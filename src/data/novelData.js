@@ -8,73 +8,145 @@ export const NOVEL_CHAPTERS = [
     "image": "/images/horloge-boreale/chapitre_1_illustration.jpg",
     "theme": "Héros, Anti-Héros & Narration",
     "grammarFocus": "Passé Composé vs Imparfait & Adverbes en -ment",
-    "summary": "La brume glaciale du fleuve Saint-Laurent enveloppait lentement les ruelles pavées du \nVieux-Montréal en cette nuit d'octobre. Sous la lumière vacilla...",
+    "summary": "Pendant une nuit froide d'octobre à Montréal, Julien entre secrètement dans le musée pour retrouver un objet familial. Mais quand l'alarme sonne et qu'un incendie éclate, il doit faire un choix difficile.",
     "pages": [
       {
         "pageNumber": 1,
         "title": "Page 1",
         "audioSrc": "/audio/horloge-boreale/chapitre_1_partie_1.mp3",
-        "text": "La brume glaciale du fleuve Saint-Laurent enveloppait lentement les ruelles pavées du \nVieux-Montréal en cette nuit d'octobre. Sous la lumière vacillante d'un réverbère ancien, une \nsilhouette se découpait contre les murs de pierre grise du Musée des Beaux-Arts et d'Histoire. \nJulien n'était certainement pas un héros classique. Contrairement aux protagonistes \nlégendaires qui agissent toujours par pur héroïsme et abnégation totale, Julien possédait des \nfaiblesses manifestes et des motivations résolument ambiguës. Cynique, distant et parfois \négoïste, il se considérait plutôt comme un anti-héros contraint d'évoluer dans un monde \ncorrompu. \nCe soir-là, son objectif était d'une précision chirurgicale. Il ne cherchait ni la gloire ni les éloges \nd'une foule reconnaissante. Il voulait seulement récupérer un artefact précis : l'Horloge Boréale, \nun mécanisme antique que le musée avait acquis dans des circonstances douteuses auprès \nd'un collectionneur sans scrupules. Pour Julien, cet objet représentait le seul indice capable \nd'éclairer l'origine mystérieuse de sa famille et la disparition inexpliquée de son grand-père. \nJulien ajusta son masque noir et vérifia l'équipement fixé à sa ceinture. Ses mains tremblaient \nlégèrement, mais il contrôla son geste avec rigueur. Il s'approcha sournoisement de \nl'échafaudage métallique dressé contre l'aile est du bâtiment historique. Il grimpa prudemment \nchaque barreau, évitant les projecteurs de surveillance qui balayaient la cour intérieure. \nArrivé sur le toit en zinc, il s'agenouilla près d'une verrière d'aération. C’est à cet instant précis \nqu’une voix basse, teintée d'une ironie mordante, retentit derrière lui : \n— Tu es en retard de trois minutes, Julien. J'ai failli croire que ton prétendu courage t'avait \nabandonné. \nJulien se retourna vivement, la main posée sur son câble de rappel. Devant lui se tenait Coralie, \ntapie dans l'ombre d'une haute cheminée de brique. Coralie était une cambrioleuse d'élite \nindépendante avec qui Julien entretenait une rivalité compliquée. Rusée, incroyablement agile \net d'une franchise désarmante, elle ne travaillait jamais gratuitement. Elle incarnait elle aussi \nl'anti-héroïne par excellence : guidée par le gain matériel et son propre code de conduite, mais \nincapable de tolérer l'injustice flagrante. \n— Contrairement à toi, Coralie, je ne cours pas après le premier objet brillant venu, répliqua \nsèchement Julien à voix basse. Pourquoi es-tu ici ? Ce secteur devait rester libre ce soir. \n— De même que tu cherches l'Horloge Boréale, je m'intéresse au diamant bleu exposé dans la \ngalerie adjacente, chuchota-t-elle avec un sourire en coin. Nos chemins se croisent, que cela te \nplaise ou non. Et si nous ne coopérons pas immédiatement, nous finirons tous les deux au \ncommissariat avant minuit."
+        "text": "C'était une nuit froide d'octobre dans le Vieux-Montréal. Un brouillard épais montait lentement du fleuve Saint-Laurent et couvrait les rues en pierre. Près du Musée des Beaux-Arts, une silhouette avançait dans le noir sous la lumière d'un vieux réverbère.\n\nJulien n'était pas un héros classique. Il n'agissait pas pour la gloire et il n'aimait pas toujours suivre les règles. Il était souvent distant, un peu cynique, mais il avait ses propres principes. Ce soir-là, il avait un objectif très précis : il voulait récupérer un vieil objet de grande valeur appelé l'Horloge Boréale. Le musée avait acheté cette horloge récemment auprès d'un vendeur douteux. Pour Julien, cet objet représentait le seul moyen de comprendre l'histoire de sa famille et la disparition mystérieuse de son grand-père.\n\nJulien mit son masque noir et vérifia rapidement son équipement. Ses mains tremblaient un peu à cause du stress, mais il resta calme. Il monta prudemment sur l'échafaudage en métal dressé contre le mur du musée pour éviter les caméras de sécurité. Arrivé sur le toit, il s'agenouilla près d'une grande verrière. Soudain, une voix basse et moqueuse parla derrière lui :\n\n— Tu es en retard de trois minutes, Julien. Je pensais que tu avais peur !\n\nJulien se retourna vivement. Devant lui se tenait Coralie, cachée derrière une grande cheminée. Coralie était une cambrioleuse très agile et intelligente. Elle travaillait toujours seule pour son propre intérêt, mais elle détestait l'injustice.\n\n— Je ne cherche pas des objets brillants comme toi, répliqua Julien à voix basse. Pourquoi es-tu ici ce soir ?\n\n— De même que tu cherches ton horloge, je m'intéresse au diamant bleu exposé dans la salle à côté, dit-elle avec un sourire en coin. Nos chemins se croisent. Si nous ne coopérons pas immédiatement, nous finirons tous les deux au commissariat avant minuit !"
       },
       {
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "/audio/horloge-boreale/chapitre_1_partie_2.mp3",
-        "text": "Julien poussa un soupir d'agacement. Il détestait improviser, particulièrement avec quelqu'un \nd'aussi imprévisible. Pourtant, la logique imposait une trêve temporaire. \n— Très bien, murmura-t-il. Mais écoute-moi attentivement : nous entrons ensemble, nous \ncoupons les alarmes du secteur central, puis chacun prend son chemin sans trahir l'autre. Pas \nde violence inutile. \n— Marché conclu, répondit Coralie en déverrouillant avec adresse le loquet de la verrière. \nLes deux silhouettes descendirent silencieusement le long des câbles de suspension et \natterrirent sans un bruit sur le marbre froid de la galerie principale. Tandis que les gardes en \nuniforme patrouillaient loyalement autour de l'entrée d'honneur au rez-de-chaussée, Julien et \nCoralie contournèrent méthodiquement les faisceaux laser invisibles. \nAu centre de la salle octogonale, sous un dôme de verre blindé, reposait l'Horloge Boréale. Ses \nengrenages en cuivre doré scintillaient doucement dans la pénombre. Juste à côté, dans une \nvitrine séparée, étincelait le diamant convoité par Coralie. \nJulien s'approcha de la console de désactivation. Ses doigts coururent rapidement sur le clavier \ntactile. Il observa attentivement les fils de connexion. Un trait de caractère dominant chez lui \nétait son perfectionnisme poussé à l'extrême : chaque mouvement devait être exécuté \nimpeccablement pour éviter toute erreur fatale. \nCependant, alors que Coralie s'emparait habilement de sa pierre précieuse, le bruit sourd de \npas pressés résonna dans le couloir adjacent. La porte blindée s'ouvrit avec fracas. Le capitaine \nAntoine Vaneau entra dans la salle, lampe torche à la main et regard perçant. Vaneau \nreprésentait la figure pure du héros classique : un officier d'une intégrité absolue, loyal envers la \nloi et animé par un sens inébranlable du devoir civique. \n— Ne bougez plus ! s'écria Vaneau d'une voix ferme en pointant sa lampe sur les deux intrus. \nRendez-vous pacifiquement. La fuite est impossible. \nSoudainement, le dispositif d'urgence automatisé se verrouilla. Une grille d'acier commença à \ndescendre lourdement du plafond pour sceller la seule issue de secours menant vers la cour \narrière. Dans le même temps, un court-circuit provoqué par le système anti-intrusion déclencha \nun départ de feu sur un panneau électrique mural situé juste au-dessus des archives \nhistoriques du musée. \nCoralie se précipita immédiatement vers la grille qui se refermait à toute vitesse : \n— Julien, dépêche-toi ! La grille va se bloquer dans cinq secondes ! Si nous restons ici, nous \nserons pris au piège !"
+        "text": "Julien soupira. Il n'aimait pas changer ses plans avec une personne imprévisible, mais il comprit rapidement que Coralie avait raison.\n\n— D'accord, murmura-t-il. Nous entrons ensemble, nous coupons les alarmes du secteur central, puis chacun prend son objet et part sans trahir l'autre. Pas de violence inutile.\n\n— Marché conclu, répondit Coralie en déverrouillant adroitement le loquet de la fenêtre.\n\nLes deux complices descendirent en silence avec leurs cordes et arrivèrent facilement sur le marbre froid de la galerie principale. Pendant que les gardes surveillaient l'entrée principale au rez-de-chaussée, Julien et Coralie évitèrent méthodiquement les faisceaux de sécurité.\n\nAu centre de la pièce, sous un dôme en verre, l'Horloge Boréale scintillait doucement dans la nuit. Juste à côté, dans une autre vitrine séparée, le diamant bleu étincelait.\n\nJulien s'approcha de la console de contrôle. Ses doigts tapèrent rapidement sur le clavier. Il observa attentivement les câbles électriques. Julien aimait faire les choses impeccablement, car une seule petite erreur pouvait déclencher l'alarme générale.\n\nCependant, au moment où Coralie prit la pierre précieuse, le bruit de pas pressés résonna dans le couloir. La porte blindée s'ouvrit avec fracas et le capitaine Antoine Vaneau entra dans la salle avec sa lampe torche. Le capitaine était un policier honnête, très loyal envers la loi et animé par le devoir.\n\n— Ne bougez plus ! cria le capitaine d'une voix ferme. Rendez-vous pacifiquement !\n\nSoudainement, le système d'urgence automatique se ferma. Une lourde grille en métal commença à descendre du plafond pour bloquer la sortie. En même temps, un court-circuit électrique provoqua des étincelles et un petit feu commença à brûler près des vieux documents historiques du musée.\n\nCoralie courut immédiatement vers la sortie qui se refermait :\n\n— Julien, dépêche-toi ! La grille va se bloquer dans cinq secondes ! Si nous restons ici, nous serons pris au piège !"
       },
       {
         "pageNumber": 3,
         "title": "Page 3",
         "audioSrc": "/audio/horloge-boreale/chapitre_1_partie_3.m4a",
-        "text": "Julien saisit l'Horloge Boréale. Il fit un pas vers la sortie, mais son regard croisa celui du \ncapitaine Vaneau, qui venait de trébucher contre un socle de marbre et se trouvait désormais\ncoincé sous une lourde poutre décorative tombée sous l'impact de l'incendie naissant. Les \nflammes approchaient dangereusement des archives et du capitaine immobilisé. \nJulien se retrouva instantanément confronté à un dilemme moral déchirant. S'il fuyait sans \nattendre avec Coralie, il sauvait sa propre liberté et conservait l'artefact familial tant convoité. \nS'il restait pour aider Vaneau, il risquait d'être arrêté sur-le-champ et de tout perdre. \nDans son monologue interne, le doute le submergea violemment : « Pourquoi devrais-je risquer \nma peau pour un homme qui veut m'enfermer ? Je ne suis pas un sauveur public. Je n'ai jamais \nprétendu être un modèle de vertu. Les héros se sacrifient pour des idéaux abstraits, pas moi. \nPourtant, le laisser périr ici serait impardonnable. » \nContrairement à ses réflexes habituels de survie et à son cynisme affiché, Julien prit sa \ndécision. Il lança un regard déterminé à Coralie : \n— Pars, Coralie ! Sauve-toi ! \n— Tu es devenu complètement fou ! cria-t-elle à travers l'ouverture qui rétrécissait. Tu vas te \nfaire capturer ! \nSans répondre, Julien rangea l'Horloge Boréale dans son sac à dos, fit demi-tour et courut \ncourageusement vers le capitaine en détresse. Utilisant une barre de fer abandonnée près des \ntravaux de rénovation, il fit levier de toutes ses forces pour soulever la poutre brûlante. \n— Appuyez-vous sur moi, capitaine ! ordonna Julien d'une voix rauque. Dépêchez-vous avant \nque le plafond ne s'effondre ! \nVaneau, stupéfait par ce geste inattendu de la part d'un criminel qu'il traquait depuis des \nsemaines, s'extirpa péniblement de sa position. \n— Pourquoi faites-vous cela ? demanda l'officier, le souffle court, tandis que la fumée \nenvahissait la salle. Vous savez très bien que je représente la loi. \n— Parce que je refuse de laisser mourir un homme pour de vieilles pierres et un morceau d'or, \nrétorqua Julien en l'aidant à marcher vers le couloir latéral sécurisé. \nJulien actionna l'extincteur mural pour étouffer le début d'incendie le plus proche et déverrouilla \nmanuellement une trappe de service dissimulée derrière les boiseries du musée. \n— Prenez cette issue, elle mène directement au poste de garde extérieur, dit Julien à Vaneau. \nLe capitaine fixa le jeune homme avec gravité. Pour la première fois, ses certitudes sur le bien \net le mal vacillaient : \n— Ce sacrifice ne restera pas ignoré, jeune homme. Mais si nos routes se recroisent, je devrai \naccomplir mon devoir."
+        "text": "Julien saisit vite l'Horloge Boréale. Il fit un pas vers la sortie, mais son regard croisa celui du capitaine Vaneau. Le policier venait de trébucher et se trouvait coincé sous une grosse poutre tombée à cause de l'incendie. Les flammes s'approchaient dangereusement de lui.\n\nJulien se retrouva devant un dilemme très difficile : s'il fuyait tout de suite avec Coralie, il sauvait sa liberté et gardait l'horloge familiale. Mais s'il restait pour aider Vaneau, il risquait d'être arrêté immédiatement.\n\nPendant un court instant, il hésita : « Pourquoi devrais-je risquer ma vie pour un homme qui veut m'enfermer ? Je ne suis pas un sauveur. Pourtant, le laisser périr ici dans le feu est impossible. »\n\nJulien prit courageusement sa décision. Il cria à Coralie :\n\n— Pars, Coralie ! Sauve-toi !\n\n— Tu es fou ! cria-t-elle à travers l'ouverture. Tu vas te faire attraper !\n\nJulien mit l'horloge dans son sac et courut vers le capitaine blessé. Utilisant une barre de fer trouvée sur le sol, il poussa de toutes ses forces pour soulever la poutre brûlante.\n\n— Appuyez-vous sur moi, capitaine ! ordonna Julien. Dépêchez-vous avant que le plafond ne s'effondre !\n\nLe capitaine Vaneau, très surpris par l'aide inattendue de ce jeune fugitif, se releva péniblement.\n\n— Pourquoi faites-vous cela ? demanda l'officier, le souffle court. Vous savez que je représente la loi.\n\n— Parce que je refuse de laisser mourir un homme pour de vieilles pierres et un morceau d'or, répondit simplement Julien en l'aidant à marcher vers une issue sécurisée.\n\nJulien actionna l'extincteur mural pour éteindre le début d'incendie, puis il déverrouilla manuellement une trappe de service cachée dans le mur.\n\n— Prenez cette issue, elle mène directement dehors, dit Julien à Vaneau.\n\nLe capitaine fixa le jeune homme avec gravité :\n\n— Ce sacrifice ne restera pas ignoré. Mais si nos routes se croisent de nouveau, je devrai accomplir mon devoir.\n\n— Je n'en attends pas moins de vous, répliqua Julien avec un demi-sourire."
       },
       {
         "pageNumber": 4,
         "title": "Page 4",
         "audioSrc": "/audio/horloge-boreale/chapitre_1_partie_4.m4a",
-        "text": "— Je n'en attends pas moins de vous, capitaine, répliqua Julien avec un demi-sourire. \nAlors que les sirènes de police retentissaient bruyamment au loin dans les rues de la métropole, \nJulien s'engouffra à son tour dans le conduit d'évacuation technique. Il émergea quelques \nminutes plus tard dans une ruelle sombre et déserte, le visage couvert de suie, les muscles \nendoloris, mais l'esprit en ébullition. Il tenait enfin entre ses mains l'Horloge Boréale, sans savoir \nencore que les secrets gravés dans ses rouages allaient bientôt bouleverser l'équilibre de toute \nsa vie."
+        "text": "Alors que les sirènes de police retentissaient au loin dans les rues, Julien s'échappa dans un conduit d'aération. Il sortit quelques minutes plus tard dans une ruelle sombre, le visage couvert de suie et fatigué, mais soulagé. Il tenait enfin l'Horloge Boréale dans ses mains, prêt à découvrir les mystères cachés de son passé familial."
       }
     ],
     "vocabList": [
       {
-        "word": "L'abnégation (selflessness / self-denial)",
-        "definition": "Le fait de se sacrifier ou de renoncer à son intérêt personnel par dévouement."
+        "word": "Un brouillard épais",
+        "definition": "A thick fog / heavy mist"
       },
       {
-        "word": "Un artefact (artifact)",
-        "definition": "Un objet fabriqué par l'homme, souvent ancien ou ayant une valeur historique."
+        "word": "Un réverbère",
+        "definition": "A street lamp / streetlight"
       },
       {
-        "word": "Sans scrupules (unscrupulous)",
-        "definition": "Sans conscience morale, prêt à agir de façon malhonnête."
+        "word": "Il n'agissait pas",
+        "definition": "He did not act / wasn't acting"
       },
       {
-        "word": "Une verrière (skylight / glass roof)",
-        "definition": "Une grande ouverture vitrée dans un toit ou un mur."
+        "word": "Auprès d'un vendeur douteux",
+        "definition": "From a shady / suspicious seller"
       },
       {
-        "word": "Tapie (crouching / hidden)",
-        "definition": "Cachée, blottie dans l'ombre pour ne pas être vue."
+        "word": "L'échafaudage (m.)",
+        "definition": "The scaffolding"
       },
       {
-        "word": "Improviser (to improvise)",
-        "definition": "Faire quelque chose sans préparation préalable, au dernier moment."
+        "word": "Il s'agenouilla",
+        "definition": "He knelt down"
       },
       {
-        "word": "L'intégrité (integrity)",
-        "definition": "L'honnêteté et la droiture morale absolue d'une personne."
+        "word": "Devant lui se tenait...",
+        "definition": "In front of him stood..."
       },
       {
-        "word": "Un court-circuit (short circuit)",
-        "definition": "Une panne ou un incident électrique provoquant des étincelles ou un feu."
+        "word": "Une cambrioleuse",
+        "definition": "A burglar / thief (female)"
       },
       {
-        "word": "S'extirper (to pull oneself out / escape)",
-        "definition": "Se sortir avec beaucoup d'efforts d'un endroit difficile."
+        "word": "De même (que)",
+        "definition": "Just as / in the same way (that)"
       },
       {
-        "word": "En ébullition (in turmoil / bubbling)",
-        "definition": "Très agité, en pleine activité intellectuelle ou émotionnelle."
+        "word": "Les chemins (m. pl.)",
+        "definition": "The paths / ways"
+      },
+      {
+        "word": "Trahir",
+        "definition": "To betray"
+      },
+      {
+        "word": "Marché conclu !",
+        "definition": "Deal! / It's a deal!"
+      },
+      {
+        "word": "Déverrouillant adroitement le loquet",
+        "definition": "Skillfully unlocking the latch"
+      },
+      {
+        "word": "Les faisceaux de sécurité (m. pl.)",
+        "definition": "The security laser beams"
+      },
+      {
+        "word": "Un dôme",
+        "definition": "A dome / glass dome"
+      },
+      {
+        "word": "Scintillait",
+        "definition": "Sparkled / shimmered / twinkled"
+      },
+      {
+        "word": "La porte blindée",
+        "definition": "The reinforced / armored door"
+      },
+      {
+        "word": "Un fracas",
+        "definition": "A loud crash / bang"
+      },
+      {
+        "word": "Une lampe torche",
+        "definition": "A flashlight"
+      },
+      {
+        "word": "Une lourde grille en métal",
+        "definition": "A heavy metal gate / grate"
+      },
+      {
+        "word": "Des étincelles (f. pl.)",
+        "definition": "Sparks"
+      },
+      {
+        "word": "Trébucher",
+        "definition": "To trip / to stumble"
+      },
+      {
+        "word": "S'il fuyait",
+        "definition": "If he fled / if he ran away"
+      },
+      {
+        "word": "M'enfermer / Enfermer",
+        "definition": "To lock me up / to imprison"
+      },
+      {
+        "word": "Une barre de fer",
+        "definition": "An iron bar / crowbar"
+      },
+      {
+        "word": "Une trappe de service",
+        "definition": "A service hatch / access door"
+      },
+      {
+        "word": "Retentissaient",
+        "definition": "Were ringing out / blaring / echoing"
+      },
+      {
+        "word": "La suie",
+        "definition": "Soot"
       }
     ],
     "quiz": [
@@ -105,11 +177,11 @@ export const NOVEL_CHAPTERS = [
         "question": "Comment Coralie est-elle décrite dans le texte ?",
         "options": [
           "Une policière dévouée à la justice",
-          "Une cambrioleuse d'élite rusée et agile",
+          "Une cambrioleuse agile et intelligente",
           "Une guide touristique du musée"
         ],
         "correctIdx": 1,
-        "explanation": "Coralie est présentée comme une cambrioleuse d'élite guidée par le gain matériel et son propre code de conduite."
+        "explanation": "Coralie est présentée comme une cambrioleuse d'élite travaillant pour son propre intérêt."
       },
       {
         "id": 4,
@@ -127,11 +199,11 @@ export const NOVEL_CHAPTERS = [
         "question": "Quelle est la réaction du capitaine Vaneau suite au geste de Julien ?",
         "options": [
           "Il arrête Julien immédiatement",
-          "Ses certitudes sur le bien et le mal vacillent et il le laisse s'échapper",
+          "Il le remercie, le laisse s'échapper, mais prévient qu'il fera son devoir s'ils se recroisent",
           "Il refuse l'aide de Julien"
         ],
         "correctIdx": 1,
-        "explanation": "Stupéfait, Vaneau laisse Julien s'échapper par une trappe mais prévient qu'il accomplira son devoir s'ils se recroisent."
+        "explanation": "Stupéfait, Vaneau laisse Julien s'échapper par une trappe mais précise qu'il fera son devoir à l'avenir."
       }
     ]
   },
@@ -144,67 +216,71 @@ export const NOVEL_CHAPTERS = [
     "image": "/images/horloge-boreale/chapitre_2_illustration.jpg",
     "theme": "Santé Mentale & Bien-Être",
     "grammarFocus": "Le Subjonctif Présent & Exprimer des Conseils",
-    "summary": "La pluie fine qui s'était mise à tomber sur Montréal transformait les pavés en miroirs sombres. \nJulien courait à perdre haleine dans les ruelles du q...",
+    "summary": "Une pluie fine tombait sur Montréal. Julien courait très vite dans les ruelles du quartier Saint-Henri, le sac à dos serré contre sa poitrine...",
     "pages": [
       {
         "pageNumber": 1,
         "title": "Page 1",
         "audioSrc": "",
-        "text": "La pluie fine qui s'était mise à tomber sur Montréal transformait les pavés en miroirs sombres. \nJulien courait à perdre haleine dans les ruelles du quartier Saint-Henri, le sac à dos serré contre \nsa poitrine. Chaque bruit de sirène au loin résonnait dans sa tête comme une menace \nimminente. La fumée inhalée au musée lui brûlait la gorge, ses muscles tremblaient sous l'effet \nde l'épuisement, mais c'était surtout la tempête dans son esprit qui le paralysait. \nIl monta quatre à quatre l'escalier extérieur en colimaçon d'un duplex typique et frappa trois \ncoups rapides à la porte arrière. \nLa porte s'ouvrit sur Samira. En découvrant Julien le visage couvert de suie, les yeux \nécarquillés et le souffle court, elle comprit immédiatement la gravité de la situation. Sans poser \nde questions superflues, elle le tira à l'intérieur, verrouilla les deux verrous de sécurité et ferma \nles rideaux épais du salon. \nJulien laissa tomber son sac sur la table en bois rustique. Il arpentait la pièce de long en large, \nincapable de tenir en place. \n— Ils vont me retrouver, Samira, balbutia-t-il, la voix altérée par la panique. La police, Vaneau... \nJ'ai déclenché les alarmes, le feu a pris, et j'ai sauvé un policier au lieu de disparaître \ndiscrètement. C'est absurde ! Mon visage était découvert un quart de seconde. Mon niveau de \nstress est intenable et cette anxiété me rend totalement malade. \nSamira s'avança calmement devant lui. Elle posa ses deux mains fermes sur ses épaules pour \ninterrompre sa marche désordonnée. Étudiante passionnée en psychologie et intervenante \nbénévole dans une ligne d'écoute pour les adolescents, elle savait reconnaître les signes aigus \nd'une détresse psychologique. \n— Julien, regarde-moi, dit-elle d'une voix posée mais autoritaire. Arrête de tourner en rond et \nassieds-toi immédiatement sur cette chaise ! Prends une grande pause. Ne te laisse pas \nsubmerger par la terreur. \nJulien s'effondra sur la chaise en bois, la tête entre les mains. \n— Je ne peux pas me calmer, Samira. C'est au-dessus de mes forces. Si je perds le contrôle \nmaintenant, tout s'effondre. \n— Écoute-moi attentivement, reprit Samira avec une bienveillance inébranlable. Tu viens de \nsubir un choc violent. Ton corps réagit à une menace directe, mais ici, tu es en sécurité. \nPratique la respiration profonde avec moi dès maintenant. Inspire par le nez pendant quatre \nsecondes... bloque l'air... et expire lentement par la bouche. Fais-le encore."
+        "text": "Une pluie fine tombait sur Montréal et transformait les rues en miroirs sombres. Julien courait très vite dans les ruelles du quartier Saint-Henri, le sac à dos serré contre sa poitrine. Chaque bruit de sirène au loin ressemblait à un danger immédiat. La fumée du musée lui brûlait encore la gorge et ses jambes tremblaient de fatigue, mais c'était surtout la panique dans sa tête qui le bloquait.\n\nIl monta rapidement l'escalier extérieur en colimaçon d'un duplex et frappa trois coups rapides à la porte arrière.\n\nLa porte s'ouvrit sur Samira. En voyant Julien avec son visage couvert de suie, ses yeux écarquillés et sa respiration courte, elle comprit immédiatement l'urgence. Sans poser de questions inutiles, elle le fit entrer, ferma les deux verrous de sécurité et tira les rideaux épais du salon.\n\nJulien posa son sac sur la table en bois. Il marchait sans arrêt dans la pièce, incapable de rester immobile.\n\n— La police va me retrouver, Samira, dit-il avec une voix paniquée. Le capitaine Vaneau a vu mon visage pendant une seconde. J'ai déclenché les alarmes et un feu a pris dans le musée. Mon niveau de stress est trop haut et cette anxiété me rend malade !\n\nSamira s'avança calmement devant lui. Elle posa ses deux mains sur ses épaules pour stopper sa marche rapide. Étudiante passionnée en psychologie et bénévole sur une ligne d'écoute pour les jeunes, elle connaissait bien les signes d'une grande détresse émotionnelle.\n\n— Julien, regarde-moi, dit-elle d'une voix calme mais ferme. Arrête de marcher et assieds-toi tout de suite sur cette chaise. Il faut que tu prennes une pause. Ne laisse pas la panique prendre le contrôle.\n\nJulien s'assit lourdement sur la chaise, la tête entre les mains.\n\n— Je n'arrive pas à me calmer, Samira. C'est trop difficile. J'ai l'impression que tout est perdu.\n\n— Écoute-moi bien, répondit Samira avec gentillesse. Tu as vécu un choc intense. Ton corps réagit à ce stress, mais ici, tu es en sécurité. Fais un exercice de respiration profonde avec moi maintenant. Inspire par le nez pendant quatre secondes... retiens ton souffle... et expire lentement par la bouche. Recommence."
       },
       {
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "",
-        "text": "Julien ferma les yeux et suivit le rythme imposé par son amie. Après plusieurs cycles \nrespiratoires, les battements frénétiques de son cœur commencèrent à ralentir. Un début de \nsoulagement se fit sentir dans ses membres crispés. \nSamira se dirigea vers la cuisine et alluma la bouilloire pour préparer une infusion à la \ncamomille. \n— Tu dois comprendre une chose essentielle, Julien, expliqua-t-elle tout en versant l'eau \nchaude. La santé mentale n'est pas une faiblesse, c'est le fondement de ton équilibre général. \nCe que tu ressens en ce moment est une réponse naturelle à une immense pression. Mais il ne \nfaut pas que tu t'isoles dans ton angoisse. La stigmatisation autour des émotions masculines t'a \ntoujours poussé à tout refouler, mais ce soir, cette stratégie ne fonctionne plus. \nElle lui tendit une tasse fumante. \n— Bois cette tisane chaude, ordonna-t-elle doucement. Ne garde aucun secret pour toi. \nConfie-toi à moi sans honte. Raconte-moi exactement ce qui s'est passé avec cette fameuse \nHorloge Boréale. \nJulien but une gorgée et prit le temps d'ordonner ses pensées. Pour la première fois depuis des \nmois, il laissa tomber sa carapace de cynisme et décrivit la confrontation au musée : l'apparition \nsurprise de Coralie, l'incendie soudain, le choix irrationnel de secourir le capitaine Vaneau au \npéril de sa liberté, et la terreur d'être arrêté. \nAlors qu'il terminait son récit, un léger grattement à la porte d'entrée fit sursauter Julien. Samira \nlui fit signe de ne pas bouger et alla regarder par le judas. Elle ouvrit la porte : c'était Marc, un \nami proche de leur promotion et bénévole dans un centre de santé communautaire, à qui \nSamira avait envoyé un message codé quelques minutes plus tôt pour obtenir du soutien \nlogistique et médical. \nMarc entra discrètement, déposant une trousse de premiers soins sur le comptoir. \n— Bonsoir Julien, dit Marc d'un ton chaleureux. Samira m'a prévenu que tu avais besoin d'aide. \nNe t'inquiète pas, personne ne m'a suivi. \nMarc examina rapidement les égratignures sur les bras de Julien et vérifia sa respiration pour \ns'assurer que l'inhalation de fumée n'était pas critique. \n— Physiquement, tu vas t'en sortir avec un bon nettoyage et du repos, déclara Marc. Mais sur \nle plan émotionnel, la fatigue et la panique sont des facteurs de risque majeurs. Il faut que tu \nrecharges tes batteries si tu veux pouvoir réfléchir lucidement demain. Adopte une stratégie \nd'adaptation saine dès ce soir : mange quelque chose de léger pour rétablir ta nutrition, lave-toi \npour enlever cette suie et va te coucher. \nSamira acquiesça vigoureusement :"
+        "text": "Julien ferma les yeux et respira au rythme guidé par son amie. Après quelques minutes, les battements de son cœur ralentirent enfin. Il commença à sentir un réel soulagement dans ses muscles.\n\nSamira alla dans la cuisine et alluma la bouilloire pour préparer une infusion à la camomille.\n\n— Tu dois comprendre une chose importante, Julien, expliqua-t-elle en versant l'eau chaude. La santé mentale n'est pas une faiblesse ; c'est la base de ton équilibre de vie. Ce que tu ressens ce soir est une réaction normale à une situation extrême. Mais il ne faut pas que tu t'isoles dans ton angoisse. La stigmatisation sociale autour des émotions masculines t'a souvent poussé à tout garder pour toi, mais ce soir, il est essentiel que tu partages ce poids.\n\nElle lui tendit une tasse chaude :\n\n— Bois cette tisane. Raconte-moi exactement ce qui s'est passé au musée avec l'Horloge Boréale.\n\nJulien but une gorgée et prit le temps de rassembler ses idées. Pour la première fois, il oublia son attitude cynique et raconta toute l'histoire : la surprise de croiser Coralie, l'incendie soudain, son choix de sauver le capitaine Vaneau et sa peur d'être arrêté.\n\nPendant qu'il finissait de parler, quelqu'un gratta doucement à la porte. Samira regarda par le judas et ouvrit la porte : c'était Marc, un ami proche de leur classe et bénévole dans un centre de santé communautaire. Samira lui avait envoyé un message court pour demander de l'aide.\n\nMarc entra avec discrétion et posa une trousse de premiers soins sur le comptoir :\n\n— Bonsoir Julien, dit Marc d'un ton chaleureux. Samira m'a expliqué la situation. Ne t'inquiète pas, personne ne m'a suivi.\n\nMarc nettoya les petites égratignures sur les bras de Julien et vérifia sa respiration pour s'assurer que la fumée n'avait pas causé de blessure grave.\n\n— Physiquement, tu vas bien, avec un peu de repos, déclara Marc. Mais sur le plan émotionnel, la fatigue et la panique sont de vrais obstacles. Il faut que tu recharges tes batteries pour pouvoir penser clairement demain. Il est important que tu adoptes une bonne stratégie d'adaptation dès ce soir : mange un repas chaud pour reprendre des forces, prends une douche pour enlever la suie et va dormir.\n\nSamira approuva avec enthousiasme :"
       },
       {
         "pageNumber": 3,
         "title": "Page 3",
         "audioSrc": "",
-        "text": "— Marc a absolument raison. Ne touche plus à ce sac à dos ce soir. Interdis-toi de lire des \nnouvelles alarmistes sur ton téléphone. Dors au moins sept ou huit heures complètes. Demain \nmatin, nous analyserons l'artefact ensemble avec un esprit serein et reposé. Tu as des \nressources autour de toi, Julien ; accepte notre aide. \nTouché par cette solidarité sincère et ce soutien inconditionnel, Julien sentit la dernière couche \nde tension se dissoudre en lui. Il remercia Marc chaleureusement et suivit scrupuleusement les \nconseils de ses amis. Après avoir pris une douche chaude et mangé un bol de soupe \nréconfortant, il s'allongea sur le canapé convertible préparé par Samira. \nEn fermant les yeux, enveloppé par le calme retrouvé de l'appartement, il laissa le sommeil \nréparateur chasser ses inquiétudes. Sur la table du salon, protégée dans l'obscurité, l'Horloge \nBoréale attendait patiemment que vienne l'aube pour révéler les secrets de famille \nprofondément enfouis dans son mécanisme d'or."
+        "text": "— Marc a tout à fait raison. Il est nécessaire que tu laisses ce sac de côté ce soir. Il ne faut pas que tu lises les nouvelles sur ton téléphone. Dors au moins sept à huit heures. Demain matin, nous pourrons examiner cet objet ensemble avec les idées claires. Nous sommes là pour toi, Julien ; accepte notre aide.\n\nTouché par la générosité et l'amitié sincère de ses proches, Julien sentit le stress quitter son esprit. Il remercia Marc et accepta de suivre leurs conseils. Après une douche chaude et un bon bol de soupe, il s'allongea sur le canapé préparé par Samira.\n\nEn fermant les yeux dans le silence rassurant de l'appartement, il laissa le sommeil chasser ses peurs. Sur la table du salon, protégée dans le noir, l'Horloge Boréale attendait le matin pour révéler les secrets de famille cachés dans son mécanisme."
       }
     ],
     "vocabList": [
       {
-        "word": "Le bien-être (well-being)",
-        "definition": "Un état de calme physique et mental général."
+        "word": "Serré",
+        "definition": "Clutched tightly / pressed tight"
       },
       {
-        "word": "La santé mentale (mental health)",
-        "definition": "L'état d'équilibre psychologique, émotionnel et social d'une personne."
+        "word": "Sa poitrine",
+        "definition": "His chest"
       },
       {
-        "word": "L'anxiété (anxiety)",
-        "definition": "Une réaction d'angoisse, de stress ou d'inquiétude face à une menace."
+        "word": "L'escalier extérieur en colimaçon",
+        "definition": "The outdoor spiral staircase"
       },
       {
-        "word": "Le stress (stress)",
-        "definition": "Une réponse physiologique et émotionnelle à une pression extérieure."
+        "word": "Écarquillés",
+        "definition": "Wide open / wide (eyes)"
       },
       {
-        "word": "Le soulagement (relief)",
-        "definition": "La disparition ou diminution d'une tension physique ou mentale."
+        "word": "Gratta",
+        "definition": "Scratched / scraped lightly"
       },
       {
-        "word": "La détresse (distress)",
-        "definition": "Un état de souffrance, d'affliction ou de danger moral aigu."
+        "word": "Bénévole",
+        "definition": "Volunteer"
       },
       {
-        "word": "L'équilibre de vie (life balance)",
-        "definition": "Une conciliation harmonieuse entre les devoirs et les loisirs."
+        "word": "Chaleureux",
+        "definition": "Warm / welcoming"
       },
       {
-        "word": "La stigmatisation (stigmatization)",
-        "definition": "Un jugement négatif ou un discrédit social jeté sur une personne."
+        "word": "Tes batteries",
+        "definition": "Your batteries (energy / mental charge)"
       },
       {
-        "word": "Une stratégie d'adaptation (coping strategy)",
-        "definition": "Une méthode pour surmonter le stress ou les épreuves."
+        "word": "Ses proches",
+        "definition": "His loved ones / close friends"
       },
       {
-        "word": "La respiration profonde (deep breathing)",
-        "definition": "Une technique de relaxation basée sur l'inspiration et l'expiration calmes."
+        "word": "Il s'allongea",
+        "definition": "He lay down"
+      },
+      {
+        "word": "Révéler",
+        "definition": "To reveal / to uncover"
       }
     ],
     "quiz": [
@@ -274,61 +350,77 @@ export const NOVEL_CHAPTERS = [
     "image": "/images/horloge-boreale/chapitre_3_illustration.jpg",
     "theme": "Identité & Héritage Culturel",
     "grammarFocus": "Les Pronoms Démonstratifs & Possessifs",
-    "summary": "Le lendemain matin, une lumière dorée et apaisante traversait les rideaux du salon de Samira. \nJulien s'était réveillé tôt, revigoré par une nuit de s...",
+    "summary": "Le lendemain matin, une lumière douce traversait les rideaux. Julien s'était réveillé tôt...",
     "pages": [
       {
         "pageNumber": 1,
         "title": "Page 1",
         "audioSrc": "",
-        "text": "Le lendemain matin, une lumière dorée et apaisante traversait les rideaux du salon de Samira. \nJulien s'était réveillé tôt, revigoré par une nuit de sommeil profond et par le calme de \nl'appartement. Sur la grande table en bois, il avait délicatement déposé l'Horloge Boréale. Alors \nque le thé infusait dans la cuisine, Julien examinait attentivement les rouages complexes de \nl'instrument en laiton. \nSamira s'est assise en face de lui avec deux tasses fumantes. Marc, fidèle à sa promesse \nd'apporter son soutien, est arrivé quelques minutes plus tard avec une boîte d'outils de \nprécision d'horlogerie prêtée par son oncle. \n— Quand j'étais enfant, commença Julien d'une voix nostalgique en observant le cadran \nsculpté, j'habitais avec mes parents et mon grand-père, Amadou, dans un foyer chaleureux et \ntrès soudé. Mon grand-père était un maître artisan horloger originaire de Saint-Louis, au \nSénégal. Nos liens de parenté étaient fusionnels. Il m'a toujours inculqué l'importance de la \npatience, de l'intégrité morale et de la persévérance. \nJulien s'est arrêté un instant pour caresser une gravure représentant un baobab stylisé sur le \nflanc de l'objet. \n— Cet homme exceptionnel m'a transmis bien plus que des techniques manuelles : il m'a légué \ntout un héritage culturel. Tous les soirs, il me racontait l'histoire de nos ancêtres et m'expliquait \nnos racines familiales en Afrique de l'Ouest. Mais quand nous avons déménagé dans un \nnouveau quartier à Montréal, mon milieu social a subitement changé. À l'école secondaire, les \nautres élèves me collaient souvent des étiquettes injustes. J'ai souffert de stéréotypes \nréducteurs et de préjugés stupides sur mes origines. \nSamira hocha la tête avec empathie : \n— Les préjugés blessent profondément quand on cherche son appartenance à un groupe. \nComment as-tu réagi à cette époque ? \n— Pendant longtemps, je me suis renfermé sur moi-même, admit Julien. Je me sentais déchiré \nentre deux mondes. Pour me protéger, j'ai voulu me démarquer de tout le monde en devenant \ndistant et froid. Je refusais de m'identifier aux autres adolescents. Mon grand-père, qui était \ntoujours bienveillant et patient, a remarqué ma détresse. Un soir d'hiver, il m'a montré cette \nhorloge et m'a dit : « Julien, notre identité personnelle n'est pas une boîte rigide. C'est un \nassemblage complexe de valeurs, de mémoire et de choix libres. Ne laisse jamais l'opinion \nd'autrui définir qui tu es. » \nMarc sourit en ajustant sa loupe d'atelier :"
+        "text": "Le lendemain matin, une lumière douce et claire traversait les rideaux du salon de Samira. Julien s'était réveillé tôt, reposé grâce à une bonne nuit de sommeil. Sur la grande table en bois, il avait posé délicatement l'Horloge Boréale. Pendant que le thé chauffait dans la cuisine, Julien regardait avec attention les rouages dorés de l'instrument.\n\nSamira s'assit en face de lui avec deux tasses. Marc arriva peu après avec une boîte de petits outils d'horlogerie prêtée par son oncle.\n\n— Quand j'étais enfant, commença Julien d'un ton nostalgique en touchant le cadran de l'horloge, j'habitais avec mes parents et mon grand-père, Amadou, dans une maison très chaleureuse. Mon grand-père était un maître artisan horloger originaire de Saint-Louis, au Sénégal. Nos liens familiaux étaient très forts. Il m'a toujours appris la patience, l'intégrité et la persévérance.\n\nJulien s'arrêta un instant pour regarder un petit dessin gravé sur le côté de l'horloge, qui représentait un grand baobab.\n\n— Cet homme remarquable m'a transmis bien plus que le travail du bois et du métal : il m'a donné un véritable héritage culturel. Chaque soir, il me parlait de nos ancêtres et de nos racines en Afrique de l'Ouest. Mais quand nous avons déménagé dans un autre quartier à Montréal, mon milieu social a changé. À l'école, certains élèves se moquaient de moi. J'ai souffert de stéréotypes injustes et de préjugés sur mes origines.\n\nSamira hocha la tête avec compréhension :\n\n— Les préjugés font mal quand on cherche sa place et son sentiment d'appartenance. Qu'as-tu fait à ce moment-là ?\n\n— Pendant longtemps, je me suis isolé, répondit Julien. J'étais partagé entre deux univers différents. Pour me protéger, je suis devenu distant et froid avec les autres. Mais mon grand-père a remarqué ma tristesse. Un soir, il m'a montré cette horloge et m'a dit : « Julien, notre identité personnelle ne dépend pas du regard des autres. Elle se construit avec nos valeurs, nos souvenirs et nos choix libres. »\n\nMarc sourit en ajustant sa loupe :"
       },
       {
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "",
-        "text": "— Ton grand-père était un homme sage. L'épanouissement personnel commence toujours par \nl'acceptation de son histoire. Regardons maintenant ce que ce mécanisme a à nous apprendre. \nJulien prit un petit tournevis plat. Ses mains ne tremblaient plus. Avec un soin méticuleux et \npointilleux, il a dévissé la plaque arrière de l'Horloge Boréale. À l'intérieur, au cœur du \nmouvement mécanique, se trouvait un médaillon central amovible en argent. \nEn retirant la pièce d'argent, Julien a découvert qu'elle n'était pas un simple ornement. Son \nrevers était gravé d'un alphabet codé mêlant des symboles traditionnels sénégalais et des \ncoordonnées géographiques précises. \n— Je me souviens ! s'est écrié Julien, les yeux brillants d'émotion. Mon grand-père me parlait \nsouvent d'un projet secret auquel il se consacrait avec passion dans les années 1990 : un \nlaboratoire expérimental situé dans la région boisée des Laurentides. Il disait que ce lieu abritait \nla clé d'un équilibre nouveau entre tradition et modernité. \nSamira a immédiatement ouvert une carte topographique sur sa tablette numérique et a entré \nles coordonnées indiquées sur le médaillon. \n— Regardez ici, a souligné Samira en pointant un point précis sur l'écran. Ces coordonnées \nmènent à un ancien domaine forestier privé en bordure d'une réserve naturelle protégée. C'est \nà moins de deux heures de route au nord d'ici. \n— Pourquoi mon grand-père cacherait-il ces coordonnées dans une horloge destinée au musée \n? a demandé Julien, pensif. \n— Parce qu'il savait que seule une personne partageant ses valeurs et connaissant l'histoire du \nfoyer familial prendrait la peine d'ouvrir ce mécanisme sans le briser, a répondu Marc avec \nconviction. Cet objet est une lettre ouverte qu'il t'a laissée. \nJulien a serré le médaillon dans sa paume. Pour la première fois depuis des années, il ne \nressentait plus de confusion sur qui il était. L'altruisme de son grand-père, la mémoire de ses \nancêtres et les souvenirs de son enfance formaient désormais le socle solide de son identité. Il \nne fuyait plus son passé : il était prêt à honorer cet héritage. \n— Nous devons nous rendre à ce laboratoire dès aujourd'hui, a déclaré Julien avec \ndétermination. Si mon grand-père s'est battu pour protéger ce secret, nous avons le devoir \nmoral de découvrir ce qui s'y cache. \nSamira et Marc ont échangé un regard complice et ont rassemblé leurs affaires. Le mystère \nfamilial de Julien prenait une tout autre dimension, les guidant tout droit vers une révélation \nécologique et technologique majeure au cœur de la forêt québécoise."
+        "text": "— Ton grand-père était sage. Pour être bien dans sa peau, il faut d'abord accepter son histoire. Regardons maintenant ce que cette horloge contient !\n\nJulien prit un petit tournevis plat. Ses mains étaient calmes et stables. Avec beaucoup de soin, il dévissa la plaque arrière de l'Horloge Boréale. À l'intérieur, au centre du mécanisme, se trouvait un médaillon en argent amovible.\n\nEn retirant la pièce d'argent, Julien remarqua que ce n'était pas une simple décoration : l'arrière du médaillon portait des symboles traditionnels sénégalais et des coordonnées géographiques précises.\n\n— Je me rappelle ! s'écria Julien avec émotion. Mon grand-père me parlait souvent d'un projet secret dans les années 1990 : un laboratoire expérimental situé dans la forêt des Laurentides. Il disait que cet endroit unissait la tradition et l'écologie moderne.\n\nSamira ouvrit immédiatement une carte sur sa tablette numérique et tapa les coordonnées du médaillon :\n\n— Regardez ici, montra Samira sur l'écran. Ces coordonnées indiquent un grand terrain forestier privé, juste à côté d'une réserve naturelle protégée. C'est à environ deux heures de route au nord de Montréal.\n\n— Pourquoi mon grand-père a-t-il caché ces chiffres dans une horloge ? demanda Julien, curieux.\n\n— Parce qu'il savait que seule une personne patiente, qui connaît l'histoire familiale, prendrait le temps d'ouvrir l'horloge sans la casser, répondit Marc avec assurance. Ce message est un héritage direct pour toi.\n\nJulien serra le médaillon dans sa main. Pour la première fois depuis des années, il se sentait en paix avec son identité. La générosité de son grand-père, la mémoire de sa famille et ses racines formaient enfin une base solide pour son avenir.\n\n— Nous devons aller à ce laboratoire aujourd'hui, déclara Julien avec enthousiasme. Mon grand-père voulait protéger ce lieu, et nous devons découvrir ce qu'il contient.\n\nSamira et Marc prirent leurs affaires avec le sourire. Le voyage prenait un tournant nouveau, les guidant vers une grande découverte au cœur de la forêt québécoise."
       }
     ],
     "vocabList": [
       {
-        "word": "L'appartenance (belonging)",
-        "definition": "Le sentiment de faire partie intégrante d'un groupe ou d'une communauté."
+        "word": "Délicatement",
+        "definition": "Delicately / gently"
       },
       {
-        "word": "Le milieu social (social background)",
-        "definition": "L'environnement culturel et économique dans lequel vit une personne."
+        "word": "Les rouages dorés",
+        "definition": "The golden gears / clockwork cogs"
       },
       {
-        "word": "Les racines (roots)",
-        "definition": "L'origine géographique, familiale et culturelle d'un individu."
+        "word": "Outils (m. pl.)",
+        "definition": "Tools"
       },
       {
-        "word": "Identité personnelle (personal identity)",
-        "definition": "La perception de soi à travers ses valeurs, son histoire et ses choix."
+        "word": "Gravé",
+        "definition": "Engraved / carved"
       },
       {
-        "word": "Altruiste (altruistic)",
-        "definition": "Se soucier du bien-être des autres de manière désintéressée."
+        "word": "Déménagé",
+        "definition": "Moved (residence / house)"
       },
       {
-        "word": "Persévérant (perseverant)",
-        "definition": "Faire preuve de constance et de patience face aux difficultés."
+        "word": "Certains élèves se moquaient",
+        "definition": "Some students made fun / were mocking"
       },
       {
-        "word": "Pointilleux / Pointilleuse (meticulous)",
-        "definition": "Prêter une attention extrême aux moindres détails."
+        "word": "Du regard des autres",
+        "definition": "On what others think / others' judgment"
       },
       {
-        "word": "Serein / Sereine (serene)",
-        "definition": "Garder son calme, sa tranquillité et sa paix d'esprit."
+        "word": "Tournevis plat (m.)",
+        "definition": "Flathead screwdriver"
       },
       {
-        "word": "L'intégrité (integrity)",
-        "definition": "Le respect strict de principes moraux et d'honnêteté."
+        "word": "Avec beaucoup de soin",
+        "definition": "With great care / very carefully"
       },
       {
-        "word": "Héritage culturel (cultural heritage)",
-        "definition": "La transmission de traditions, de langues et de valeurs par la famille."
+        "word": "Dévissa",
+        "definition": "Unscrewed"
+      },
+      {
+        "word": "Unissait",
+        "definition": "United / brought together"
+      },
+      {
+        "word": "Tapa",
+        "definition": "Typed / tapped"
+      },
+      {
+        "word": "Un grand terrain forestier",
+        "definition": "A large forested plot / wooded land"
+      },
+      {
+        "word": "Prirent",
+        "definition": "Took / gathered"
       }
     ],
     "quiz": [
@@ -398,60 +490,60 @@ export const NOVEL_CHAPTERS = [
     "image": "/images/horloge-boreale/chapitre_4_illustration.jpg",
     "theme": "Environnement & Consommation Responsable",
     "grammarFocus": "Connecteurs Logiques & Argumentation",
-    "summary": "La vieille voiture de Marc serpentait sur les routes escarpées des Laurentides. Les collines \nboisées flamboyaient de couleurs automnales, mais à mesu...",
+    "summary": "La voiture de Marc montait le long des routes de montagne dans les Laurentides...",
     "pages": [
       {
         "pageNumber": 1,
         "title": "Page 1",
         "audioSrc": "",
-        "text": "La vieille voiture de Marc serpentait sur les routes escarpées des Laurentides. Les collines \nboisées flamboyaient de couleurs automnales, mais à mesure que le trio approchait des \ncoordonnées indiquées par le médaillon, le paysage s'assombrissait. Une odeur âcre de terre \nbrûlée et de carburant lourd flottait dans l'air frais des montagnes. \nAu bout d'un chemin de gravier envahi par les herbes folles, ils aperçurent enfin le domaine : un \nbâtiment discret en bois et en verre, parfaitement intégré à la canopée forestière. C’était le \nlaboratoire expérimental d'Amadou. Mais à seulement quelques centaines de mètres de là, de \nmonstrueuses pelleteuses jaunes et des camions de forage déchiraient déjà le flanc de la \ncolline. \nJulien, Samira et Marc descendirent du véhicule et pénétrèrent prudemment dans le laboratoire \npar une porte dérobée. À l'intérieur, des panneaux solaires autonomes alimentaient encore de \ngrands écrans d'observation et des classeurs remplis de données environnementales. Sur la \ntable centrale, un dossier frappé du sceau d'un consortium minier international révéla la terrible \nréalité. \n— Regardez ces cartes géologiques, dit Julien d'une voix blanche. Une multinationale a acheté \nles terrains adjacents pour exploiter une mine à ciel ouvert de lithium et de métaux rares. \nSamira feuilleta rapidement le rapport technique avec indignation : \n— Puisque ce projet industriel détruira plus de trois cents hectares de forêt protégée, il causera \nune déforestation massive et immédiate. En raison du transport lourd et des usines de raffinage \nprévues sur place, les émissions de carbone augmenteront d'au moins soixante pour cent dans \ntoute la région ! \n— C'est une catastrophe écologique majeure, ajouta Marc en observant les graphiques de \nmodélisation du climat. À cause de la destruction de cet écosystème, nous assisterons à une \nperte irréversible de biodiversité. Les cours d'eau locaux seront contaminés par les résidus \nchimiques, et par conséquent, toute la faune de la vallée sera directement empoisonnée. \nJulien alluma le terminal informatique principal du laboratoire. Le testament numérique de son \ngrand-père apparut à l'écran sous la forme d'un message vidéo enregistré des années plus tôt : \n« Si vous regardez ce message, c'est que la cupidité des hommes a fini par atteindre cette \nvallée. Ce sanctuaire ne m'appartient pas : il appartient à la terre et aux générations de demain. \nLa surconsommation aveugle menace notre avenir commun. Vous devrez vous battre avec les \narmes de la vérité, de la science et de la conscience citoyenne. »"
+        "text": "La voiture de Marc montait le long des routes de montagne dans les Laurentides. Les collines étaient pleines de magnifiques feuilles d'automne rouges et jaunes. Mais quand ils arrivèrent près des coordonnées du médaillon, le paysage changea brusquement. Une odeur désagréable de terre brûlée et de carburant flottait dans l'air.\n\nAu bout d'un petit chemin de gravier, ils virent enfin le bâtiment : une maison en bois et en verre construite au milieu des arbres. C'était le laboratoire d'Amadou. Cependant, à quelques centaines de mètres, de gros camions jaunes et des pelleteuses commençaient déjà à creuser la colline.\n\nJulien, Samira et Marc entrèrent rapidement dans le bâtiment par une porte de côté. À l'intérieur, des panneaux solaires alimentaient encore des ordinateurs et plusieurs classeurs remplis de recherches environnementales. Sur la grande table, un document portant le logo d'une compagnie minière internationale expliquait la situation.\n\n— Regardez ces cartes, dit Julien avec inquiétude. Une entreprise a acheté ce terrain pour construire une grande mine de lithium et de métaux rares.\n\nSamira lut le rapport avec colère :\n\n— Puisque ce projet industriel va couper plus de trois cents hectares d'arbres, il va causer une déforestation très grave. En plus, à cause du transport constant des camions, les émissions de carbone vont augmenter rapidement dans toute la région !\n\n— C'est un désastre pour l'environnement, ajouta Marc en regardant les graphiques sur l'écran. La destruction de cet écosystème va provoquer une perte de biodiversité irréversible. Les produits chimiques de la mine vont polluer la rivière voisine, et par conséquent, tous les animaux de la forêt seront en danger.\n\nJulien alluma l'ordinateur principal du laboratoire. Une vidéo enregistrée par son grand-père il y a plusieurs années apparut à l'écran :\n\n« Si vous regardez ce message aujourd'hui, c'est que des personnes cherchent à détruire cette belle vallée. Cet endroit n'appartient pas à une compagnie : il appartient à la terre et aux générations futures. La surconsommation menace notre avenir à tous. Vous devez utiliser la science, la vérité et votre voix de citoyen pour défendre la forêt. »"
       },
       {
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "",
-        "text": "Samira, dont l'engagement pour le militantisme et la consommation responsable était au cœur \nde chaque action quotidienne, serra les poings avec détermination : \n— Votre grand-père avait parfaitement compris les enjeux de la durabilité ! Les entreprises \ncontinuent d'encourager le gaspillage des ressources et l'économie linéaire destructrice, alors \nque nous devons impérativement bâtir une économie circulaire et éthique. \nElle se tourna vers Julien et Marc, les yeux étincelants : \n— Nous ne resterons pas passifs devant ce désastre. Si nous n'agissons pas tout de suite, la \nplanète entière subira des événements climatiques extrêmes de plus en plus destructeurs. La \nfonte des glaces s'accélérera, le niveau des océans montera et les communautés vulnérables \npaieront le prix fort. C'est pourquoi nous organiserons une riposte sans précédent ! \n— Quel est le plan ? demanda Julien, prêt à mettre ses compétences au service de cette \ncause. \nSamira déroula une grande feuille de papier et commença à esquisser un plan d'action \nstratégique : \n— D'abord, nous compilerons toutes les données scientifiques et les preuves de pollution \nillégale cachées dans ce laboratoire. Ensuite, nous rédigerons un discours persuasif percutant \net nous lancerons une grande campagne de sensibilisation sur les réseaux sociaux \nfrancophones. Nous créerons une véritable prise de conscience collective auprès du public et \ndes élus municipaux ! \nMarc brancha un disque dur externe pour copier l'intégralité des fichiers écologiques d'Amadou \n: \n— Si nous diffusons ces faits indiscutables, les citoyens refuseront ce projet écocide. Les \njeunes d'ici et d'ailleurs s'engageront à nos côtés. Nous exigerons le passage immédiat à des \nénergies vertes et la préservation stricte de la réserve. Nous sauverons cette forêt, nous \nréduirons l'empreinte écologique locale et nous protégerons l'héritage d'Amadou ! \nJulien regarda par la grande baie vitrée les arbres centenaires qui frémissaient sous le vent du \nnord. Pour la première fois de sa vie, il ne luttait pas pour sa propre survie ou pour un intérêt \npersonnel étroit. En embrassant ce combat pour la justice environnementale, il sentit naître en \nlui une énergie nouvelle, prêt à porter cet appel à l'action jusqu'au cœur des débats qui \ndécideraient du monde de demain."
+        "text": "Samira, qui militait souvent pour l'écologie et la consommation responsable, leva la tête avec détermination :\n\n— Votre grand-père avait tout compris sur la durabilité ! Beaucoup d'entreprises préfèrent le gaspillage des ressources et le profit rapide, alors que nous devons obligatoirement développer une économie circulaire qui respecte la nature.\n\nElle regarda Julien et Marc avec énergie :\n\n— Nous ne pouvons pas laisser faire cela sans rien dire. Si nous ne réagissons pas maintenant, la planète connaîtra des dérèglements climatiques pires encore : la fonte des glaces va continuer, le niveau de la mer va monter et beaucoup de populations vont souffrir. C'est pour cela que nous devons agir dès aujourd'hui !\n\n— Quel est notre plan ? demanda Julien, prêt à utiliser son énergie pour une bonne cause.\n\nSamira prit une feuille blanche et commença à écrire leurs idées :\n\n— D'abord, nous allons rassembler toutes les données scientifiques et les preuves de pollution trouvées dans ce laboratoire. Ensuite, nous écrirons un texte clair et nous lancerons une grande campagne d'information sur les réseaux sociaux pour alerter les citoyens et les représentants de la ville.\n\nMarc brancha une clé USB pour sauvegarder tous les fichiers importants d'Amadou :\n\n— Si nous partageons ces faits réels, les gens vont refuser ce projet destructeur. Les jeunes vont se joindre à nous. Nous demanderons l'utilisation d'énergies propres et la protection complète de cette forêt. Nous allons réduire l'empreinte écologique locale et continuer le travail de ton grand-père !\n\nJulien regarda par la fenêtre les grands arbres qui bougeaient dans le vent d'automne. Pour la première fois de sa vie, il ne se battait pas uniquement pour lui-même. En s'engageant pour la nature, il sentait naître en lui une grande motivation pour construire un avenir meilleur."
       }
     ],
     "vocabList": [
       {
-        "word": "Une cause (cause)",
+        "word": "Une cause",
         "definition": "La raison d'être ou l'origine d'un fait ou d'un phénomène."
       },
       {
-        "word": "Une conséquence (consequence)",
+        "word": "Une conséquence",
         "definition": "Le résultat logique ou l'effet découlant d'une action."
       },
       {
-        "word": "Émission de carbone (carbon emission)",
+        "word": "Émission de carbone",
         "definition": "Le rejet de gaz à effet de serre dans l'atmosphère terrestre."
       },
       {
-        "word": "Déforestation (deforestation)",
+        "word": "Déforestation",
         "definition": "La destruction ou réduction massive des surfaces forestières."
       },
       {
-        "word": "Gaz à effet de serre (greenhouse gas)",
+        "word": "Gaz à effet de serre",
         "definition": "Gaz retenant la chaleur solaire et causant le réchauffement global."
       },
       {
-        "word": "Perte de biodiversité (biodiversity loss)",
+        "word": "Perte de biodiversité",
         "definition": "La disparition irrémédiable d'espèces animales ou végétales."
       },
       {
-        "word": "Empreinte écologique (ecological footprint)",
+        "word": "Empreinte écologique",
         "definition": "La mesure de l'impact des activités humaines sur les écosystèmes."
       },
       {
-        "word": "La fonte des glaces (melting ice)",
+        "word": "La fonte des glaces",
         "definition": "Le retrait des glaciers et de la calotte polaire dû au climat."
       },
       {
-        "word": "L'économie circulaire (circular economy)",
+        "word": "L'économie circulaire",
         "definition": "Un modèle de production basé sur le recyclage et la réduction des déchets."
       },
       {
-        "word": "Durabilité (sustainability)",
+        "word": "Durabilité",
         "definition": "La capacité à maintenir un équilibre écologique à long terme."
       }
     ],
@@ -465,7 +557,7 @@ export const NOVEL_CHAPTERS = [
           "Une odeur de café chaud et de pain"
         ],
         "correctIdx": 1,
-        "explanation": "L'odeur de terre brûlée et de carburant lourd témoigne de l'activité industrielle destructrice à proximité."
+        "explanation": "L'odeur de terre brûlée et de carburant témoigne de l'activité industrielle destructrice à proximité."
       },
       {
         "id": 2,
@@ -483,11 +575,11 @@ export const NOVEL_CHAPTERS = [
         "question": "Quelle conséquence écologique Samira redoute-t-elle si le projet industriel se réalise ?",
         "options": [
           "Une baisse des températures dans la région",
-          "Une déforestation massive de 300 hectares et une hausse de 60% des émissions de carbone",
+          "Une déforestation massive de 300 hectares et une hausse des émissions de carbone",
           "Une augmentation de la biodiversité"
         ],
         "correctIdx": 1,
-        "explanation": "Samira calcule que le projet détruira 300 hectares de forêt et augmentera les émissions de carbone de 60%."
+        "explanation": "Samira calcule que le projet détruira 300 hectares de forêt et augmentera fortement les émissions de carbone."
       },
       {
         "id": 4,
@@ -505,7 +597,7 @@ export const NOVEL_CHAPTERS = [
         "question": "Quel plan d'action Samira propose-t-elle pour lutter contre ce désastre ?",
         "options": [
           "Fuir au Sénégal avec les données",
-          "Compiler les données scientifiques, rédiger un discours persuasif et lancer une campagne sur les réseaux sociaux",
+          "Compiler les données scientifiques, rédiger un texte clair et lancer une campagne sur les réseaux sociaux",
           "Bloquer physiquement les pelleteuses"
         ],
         "correctIdx": 1,
@@ -522,66 +614,66 @@ export const NOVEL_CHAPTERS = [
     "image": "/images/horloge-boreale/chapitre_5_illustration.jpg",
     "theme": "Regards sur l'Avenir & Métiers",
     "grammarFocus": "Le Futur Simple & Hypothèses",
-    "summary": "Trois semaines après leur découverte dans les Laurentides, le grand auditorium du Palais des \nCongrès de Montréal vibrait d'une effervescence particul...",
+    "summary": "Trois semaines après leur visite dans les Laurentides, Julien présente son projet au Forum International...",
     "pages": [
       {
         "pageNumber": 1,
         "title": "Page 1",
         "audioSrc": "",
-        "text": "Trois semaines après leur découverte dans les Laurentides, le grand auditorium du Palais des \nCongrès de Montréal vibrait d'une effervescence particulière. C'était l'ouverture officielle du \nForum International des Innovations et du Développement Durable, un rassemblement majeur \nréunissant des ministres, des scientifiques, des leaders industriels et des représentants de la \njeunesse francophone. \nDans les coulisses de la salle plénière, Julien ajustait sa veste sombre avec une nervosité \nmaîtrisée. L'ancien jeune homme cynique et isolé avait laissé place à un orateur déterminé. À \nses côtés, Samira et Marc finalisaient les derniers réglages de leur projection holographique \ninteractive sur leurs tablettes numériques. \n— Te souviens-tu de ce que nous avons traversé pour arriver jusqu'ici ? murmura Samira en \nsouriant. Tu as toutes les compétences requises pour convaincre cette assemblée. Ton esprit \ncritique et ton sens de la résolution de problèmes sont nos meilleurs atouts aujourd'hui. \n— Si nous gardons notre calme, nous réussirons notre présentation sans hésitation, répondit \nJulien avec assurance. Nous avons travaillé en équipe avec une autonomie remarquable. Il est \ntemps de montrer à quoi ressemblera le monde de demain. \nUne voix retentit soudain derrière eux : \n— Monsieur Touré ? Vous avez cinq minutes avant votre entrée en scène. \nJulien se retourna et aperçut le capitaine Antoine Vaneau, vêtu de son uniforme d'apparat. \nVaneau n'était plus là en tant qu'adversaire, mais comme responsable de la sécurité du sommet \nmondial. L'enquête officielle menée par la police avait totalement innocenté Julien : les données \nd'Amadou avaient prouvé la corruption des propriétaires de la mine et la légitimité historique de \nl'Horloge Boréale dans la succession familiale. \n— Capitaine, salua Julien avec déférence. \n— Je voulais vous souhaiter bonne chance, dit Vaneau d'un ton chaleureux et sincère en lui \ntendant la main. Vous avez su transformer une situation complexe en une perspective d'avenir \nremarquable pour toute notre société. Si chacun faisait preuve de votre intégrité et de votre \ncourage civique, notre communauté évoluerait bien plus vite. \n— Merci, capitaine. Votre soutien a été déterminant. \nLe signal lumineux clignota au-dessus de la scène. Les rideaux s'ouvrirent et Julien s'avança \nsous la lumière vive des projecteurs, acclamé par des centaines de délégués internationaux."
+        "text": "Trois semaines après leur visite dans les Laurentides, le grand auditorium du Palais des Congrès de Montréal était rempli de monde. C'était l'ouverture du Forum International des Innovations et du Développement Durable, un événement important qui réunissait des scientifiques, des chefs d'entreprise et des étudiants.\n\nDans les coulisses, Julien ajustait sa veste avec un peu de trac, mais avec beaucoup de calme. Le jeune homme timide et solitaire du passé était devenu un orateur convaincant. À côté de lui, Samira et Marc préparaient la présentation numérique sur leurs tablettes.\n\n— Pense à tout ce que nous avons réussi depuis le début, dit Samira avec un grand sourire. Tu as toutes les compétences nécessaires pour parler à ce public. Ton esprit critique et ta capacité de réflexion sont nos plus grandes forces aujourd'hui.\n\n— Si nous restons concentrés, nous ferons une excellente présentation, répondit Julien avec enthousiasme. Nous avons accompli un travail d'équipe remarquable. C'est le moment d'expliquer nos idées pour demain.\n\nUne voix familière se fit entendre derrière eux :\n\n— Julien ? C'est à vous dans quelques minutes.\n\nJulien se retourna et vit le capitaine Antoine Vaneau en uniforme. Vaneau n'était plus un adversaire, mais le chef responsable de la sécurité du sommet mondial. L'enquête officielle de la police avait complètement innocenté Julien : les documents d'Amadou avaient prouvé la corruption de la compagnie minière et confirmé que l'Horloge Boréale appartenait légitimement à la famille de Julien.\n\n— Bonjour, capitaine, dit Julien poliment en lui serrant la main.\n\n— Je voulais vous souhaiter un grand succès, répondit le policier avec franchise et bienveillance. Vous avez utilisé votre courage et votre honnêteté pour aider toute notre communauté. Si chaque citoyen agissait avec autant de responsabilité, notre société ferait de grands progrès.\n\n— Merci beaucoup, capitaine. Votre soutien nous a énormément aidés.\n\nLa lumière de la scène s'alluma. Les rideaux s'ouvrirent et Julien s'avança devant le public qui applaudissait chaleureusement."
       },
       {
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "",
-        "text": "Derrière lui, l'immense écran circulaire afficha le modèle numérique de l'Horloge Boréale couplé \naux schémas du laboratoire forestier d'Amadou. Julien prit le micro et s'adressa à la foule d'une \nvoix posée, fluide et empreinte de conviction : \n— Mesdames et messieurs, chers délégués, commença-t-il, les défis écologiques et \ntechnologiques du XXIe siècle ne sont pas une fatalité, mais un enjeu stimulant qui appelle une \ntransformation profonde de nos modes de vie. Aujourd'hui, l'automatisation et l'intelligence \nartificielle redéfinissent complètement le marché du travail mondial. Cependant, si nous \nutilisions ces technologies avec une éthique rigoureuse, nous créerions des dizaines de métiers \némergents axés sur la protection de la planète et le bien commun. \nJulien actionna la télécommande pour dévoiler le projet pilote baptisé « Sentinelle Boréale » : \n— Si nous intégrons l'intelligence artificielle à des capteurs biomimétiques dans nos forêts \nprotégées, nous détecterons la pollution de l'eau en temps réel avant qu'elle ne devienne \nirréparable. Si nous investissions massivement dans cette filière verte, nous formerions des \nmilliers de jeunes éco-ingénieurs, de spécialistes en cybersécurité environnementale et \nd'artisans de la durabilité. Il faudra que nos gouvernements soutiennent les travailleurs \nindépendants et les coopératives locales qui réinventent l'économie circulaire. \nDans la salle, le public écoutait dans un silence absolu, captivé par la cohérence du discours et \nla force des données scientifiques présentées. \n— Mon grand-père me disait souvent que pour envisager l'avenir, il faut d'abord honorer ses \nracines. Nos aspirations professionnelles ne doivent pas se limiter à obtenir un bon salaire ou \nun poste prestigieux dans un bureau fermé. Elles doivent nous permettre de nous épanouir \npleinement en servant une cause plus grande que nous. Si nous faisions le choix de la \nresponsabilité dès aujourd'hui, nos sociétés bâtiraient un avenir juste, propre et solidaire. \nLorsque Julien termina son intervention par un appel vibrant à la jeunesse, la salle entière se \nleva pour une ovation unanime. Des représentants d'organisations internationales et des \ndirigeants d'entreprises innovantes montèrent sur scène pour féliciter l'équipe. \nPlus tard dans l'après-midi, dans le hall des exposants, Julien discutait avec la directrice d'un \nincubateur technologique basé à Dakar et à Montréal. \n— Votre vision est fascinante, monsieur Touré, affirma la directrice en lui tendant une carte \nprofessionnelle. Notre organisation offre un stage spécialisé en gestion de projets \néco-numériques avec une rémunération très compétitive et une option complète de télétravail. \nVous devriez postuler immédiatement pour ce poste ; nous avons besoin d'un profil doté d'une \ntelle adaptabilité et d'un tel esprit d'initiative. \n— Je vous remercie infiniment, répondit Julien avec gratitude. J'aimerais beaucoup soumettre \nma candidature et je vous ferai parvenir mon CV ainsi que ma lettre de motivation dès la \nsemaine prochaine."
+        "text": "Derrière lui, un écran géant montra les plans de l'Horloge Boréale combinés aux recherches du laboratoire forestier. Julien prit le micro et parla avec une voix claire et assurée :\n\n— Bonjour à toutes et à tous, commença-t-il. Les défis écologiques et technologiques de notre époque ne sont pas impossibles à surmonter. Aujourd'hui, l'automatisation et l'intelligence artificielle changent le monde du travail. Mais si nous utilisons ces nouvelles technologies avec une vision humaine et éthique, nous pourrons créer de nouveaux métiers très utiles pour protéger notre planète.\n\nJulien montra ensuite le projet imaginé par son équipe, appelé « Sentinelle Boréale » :\n\n— Si nous installons des capteurs intelligents dans nos forêts, nous pourrons surveiller la qualité de l'eau en temps réel avant qu'une pollution ne devienne trop grave. Si nos universités forment plus de jeunes éco-ingénieurs et d'artisans de la durabilité, nous construirons une économie circulaire solide. Nos gouvernements soutiendront les travailleurs indépendants et les projets communautaires qui respectent la nature.\n\nDans la salle, tout le monde écoutait avec attention, impressionné par la clarté et le sérieux des propositions.\n\n— Mon grand-père me disait souvent que pour construire son avenir, il faut respecter ses racines culturelles. Nos choix professionnels ne doivent pas seulement servir à gagner un bon salaire. Ils doivent nous permettre de nous épanouir et de participer à une société plus juste, plus verte et plus solidaire.\n\nQuand Julien termina son discours par un message d'espoir pour la jeunesse, toute la salle se leva pour l'applaudir longuement. Des directeurs d'organisations et des enseignants vinrent féliciter les trois amis sur scène.\n\nPlus tard dans l'après-midi, dans le grand hall du salon, Julien discuta avec la directrice d'un incubateur technologique international situé entre Montréal et Dakar :\n\n— Votre projet est passionnant, dit-elle en lui tendant sa carte. Notre entreprise propose un stage rémunéré en gestion de projets éco-numériques, avec une formule moderne en télétravail. Vous devriez envoyer votre candidature sans tarder ; nous cherchons des personnes créatives avec un bel esprit d'équipe comme le vôtre.\n\n— Merci infiniment, répondit Julien avec joie. Je vais préparer mon CV et ma lettre de motivation dès cette semaine."
       },
       {
         "pageNumber": 3,
         "title": "Page 3",
         "audioSrc": "",
-        "text": "En fin de journée, Julien, Samira et Marc se retrouvèrent sur le belvédère du mont Royal pour \ncontempler le coucher de soleil sur la ville. Le vent d'automne était doux et l'horizon dégagé \ns'étendait à perte de vue. \n— Alors, Julien, demanda Samira avec complicité, qu'est-ce que tu envisages pour la suite ? \nJulien sourit en observant les reflets du soleil sur le fleuve Saint-Laurent. Il sortit le médaillon \nd'Amadou de sa poche et le regarda briller : \n— Si j'obtiens ce poste, je travaillerai entre le Québec et le Sénégal pour développer des \ntechnologies propres. J'ai enfin trouvé ma voie. \nL'anti-héros solitaire du premier jour s'était transformé en un bâtisseur d'avenir conscient de ses \nforces, fier de son héritage et prêt à relever tous les défis de demain."
+        "text": "En fin de journée, Julien, Samira et Marc montèrent sur le belvédère du mont Royal pour regarder le coucher de soleil sur la ville de Montréal. Le vent était doux et la vue était magnifique.\n\n— Alors, Julien, demanda Samira avec curiosité, qu'est-ce que tu vas faire maintenant ?\n\nJulien sourit en regardant les reflets dorés de l'eau sur le fleuve Saint-Laurent. Il sortit le médaillon en argent de sa poche :\n\n— Si j'obtiens ce stage, je travaillerai entre le Québec et le Sénégal pour développer des technologies écologiques. J'ai enfin trouvé ma voie.\n\nLe jeune solitaire du début s'était transformé en un citoyen confiant, fier de ses origines, bien entouré par ses amis et prêt à relever tous les défis de l'avenir."
       }
     ],
     "vocabList": [
       {
-        "word": "Une compétence (skill)",
+        "word": "Une compétence",
         "definition": "Une capacité ou connaissance pratique acquise pour effectuer un travail."
       },
       {
-        "word": "Un atout (asset)",
+        "word": "Un atout",
         "definition": "Une force ou qualité positive favorisant la réussite."
       },
       {
-        "word": "L'esprit d'équipe (team spirit)",
+        "word": "L'esprit d'équipe",
         "definition": "La disposition à collaborer efficacement avec d'autres personnes."
       },
       {
-        "word": "L'esprit critique (critical thinking)",
+        "word": "L'esprit critique",
         "definition": "La faculté d'évaluer objectivement des données avant de juger."
       },
       {
-        "word": "L'adaptabilité (adaptability)",
+        "word": "L'adaptabilité",
         "definition": "L'aptitude à s'ajuster rapidement au changement et à la nouveauté."
       },
       {
-        "word": "L'autonomie (autonomy)",
+        "word": "L'autonomie",
         "definition": "La capacité à agir de manière indépendante et à prendre des initiatives."
       },
       {
-        "word": "La résolution de problèmes (problem solving)",
+        "word": "La résolution de problèmes",
         "definition": "L'aptitude à analyser un obstacle et à y apporter une réponse."
       },
       {
-        "word": "L'automatisation (automation)",
+        "word": "L'automatisation",
         "definition": "L'exécution de tâches par des machines sans intervention humaine."
       },
       {
-        "word": "L'intelligence artificielle (artificial intelligence)",
+        "word": "L'intelligence artificielle",
         "definition": "Technologies imitant des processus d'intelligence humaine."
       },
       {
-        "word": "Le télétravail (telecommuting)",
+        "word": "Le télétravail",
         "definition": "L'organisation d'une activité professionnelle à distance."
       }
     ],
