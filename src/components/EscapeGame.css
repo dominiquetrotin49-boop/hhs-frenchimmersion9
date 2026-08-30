@@ -1,0 +1,338 @@
+.escape-game-container {
+  font-family: 'Courier New', Courier, monospace; /* Retro typewriter/comic font feel */
+  background-color: #2c3e50; /* Dark blue/grey background reminiscent of Tintin nights */
+  color: #f1c40f; /* Retro yellow text */
+  padding: 2rem;
+  border-radius: var(--radius-lg);
+  border: 4px solid #34495e;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5), 0 10px 20px rgba(0, 0, 0, 0.3);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.game-title {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #e74c3c; /* Red */
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 0px #c0392b;
+}
+
+.game-subtitle {
+  text-align: center;
+  color: #ecf0f1;
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.stage-container {
+  background: #34495e;
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 2px solid #2c3e50;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.clue-text {
+  font-size: 1.2rem;
+  color: #ecf0f1;
+  text-align: center;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Stage 1: Inputs */
+.code-inputs {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.letter-input {
+  width: 50px;
+  height: 60px;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  background: #2c3e50;
+  border: 2px solid #f1c40f;
+  color: #f1c40f;
+  border-radius: 4px;
+  outline: none;
+  font-family: inherit;
+}
+.letter-input:focus {
+  border-color: #e74c3c;
+  box-shadow: 0 0 10px #e74c3c;
+}
+
+/* Stage 2: Multiple Choice */
+.mcq-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  max-width: 400px;
+}
+.mcq-btn {
+  background: #2c3e50;
+  color: #ecf0f1;
+  border: 2px solid #3498db;
+  padding: 1rem;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mcq-btn:hover {
+  background: #3498db;
+  color: white;
+}
+.mcq-btn.error {
+  animation: shake 0.4s;
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+
+/* Stage 3: Matching */
+.matching-container {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+}
+.matching-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+.match-btn {
+  background: #2c3e50;
+  border: 2px solid #7f8c8d;
+  color: #ecf0f1;
+  padding: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  text-align: left;
+  transition: all 0.2s;
+}
+.match-btn:hover {
+  border-color: #f1c40f;
+}
+.match-btn.selected {
+  background: #f1c40f;
+  color: #2c3e50;
+  border-color: #f1c40f;
+}
+.match-btn.matched {
+  background: #27ae60;
+  border-color: #27ae60;
+  color: white;
+  cursor: default;
+}
+
+/* Stage 4: Keypad */
+.keypad-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.keypad-display {
+  background: #111;
+  color: #2ecc71;
+  font-size: 2rem;
+  padding: 1rem;
+  border-radius: 4px;
+  width: 200px;
+  text-align: center;
+  letter-spacing: 4px;
+  font-family: monospace;
+}
+.keypad-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+}
+.key-btn {
+  background: #7f8c8d;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: inherit;
+}
+.key-btn:active {
+  background: #95a5a6;
+  transform: scale(0.95);
+}
+
+/* Win Screen */
+.win-screen {
+  text-align: center;
+  padding: 2rem;
+}
+.win-title {
+  font-size: 2.5rem;
+  color: #f1c40f;
+  margin-bottom: 1rem;
+  animation: pulse 1.5s infinite;
+}
+.win-text {
+  font-size: 1.2rem;
+  color: #ecf0f1;
+}
+
+/* Animations */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); text-shadow: 0 0 20px #f1c40f; }
+  100% { transform: scale(1); }
+}
+
+/* Stage 5: Anagram */
+.anagram-box {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1.5rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  border: 1px dashed #7f8c8d;
+  letter-spacing: 0.5em;
+  color: #3498db;
+}
+
+.anagram-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.anagram-input {
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #e74c3c;
+  border-radius: 8px;
+  padding: 1rem;
+  font-size: 1.5rem;
+  color: white;
+  text-align: center;
+  font-family: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+
+/* Stage 6: True/False */
+.tf-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1.5rem;
+  border-radius: 8px;
+  color: white;
+}
+
+.tf-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.tf-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.tf-btn {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid transparent;
+  color: #ecf0f1;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.tf-btn.active-vrai {
+  background: #27ae60;
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+}
+
+.tf-btn.active-faux {
+  background: #c0392b;
+  border-color: rgba(255,255,255,0.5);
+  color: white;
+}
+
+/* Stage 7: Color Sequence */
+.sequence-display {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.seq-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  transition: background-color 0.2s;
+}
+
+.color-btn-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.color-btn {
+  height: 80px;
+  border-radius: 8px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  transition: transform 0.1s, border-color 0.2s;
+}
+
+.color-btn:active {
+  transform: scale(0.95);
+}
+
+.color-btn:hover {
+  border-color: white;
+}
+
+.bg-red { background: #d62828; }
+.bg-blue { background: #3498db; }
+.bg-green { background: #27ae60; }
+.bg-black { background: #2c3e50; }

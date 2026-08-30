@@ -1,0 +1,494 @@
+/* Disney-Themed Speed Runner CSS System - Bright Magical Theme */
+.disney-runner-container {
+  width: 100%;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #e0f2fe 0%, #c7d2fe 50%, #e9d5ff 100%);
+  border: 3px solid #f59e0b;
+  box-shadow: 0 20px 50px rgba(147, 51, 234, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* DISNEY HEADER BAR */
+.disney-runner-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+}
+
+@media (min-width: 640px) {
+  .disney-runner-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.disney-castle-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.6);
+}
+
+.disney-game-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #7c2d12;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.disney-game-sub {
+  font-size: 0.8rem;
+  color: #334155;
+  font-weight: 700;
+  margin: 0;
+}
+
+.disney-score-pill {
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  color: #0f172a;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* MENU CARD */
+.disney-menu-card {
+  padding: 2.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 1.25rem;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.disney-avatar-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem;
+  border-radius: 1.25rem;
+  background: #ffffff;
+  border: 3px solid #cbd5e1;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.disney-avatar-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: #f59e0b;
+  background: #fefce8;
+}
+
+.disney-avatar-card.selected {
+  border-color: #d97706;
+  background: linear-gradient(135deg, #fef08a 0%, #fef3c7 100%);
+  box-shadow: 0 0 25px rgba(245, 158, 11, 0.6);
+}
+
+.disney-avatar-img-frame {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f59e0b;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  background: #000000;
+}
+
+.disney-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.disney-start-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border: 2px solid #fef08a;
+  padding: 0.9rem 2.5rem;
+  border-radius: 0.9rem;
+  box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.disney-start-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(217, 119, 6, 0.6);
+}
+
+/* ARCADE STAGE & SEMI-TRANSPARENT CHARACTER WATERMARK BACKGROUND */
+.disney-arcade-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+.disney-character-watermark-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.disney-watermark-img {
+  max-width: 520px;
+  max-height: 480px;
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.18;
+  filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.4));
+  transition: opacity 0.5s ease;
+}
+
+.disney-hud-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  padding: 0.7rem 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+/* 3D DYNAMIC COMBO BADGE SYSTEM */
+.disney-combo-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.78rem;
+  font-weight: 900;
+  padding: 0.4rem 1rem;
+  border-radius: 9999px;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+.disney-combo-icon-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.disney-combo-badge.combo-x1 {
+  background: linear-gradient(135deg, #ffffff 0%, #fef3c7 100%);
+  border: 2px solid #f59e0b;
+  color: #7c2d12;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+.disney-combo-badge.combo-x2 {
+  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+  border: 2.5px solid #a5f3fc;
+  color: #ffffff;
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.4);
+  transform: scale(1.03);
+}
+
+.disney-combo-badge.combo-x3 {
+  background: linear-gradient(135deg, #8b5cf6 0%, #d946ef 100%);
+  border: 2.5px solid #f472b6;
+  color: #ffffff;
+  box-shadow: 0 0 25px rgba(217, 70, 239, 0.7), inset 0 0 12px rgba(255, 255, 255, 0.5);
+  transform: scale(1.06);
+}
+
+.disney-combo-badge.combo-x5 {
+  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #d97706 100%);
+  border: 3px solid #ffffff;
+  color: #7c2d12;
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.9), inset 0 0 15px rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  animation: comboCrownPulse 1.2s infinite alternate;
+}
+
+@keyframes comboCrownPulse {
+  0% { transform: scale(1.06); box-shadow: 0 0 25px rgba(245, 158, 11, 0.7); }
+  100% { transform: scale(1.1); box-shadow: 0 0 45px rgba(251, 191, 36, 1); }
+}
+
+/* QUESTION CARD */
+.disney-question-card {
+  background: #ffffff;
+  border: 3px solid #f59e0b;
+  padding: 1.35rem 1.5rem;
+  border-radius: 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 25px rgba(245, 158, 11, 0.25);
+  text-align: center;
+}
+
+.disney-question-tag {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #b45309;
+  display: inline-block;
+  margin-bottom: 0.4rem;
+}
+
+.disney-question-sentence {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.disney-blank-box {
+  display: inline-block;
+  background: #fef9c3;
+  border: 2px dashed #ca8a04;
+  color: #a16207;
+  padding: 0.15rem 1.35rem;
+  border-radius: 0.5rem;
+  margin: 0 0.4rem;
+  font-weight: 900;
+}
+
+/* BRIGHT MAGICAL PARALLAX TRACK ENVIRONMENT */
+.disney-track-environment {
+  position: relative;
+  height: 285px;
+  background: linear-gradient(180deg, #60a5fa 0%, #818cf8 55%, #a78bfa 100%);
+  border-radius: 1.25rem;
+  border: 3px solid #f59e0b;
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.5), 0 10px 25px rgba(129, 140, 248, 0.3);
+  overflow: hidden;
+}
+
+.disney-castle-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  opacity: 0.95;
+}
+
+.disney-moon {
+  font-size: 2.4rem;
+  filter: drop-shadow(0 0 15px rgba(255, 255, 255, 0.9));
+}
+
+.disney-stars {
+  font-size: 1rem;
+  color: #fef08a;
+  letter-spacing: 0.5rem;
+  text-shadow: 0 0 8px rgba(254, 240, 138, 0.8);
+}
+
+.disney-lanes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  height: 100%;
+  padding-top: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.disney-lane {
+  border-right: 2px dashed rgba(255, 255, 255, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 1rem;
+  transition: background 0.2s ease;
+}
+
+.disney-lane:last-child {
+  border-right: none;
+}
+
+.disney-lane.active-lane {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.disney-magic-gate {
+  width: 90%;
+  max-width: 175px;
+  padding: 1.1rem 0.5rem;
+  border-radius: 1.25rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 3px solid #f59e0b;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15), 0 0 20px rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.disney-magic-gate:hover {
+  transform: translateY(-4px) scale(1.04);
+  border-color: #d97706;
+  box-shadow: 0 12px 30px rgba(217, 119, 6, 0.4);
+}
+
+.disney-magic-gate.gate-boost {
+  border-color: #10b981;
+  background: linear-gradient(135deg, #ecfdf5 0%, #a7f3d0 100%);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.85);
+  animation: boostScale 0.4s ease;
+}
+
+@keyframes boostScale {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+.disney-gate-num {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #64748b;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.disney-gate-word {
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #b45309;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* DISNEY CARTOON AVATAR ON RUNNER TRACK - EXACT SAME SIZE AS MAIN MENU (68px x 68px) */
+.disney-runner-avatar {
+  position: absolute;
+  bottom: 12px;
+  width: 33.333%;
+  display: flex;
+  justify-content: center;
+  transition: left 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+.disney-runner-avatar.lane-pos-0 { left: 0%; }
+.disney-runner-avatar.lane-pos-1 { left: 33.333%; }
+.disney-runner-avatar.lane-pos-2 { left: 66.666%; }
+
+.disney-avatar-sprite {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: runnerBob 0.6s infinite alternate ease-in-out;
+}
+
+@keyframes runnerBob {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-8px); }
+}
+
+/* EXACT 68px x 68px MATCHING MAIN MENU BOX AVATAR SIZE */
+.disney-onstage-avatar-frame {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #fef08a;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35), 0 0 15px rgba(254, 240, 138, 0.8);
+  background: #000000;
+}
+
+.disney-onstage-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.disney-sparkle-trail {
+  font-size: 0.75rem;
+  margin-top: -4px;
+}
+
+/* MODAL OVERLAY ON INCORRECT GATE */
+.disney-modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 50;
+}
+
+.disney-feedback-card {
+  background: #ffffff;
+  border: 3px solid #f43f5e;
+  padding: 1.85rem;
+  border-radius: 1.5rem;
+  max-width: 460px;
+  width: 100%;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2), 0 0 30px rgba(244, 63, 94, 0.3);
+  color: #0f172a;
+}
+
+.disney-continue-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: 2px solid #7dd3fc;
+  padding: 0.8rem 1.85rem;
+  border-radius: 0.85rem;
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.disney-continue-btn:hover {
+  transform: scale(1.03);
+}
+
+/* GAMEOVER CARD */
+.disney-gameover-card {
+  padding: 2.5rem 1.5rem;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  border: 3px solid #f59e0b;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  color: #0f172a;
+}

@@ -1,0 +1,100 @@
+/* ===================================================================
+   🏰 DISNEY-STYLE ORTHOGRAPHE & SPELLING DICTATION ACTIVITY STYLES
+   =================================================================== */
+
+.orthographe-disney-container {
+  background: linear-gradient(135deg, rgba(38, 50, 68, 0.82) 0%, rgba(55, 52, 125, 0.82) 100%);
+  backdrop-filter: blur(16px);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  border: 2px solid rgba(251, 191, 36, 0.4);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), inset 0 0 20px rgba(251, 191, 36, 0.05);
+  color: #f8fafc;
+  text-align: left;
+}
+
+.french-accent-bar {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(251, 191, 36, 0.3);
+  padding: 0.5rem 0.75rem;
+  border-radius: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.accent-btn {
+  background: rgba(251, 191, 36, 0.12);
+  color: #fef08a;
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  width: 28px;
+  height: 28px;
+  border-radius: 0.5rem;
+  font-weight: 800;
+  font-size: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.accent-btn:hover {
+  background: #fbbf24;
+  color: #0f172a;
+  border-color: #f59e0b;
+  transform: translateY(-2px) scale(1.1);
+  box-shadow: 0 4px 10px rgba(251, 191, 36, 0.3);
+}
+
+.ortho-card-disney {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  border: 1.5px solid rgba(251, 191, 36, 0.3);
+  border-radius: 1.2rem;
+  padding: 1.25rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease;
+}
+
+.ortho-card-disney:hover {
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 8px 24px rgba(251, 191, 36, 0.15);
+}
+
+.ortho-input-disney {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.9) !important;
+  color: #ffffff !important;
+  border: 2px solid rgba(251, 191, 36, 0.4) !important;
+  border-radius: 0.75rem !important;
+  padding: 0.55rem 0.85rem !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.ortho-input-disney:focus {
+  outline: none !important;
+  border-color: #fbbf24 !important;
+  box-shadow: 0 0 0 3px rgba(251, 191, 36, 0.25) !important;
+}
+
+.ortho-input-disney.correct {
+  border-color: #10b981 !important;
+  background: rgba(16, 185, 129, 0.15) !important;
+  color: #a7f3d0 !important;
+}
+
+.ortho-input-disney.accent-error {
+  border-color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.15) !important;
+  color: #fef08a !important;
+}
+
+.ortho-input-disney.spelling-error {
+  border-color: #f43f5e !important;
+  background: rgba(244, 63, 94, 0.15) !important;
+  color: #fecdd3 !important;
+}

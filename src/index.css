@@ -1,0 +1,104 @@
+:root {
+  --primary-color: #06b6d4;      /* Vibrant Aqua 500 */
+  --primary-hover: #0284c7;      /* Ocean Blue 600 */
+  --accent-color: #0891b2;       /* Cyan 600 */
+  --teal-accent: #0d9488;        /* Teal 600 */
+  --bg-color: #f0fdfa;            /* Light Mint Aqua Ice */
+  --text-main: #0f172a;           /* Deep Slate for high legibility */
+  --text-heading: #083344;        /* Deep Ocean Blue */
+  --text-muted: #334155;          /* Slate Muted */
+  --glass-bg: rgba(255, 255, 255, 0.90);
+  --glass-card-hover: rgba(255, 255, 255, 0.96);
+  --glass-border: rgba(6, 182, 212, 0.3);
+  --glow-aqua: 0 10px 25px rgba(6, 182, 212, 0.2);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.6;
+  min-height: 100vh;
+  /* Ultra-Sheer Soft Overlay allowing the background image & water reflection to be vivid */
+  background: 
+    linear-gradient(135deg, rgba(240, 253, 250, 0.35) 0%, rgba(224, 242, 254, 0.40) 100%),
+    url('/background.jpg') fixed center/cover no-repeat;
+  background-attachment: fixed;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Light Aqua Glassmorphism Utility */
+.glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -5px rgba(6, 182, 212, 0.12), 0 4px 12px rgba(0, 0, 0, 0.03);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass:hover {
+  background: var(--glass-card-hover);
+  border-color: rgba(6, 182, 212, 0.5);
+  box-shadow: var(--glow-aqua);
+}
+
+/* Buttons */
+.btn-primary {
+  background: linear-gradient(135deg, #06b6d4 0%, #0284c7 100%);
+  color: #ffffff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.35);
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #0891b2 0%, #0369a1 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.85);
+  color: var(--text-heading);
+  border: 1px solid var(--glass-border);
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.btn-secondary:hover {
+  background-color: rgba(236, 254, 255, 0.95);
+  border-color: var(--primary-color);
+  color: var(--primary-hover);
+}

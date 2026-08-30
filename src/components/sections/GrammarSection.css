@@ -1,0 +1,280 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GrammarSection.css — TikTok / Teen Social Feed Aesthetic
+   Light glassmorphism cards, generous spacing, neon accents
+   ═══════════════════════════════════════════════════════════════════ */
+
+.grammar-header-container {
+  max-width: 100%;
+}
+
+/* ── Section-level accordion frame ── */
+.grammar-accordion-frame {
+  margin-top: 1.5rem;
+}
+
+/* ── Stack of folder cards ── */
+.folders-accordion-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+/* ── Individual folder card ── */
+.grammar-folder-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1.25rem;
+  overflow: hidden;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+/* Left-edge TikTok gradient accent */
+.grammar-folder-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #fe2c55, #25f4ee);
+  border-radius: 4px 0 0 4px;
+  opacity: 0.7;
+  transition: opacity 0.25s ease;
+}
+
+.grammar-folder-card:hover {
+  border-color: rgba(254, 44, 85, 0.2);
+  box-shadow: 0 8px 30px rgba(254, 44, 85, 0.08);
+  transform: translateY(-1px);
+}
+.grammar-folder-card:hover::before {
+  opacity: 1;
+}
+
+/* ── Open state ── */
+.grammar-folder-card.open {
+  background: #ffffff;
+  border-color: rgba(37, 244, 238, 0.3);
+  box-shadow: 0 12px 40px rgba(37, 244, 238, 0.1);
+}
+.grammar-folder-card.open::before {
+  opacity: 1;
+  width: 5px;
+}
+
+/* ── Header row ── */
+.folder-header-row {
+  padding: 1.25rem 1.5rem 1.25rem 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.grammar-folder-card.open .folder-header-row {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* ── Expanded body ── */
+.folder-expanded-body {
+  padding: 1.75rem 1.75rem 2rem;
+}
+
+/* ── TikTok Pinned Comment (Formula Box) ── */
+.formula-box {
+  background-color: rgba(254, 44, 85, 0.04);
+  border-left: 5px solid #fe2c55;
+  padding: 1.25rem 1.5rem;
+  border-radius: 0 1rem 1rem 0;
+  margin-bottom: 1.75rem;
+  text-align: left;
+}
+
+.formula-box-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #fe2c55;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.formula-box-text {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.6;
+}
+
+/* ── Social Media Card Layout (Pillars Grid) ── */
+.pillars-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 768px) {
+  .pillars-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.pillar-card {
+  background: #f8fafc;
+  padding: 1.5rem;
+  border-radius: 1.25rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.pillar-card:hover {
+  background: #ffffff;
+  border-color: rgba(37, 244, 238, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(37, 244, 238, 0.08);
+}
+
+.pillar-icon-badge {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.pillar-content {
+  flex: 1;
+  text-align: left;
+}
+
+/* ── Preposition Word Title (Highlight Focus) ── */
+.pillar-preposition-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 0.5rem;
+  display: inline-block;
+  border-bottom: 3px solid #25f4ee; /* Cute brand-colored bottom line */
+  padding-bottom: 0.1rem;
+}
+
+.pillar-desc {
+  font-size: 0.95rem;
+  color: #475569;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* ── Social Media Interactive Poll (Trivia) ── */
+.trivia-poll-container {
+  background: rgba(37, 244, 238, 0.03);
+  border: 2px dashed rgba(37, 244, 238, 0.25);
+  padding: 1.75rem 2rem;
+  border-radius: 1.5rem;
+  margin-top: 2rem;
+  text-align: left;
+}
+
+.trivia-poll-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.trivia-poll-tag {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #02b1a9;
+}
+
+.trivia-poll-question {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.trivia-poll-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.trivia-poll-btn {
+  background: #ffffff;
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.02);
+}
+
+.trivia-poll-btn:hover {
+  background: #f8fafc;
+  border-color: rgba(0, 0, 0, 0.15);
+}
+
+.trivia-poll-btn.correct {
+  background: #10b981;
+  color: #ffffff;
+  border-color: #059669;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.trivia-poll-btn.incorrect {
+  background: #ef4444;
+  color: #ffffff;
+  border-color: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+.trivia-poll-feedback {
+  padding: 1rem 1.5rem;
+  border-radius: 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1.6;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.trivia-poll-feedback.correct {
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+.trivia-poll-feedback.incorrect {
+  background: #fdf2f2;
+  color: #9b1c1c;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+

@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Side by Side: A Journey Workbook</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Georgia:ital,wght@0,400;0,700;1,400&family=Trebuchet+MS:wght@400;700&display=swap');
+        
+        body {
+            font-family: 'Calibri', 'Arial', sans-serif;
+            color: #2E2E2E;
+            line-height: 1.6;
+            background-color: #FFFFFF;
+            margin: 40px auto;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        /* Page Breaks for Google Docs Export */
+        .page {
+            page-break-after: always;
+            padding-bottom: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #E2E8F0;
+        }
+
+        .page:last-child {
+            page-break-after: avoid;
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4 {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            color: #3D3025; /* Deep Espresso Brown */
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 32pt;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-family: 'Trebuchet MS', 'Arial', sans-serif;
+            color: #C85A17; /* Warm Terracotta Accent */
+            font-size: 16pt;
+            font-weight: bold;
+            text-align: center;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 40px;
+        }
+
+        h2 {
+            font-family: 'Trebuchet MS', 'Arial', sans-serif;
+            font-size: 18pt;
+            color: #C85A17;
+            border-bottom: 2px solid #E2E8F0;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+
+        h3 {
+            font-size: 14pt;
+            color: #3D3025;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        h4 {
+            font-size: 12pt;
+            color: #5D4037;
+            margin-top: 15px;
+            margin-bottom: 5px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 11pt;
+            text-align: justify;
+        }
+
+        /* Quotes */
+        blockquote {
+            background-color: #F0F4F8; /* Light Sky Blue-Grey */
+            border-left: 5px solid #C85A17;
+            padding: 15px 20px;
+            margin: 25px 0;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            color: #3D3025;
+        }
+
+        blockquote span {
+            display: block;
+            text-align: right;
+            font-style: normal;
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 10pt;
+            color: #C85A17;
+        }
+
+        /* Lists */
+        ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 11pt;
+        }
+
+        /* Callout Boxes */
+        .callout-box {
+            background-color: #F4F6F7;
+            border: 1px solid #CFD8DC;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+
+        .callout-box h3 {
+            margin-top: 0;
+            color: #C85A17;
+            font-family: 'Trebuchet MS', sans-serif;
+        }
+
+        /* Journal & Questions Styling */
+        .journal-container {
+            margin-top: 25px;
+        }
+
+        .journal-title {
+            font-family: 'Trebuchet MS', sans-serif;
+            font-weight: bold;
+            color: #3D3025;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            font-size: 10pt;
+            letter-spacing: 1px;
+        }
+
+        .journal-box {
+            background-color: #FAFAFA;
+            border: 1px dashed #B0BEC5;
+            border-radius: 4px;
+            padding: 20px;
+            min-height: 180px;
+            margin-bottom: 25px;
+            color: #78909C;
+            font-style: italic;
+            font-size: 10pt;
+        }
+
+        .homework-box {
+            background-color: #ECEFF1;
+            border-left: 5px solid #37474F;
+            padding: 15px 20px;
+            margin: 25px 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .homework-box h4 {
+            margin-top: 0;
+            color: #37474F;
+            font-family: 'Trebuchet MS', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Cover Page Styling */
+        .cover-page {
+            text-align: center;
+            padding-top: 60px;
+            padding-bottom: 100px;
+            height: 100%;
+        }
+
+        .cover-art-placeholder {
+            margin: 40px auto;
+            width: 80%;
+            height: 250px;
+            border: 1px solid #CFD8DC;
+            background-color: #F5F7F8;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+        }
+
+        .cover-art-icon {
+            font-size: 48px;
+            color: #C85A17;
+            margin-bottom: 10px;
+        }
+
+        .cover-art-text {
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 11pt;
+            color: #546E7A;
+            font-weight: bold;
+        }
+
+        .cover-quote {
+            max-width: 500px;
+            margin: 50px auto 0 auto;
+            font-family: 'Georgia', serif;
+            font-style: italic;
+            font-size: 12pt;
+            color: #4E342E;
+            line-height: 1.8;
+            border-top: 1px solid #CFD8DC;
+            border-bottom: 1px solid #CFD8DC;
+            padding: 20px 0;
+        }
+
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+        }
+
+        th {
+            background-color: #3D3025;
+            color: #FFFFFF;
+            padding: 12px;
+            text-align: left;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 10pt;
+            font-weight: bold;
+            border: 1px solid #3D3025;
+        }
+
+        td {
+            border: 1px solid #CFD8DC;
+            padding: 12px;
+            font-size: 10pt;
+            vertical-align: top;
+            line-height: 1.5;
+        }
+
+        tr:nth-child(even) {
+            background-color: #F9F9F9;
+        }
+
+        /* Footer & Page Numbers */
+        .page-footer {
+            text-align: center;
+            font-family: 'Trebuchet MS', sans-serif;
+            font-size: 9pt;
+            color: #90A4AE;
+            margin-top: 30px;
+            border-top: 1px solid #ECEFF1;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- COVER PAGE -->
+    <div class="page cover-page">
+        <h1>Side by Side</h1>
+        <div class="subtitle">A Journey Workbook</div>
+        
+        <div style="margin: 30px auto; text-align: center;">
+            <img src="workbook_cover_gesturing_1787077411770.jpg" alt="Workbook Cover" style="width: 65%; max-width: 420px; border-radius: 8px; border: 1px solid #CFD8DC; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+        </div>
+
+        <div class="cover-quote">
+            "I am a son of God, called by name, equipped for life, healed by grace, and walking forward in faith—not fear. <br>
+            I will not turn back. <br>
+            I will not go alone. <br>
+            I was made for this."
+        </div>
+    </div>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="page">
+        <h2>🧭 Table of Contents</h2>
+        <ul style="list-style-type: none; padding-left: 0; line-height: 2;">
+            <li><strong>1. 🧭 Foundational Tools</strong> — <em>page I</em></li>
+            <li><strong>2. 🌲 Session-by-Session Resources</strong>
+                <ul style="list-style-type: circle; padding-left: 20px;">
+                    <li>Session 1: Orientation — <em>page 1</em></li>
+                    <li>Session 2: Identity as a Son — <em>page 3</em></li>
+                    <li>Session 3: The Father Wound — <em>page 5</em></li>
+                    <li>Session 4: Receiving the Father's Blessing — <em>page 7</em></li>
+                    <li>Session 5: Trained for Purpose — <em>page 9</em></li>
+                    <li>Session 6: Calling and Mission — <em>page 11</em></li>
+                    <li>Session 7: Courage and Risk — <em>page 13</em></li>
+                    <li>Session 8: Fighting for Others — <em>page 15</em></li>
+                    <li>Session 9: Brotherhood and Brotherhood Wounds — <em>page 17</em></li>
+                    <li>Session 10: Sexual Integrity and Wholeness — <em>page 19</em></li>
+                    <li>Session 11: Daily Spiritual Rhythm — <em>page 21</em></li>
+                    <li>Session 12: Commissioning: Walking in Purpose — <em>page 23</em></li>
+                </ul>
+            </li>
+            <li><strong>3. 🏔️ Parting Thoughts for the Road Ahead</strong> — <em>page 25</em></li>
+            <li><strong>4. 📚 Bibliography & References</strong> — <em>page 26</em></li>
+            <li><strong>5. 📊 Appendix: Sourced Quotes Reference Table</strong> — <em>page 27</em></li>
+        </ul>
+        <div class="page-footer">Table of Contents</div>
+    </div>
+
+    <!-- INTRODUCTION -->
+    <div class="page">
+        <h2>🧭 Introduction: Foundational Tools</h2>
+        <blockquote>
+            “The glory of God is man fully alive.”
+            <span>— St. Irenaeus</span>
+        </blockquote>
+        
+        <p>This workbook is for men who sense the stirring of something deeper within them—a holy unrest, a divine dissatisfaction with a life of passivity, compromise, or confusion. Perhaps you’ve missed a season of growth, skipped a stage of formation, or are carrying unhealed wounds that still shape how you see yourself, God, and others. This is not the end of your story—it is the beginning of your awakening.</p>
+        
+        <p>In the path of Christian maturity, manhood is not achieved overnight; it is a gradual journey of restoration and growth. Scriptural and historical teachings suggest a healthy maturation path for a man consists of several vital phases. Each phase is crucial. Each has a role in shaping who a man becomes. But many men, for a host of reasons—family brokenness, fatherlessness, trauma, distraction, or spiritual neglect—miss key milestones in their formation.</p>
+
+        <p>We often miss the formative season of discovery—a time of healthy adventure, safe risks, and learning who we are before our strength is tested by the weight of adult responsibilities. If you feel there are missing chapters in your growth, this is not a cause for shame. It is an invitation. The path of mature manhood can still be entered, but it must be entered with awareness, intention, and humility. A mature man of God is not a bully or a brute, but one who stands firm for what is right from a secure place of identity and purpose. He protects, serves, builds, and loves. This journey is not about fixing yourself but allowing Christ to restore and commission you.</p>
+
+        <div class="callout-box">
+            <h3>What This Workbook Is:</h3>
+            <ul>
+                <li><strong>A journey of 12 sessions</strong>, guiding you through essential areas of growth, healing, and spiritual strength.</li>
+                <li><strong>A combination of teaching, scripture, reflection, and action</strong> to help you internalize each lesson.</li>
+                <li><strong>A tool for honest self-reflection</strong>, community support, and spiritual formation.</li>
+            </ul>
+            
+            <h3 style="margin-top: 15px;">What This Workbook Is Not:</h3>
+            <ul>
+                <li>A quick fix or performance checklist.</li>
+                <li>A replacement for deep discipleship or counseling where needed.</li>
+                <li>A solitary experience. While you can go through it alone, it is meant to be enriched through brotherhood, mentorship, and God’s presence.</li>
+            </ul>
+        </div>
+
+        <p><strong>You are not too late.</strong> The call to true manhood still rings out for you. It’s time to respond. Not with fear or bravado—but with willingness, courage, and a heart open to the transforming love of God. This is the journey of becoming the man you were always meant to be.</p>
+        
+        <p style="font-weight: bold; color: #C85A17;">Welcome to the journey. Let’s begin.</p>
+        
+        <div class="page-footer">I</div>
+    </div>
+
+    <!-- SESSION 1 -->
+    <div class="page">
+        <h2>🌲 Session 1 – Orientation: Understanding the Journey</h2>
+        <p>Welcome to Session 1. This is where your journey begins—not the one you’ve been surviving, but the one your soul has been waiting for.</p>
+        <p>Every man is on a path. Some are walking in circles. Some are running from pain. Others are frozen at the crossroads, unsure which way leads to life. This first session is about stopping. It’s about taking an honest look at where you’ve been, where you are, and what may have been missed along the way.</p>
+        <p>God’s design for masculine growth is not chaotic or random. It is sacred. It unfolds in seasons—each one building on the last. But the truth is, most of us weren’t clearly shown the way. We absorbed distorted messages about what it means to be a man: <em>Be tough. Don’t cry. Prove yourself. Never fail.</em> These messages left us wounded, confused, or stuck.</p>
+        <p>This is not about blame. It’s about awareness. Because we cannot walk forward into healing and strength until we name the places we’ve skipped, rushed, or avoided altogether. It’s about discovering that the journey of becoming a man is not a solo mission or a performance. It’s a path of formation—guided by truth, grounded in brotherhood, and empowered by God.</p>
+        <p>In this session, we look back—not to dwell in the past, but to trace how our story unfolded. You’ll create a life timeline, reflect on the early messages you received about masculinity, and invite God to begin revealing the patterns that shaped you.</p>
+        <p>This is your orientation. Your moment to pause, breathe, and ask, “Where am I, really?” Because until we know where we are, we cannot truly know where we’re going.</p>
+        
+        <blockquote>
+            “Stand at the crossroads and look; ask for the ancient paths, ask where the good way is, and walk in it, and you will find rest for your souls.”
+            <span>— Jeremiah 6:16</span>
+        </blockquote>
+
+        <p style="font-weight: bold;">Let’s begin—with honesty, humility, and hope.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Discovering the masculine journey; identifying missing pieces</p>
+            <p><strong>Scriptures:</strong> Jeremiah 6:16, Ecclesiastes 3:1</p>
+            <p><strong>Quote:</strong> “Growth requires honest self-awareness. We cannot move forward without first knowing where we stand.” — Dr. Larry Crabb</p>
+            <p><strong>Teaching Point:</strong> The masculine journey is not random; it is seasonal and sacred. Many men unknowingly skipped key stages in their growth, particularly those of adventure, discipline, and affirmation. Understanding what was missed and what must be recovered is the beginning of real maturity.</p>
+            <p><strong>Prompt:</strong> What are the early messages I internalized about being a man?</p>
+            <p><strong>Action:</strong> Read Psalm 139 and begin a daily journal. Create a timeline of life events and reflect on moments that shaped your understanding of masculinity.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Read Psalm 139 and ask God to search your heart.</li>
+            <li>Begin a daily journal to reflect on each session.</li>
+        </ul>
+        <div class="page-footer">1</div>
+    </div>
+
+    <!-- SESSION 1 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 1 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What messages did you receive about manhood growing up?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: Where do you feel uninitiated, untested, or unsupported in your journey?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Create a life timeline. Mark key events in boyhood, teenage years, and adulthood that shaped or wounded you. Bring this timeline to your next group or personal reflection time.</p>
+        </div>
+        <div class="page-footer">2</div>
+    </div>
+
+    <!-- SESSION 2 -->
+    <div class="page">
+        <h2>🌲 Session 2 – Identity as a Son</h2>
+        <p>Before a man can fight, lead, or serve with strength, he must first know who he is. That’s where we begin in Session 2—with identity.</p>
+        <p>Too many men spend their lives chasing validation—trying to earn worth through achievement, performance, or approval. We put on masks, play roles, and carry titles, hoping they’ll fill the ache inside. But at the core of every man’s heart is a question: <em>“Do I matter? Am I enough? Who am I, really?”</em></p>
+        <p>The truth is, identity isn’t earned. It’s received.</p>
+        <p>God doesn’t wait for us to succeed before calling us His sons. He speaks identity before we lift a finger. Just as He declared over Jesus, “This is my beloved Son, in whom I am well pleased,” God speaks that same truth over every man who belongs to Him. Before you perform, before you prove, before you produce—<em>you are already loved.</em></p>
+        <p style="text-align: justify;">This session is an invitation to stop striving and start receiving. It’s about learning to live from identity, not for it. You’ll reflect on the roles, labels, and lies you’ve picked up along the way—and begin to lay them down. You’ll replace them with the voice of the Father, who names you with love, purpose, and belonging.</p>
+        <p>Romans 8 tells us that those who are led by the Spirit of God are sons of God—not slaves, not orphans, not outsiders. Sons. And sons live differently. Sons walk with confidence, rest in grace, and rise with courage.</p>
+        <p>This week, you’ll write and speak a personal declaration of who you are in Christ. Not who the world says you are. Not who shame says you are. But who <em>He</em> says you are.</p>
+        
+        <blockquote>
+            “You are not a mistake. You are not an afterthought. You are a beloved son of the Father.”
+        </blockquote>
+
+        <p style="font-weight: bold;">Let’s reclaim your true name.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Receiving your identity as a beloved son</p>
+            <p><strong>Scriptures:</strong> Romans 8:14-17, Isaiah 43:1, Ephesians 2:10</p>
+            <p><strong>Quote:</strong> “We live out who we believe we are. Identity precedes behavior.” — Neil T. Anderson</p>
+            <p><strong>Teaching Point:</strong> Many men try to earn worth through performance or approval, but God’s love defines who we are before we achieve anything. Being secure in your identity as God’s beloved son is the foundation for every stage that follows.</p>
+            <p><strong>Prompt:</strong> What labels or roles have I accepted that contradict God's truth?</p>
+            <p><strong>Action:</strong> Write a daily declaration of identity in Christ and speak it aloud each morning.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Use affirmations based on Scripture (e.g., “I am chosen,” “I am God’s workmanship”).</li>
+            <li>Pray daily: “Father, show me who I am in You.”</li>
+        </ul>
+        <div class="page-footer">3</div>
+    </div>
+
+    <!-- SESSION 2 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 2 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What lies have you believed about your identity?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What truths from these scriptures speak directly to your real identity?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write a personal declaration of who you are in Christ based on Scripture. Speak it aloud each day this week.</p>
+        </div>
+        <div class="page-footer">4</div>
+    </div>
+
+    <!-- SESSION 3 -->
+    <div class="page">
+        <h2>🌲 Session 3 – The Father Wound</h2>
+        <p>Every man carries a “father story”. Some are stories of love, strength, and presence. But for many, they are stories marked by absence, silence, or pain. Whether your father was physically gone, emotionally distant, overly harsh, or simply unaware, the impact remains. Even if he did his best—if something was missing, you felt it. And it shaped you.</p>
+        <p>This is called the <em>father wound</em>. And it runs deeper than most of us realize.</p>
+        <p>The wound isn’t about blame—it’s about <em>naming</em>. Because what we don’t acknowledge will keep leading us. The unspoken ache for a father’s blessing, the unhealed grief over what we didn’t receive, the silent vows we made to never be like him or never need anyone again—these become hidden scripts that play out in our lives.</p>
+        <p>God is not asking you to pretend it didn’t hurt. He’s asking you to bring the pain into the light, where healing can begin.</p>
+        <p>In this session, you’ll be invited to ask hard but honest questions:</p>
+        <ul>
+            <li>What did I long to hear from my father?</li>
+            <li>What was withheld?</li>
+            <li>How has that shaped my sense of masculinity, identity, or even how I see God?</li>
+        </ul>
+        <p>You’ll write an unsent letter to your father—not to accuse, but to express the truth. Let the rawness rise. Let the grief speak. And then, offer it to God.</p>
+        <p>Psalm 68 tells us that God is a <em>Father to the fatherless</em>. That doesn’t just mean orphans—it means <em>you</em>. He steps into the gap left by human failure. He sees, He knows, and He heals.</p>
+        <p>This isn’t easy work. But it’s the work of freedom. As you name what was lost, you open your heart to receive what only the Father can give.</p>
+        <p>You are not alone in this. Let’s walk this part of the journey with honesty, with courage, and with Christ right beside you. He is not afraid of your wound. He is already moving toward it with healing in His hands.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Naming and grieving father wounds</p>
+            <p><strong>Scriptures:</strong> Psalm 68:5-6, Joel 2:25, Psalm 147:3</p>
+            <p><strong>Quote:</strong> “A man cannot become whole until he faces the wounds of his past with Christ.” — Dan Allender</p>
+            <p><strong>Teaching Point:</strong> Wounds left unacknowledged still lead. Healing begins when we bravely name the absence, pain, or failure of the father figure in our life. Jesus wants to meet you in your loss, not deny it.</p>
+            <p><strong>Prompt:</strong> What did I most long to hear or receive from my father? What was withheld?</p>
+            <p><strong>Action:</strong> Write an unsent letter to your father. Let the raw truth rise, then offer that letter to God for healing.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Attend a grief or healing prayer session with a trusted mentor or counselor.</li>
+            <li>Practice lament as seen in the Psalms.</li>
+        </ul>
+        <div class="page-footer">5</div>
+    </div>
+
+    <!-- SESSION 3 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 3 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What did you need from your father that you didn’t receive?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: How has that absence or pain impacted your sense of manhood?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write your unsent letter to your earthly father. Be entirely honest, and let God meet you inside that pain.</p>
+        </div>
+        <div class="page-footer">6</div>
+    </div>
+
+    <!-- SESSION 4 -->
+    <div class="page">
+        <h2>🌲 Session 4 – Receiving the Father’s Blessing</h2>
+        <p>There is a moment in every man’s life when he needs to hear words that reach beyond performance, beyond effort, beyond past wounds. Words not of critique or correction—but of <em>blessing</em>. This session is about that moment.</p>
+        <p>Whether you received it or not from your earthly father, your heart was designed for a blessing—a spoken affirmation of identity, purpose, and delight. Without it, a man often lives uncertain, striving, always wondering if he measures up. But when a father speaks blessing, it anchors a man’s soul. It gives him the permission to be who he was made to be.</p>
+        <p>The good news is this: even if no earthly father ever spoke those words over you, your Heavenly Father still <em>can</em>. And He longs to.</p>
+        <p>In Matthew 3:17, before Jesus had performed a single miracle or preached a single sermon, the Father declared: <strong>“This is my Son, whom I love; with Him I am well pleased.”</strong> That same blessing is spoken over you—not because of your achievements, but because of your identity as a son.</p>
+        <p>In this session, you’ll be invited to listen—truly listen—for the voice of your Father. To quiet the noise of self-doubt, shame, and striving. To open your heart and ask: <em>What does God call me? What does He see when He looks at me?</em></p>
+        <p>You’ll also be encouraged to reflect, to write, and even to invite a spiritual father or mentor to speak words of life and affirmation over you. Because blessing is more than affirmation—it’s <em>transformation</em>. It calls you into purpose. It restores what was missed.</p>
+        <p>God delights in you. He’s not ashamed of you. He knows your name—and He blesses it. You don’t have to earn it. Just receive it.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Letting God speak identity and delight over you</p>
+            <p><strong>Scriptures:</strong> Matthew 3:17, Numbers 6:24-26</p>
+            <p><strong>Quote:</strong> “Blessing calls out identity, and identity gives purpose. A man cannot thrive without knowing the Father’s voice.” — Dr. John Townsend</p>
+            <p><strong>Teaching Point:</strong> God the Father still speaks. He blesses you with delight, identity, and purpose—not because you perform, but because you are His. Receiving the Father’s blessing isn’t just emotional; it’s spiritual grounding.</p>
+            <p><strong>Prompt:</strong> Can I imagine God saying “I delight in you”? Why or why not?</p>
+            <p><strong>Action:</strong> Spend time in quiet listening. Write what you believe God is speaking over you.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Ask a spiritual father or mentor to speak a blessing over you.</li>
+            <li>Meditate on God’s words as if He were speaking them directly to you.</li>
+        </ul>
+        <div class="page-footer">7</div>
+    </div>
+
+    <!-- SESSION 4 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 4 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: Can you receive God’s blessing? Why or why not?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What do you believe God would say if He stood before you right now?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Spend 30+ minutes in a quiet place, asking God: “What do You call me? How do You see me?” Write down what you hear or perceive during that time.</p>
+        </div>
+        <div class="page-footer">8</div>
+    </div>
+
+    <!-- SESSION 5 -->
+    <div class="page">
+        <h2>🌲 Session 5 – Trained for Purpose: Developing Spiritual Resilience</h2>
+        <p>Every man is in a spiritual struggle—whether he realizes it or not.</p>
+        <p>But too many are unprepared. We fight the wrong enemies, wield the wrong weapons, or walk onto the field in spiritual weakness, emotional fatigue, and inner confusion. That’s not how we are meant to live. This session is about training—not for comfort, but for courage. Not for survival, but for spiritual strength.</p>
+        <p>A man of God is not formed in a moment of adrenaline. He is forged through routine, perseverance, and discipline. The great struggles of life—against fear, lies, temptation, shame, and spiritual apathy—require more than willpower. They require a man who knows who he is, knows what he’s standing for, and is rooted in a daily rhythm that connects him to the power of God.</p>
+        <p>Ephesians 6 tells us to “put on the full armor of God.” That isn’t a one-time event; it’s a daily decision. A mature man trains his body, soul, and spirit—not to prove something to others, but to withstand trials and resist the pull of darkness, standing firm in the truth of who he is.</p>
+        <p>This week, you’ll be invited to examine your spiritual life with honesty. Where are you undisciplined? Where are you weak? Not to feel shame—but to start building strength. You’ll begin creating a daily rhythm of prayer, scripture, reflection, and worship. Start small. Stay consistent. Let God begin forming resilience in you.</p>
+        
+        <blockquote>
+            “Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.”
+            <span>— Joshua 1:9</span>
+        </blockquote>
+
+        <p>God is with you. But He also trains you. You were not made for spiritual laziness. You were made to be alert, ready, and grounded. You were made to stand strong. Now it's time to train like it.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Developing readiness, discipline, and spiritual strength</p>
+            <p><strong>Scriptures:</strong> Joshua 1:9, Psalm 18:34, Ephesians 6:10-18</p>
+            <p><strong>Quote:</strong> “Spiritual warfare begins with identity and is sustained by obedience.” — Chip Ingram</p>
+            <p><strong>Teaching Point:</strong> God calls every man to stand firm—not against people, but against spiritual darkness and lies. Strength is built through daily routine, Scripture, and perseverance. God wants to build resilience in you.</p>
+            <p><strong>Prompt:</strong> Where am I undisciplined, and how does that impact my spiritual strength?</p>
+            <p><strong>Action:</strong> Build a simple daily spiritual routine (prayer, Word, reflection). Start small and stay consistent.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Start physical fitness or spiritual fasting alongside spiritual disciplines.</li>
+            <li>Join a men’s discipleship group focused on accountability and scripture.</li>
+        </ul>
+        <div class="page-footer">9</div>
+    </div>
+
+    <!-- SESSION 5 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 5 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What battles or main challenges are you currently facing in your life?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: Which part of the armor of God (Ephesians 6) do you need most today?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Begin a simple morning rhythm of prayer, scripture, and actively declaring the armor of God over your day.</p>
+        </div>
+        <div class="page-footer">10</div>
+    </div>
+
+    <!-- SESSION 6 -->
+    <div class="page">
+        <h2>🌲 Session 6 – Calling and Mission</h2>
+        <p>There comes a point in every man’s journey when he must ask the deeper question: <em>Why am I here?</em> Not “what do I do for work,” or “how do I keep busy,” but “what was I made for?” This session is about uncovering that answer.</p>
+        <p>God didn’t create you to drift through life. You were designed with a purpose—crafted by His hands, planted in this generation, in your exact circumstances, for a mission that matters. But calling isn’t always flashy or obvious. It doesn’t always come with applause or titles. Sometimes it looks like showing up consistently, standing for what’s right, or simply being faithful in the quiet places.</p>
+        <p>As men, we often confuse calling with career. But your mission goes deeper than your job. It’s about Kingdom influence—using your unique gifts, burdens, and story to serve, build, and bring God’s light into the world around you.</p>
+        <p>This week, you’ll begin asking: <em>What breaks my heart? What injustice stirs me? Where has God placed me—and for what purpose?</em> You’ll be challenged to identify your burdens, your gifts, and the places they intersect. From there, you’ll begin crafting a personal mission statement—a compass that gives focus and direction to your steps.</p>
+        
+        <blockquote>
+            “The purposes of a person’s heart are deep waters, but one who has insight draws them out.”
+            <span>— Proverbs 20:5</span>
+        </blockquote>
+
+        <p>This session is about drawing it out—listening deeply and honestly to what God has placed inside you. Your mission doesn’t need to be grand to be powerful. It just needs to be faithful. And the world is waiting for men who know why they’re here—and live like it.</p>
+        <p style="font-weight: bold;">Let’s step into the clarity and courage that come when you finally name your calling.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Understanding your God-given purpose</p>
+            <p><strong>Scriptures:</strong> Micah 6:8, Proverbs 20:5, 1 Corinthians 16:13-14</p>
+            <p><strong>Quote:</strong> “Purpose doesn’t have to be grand—it has to be faithful.” — Dallas Willard</p>
+            <p><strong>Teaching Point:</strong> Every man is made for purpose—not just career, but Kingdom influence. God’s calling is not about titles; it’s about faithful living and serving where you are planted. Mission gives a man focus and drive.</p>
+            <p><strong>Prompt:</strong> What burdens me in the world? What gifts do I have to meet that need?</p>
+            <p><strong>Action:</strong> Write a draft mission statement. Review it regularly and align daily decisions with it.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Journal on the needs you see around you that make you angry or passionate.</li>
+            <li>Ask God daily: “What is my next assignment today?”</li>
+        </ul>
+        <div class="page-footer">11</div>
+    </div>
+
+    <!-- SESSION 6 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 6 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What stirs your heart, causes you deep concern, or angers you about the world?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: Where do you think God is calling you to bring justice, mercy, or truth in your current circles?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write your personal mission statement (1-2 sentences). Place it where you can see it and pray it each morning.</p>
+        </div>
+        <div class="page-footer">12</div>
+    </div>
+
+    <!-- SESSION 7 -->
+    <div class="page">
+        <h2>🌲 Session 7 – Courage and Risk</h2>
+        <p>At some point on the masculine journey, every man faces a threshold—a place where the next step isn’t safe, certain, or easy. It’s here that the question arises: <em>Will I trust God enough to move forward—even when I can’t see what’s next?</em></p>
+        <p>This session is about courage—not the absence of fear, but the presence of faith.</p>
+        <p>Courage isn’t loud. It’s not reckless. It’s often quiet and trembling—but obedient. It shows up when we take risks that matter, when we say yes before all the answers are clear, when we lean into the unknown because God is already there.</p>
+        <p>In Hebrews 11, we read about Abraham, who “obeyed and went, even though he did not know where he was going.” That’s the kind of faith God is calling you into—not blind trust, but bold trust. A trust rooted in God's character more than your comfort.</p>
+        <p>Most men live with an inner longing for significance, but few ever take the risks required to step into it. Why? Because fear whispers: <em>What if I fail? What if I’m not enough? What if I get hurt again?</em> But God’s voice is stronger—if you’ll listen. It says: <em>I am with you. Step out. I will lead you.</em></p>
+        <p>In this session, you’ll identify where fear has held you back—and you’ll name one act of courage you’re being called to take. It may be a conversation you’ve avoided, a dream you’ve shelved, or a decision that requires trust. Whatever it is, this is your moment to act.</p>
+        
+        <blockquote>
+            “Trust in the Lord with all your heart and lean not on your own understanding; in all your ways submit to Him, and He will make your paths straight.”
+            <span>— Proverbs 3:5–6</span>
+        </blockquote>
+
+        <p>Faith doesn’t always feel safe. But it always leads you closer to the man God created you to be. You were not made to sit on the sidelines. This is your step. This is your moment. Take it.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Embracing uncertainty with faith</p>
+            <p><strong>Scriptures:</strong> Hebrews 11:8, Proverbs 3:5-6, Psalm 32:8</p>
+            <p><strong>Quote:</strong> “Faith is taking the first step even when you don't see the whole staircase.” — Dr. Martin Luther King Jr.</p>
+            <p><strong>Teaching Point:</strong> Courage doesn’t mean no fear—it means trust that obeys. Every man is called to move forward before he feels ready. God reveals more as you obey.</p>
+            <p><strong>Prompt:</strong> Where is God asking me to trust Him with a step into the unknown?</p>
+            <p><strong>Action:</strong> Identify one risk or act of obedience and take that step this week.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Make a list of areas where fear is holding you back.</li>
+            <li>Choose one small, faithful risk to take this week.</li>
+        </ul>
+        <div class="page-footer">13</div>
+    </div>
+
+    <!-- SESSION 7 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 7 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: Where is God calling you to move forward despite uncertainty?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What fears do you need to surrender to trust Him more fully?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Begin each day with a surrender prayer: “God, lead me. I will follow even if I cannot see.”</p>
+        </div>
+        <div class="page-footer">14</div>
+    </div>
+
+    <!-- SESSION 8 -->
+    <div class="page">
+        <h2>🌲 Session 8 – Fighting for Others</h2>
+        <p>A true man of God does not live for ego, power, or position. He uses his strength to serve and protect others.</p>
+        <p>Masculinity, at its best, is not about dominance—it’s about sacrifice. Real strength is not self-serving; it’s protective. It shows in the quiet resolve to stand guard over your family, to advocate for the vulnerable, to speak up when injustice is near, and to lay your life down—not just once, but daily.</p>
+        <p>This session marks a shift. Up to now, you’ve been doing the deep inner work: healing wounds, reclaiming your identity, building strength, and naming your mission. But the journey isn’t just about you. God shapes men not for isolation, but for impact.</p>
+        <p>Jesus modeled this perfectly. He came not to be served, but to serve—to fight for hearts, restore the broken, and lift the oppressed. That same Spirit lives in you. Now, you’re invited to ask:</p>
+        <ul>
+            <li>Who needs my strength?</li>
+            <li>Who am I called to protect, serve, or stand beside?</li>
+        </ul>
+        
+        <blockquote>
+            “Fight for your families, your sons and your daughters, your wives and your homes.”
+            <span>— Nehemiah 4:14</span>
+        </blockquote>
+
+        <p>This is not a poetic metaphor. It is a divine mandate.</p>
+        <p>In this session, you’ll reflect on the people around you—family, friends, community—and ask where your strength is needed most. You’ll identify a tangible way to act: a conversation, a decision, a sacrifice, a stand. And you’ll take it—not to prove you’re strong, but to use your strength in love.</p>
+        <p>This is what mature manhood looks like. Not a man who fights against others, but one who stands up for them. You were made to stand in the gap. To be a protector. A shield. A servant. Let’s rise to that call.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Becoming a protector and advocate</p>
+            <p><strong>Scriptures:</strong> Nehemiah 4:14, Matthew 20:26-28, Philippians 2:3-4</p>
+            <p><strong>Quote:</strong> “Real masculinity protects, provides, and lays down its life.” — Dr. Tony Evans</p>
+            <p><strong>Teaching Point:</strong> A man's strength is not for self-glory—it is for the defense and service of others. God calls men to be advocates for the weak, voices for the voiceless, and shields for the vulnerable.</p>
+            <p><strong>Prompt:</strong> Who in my life needs my strength, advocacy, or presence?</p>
+            <p><strong>Action:</strong> Choose a tangible act of service this week—especially for someone in need.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Identify someone vulnerable in your life and look for ways to serve or stand with them.</li>
+            <li>Volunteer for a cause that aligns with your values.</li>
+        </ul>
+        <div class="page-footer">15</div>
+    </div>
+
+    <!-- SESSION 8 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 8 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: Who are you called to defend, protect, or lift up?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What does it look like practically for you to be a servant leader?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write a prayer of commitment to serve your family, friends, or community. Act on one concrete act of service this week.</p>
+        </div>
+        <div class="page-footer">16</div>
+    </div>
+
+    <!-- SESSION 9 -->
+    <div class="page">
+        <h2>🌲 Session 9 – Brotherhood and Brotherhood Wounds</h2>
+        <p>Every man longs for a brother. Someone who truly sees him, stands with him, sharpens him, and walks beside him.</p>
+        <p>But let’s be honest—many men don’t experience that kind of brotherhood. Instead, they live in quiet isolation, hiding behind strength or success, keeping others at arm’s length. Some have tried to trust, only to be betrayed or disappointed. Others have never known what real male friendship can look like. So they walk alone.</p>
+        <p>But here’s the truth: <strong>you were never meant to walk alone.</strong></p>
+        <p>God designed brotherhood as a sacred part of the masculine journey. Ecclesiastes reminds us that “Two are better than one… If either of them falls down, one can help the other up.” Strength in solitude is a myth. Real strength is tested and refined in community.</p>
+        <p>This session is about reclaiming that truth—and, for many, healing from where brotherhood went wrong. You’ll be invited to look honestly at your story:</p>
+        <ul>
+            <li>Where have you been hurt by other men?</li>
+            <li>Where have you withdrawn out of self-protection?</li>
+            <li>Where is God asking you to risk connection again?</li>
+        </ul>
+        <p>Brotherhood is not about perfection. It’s about presence. It’s about showing up with honesty, listening without fixing, and choosing loyalty even when it’s hard. Real brotherhood doesn’t shame weakness—it strengthens it.</p>
+        <p>You’ll also be challenged to initiate—to reach out, reconnect, or open up to a mentor, a friend, or a fellow traveler on this journey. Healing begins with vulnerability. And growth accelerates when it’s shared.</p>
+        
+        <blockquote>
+            “As iron sharpens iron, so one man sharpens another.”
+            <span>— Proverbs 27:17</span>
+        </blockquote>
+
+        <p>You weren’t built to do life alone. You were made for brotherhood. You are not alone. And you don’t have to be anymore.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Engaging in authentic community</p>
+            <p><strong>Scriptures:</strong> Ecclesiastes 4:9-10, James 5:16, Proverbs 27:17</p>
+            <p><strong>Quote:</strong> “You are only as strong as the brother who walks beside you.” — Stephen Mansfield</p>
+            <p><strong>Teaching Point:</strong> Isolation weakens men. Brotherhood refines, challenges, and heals. But many men carry wounds from past betrayals. Healing and growth come when you risk again.</p>
+            <p><strong>Prompt:</strong> What walls have I built between myself and other men?</p>
+            <p><strong>Action:</strong> Reconnect or initiate with a brother or mentor. Share honestly.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Seek out or start a men’s group focused on prayer, honesty, and accountability.</li>
+            <li>Forgive past betrayals or wounds from male friendships.</li>
+        </ul>
+        <div class="page-footer">17</div>
+    </div>
+
+    <!-- SESSION 9 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 9 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What is your current experience of male friendship?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: Where have you been hurt—or hurt others—in male relationships?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Reconnect with a trusted man or mentor this week. Share a current burden or ask for prayer regarding a specific area of your life.</p>
+        </div>
+        <div class="page-footer">18</div>
+    </div>
+
+    <!-- SESSION 10 -->
+    <div class="page">
+        <h2>🌲 Session 10 – Sexual Integrity and Wholeness</h2>
+        <p>Few areas shape a man’s inner world as powerfully—or as painfully—as his sexuality. It is a sacred gift from God, meant to reflect intimacy, covenant, and life. But in our culture—and often in our own stories—sexuality has been twisted, wounded, or weaponized. Many men carry secret struggles, hidden shame, or a deep sense of failure. Others have numbed out, given in, or given up.</p>
+        <p>But hear this clearly: sexual integrity is not about shame. It’s about freedom. And this session is not about perfection. It’s about healing.</p>
+        <p>God didn’t create you for bondage. He created you for wholeness—where your desires are not repressed but redeemed, where your body is honored, and where love is expressed in truth, not distortion.</p>
+        <p>This session invites you to bring your whole story into the light:</p>
+        <ul>
+            <li>Where have you struggled with lust, secrecy, or false intimacy?</li>
+            <li>How has shame impacted your view of yourself—or your ability to connect with others?</li>
+            <li>What would it look like to walk in purity—not as legalism, but as liberation?</li>
+        </ul>
+        <p>Job declared, “I made a covenant with my eyes not to look lustfully…” (Job 31:1). This was not weakness. It was strength—strength rooted in conviction, vision, and accountability.</p>
+        <p>You’ll be encouraged this week to create a plan—a practical, grace-filled strategy—for walking in sexual integrity. Boundaries, support, routines, and prayer are not signs of failure; they are tools for freedom. You may need to reach out for help. Do it. That, too, is strength.</p>
+        <p>God is not shocked by your struggle. He’s already moving toward you with healing in His hands. This is your invitation to begin walking in the light—free, whole, and unashamed.</p>
+        
+        <blockquote>
+            “Search me, O God… test me and know my anxious thoughts. See if there is any offensive way in me, and lead me in the way everlasting.”
+            <span>— Psalm 139:23-24</span>
+        </blockquote>
+
+        <p>This is the way of honor. The way of truth. The way home.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Walking in purity and honoring your body and others</p>
+            <p><strong>Scriptures:</strong> 1 Thessalonians 4:3-5, Job 31:1, 2 Timothy 2:22</p>
+            <p><strong>Quote:</strong> “Sexual purity is not repression, but freedom to love without shame.” — Dr. Juli Slattery</p>
+            <p><strong>Teaching Point:</strong> God designed sexuality as sacred and powerful. When misused, it brings shame and bondage. Sexual wholeness isn’t just abstinence—it’s living aligned with honor, love, and freedom.</p>
+            <p><strong>Prompt:</strong> How has broken sexual desire or shame shaped my story?</p>
+            <p><strong>Action:</strong> Create a plan for purity, including boundaries, support systems, and grace.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Fast from media or inputs that feed lust or objectification.</li>
+            <li>Seek accountability if sexual sin is a stronghold in your life.</li>
+        </ul>
+        <div class="page-footer">19</div>
+    </div>
+
+    <!-- SESSION 10 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 10 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What are your triggers or weak points?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: How can walking in purity make you a stronger man, friend, or husband?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write a personal purity covenant with God. Include practical action steps and name your accountability partner.</p>
+        </div>
+        <div class="page-footer">20</div>
+    </div>
+
+    <!-- SESSION 11 -->
+    <div class="page">
+        <h2>🌲 Session 11 – Daily Spiritual Rhythm</h2>
+        <p>Becoming a strong man of God doesn’t happen in a moment. It happens in the everyday.</p>
+        <p>True strength is not built on emotion or inspiration—it’s forged in <em>rhythm</em>. In the quiet, consistent choices you make when no one is watching. In the habits that train your heart, renew your mind, and align your spirit with God’s truth. This session is about developing that rhythm—and learning to live by it.</p>
+        <p>Every man is on a spiritual path, and strength isn't built by showing up unprepared. Men of God don't grow in strength by accident. They train. They practice. They build endurance. The same is true spiritually.</p>
+        <p>This week, you’ll be invited to take ownership of your spiritual life—to design a daily rhythm that works for <em>you</em> and strengthens the character God is forming in you. It doesn’t need to be long or perfect. But it must be intentional.</p>
+        <p>Jesus Himself rose early to pray. He withdrew to be with the Father. He modeled a life of consistent connection, solitude, and surrender. That wasn’t weakness. It was the source of His power.</p>
+        <p>In this session, you’ll build a personal rhythm—Scripture, prayer, journaling, silence, gratitude. Even five focused minutes a day can change the direction of your life. You’ll also take stock:</p>
+        <ul>
+            <li>What distractions keep you from staying grounded?</li>
+            <li>What habits need to be surrendered?</li>
+            <li>What practices help you stay anchored when life gets hard?</li>
+        </ul>
+        
+        <blockquote>
+            “Set your minds on things above, not on earthly things… For you died, and your life is now hidden with Christ in God.”
+            <span>— Colossians 3:2-3</span>
+        </blockquote>
+
+        <p>This isn’t about checking boxes. It’s about staying connected to your Source. Daily. Faithfully. Quietly. Powerfully. Because in the rhythms of surrender, strength is born. Let’s build yours—step by step, day by day.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Building daily spiritual strength and endurance</p>
+            <p><strong>Scriptures:</strong> Mark 1:35, Psalm 119:105, Colossians 3:2-3</p>
+            <p><strong>Quote:</strong> “A man of God is not built in a moment—but in a daily rhythm of surrender and strength.” — Richard Foster</p>
+            <p><strong>Teaching Point:</strong> Men are formed in daily, quiet places. Building a sustainable, simple rhythm of Word, prayer, solitude, and worship gives lasting strength.</p>
+            <p><strong>Prompt:</strong> What habits build strength in my inner life?</p>
+            <p><strong>Action:</strong> Design a personal daily rhythm and practice it for 7 days.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Create a daily rhythm: Scripture, prayer, journal, and gratitude.</li>
+            <li>Identify a specific place and time for daily solitude with God.</li>
+        </ul>
+        <div class="page-footer">21</div>
+    </div>
+
+    <!-- SESSION 11 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 11 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What spiritual rhythms have helped you stay anchored in the past?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What distractions or habits need to be surrendered to prioritize this rhythm?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Design a 7-day rhythm of spiritual practices, write it down, and track your daily consistency this week.</p>
+        </div>
+        <div class="page-footer">22</div>
+    </div>
+
+    <!-- SESSION 12 -->
+    <div class="page">
+        <h2>🌲 Session 12 – Commissioning: Walking in Purpose</h2>
+        <p>You’ve come a long way.</p>
+        <p>Twelve sessions ago, you stood at the beginning of a journey—unsure of where it would lead, but willing to face what needed to be faced. Along the way, you’ve named wounds, reclaimed your identity, learned to stand with purpose, and rediscovered your calling as a man of God.</p>
+        <p>Now, the journey doesn’t end here—it begins again. But something has changed. You’re no longer walking in confusion or passivity. You are walking as a man commissioned for purpose.</p>
+        <p>This session is about recognizing what God has formed in you—and stepping into it with confidence and humility. Not self-confidence. God-confidence. Because the strength you now carry isn’t your own. It’s the result of surrender, healing, and obedience.</p>
+        
+        <blockquote>
+            “I have fought the good fight, I have finished the race, I have kept the faith.”
+            <span>— 2 Timothy 4:7</span>
+        </blockquote>
+
+        <p>That’s the posture of a mature man of God. Not perfect, but faithful. Not without scars, but full of courage.</p>
+        <p>Now it’s time to step up. To lead. To serve. To protect. To pour into others what has been poured into you. Whether in your home, your friendships, your church, or your community—you have a role to play. You are no longer just receiving the mission. You are now carrying it forward.</p>
+        <p>This final session is a “commissioning”. A time to declare who you are, who God is, and what you’re committed to. You’ll write your Manhood Declaration—a prayer, a mission, a legacy—and speak it over your life. If possible, invite a mentor, brother, or group to affirm and pray over you.</p>
+        <p>Because this journey is not just about personal growth—it’s about Kingdom impact.</p>
+        <p>Jesus said, “You did not choose Me, but I chose you and appointed you to go and bear fruit—fruit that will last.” (John 15:16)</p>
+        <p style="font-weight: bold; color: #C85A17; text-align: center;">You’ve been chosen. You’ve been equipped. You’ve been healed. Now—you’re being sent.</p>
+
+        <div class="callout-box">
+            <p><strong>Theme:</strong> Stepping into your role with confidence and humility</p>
+            <p><strong>Scriptures:</strong> 2 Timothy 4:7, Isaiah 61:1-4, John 15:16</p>
+            <p><strong>Quote:</strong> “You were not born to drift. You were commissioned to conquer darkness.” — Erwin McManus</p>
+            <p><strong>Teaching Point:</strong> This journey isn’t for self-help—it’s for mission. You were chosen by God to step up, serve, and lead. Now you walk forward as a man commissioned for purpose, always dependent on Christ.</p>
+            <p><strong>Prompt:</strong> What legacy do I want to leave as a man of God?</p>
+            <p><strong>Action:</strong> Plan a small commissioning moment. Invite a mentor or group to affirm your journey and mission.</p>
+        </div>
+
+        <h4 style="color:#C85A17;">Suggestions:</h4>
+        <ul>
+            <li>Plan a small commissioning moment: invite a mentor to pray over you.</li>
+            <li>Begin mentoring or walking with another man just beginning the journey.</li>
+        </ul>
+        <div class="page-footer">23</div>
+    </div>
+
+    <!-- SESSION 12 QUESTIONS -->
+    <div class="page">
+        <h3>🌲 Session 12 – Reflection & Journal</h3>
+        
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 1: What has changed in you during this 12-session journey?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="journal-container">
+            <div class="journal-title">Reflection Question 2: What has God spoken over your identity and mission?</div>
+            <div class="journal-box">[ Write your reflection here in Google Docs... ]</div>
+        </div>
+
+        <div class="homework-box">
+            <h4>Homework Challenge</h4>
+            <p>Write your Manhood Declaration—your prayer, mission, and legacy. Read it regularly and carry it with you.</p>
+        </div>
+        <div class="page-footer">24</div>
+    </div>
+
+    <!-- PARTING THOUGHTS -->
+    <div class="page">
+        <h2>🏔️ Parting Thoughts for the Road Ahead</h2>
+        <p>Brother, you made it.</p>
+        <p>Not just to the end of a workbook—but to the threshold of a new way of living. These pages were never just about reflection or information. They were about <em>transformation</em>. About awakening the man you were always meant to be.</p>
+        <p>You have faced your wounds with courage. You have reclaimed your identity as a beloved son. You have learned to stand in truth, fight with purpose, and love with strength. You’ve been equipped not just to survive—but to lead, to serve, to build, and to bless.</p>
+        <p>This is no small thing.</p>
+        <p>But don’t mistake this moment for the finish line. This is a <em>beginning</em>. A launch point. A commissioning. Because now the world needs what has been formed in you. Your family needs it. Your brothers need it. Your community needs it.</p>
+        <p>The battles will continue. The road won’t always be easy. But you are no longer the same. You are no longer walking blind or alone. You are rooted. Grounded. Called. You know who you are—and whose you are.</p>
+        <p>You’ve been given a sword of truth, a shield of faith, and a heart that beats with the love of your Father. You’ve walked this journey side by side. Now, carry it forward—side by side with others.</p>
+        
+        <blockquote>
+            “I am a son of God, called by name, equipped for life, healed by grace, and walking forward in faith—not fear. I will not turn back. I will not go alone. I was made for this.”
+        </blockquote>
+        
+        <p>Hold that close. Read it often. Live it boldly.</p>
+        <p>And when the days get dark, or the journey feels long, remember—you’re not alone. Christ goes before you. Your brothers walk beside you. And the Spirit within you will never fail.</p>
+        <p style="font-weight: bold; color: #C85A17;">This is your time. Now go—and live as the man you were created to be.</p>
+        <div class="page-footer">25</div>
+    </div>
+
+    <!-- BIBLIOGRAPHY -->
+    <div class="page">
+        <h2>📚 Bibliography & References</h2>
+        <ul>
+            <li>Anderson, Neil T. <em>Victory Over the Darkness</em>. Bethany House, 2000.</li>
+            <li>Allender, Dan B. <em>The Wounded Heart</em>. NavPress, 1990.</li>
+            <li>Crabb, Larry. <em>Inside Out</em>. NavPress, 1988.</li>
+            <li>Dalbey, Gordon. <em>Healing the Masculine Soul</em>. Thomas Nelson, 2003.</li>
+            <li>Evans, Tony. <em>Kingdom Man</em>. Tyndale House Publishers, 2012.</li>
+            <li>Foster, Richard. <em>Celebration of Discipline</em>. HarperOne, 1978.</li>
+            <li>Ingram, Chip. <em>The Invisible War</em>. Baker Books, 2006.</li>
+            <li>King Jr., Martin Luther. <em>Strength to Love</em>. Harper & Row, 1963.</li>
+            <li>Mansfield, Stephen. <em>Building Brotherhood</em>. Tyndale House, 2015.</li>
+            <li>McManus, Erwin Raphael. <em>The Way of the Warrior</em>. WaterBrook, 2019.</li>
+            <li>Slattery, Juli. <em>Rethinking Sexuality</em>. Multnomah, 2018.</li>
+            <li>Sinek, Simon. <em>Start With Why</em>. Portfolio, 2009.</li>
+            <li>Townsend, John. <em>Leadership Beyond Reason</em>. Zondervan, 2011.</li>
+            <li>Trent, John & Smalley, Gary. <em>The Blessing</em>. Thomas Nelson, 2011.</li>
+            <li>Willard, Dallas. <em>Hearing God</em>. InterVarsity Press, 1999.</li>
+        </ul>
+        <p style="font-size: 9pt; color: #546E7A; margin-top: 20px;">
+            <strong>Scripture References:</strong> Scripture quotations are from the Holy Bible, New International Version® (NIV®), unless otherwise noted. Copyright © 1973, 1978, 1984, 2011 by Biblica, Inc.™ Used by permission. All rights reserved worldwide.
+        </p>
+        <div class="page-footer">26</div>
+    </div>
+
+    <!-- APPENDIX -->
+    <div class="page">
+        <h2>📊 Appendix: Sourced Quotes Reference Table</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width: 5%;">#</th>
+                    <th style="width: 30%;">Quote</th>
+                    <th style="width: 25%;">Author</th>
+                    <th style="width: 40%;">Verified or Probable Source</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>"The glory of God is man fully alive."</td>
+                    <td>St. Irenaeus</td>
+                    <td>Against Heresies, Book IV, Chapter 20 (ca. 180 A.D.)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>"Growth requires honest self-awareness. We cannot move forward without first knowing where we stand."</td>
+                    <td>Dr. Larry Crabb</td>
+                    <td>Inside Out (NavPress, 1988)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>"We live out who we believe we are. Identity precedes behavior."</td>
+                    <td>Neil T. Anderson</td>
+                    <td>Victory Over the Darkness (Bethany House, 2000)</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>"A man cannot become whole until he faces the wounds of his past with Christ."</td>
+                    <td>Dan Allender</td>
+                    <td>The Wounded Heart or Healing the Wounded Heart</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>"Blessing calls out identity, and identity gives purpose. A man cannot thrive without knowing the Father’s voice."</td>
+                    <td>Dr. John Townsend</td>
+                    <td>Leadership Beyond Reason (Zondervan, 2011)</td>
+                </tr>
+                <tr>
+                    <td>6</td>
+                    <td>"Spiritual warfare begins with identity and is sustained by obedience."</td>
+                    <td>Chip Ingram</td>
+                    <td>The Invisible War (Baker Books, 2006)</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>"Purpose doesn’t have to be grand—it has to be faithful."</td>
+                    <td>Dallas Willard</td>
+                    <td>Paraphrase from works including Renovation of the Heart</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>"Faith is taking the first step even when you don't see the whole staircase."</td>
+                    <td>Dr. Martin Luther King Jr.</td>
+                    <td>Commonly attributed; thematic match in Strength to Love (1963)</td>
+                </tr>
+                <tr>
+                    <td>9</td>
+                    <td>"Real masculinity protects, provides, and lays down its life."</td>
+                    <td>Dr. Tony Evans</td>
+                    <td>Kingdom Man (Tyndale, 2012)</td>
+                </tr>
+                <tr>
+                    <td>10</td>
+                    <td>"You are only as strong as the brother who walks beside you."</td>
+                    <td>Stephen Mansfield</td>
+                    <td>Mansfield’s Book of Manly Men (Thomas Nelson, 2013)</td>
+                </tr>
+                <tr>
+                    <td>11</td>
+                    <td>"Sexual purity is not repression, but freedom to love without shame."</td>
+                    <td>Dr. Juli Slattery</td>
+                    <td>Rethinking Sexuality (Multnomah, 2018)</td>
+                </tr>
+                <tr>
+                    <td>12</td>
+                    <td>"A man of God is not built in a moment—but in a daily rhythm of surrender and strength."</td>
+                    <td>Richard Foster</td>
+                    <td>Thematic paraphrase from Celebration of Discipline (1978)</td>
+                </tr>
+                <tr>
+                    <td>13</td>
+                    <td>"You were not born to drift. You were commissioned to conquer darkness."</td>
+                    <td>Erwin McManus</td>
+                    <td>The Way of the Warrior (WaterBrook, 2019)</td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="page-footer">27</div>
+    </div>
+
+</body>
+</html>

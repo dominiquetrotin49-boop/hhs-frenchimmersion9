@@ -1,0 +1,679 @@
+/* Streamlined Single Boss Battle (Malakor) CSS System */
+.boss-battle-container {
+  width: 100%;
+  border-radius: 1.5rem;
+  background: linear-gradient(135deg, #e0f2fe 0%, #c7d2fe 50%, #e9d5ff 100%);
+  border: 3px solid #f59e0b;
+  box-shadow: 0 20px 50px rgba(147, 51, 234, 0.25), inset 0 0 30px rgba(255, 255, 255, 0.8);
+  padding: 1.5rem;
+  color: #0f172a;
+  position: relative;
+  overflow: hidden;
+}
+
+/* TOP HEADER BAR */
+.boss-arena-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 2px solid rgba(245, 158, 11, 0.35);
+  position: relative;
+  z-index: 5;
+}
+
+@media (min-width: 640px) {
+  .boss-arena-header {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.boss-arena-badge {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fef08a 0%, #eab308 100%);
+  color: #7c2d12;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 0 20px rgba(234, 179, 8, 0.6);
+}
+
+.boss-arena-title {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #7c2d12;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.boss-arena-sub {
+  font-size: 0.8rem;
+  color: #334155;
+  font-weight: 700;
+  margin: 0;
+}
+
+.boss-stat-pill {
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  padding: 0.45rem 1rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+/* MENU CARD */
+.boss-menu-card {
+  padding: 2.25rem 1.5rem;
+  background: rgba(255, 255, 255, 0.92);
+  border-radius: 1.25rem;
+  border: 2px solid #f59e0b;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.boss-start-battle-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border: 2px solid #fef08a;
+  padding: 0.9rem 2.5rem;
+  border-radius: 0.9rem;
+  box-shadow: 0 10px 25px rgba(217, 119, 6, 0.4);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.boss-start-battle-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 12px 32px rgba(217, 119, 6, 0.6);
+}
+
+/* BATTLE STAGE */
+.boss-battle-stage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+}
+
+/* SEMI-TRANSPARENT MALAKOR WATERMARK BACKGROUND */
+.boss-character-watermark-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+  border-radius: 1.25rem;
+}
+
+.boss-watermark-img {
+  max-width: 520px;
+  max-height: 480px;
+  width: 90%;
+  height: auto;
+  object-fit: contain;
+  opacity: 0.45;
+  filter: drop-shadow(0 0 25px rgba(245, 158, 11, 0.4));
+  transition: opacity 0.5s ease;
+}
+
+/* HEALTHBARS */
+.boss-health-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.boss-hp-card {
+  background: #ffffff;
+  border: 2px solid #cbd5e1;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+}
+
+.boss-hp-card.player-hp {
+  border-color: #10b981;
+}
+
+.boss-hp-card.boss-hp {
+  border-color: #f43f5e;
+}
+
+.boss-hp-bar-bg {
+  width: 100%;
+  height: 14px;
+  background: #e2e8f0;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid #cbd5e1;
+}
+
+.boss-hp-bar-fill {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.4s ease-out;
+}
+
+.boss-vs-badge {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  font-weight: 900;
+  font-size: 0.85rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 50%;
+  border: 2px solid #fef08a;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.5);
+}
+
+/* TIMER COUNTDOWN BAR */
+.boss-timer-container {
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  padding: 0.75rem 1.25rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  position: relative;
+  z-index: 5;
+}
+
+.boss-timer-track {
+  width: 100%;
+  height: 10px;
+  background: #f1f5f9;
+  border-radius: 9999px;
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+}
+
+.boss-timer-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #f59e0b 0%, #eab308 100%);
+  border-radius: 9999px;
+  transition: width 0.1s linear;
+}
+
+.boss-timer-fill.critical {
+  background: linear-gradient(90deg, #ef4444 0%, #dc2626 100%);
+  animation: timerPulse 0.4s infinite alternate;
+}
+
+@keyframes timerPulse {
+  0% { opacity: 1; }
+  100% { opacity: 0.4; }
+}
+
+/* POWER-UPS BAR */
+.boss-powerups-bar {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 5;
+}
+
+.boss-powerup-btn {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.5rem 1.15rem;
+  border-radius: 9999px;
+  border: 2px solid #cbd5e1;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.boss-powerup-btn.available {
+  background: #ffffff;
+  border-color: #f59e0b;
+  color: #7c2d12;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.2);
+}
+
+.boss-powerup-btn.available:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: #fefce8;
+  border-color: #d97706;
+}
+
+.boss-powerup-btn.disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  border-color: #e2e8f0;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* PROMPT CARD FULLY TRANSPARENT */
+.boss-prompt-card {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 3px solid #f59e0b;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), 0 0 25px rgba(245, 158, 11, 0.25);
+  text-align: center;
+  position: relative;
+  z-index: 5;
+}
+
+.boss-category-tag {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #b45309;
+  display: inline-block;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.75);
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  border: 1px solid #fde047;
+}
+
+.boss-prompt-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.boss-prompt-box {
+  background: transparent;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 2px solid #fde047;
+  padding: 0.75rem 1.5rem;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  box-shadow: 0 4px 12px rgba(250, 204, 21, 0.2);
+}
+
+.boss-label {
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: #854d0e;
+  text-transform: uppercase;
+  margin-bottom: 0.2rem;
+}
+
+.boss-val {
+  font-size: 1.35rem;
+  font-weight: 900;
+}
+
+/* INPUT FORM */
+.boss-input-form {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.boss-text-input {
+  flex: 1;
+  background: #f8fafc;
+  border: 2.5px solid #cbd5e1;
+  padding: 0.85rem 1.25rem;
+  border-radius: 0.85rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #0f172a;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.boss-text-input:focus {
+  border-color: #f59e0b;
+  background: #ffffff;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.boss-strike-btn {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  border: 2px solid #fef08a;
+  padding: 0 1.5rem;
+  border-radius: 0.85rem;
+  font-weight: 900;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+  transition: all 0.2s ease;
+}
+
+.boss-strike-btn:hover {
+  transform: scale(1.04);
+}
+
+.boss-accent-keyboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  margin-top: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.boss-accent-btn {
+  background: #f1f5f9;
+  border: 1.5px solid #cbd5e1;
+  color: #334155;
+  font-weight: 900;
+  font-size: 0.85rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.boss-accent-btn:hover {
+  background: #fde047;
+  border-color: #ca8a04;
+  color: #854d0e;
+  transform: scale(1.1);
+}
+
+/* FEEDBACK BOX */
+.boss-feedback-box {
+  padding: 1.25rem;
+  border-radius: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.boss-feedback-box.crit, .boss-feedback-box.hit {
+  background: #f0fdf4;
+  border: 2px solid #4ade80;
+  color: #166534;
+}
+
+.boss-feedback-box.shield {
+  background: #fefce8;
+  border: 2px solid #facc15;
+  color: #854d0e;
+}
+
+.boss-feedback-box.miss {
+  background: #fff1f2;
+  border: 2px solid #fda4af;
+  color: #9f1239;
+}
+
+.boss-next-btn {
+  background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+  color: #ffffff;
+  border: 2px solid #7dd3fc;
+  padding: 0.75rem 1.85rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 18px rgba(2, 132, 199, 0.35);
+  transition: all 0.2s ease;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.boss-next-btn:hover {
+  transform: scale(1.04);
+}
+
+/* RESULT CARDS */
+.boss-result-card {
+  padding: 2.5rem 1.5rem;
+  background: #ffffff;
+  border-radius: 1.5rem;
+  border: 3px solid #f59e0b;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+}
+
+.boss-result-card.gameover {
+  border-color: #f43f5e;
+}
+
+/* ANIMATED SPELL OVERLAY SYSTEM */
+.boss-spell-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  border-radius: 1.25rem;
+  overflow: hidden;
+}
+
+.boss-spell-overlay.shield {
+  background: radial-gradient(circle, rgba(251, 191, 36, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.boss-spell-shield-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.boss-shield-aura {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 240, 138, 0.9) 0%, rgba(245, 158, 11, 0.5) 60%, rgba(245, 158, 11, 0) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.9);
+  animation: shieldPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes shieldPop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.2); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.boss-spell-banner {
+  margin-top: 1rem;
+  text-align: center;
+  background: rgba(124, 45, 18, 0.9);
+  border: 2px solid #fde047;
+  padding: 0.6rem 1.5rem;
+  border-radius: 9999px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  animation: bannerFadeIn 0.5s ease-out forwards;
+}
+
+.boss-spell-title {
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fef08a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.boss-spell-sub {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@keyframes bannerFadeIn {
+  0% { opacity: 0; transform: translateY(15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.boss-float-symbols {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.boss-float-item {
+  position: absolute;
+  font-weight: 900;
+  font-size: 0.9rem;
+  color: #d97706;
+  background: #ffffff;
+  border: 2px solid #f59e0b;
+  padding: 0.3rem 0.8rem;
+  border-radius: 9999px;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  opacity: 0;
+}
+
+.boss-float-item.float-1 {
+  top: -20px;
+  left: -40px;
+  animation: floatUp 2s ease-out forwards;
+}
+
+.boss-float-item.float-2 {
+  top: 10px;
+  right: -50px;
+  animation: floatUp 2.2s ease-out 0.2s forwards;
+}
+
+@keyframes floatUp {
+  0% { opacity: 0; transform: translateY(10px) scale(0.8); }
+  30% { opacity: 1; transform: translateY(-10px) scale(1.1); }
+  100% { opacity: 0; transform: translateY(-45px) scale(1); }
+}
+
+/* LIGHTNING SPELL STYLES (+5s) */
+.boss-spell-overlay.lightning {
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.boss-spell-lightning-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.lightning-streak-line {
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 8px;
+  background: linear-gradient(90deg, transparent, #22d3ee, #ffffff, #22d3ee, transparent);
+  transform: rotate(-35deg);
+  box-shadow: 0 0 35px #06b6d4, 0 0 60px #ffffff;
+  animation: lightningStrike 0.4s ease-out forwards;
+}
+
+@keyframes lightningStrike {
+  0% { opacity: 0; transform: rotate(-35deg) scaleX(0); }
+  50% { opacity: 1; transform: rotate(-35deg) scaleX(1.3); }
+  100% { opacity: 0; transform: rotate(-35deg) scaleX(1.5); }
+}
+
+.boss-lightning-aura {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(165, 243, 252, 0.9) 0%, rgba(6, 182, 212, 0.5) 60%, rgba(6, 182, 212, 0) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(6, 182, 212, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.9);
+  animation: lightningPop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes lightningPop {
+  0% { transform: scale(0) rotate(-20deg); opacity: 0; }
+  60% { transform: scale(1.25) rotate(10deg); opacity: 1; }
+  100% { transform: scale(1) rotate(0deg); opacity: 1; }
+}
+
+.boss-spell-banner.lightning {
+  background: rgba(14, 116, 144, 0.92);
+  border-color: #67e8f9;
+}
+
+.boss-float-item.cyan {
+  color: #0891b2;
+  border-color: #06b6d4;
+  box-shadow: 0 4px 15px rgba(6, 182, 212, 0.4);
+}
+
+/* MULTIPLIER SPELL STYLES (x3 XP) */
+.boss-spell-overlay.multiplier {
+  background: radial-gradient(circle, rgba(244, 63, 94, 0.35) 0%, rgba(0, 0, 0, 0) 70%);
+}
+
+.boss-spell-multiplier-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.boss-flame-aura {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(254, 205, 211, 0.9) 0%, rgba(244, 63, 94, 0.5) 60%, rgba(244, 63, 94, 0) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 50px rgba(244, 63, 94, 0.8), inset 0 0 20px rgba(255, 255, 255, 0.9);
+  animation: flamePop 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes flamePop {
+  0% { transform: scale(0); opacity: 0; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+.boss-spell-banner.rose {
+  background: rgba(159, 18, 57, 0.92);
+  border-color: #fda4af;
+}
+
+.boss-float-item.rose {
+  color: #e11d48;
+  border-color: #f43f5e;
+  box-shadow: 0 4px 15px rgba(244, 63, 94, 0.4);
+}

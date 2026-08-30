@@ -1,0 +1,35 @@
+.app-container {
+  display: flex;
+  min-height: 100vh;
+  padding: 1rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0; /* Prevents overflow */
+  padding: 1rem 2rem;
+}
+
+@media (max-width: 1024px) {
+  .app-container {
+    flex-direction: column;
+    padding: 0;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    left: 0;
+    border-radius: 0;
+    margin-right: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+  }
+}

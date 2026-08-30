@@ -1,0 +1,46 @@
+- [x] Copier et combiner les 3 fichiers audio en un fichier chapitre_1_complet.mp3
+- [x] Importer Lucide icons et React hooks dans ChapterView.jsx
+- [x] Ajouter l'onglet/barre de lecture "Écoute le chapitre 1" dans ChapterView.jsx
+- [x] Générer l'illustration Hergé Ligne Claire du Chapitre 1
+- [x] Copier l'illustration générée dans public/images/horloge-boreale/
+- [x] Ajuster l'illustration (w-full h-auto block) pour qu'elle s'affiche entièrement sans rognage dans la fiche du Chapitre 1
+- [x] Retirer les boutons de taille et verrouiller la largeur de l'illustration à la taille Moyen (75% max-width)
+- [x] Convertir et découper le nouvel audio de vocabulaire Reprise en 8 fichiers WAV
+- [x] Remplacer les 8 WAV originaux dans public/audio/unite-reprise/ par les nouveaux clips
+- [x] Copier la fonction serverless api/writing-feedback.js de l'app Grade 11
+- [x] Copier le composant React src/components/games/WritingPrompt.jsx de l'app Grade 11
+- [x] Configurer vercel.json pour acheminer les requêtes /api/ sans réécriture
+- [x] Intégrer l'Atelier d'Écriture (Activité 4) dans PracticeSection.jsx et adapter la grille CSS à 4 colonnes
+- [x] Ajouter la règle d'analyse pour corriger "ercole" en "école" dans WritingPrompt.jsx et api/writing-feedback.js (Grade 9 et Grade 11)
+- [x] Ajouter la règle d'analyse pour corriger "je va" en "je vais" (Grade 9 et Grade 11)
+- [x] Désactiver l'autocorrection et le spellcheck natifs du navigateur sur les zones de texte (Grade 9 et Grade 11)
+- [x] Ajouter des règles d'analyse de limites de mots précises pour attraper "dejeuner" ➔ "déjeuner" et "ecole" ➔ "école" (Grade 9 et Grade 11)
+- [x] Retirer la dépendance obsolète @google/genai de package.json dans l'app Grade 11
+- [x] Déployer l'app Grade 11 (charming-goodall) sur Vercel avec succès
+- [x] Rendre WritingPrompt.jsx réutilisable avec des props pour les sujets, titre, et sous-titre
+- [x] Définir les 4 sujets d'écriture sur les Héros & Anti-Héros pour l'Unité 1 dans PracticeSection.jsx
+- [x] Intégrer l'Atelier d'Écriture dans la section Exercices de l'Unité 1
+- [x] Retirer l'onglet principal "Jeux Interactifs" de la navigation dans ChapterView.jsx (passage à 3 colonnes)
+- [x] Déplacer l'Arcade/Jeux comme sous-onglet de "Practice" sous le nom "Flashcard Practice" dans VocabularySection.jsx (3 colonnes)
+- [x] Renommer le titre interne du composant GameSection à "Flashcard Practice"
+- [x] Retirer le bouton "Mélanger" de la barre d'options de Flashcard Practice dans GameSection.jsx et restyler les deux boutons restants (Cartes 3D et Quiz Défi) pour s'étendre proprement
+- [x] Rendre le nom du sous-onglet de jeux conditionnel : s'affiche sous l'appellation "Jeux" dans la section Reprise, et "Flashcard Practice" pour les autres unités (comme l'Unité 1)
+- [x] Redessiner la sélection d'activités dans "Flashcard Practice" pour afficher de grandes cartes avec icônes, descriptions et boutons, similaires aux exercices de Reprise du site de 11e année (Unité 2 et autres unités hors Reprise)
+- [x] Rétablir l'affichage du Quiz Défi aux couleurs, polices et format de "L'Atelier d'Orthographe & Dictée Enchantée" (fond dégradé bleu/violet sombre, bordures dorées de 2px, boutons d'options translucides à bordures colorées interactives, et boutons d'action cyan)
+- [x] Copier les sujets d'écriture officiels Héros & Anti-Héros depuis le composant de 11e année (Votre héros préféré, Le portrait d'un anti-héros, Si vous étiez un super-héros, Le rival ou le méchant)
+- [x] Créer la barre d'onglets sous l'onglet "Exercices" (pratique) de l'Unité 1 et y ajouter l'onglet "Production Écrite" contenant l'Atelier d'Écriture
+- [x] Détecter et tuer le processus Node holding port 5173 et relancer le serveur de dev sur le port 5173
+- [x] Créer le nouveau fichier src/data/novelData.js contenant les chapitres 1-5 découpés page par page avec vocabulaire associé et 5 questionnaires QCM de comprehension (25 questions au total)
+- [x] Importer et adapter le composant NovelReader.jsx et NovelReader.css dans le projet Grade 9 (avec synthèse vocale adaptée par genre de narrateur)
+- [x] Associer la route /roman à NovelReader dans App.jsx
+- [x] Ajouter l'accès « Le Mystère de l'Horloge Boréale » sous « Ressources Générales » dans Sidebar.jsx, et filtrer l'unité de la liste standard
+- [x] Réorganiser les 4 pages du Chapitre 1 pour qu'elles se terminent toutes par une fin de phrase complète (un point)
+- [x] Corriger le raccord de Page 3 pour démarrer l'audio à 0.0s afin d'englober la première phrase "Julien saisit..." qui y a été déplacée
+- [x] Générer et sauvegarder les 6 avatars de personnages au style Ligne Claire
+- [x] Rendre les avatars de Julien et de Samira plus charismatiques
+- [x] Retirer le hijab de Samira (nouvel avatar avec cheveux bouclés, et uniformisation de l'illustration du Chapitre 3)
+- [x] Générer, approuver et copier les illustrations Ligne Claire pour les Chapitres 4 et 5
+- [x] Mettre à jour novelData.js et configurer les chemins d'images pour les 5 chapitres
+- [x] Retirer les règles de blocage des chapitres 2-5 en production (ChapterView.jsx et NovelReader.jsx)
+- [x] Changer le titre de l'unité Reprise de "Reprise : La Rentrée des Champions" à "La Rentrée" dans le menu de gauche
+- [x] Vérifier la compilation du projet localement

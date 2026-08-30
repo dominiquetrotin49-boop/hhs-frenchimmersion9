@@ -1,0 +1,123 @@
+.pronunciation-practice {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  animation: fadeIn 0.4s ease-out;
+}
+
+/* Override glass-panel for readability to match crosswords */
+.pronunciation-practice .glass-panel {
+  background: #fcf9f2; /* Light pastel cream */
+  color: #2c3e50; /* Dark text */
+  backdrop-filter: none;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+
+.pronunciation-practice .text-gradient {
+  background: linear-gradient(135deg, #c0392b, #e74c3c);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pronunciation-header {
+  padding: 1.5rem;
+  text-align: center;
+}
+
+.vocab-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.vocab-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.vocab-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.vocab-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.5rem;
+}
+
+.vocab-card-header h3 {
+  margin: 0;
+  color: #2c3e50;
+  font-size: 1.3rem;
+  font-weight: 800;
+}
+
+.speak-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s, background-color 0.2s;
+  box-shadow: 0 4px 10px rgba(231, 111, 81, 0.3);
+  flex-shrink: 0;
+}
+
+.speak-btn:hover {
+  transform: scale(1.1);
+  background: var(--accent-secondary);
+}
+
+.speak-btn:active {
+  transform: scale(0.95);
+}
+
+.vocab-definition {
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+  color: #5a6c7d;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.def-icon {
+  flex-shrink: 0;
+  margin-top: 4px;
+  color: #e76f51;
+}
+
+.speak-def-btn {
+  align-self: flex-start;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  color: #5a6c7d;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+}
+
+.speak-def-btn:hover {
+  background: rgba(0, 0, 0, 0.1);
+  color: #2c3e50;
+}

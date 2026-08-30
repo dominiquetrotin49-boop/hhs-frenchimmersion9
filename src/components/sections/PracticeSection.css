@@ -1,0 +1,407 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PracticeSection.css — Responsive, Modular Grammar Activities Styling
+   Matches light glassmorphism cards, TikTok aesthetics, and high-contrast
+   ═══════════════════════════════════════════════════════════════════ */
+
+.practice-section-container {
+  max-width: 100%;
+  margin-top: 1.5rem;
+  margin-bottom: 6rem; /* Extra spacing at the bottom so the floating toolbar doesn't block content */
+}
+
+/* ── Tab Navigation ── */
+.activity-tabs-nav {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .activity-tabs-nav {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.activity-tab-btn {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1.5px solid rgba(0, 0, 0, 0.08);
+  border-radius: 1rem;
+  padding: 1rem;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.activity-tab-btn:hover {
+  background: #ffffff;
+  border-color: rgba(254, 44, 85, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(254, 44, 85, 0.08);
+}
+
+.activity-tab-btn.active {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+  color: #ffffff;
+  border-color: #4f46e5;
+  box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+}
+
+/* ── Main Activity Card ── */
+.activity-main-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1.5rem;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+.activity-header {
+  border-b: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+  text-align: left;
+}
+
+.activity-header h4 {
+  font-size: 1.3rem;
+  font-weight: 900;
+  color: #1e293b;
+  margin: 0 0 0.5rem 0;
+}
+
+.activity-desc {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #64748b;
+  margin: 0;
+}
+
+/* ── Questions List ── */
+.questions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+
+.question-item-card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.01);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.question-item-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(79, 70, 229, 0.2);
+}
+
+.question-content-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.question-number-badge {
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #475569;
+  font-size: 0.8rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.question-text-flow {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1e293b;
+  line-height: 1.8;
+  text-align: left;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* ── Inputs ── */
+.input-with-feedback-wrapper {
+  position: relative;
+  display: inline-block;
+  margin: 0 0.25rem;
+}
+
+.question-input {
+  width: 9rem;
+  padding: 0.35rem 2rem 0.35rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
+  border: 2px solid #cbd5e1;
+  border-radius: 0.5rem;
+  background: #f8fafc;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.question-input:focus {
+  border-color: #7c3aed;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
+}
+
+.question-input.input-success {
+  border-color: #10b981;
+  background: #f0fdf4;
+  color: #065f46;
+}
+
+.question-input.input-error {
+  border-color: #ef4444;
+  background: #fdf2f2;
+  color: #991b1b;
+}
+
+.question-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.95;
+}
+
+.validation-icon-wrapper {
+  position: absolute;
+  right: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+}
+
+.color-success {
+  color: #10b981;
+}
+
+.color-error {
+  color: #ef4444;
+}
+
+.color-error-dark {
+  color: #991b1b;
+}
+
+.question-hint-pill {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  padding: 0.15rem 0.5rem;
+  border-radius: 0.35rem;
+  border: 1px solid #e2e8f0;
+}
+
+/* ── Correction Banner ── */
+.correction-feedback-row {
+  margin-left: 2.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #991b1b;
+  background: #fdf2f2;
+  border: 1px solid rgba(239, 68, 68, 0.15);
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}
+
+.correct-answer-text {
+  font-weight: 900;
+  color: #ef4444;
+  text-decoration: underline;
+}
+
+/* ── Footer Controls ── */
+.activity-footer-controls {
+  margin-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  padding-top: 1.5rem;
+}
+
+.activity-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: flex-start;
+}
+
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 800;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.verify-btn {
+  background: #10b981;
+  color: #ffffff;
+  border: none;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
+}
+
+.verify-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
+.reset-btn {
+  background: #ffffff;
+  color: #475569;
+  border: 1.5px solid #cbd5e1;
+}
+
+.reset-btn:hover {
+  background: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.activity-results-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.score-summary-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+  border-radius: 9999px;
+  box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+}
+
+/* ── Floating Accent Toolbar ── */
+.accent-toolbar-floating {
+  position: fixed;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 2px solid rgba(37, 244, 238, 0.4);
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), 0 0 15px rgba(37, 244, 238, 0.15);
+  z-index: 1000;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  max-width: 95vw;
+}
+
+.accent-toolbar-label {
+  font-size: 0.75rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #25f4ee;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.accent-buttons-grid {
+  display: flex;
+  gap: 0.35rem;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Custom Scrollbar for floating bar scroll */
+.accent-buttons-grid::-webkit-scrollbar {
+  height: 3px;
+}
+.accent-buttons-grid::-webkit-scrollbar-thumb {
+  background: rgba(37, 244, 238, 0.3);
+  border-radius: 2px;
+}
+
+.accent-char-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 2.2rem;
+  height: 2.2rem;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.accent-char-btn:hover {
+  background: #25f4ee;
+  color: #0f172a;
+  border-color: #25f4ee;
+  transform: scale(1.1);
+}
+
+.accent-char-btn:active {
+  transform: scale(0.95);
+}
+
+/* ── Empty & General States ── */
+.practice-empty-state {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(0, 0, 0, 0.06);
+  border-radius: 1.5rem;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #64748b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+}
+
+.practice-empty-state h3 {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1e293b;
+  margin-bottom: 0.5rem;
+}
+
+.practice-empty-state p {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+}

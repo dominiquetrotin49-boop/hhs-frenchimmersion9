@@ -1,0 +1,112 @@
+.memory-game-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.game-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.score-board {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(231, 111, 81, 0.2);
+  color: var(--accent-primary);
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  perspective: 1000px;
+}
+
+.memory-card {
+  height: 120px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.memory-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.memory-card.flipped .memory-card-inner {
+  transform: rotateY(180deg);
+}
+
+.memory-card-front, .memory-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--radius-lg);
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.memory-card-front {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  font-size: 2rem;
+  border: 2px solid var(--border-color);
+}
+
+.memory-card-front:hover {
+  background: var(--bg-glass);
+  border-color: var(--accent-primary);
+}
+
+.memory-card-back {
+  transform: rotateY(180deg);
+  padding: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.french-card {
+  background: linear-gradient(135deg, #1e3a8a, #312e81);
+  color: white;
+}
+
+.english-card {
+  background: linear-gradient(135deg, #064e3b, #065f46);
+  color: white;
+}
+
+.victory-screen {
+  padding: 3rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.primary-btn {
+  background: var(--accent-primary);
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-md);
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.primary-btn:hover {
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}

@@ -1,0 +1,197 @@
+.fishtopia-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  background: #4ade80; /* Grass color */
+}
+
+.fishtopia-canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: #86efac; /* Lighter grass */
+}
+
+.fishtopia-hud {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  display: flex;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.hud-panel {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: bold;
+  color: #1e293b;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  gap: 16px;
+  pointer-events: auto;
+}
+
+.hud-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.interaction-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 8px 24px;
+  border-radius: 30px;
+  font-weight: bold;
+  animation: pulse 1.5s infinite;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% { transform: translateX(-50%) scale(1); }
+  50% { transform: translateX(-50%) scale(1.05); }
+  100% { transform: translateX(-50%) scale(1); }
+}
+
+/* Modals */
+.game-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+
+.modal-content {
+  background: #fdf6e3;
+  padding: 24px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 450px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #1e293b;
+  margin-bottom: 16px;
+}
+
+.modal-content p {
+  color: #334155;
+  font-weight: 600;
+}
+
+.shop-items {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.shop-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+}
+
+.shop-item button {
+  background: #f59e0b;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.shop-item button:disabled {
+  background: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.close-btn {
+  background: #ef4444;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Fish Alert */
+.fish-alert {
+  animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.fish-icon {
+  font-size: 64px;
+  margin: 10px 0;
+}
+
+.rarity-Common { color: #64748b; }
+.rarity-Rare { color: #3b82f6; }
+.rarity-Epic { color: #a855f7; text-shadow: 0 0 10px #a855f7; }
+.rarity-Legendary { color: #f59e0b; text-shadow: 0 0 15px #f59e0b; }
+
+@keyframes popIn {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.q-options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.q-options button {
+  padding: 12px;
+  background: white;
+  border: 2px solid #cbd5e1;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #1e293b;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.q-options button:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+}
+
+.q-options button.correct {
+  background: #10b981;
+  color: white;
+  border-color: #059669;
+}
+
+.q-options button.wrong {
+  background: #ef4444;
+  color: white;
+  border-color: #b91c1c;
+}
