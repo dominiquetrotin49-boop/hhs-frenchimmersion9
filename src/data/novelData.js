@@ -174,7 +174,7 @@ export const NOVEL_CHAPTERS = [
       },
       {
         "id": 3,
-        "question": "Comment Coralie est-elle décrite dans le texte ?",
+        "question": "Qui est Coralie dans l'histoire ?",
         "options": [
           "Une policière dévouée à la justice",
           "Une cambrioleuse agile et intelligente",
@@ -185,7 +185,7 @@ export const NOVEL_CHAPTERS = [
       },
       {
         "id": 4,
-        "question": "Quel dilemme moral Julien affronte-t-il lorsque l'incendie se déclare ?",
+        "question": "Quel choix difficile Julien doit-il faire quand l'incendie commence ?",
         "options": [
           "Fuir avec l'horloge ou aider le capitaine Vaneau coincé sous une poutre",
           "Coopérer avec Coralie ou l'abandonner aux gardes",
