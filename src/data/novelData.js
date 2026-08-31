@@ -630,7 +630,7 @@ export const NOVEL_CHAPTERS = [
         "pageNumber": 2,
         "title": "Page 2",
         "audioSrc": "",
-        "text": "Derrière lui, un écran géant montra les plans de l'Horloge Boréale combinés aux recherches du laboratoire forestier. Julien prit le micro et parla avec une voix claire et assurée :\n\n— Bonjour à toutes et à tous, commença-t-il. Les défis écologiques et technologiques de notre époque ne sont pas impossibles à surmonter. Aujourd'hui, l'automatisation et l'intelligence artificielle changent le monde du travail. Mais si nous utilisons ces nouvelles technologies avec une vision humaine et éthique, nous pourrons créer de nouveaux métiers très utiles pour protéger notre planète.\n\nJulien montra ensuite le projet imaginé par son équipe, appelé « Sentinelle Boréale » :\n\n— Si nous installons des capteurs intelligents dans nos forêts, nous pourrons surveiller la qualité de l'eau en temps réel avant qu'une pollution ne devienne trop grave. Si nos universités forment plus de jeunes éco-ingénieurs et d'artisans de la durabilité, nous construirons une économie circulaire solide. Nos gouvernements soutiendront les travailleurs indépendants et les projets communautaires qui respectent la nature.\n\nDans la salle, tout le monde écoutait avec attention, impressionné par la clarté et le sérieux des propositions.\n\n— Mon grand-père me disait souvent que pour construire son avenir, il faut respecter ses racines culturelles. Nos choix professionnels ne doivent pas seulement servir à gagner un bon salaire. Ils doivent nous permettre de nous épanouir et de participer à une société plus juste, plus verte et plus solidaire.\n\nQuand Julien termina son discours par un message d'espoir pour la jeunesse, toute la salle se leva pour l'applaudir longuement. Des directeurs d'organisations et des enseignants vinrent féliciter les trois amis sur scène.\n\nPlus tard dans l'après-midi, dans le grand hall du salon, Julien discuta avec la directrice d'un incubateur technologique international situé entre Montréal et Dakar :\n\n— Votre projet est passionnant, dit-elle en lui tendant sa carte. Notre entreprise propose un stage rémunéré en gestion de projets éco-numériques, avec une formule moderne en télétravail. Vous devriez envoyer votre candidature sans tarder ; nous cherchons des personnes créatives avec un bel esprit d'équipe comme le vôtre.\n\n— Merci infiniment, répondit Julien avec joie. Je vais préparer mon CV et ma lettre de motivation dès cette semaine."
+        "text": "Derrière lui, un écran géant montra les plans de l'Horloge Boréale combinés aux recherches du laboratoire forestier. Julien prit le micro et parla avec une voix claire et assurée :\n\n— Bonjour à toutes et à tous, commença-t-il. Les défis écologiques et technologiques de notre époque ne sont pas impossibles à surmonter. Aujourd'hui, l'automatisation et l'intelligence artificielle changent le monde du travail. Mais si nous utilisons ces nouvelles technologies avec une vision humaine et éthique, nous pourrons créer de nouveaux métiers très utiles pour protéger notre planète.\n\nJulien montra ensuite le projet imaginé par son équipe, appelé « Sentinelle Boréale » :\n\n— Si nous installons des capteurs intelligents dans nos forêts, nous pourrons surveiller la qualité de l'eau en temps réel avant qu'une pollution ne devienne pas trop grave. Si nos universités forment plus de jeunes éco-ingénieurs et d'artisans de la durabilité, nous construirons une économie circulaire solide. Nos gouvernements soutiendront les travailleurs indépendants et les projets communautaires qui respectent la nature.\n\nDans la salle, tout le monde écoutait avec attention, impressionné par la clarté et le sérieux des propositions.\n\n— Mon grand-père me disait souvent que pour construire son avenir, il faut respecter ses racines culturelles. Nos choix professionnels ne doivent pas seulement servir à gagner un bon salaire. Ils doivent nous permettre de nous épanouir et de participer à une société plus juste, plus verte et plus solidaire.\n\nQuand Julien termina son discours par un message d'espoir pour la jeunesse, toute la salle se leva pour l'applaudir longuement. Des directeurs d'organisations et des enseignants vinrent féliciter les trois amis sur scène.\n\nPlus tard dans l'après-midi, dans le grand hall du salon, Julien discuta avec la directrice d'un incubateur technologique international situé entre Montréal et Dakar :\n\n— Votre projet est passionnant, dit-elle en lui tendant sa carte. Notre entreprise propose un stage rémunéré en gestion de projets éco-numériques, avec une formule moderne en télétravail. Vous devriez envoyer votre candidature sans tarder ; nous cherchons des personnes créatives avec un bel esprit d'équipe comme le vôtre.\n\n— Merci infiniment, répondit Julien avec joie. Je vais préparer mon CV et ma lettre de motivation dès cette semaine."
       },
       {
         "pageNumber": 3,
@@ -641,44 +641,56 @@ export const NOVEL_CHAPTERS = [
     ],
     "vocabList": [
       {
-        "word": "Une compétence",
-        "definition": "Une capacité ou connaissance pratique acquise pour effectuer un travail."
+        "word": "Rempli",
+        "definition": "Filled / packed"
       },
       {
-        "word": "Un atout",
-        "definition": "Une force ou qualité positive favorisant la réussite."
+        "word": "Convaincant",
+        "definition": "Convincing / persuasive"
       },
       {
-        "word": "L'esprit d'équipe",
-        "definition": "La disposition à collaborer efficacement avec d'autres personnes."
+        "word": "Compétences (f. pl.)",
+        "definition": "Skills / abilities"
       },
       {
-        "word": "L'esprit critique",
-        "definition": "La faculté d'évaluer objectivement des données avant de juger."
+        "word": "Accompli",
+        "definition": "Accomplished / achieved"
       },
       {
-        "word": "L'adaptabilité",
-        "definition": "L'aptitude à s'ajuster rapidement au changement et à la nouveauté."
+        "word": "Avec franchise",
+        "definition": "Frankly / with honesty"
       },
       {
-        "word": "L'autonomie",
-        "definition": "La capacité à agir de manière indépendante et à prendre des initiatives."
+        "word": "S'avança",
+        "definition": "Stepped forward / walked up"
       },
       {
-        "word": "La résolution de problèmes",
-        "definition": "L'aptitude à analyser un obstacle et à y apporter une réponse."
+        "word": "Notre époque",
+        "definition": "Our era / our time"
       },
       {
-        "word": "L'automatisation",
-        "definition": "L'exécution de tâches par des machines sans intervention humaine."
+        "word": "Sentinelle (f.)",
+        "definition": "Sentinel / guard / guardian"
       },
       {
-        "word": "L'intelligence artificielle",
-        "definition": "Technologies imitant des processus d'intelligence humaine."
+        "word": "Ne devienne pas",
+        "definition": "(Before it) does not become / doesn't turn into"
       },
       {
-        "word": "Le télétravail",
-        "definition": "L'organisation d'une activité professionnelle à distance."
+        "word": "La clarté",
+        "definition": "The clarity"
+      },
+      {
+        "word": "Épanouir (s'épanouir)",
+        "definition": "To thrive / to flourish / to find fulfillment"
+      },
+      {
+        "word": "Applaudir",
+        "definition": "To applaud / to clap"
+      },
+      {
+        "word": "Vinrent",
+        "definition": "Came (passé simple of venir)"
       }
     ],
     "quiz": [
