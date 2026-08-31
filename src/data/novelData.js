@@ -543,59 +543,54 @@ export const NOVEL_CHAPTERS = [
     ],
     "quiz": [
       {
-        "id": 1,
-        "question": "Quelle odeur suspecte le trio sent-il en approchant du domaine dans les Laurentides ?",
+        "id": "q1",
+        "question": "Quelle odeur désagréable les trois amis sentent-ils en approchant du laboratoire ?",
         "options": [
           "Une odeur de pins et de fleurs sauvages",
-          "Une odeur âcre de terre brûlée et de carburant lourd",
+          "Une odeur de terre brûlée et de carburant",
           "Une odeur de café chaud et de pain"
         ],
-        "correctIdx": 1,
-        "explanation": "L'odeur de terre brûlée et de carburant témoigne de l'activité industrielle destructrice à proximité."
+        "correct": 1
       },
       {
-        "id": 2,
-        "question": "Qu'est-ce que le dossier trouvé dans le laboratoire révèle à Julien, Samira et Marc ?",
+        "id": "q2",
+        "question": "Qu'est-ce que le document trouvé dans le laboratoire révèle ?",
         "options": [
-          "Le grand-père d'Amadou a vendu le domaine",
-          "Une multinationale veut exploiter une mine de lithium à ciel ouvert",
+          "Le grand-père a vendu le terrain",
+          "Une entreprise veut construire une grande mine de lithium",
           "La police a déjà fouillé le laboratoire"
         ],
-        "correctIdx": 1,
-        "explanation": "Le dossier montre qu'une multinationale prévoit d'exploiter une mine de lithium, menaçant la forêt protégée."
+        "correct": 1
       },
       {
-        "id": 3,
-        "question": "Quelle conséquence écologique Samira redoute-t-elle si le projet industriel se réalise ?",
+        "id": "q3",
+        "question": "Quelle conséquence écologique Samira redoute-t-elle le plus ?",
         "options": [
           "Une baisse des températures dans la région",
-          "Une déforestation massive de 300 hectares et une hausse des émissions de carbone",
+          "Une déforestation de plus de 300 hectares et une hausse des émissions de carbone",
           "Une augmentation de la biodiversité"
         ],
-        "correctIdx": 1,
-        "explanation": "Samira calcule que le projet détruira 300 hectares de forêt et augmentera fortement les émissions de carbone."
+        "correct": 1
       },
       {
-        "id": 4,
-        "question": "Quel message le grand-père de Julien a-t-il laissé dans son testament numérique ?",
+        "id": "q4",
+        "question": "Quel message le grand-père a-t-il laissé dans sa vidéo ?",
         "options": [
           "Il demande à Julien de vendre le terrain pour devenir riche",
-          "Il incite à se battre avec la vérité, la science et la conscience citoyenne pour protéger la terre",
+          "Il demande d'utiliser la science et la vérité pour défendre la forêt",
           "Il explique comment réparer l'horloge"
         ],
-        "correctIdx": 1,
-        "explanation": "Amadou exhorte les jeunes à utiliser la vérité, la science et leur conscience pour défendre ce sanctuaire naturel."
+        "correct": 1
       },
       {
-        "id": 5,
-        "question": "Quel plan d'action Samira propose-t-elle pour lutter contre ce désastre ?",
+        "id": "q5",
+        "question": "Quel plan d'action Samira propose-t-elle pour sauver la forêt ?",
         "options": [
           "Fuir au Sénégal avec les données",
-          "Compiler les données scientifiques, rédiger un texte clair et lancer une campagne sur les réseaux sociaux",
-          "Bloquer physiquement les pelleteuses"
+          "Rassembler les données scientifiques et lancer une campagne sur les réseaux sociaux",
+          "Bloquer immédiatement les pelleteuses"
         ],
-        "correctIdx": 1,
-        "explanation": "Samira suggère de sensibiliser le public et les élus en s'appuyant sur des faits scientifiques partagés sur les réseaux sociaux."
+        "correct": 1
       }
     ]
   },
