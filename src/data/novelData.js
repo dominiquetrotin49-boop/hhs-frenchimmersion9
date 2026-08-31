@@ -285,59 +285,54 @@ export const NOVEL_CHAPTERS = [
     ],
     "quiz": [
       {
-        "id": 1,
+        "id": "q1",
         "question": "Pourquoi Julien est-il paniqué au début du Chapitre 2 ?",
         "options": [
           "Parce qu'il a perdu l'Horloge Boréale",
-          "Parce que son visage a été découvert un court instant et que la police le recherche",
+          "Parce que son masque est tombé et que la police le recherche",
           "Parce qu'il a été blessé par la poutre du musée"
         ],
-        "correctIdx": 1,
-        "explanation": "Julien craint d'être retrouvé par la police car son visage a été découvert pendant une fraction de seconde au musée."
+        "correct": 1
       },
       {
-        "id": 2,
+        "id": "q2",
         "question": "Qui accueille Julien et l'aide à se calmer ?",
         "options": [
           "Marc, son ami médecin",
           "Samira, une étudiante en psychologie",
           "Son grand-père Amadou"
         ],
-        "correctIdx": 1,
-        "explanation": "Samira accueille Julien dans son duplex de Saint-Henri et utilise des techniques de respiration pour calmer sa panique."
+        "correct": 1
       },
       {
-        "id": 3,
+        "id": "q3",
         "question": "Quelle infusion Samira prépare-t-elle pour Julien ?",
         "options": [
           "Une tisane à la camomille",
           "Un thé vert de Chine",
           "Une boisson énergisante"
         ],
-        "correctIdx": 0,
-        "explanation": "Samira prépare une infusion à la camomille pour apaiser l'angoisse de Julien."
+        "correct": 0
       },
       {
-        "id": 4,
-        "question": "Qui est Marc, le troisième personnage introduit dans ce chapitre ?",
+        "id": "q4",
+        "question": "Qui est Marc dans ce chapitre ?",
         "options": [
           "Un policier travaillant avec Vaneau",
           "Un ami et bénévole dans un centre de santé communautaire",
           "Le gardien du musée"
         ],
-        "correctIdx": 1,
-        "explanation": "Marc est un ami proche, bénévole dans un centre de santé, venu apporter du soutien médical et logistique."
+        "correct": 1
       },
       {
-        "id": 5,
-        "question": "Quelle stratégie d'adaptation saine Marc et Samira conseillent-ils à Julien ?",
+        "id": "q5",
+        "question": "Quels bons conseils Marc et Samira donnent-ils à Julien pour gérer son stress ?",
         "options": [
-          "Refouler ses émotions et continuer à fuir",
-          "Manger léger, se laver, dormir 7 à 8 heures et éviter les nouvelles sur son téléphone",
+          "Ignorer ses émotions et continuer à fuir",
+          "Manger léger, se doucher, bien dormir et éteindre son téléphone",
           "Ouvrir immédiatement l'Horloge Boréale"
         ],
-        "correctIdx": 1,
-        "explanation": "Marc et Samira conseillent à Julien de se reposer, de bien s'alimenter, de dormir et d'éviter les sources d'angoisse comme son téléphone."
+        "correct": 1
       }
     ]
   },
