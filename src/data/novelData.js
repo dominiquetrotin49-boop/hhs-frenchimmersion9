@@ -507,44 +507,48 @@ export const NOVEL_CHAPTERS = [
     ],
     "vocabList": [
       {
-        "word": "Une cause",
-        "definition": "La raison d'être ou l'origine d'un fait ou d'un phénomène."
+        "word": "Arrivèrent",
+        "definition": "Arrived"
       },
       {
-        "word": "Une conséquence",
-        "definition": "Le résultat logique ou l'effet découlant d'une action."
+        "word": "Pelleteuses (f. pl.)",
+        "definition": "Excavators / diggers"
       },
       {
-        "word": "Émission de carbone",
-        "definition": "Le rejet de gaz à effet de serre dans l'atmosphère terrestre."
+        "word": "Compagnie minière",
+        "definition": "Mining company"
       },
       {
-        "word": "Déforestation",
-        "definition": "La destruction ou réduction massive des surfaces forestières."
+        "word": "Une entreprise",
+        "definition": "A company / business"
       },
       {
-        "word": "Gaz à effet de serre",
-        "definition": "Gaz retenant la chaleur solaire et causant le réchauffement global."
+        "word": "Trois cents hectares",
+        "definition": "Three hundred hectares (~740 acres)"
       },
       {
-        "word": "Perte de biodiversité",
-        "definition": "La disparition irrémédiable d'espèces animales ou végétales."
+        "word": "Sans rien dire",
+        "definition": "Without saying anything / silently"
       },
       {
-        "word": "Empreinte écologique",
-        "definition": "La mesure de l'impact des activités humaines sur les écosystèmes."
+        "word": "Dérèglements (m. pl.)",
+        "definition": "Disruptions / disorders (e.g., climate disruptions)"
       },
       {
-        "word": "La fonte des glaces",
-        "definition": "Le retrait des glaciers et de la calotte polaire dû au climat."
+        "word": "Brancha",
+        "definition": "Plugged in / connected"
       },
       {
-        "word": "L'économie circulaire",
-        "definition": "Un modèle de production basé sur le recyclage et la réduction des déchets."
+        "word": "Ces faits réels",
+        "definition": "These real facts / factual evidence"
       },
       {
-        "word": "Durabilité",
-        "definition": "La capacité à maintenir un équilibre écologique à long terme."
+        "word": "L'empreinte écologique",
+        "definition": "The ecological footprint"
+      },
+      {
+        "word": "En s'engageant",
+        "definition": "By getting involved / by committing"
       }
     ],
     "quiz": [
