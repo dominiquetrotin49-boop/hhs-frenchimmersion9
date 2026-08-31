@@ -680,59 +680,54 @@ export const NOVEL_CHAPTERS = [
     ],
     "quiz": [
       {
-        "id": 1,
+        "id": "q1",
         "question": "Où se déroule la présentation de Julien, Samira et Marc trois semaines plus tard ?",
         "options": [
           "Au Palais des Congrès de Montréal",
           "À l'école secondaire de Harwood",
           "Dans les Laurentides"
         ],
-        "correctIdx": 0,
-        "explanation": "La présentation a lieu lors de l'ouverture officielle du Forum International au Palais des Congrès de Montréal."
+        "correct": 0
       },
       {
-        "id": 2,
+        "id": "q2",
         "question": "Pourquoi Julien n'est-il plus recherché par la police ?",
         "options": [
           "Parce qu'il s'est enfui à l'étranger",
-          "Parce que l'enquête officielle a prouvé la légitimité de l'horloge et la corruption des propriétaires de la mine",
+          "Parce que l'enquête a prouvé son innocence et la corruption de la compagnie minière",
           "Parce que le capitaine Vaneau a démissionné"
         ],
-        "correctIdx": 1,
-        "explanation": "L'enquête policière a innocenté Julien grâce aux données prouvant la corruption minière."
+        "correct": 1
       },
       {
-        "id": 3,
-        "question": "Quel est le nom du projet pilote dévoilé par Julien ?",
+        "id": "q3",
+        "question": "Quel est le nom du projet présenté par Julien ?",
         "options": [
           "L'Horloge du Futur",
           "Sentinelle Boréale",
           "L'Éco-Dôme de Montréal"
         ],
-        "correctIdx": 1,
-        "explanation": "Julien présente le projet 'Sentinelle Boréale' combinant capteurs d'IA et biomimétisme."
+        "correct": 1
       },
       {
-        "id": 4,
+        "id": "q4",
         "question": "Quelle proposition de stage la directrice de l'incubateur fait-elle à Julien ?",
         "options": [
           "Un stage en informatique pure à Paris",
-          "Un stage en gestion de projets éco-numériques rémunéré et en télétravail",
+          "Un stage rémunéré en gestion de projets éco-numériques avec du télétravail",
           "Un poste d'agent de sécurité au musée"
         ],
-        "correctIdx": 1,
-        "explanation": "La directrice propose un stage spécialisé éco-numérique avec option complète de télétravail."
+        "correct": 1
       },
       {
-        "id": 5,
-        "question": "Où le trio se retrouve-t-il à la fin de la journée pour contempler le coucher de soleil ?",
+        "id": "q5",
+        "question": "Où le trio se retrouve-t-il à la fin de la journée pour regarder le coucher de soleil ?",
         "options": [
           "Sur le toit du Musée des Beaux-Arts",
           "Sur le belvédère du mont Royal",
           "Au port de Montréal"
         ],
-        "correctIdx": 1,
-        "explanation": "En fin de journée, Julien, Samira et Marc célèbrent leur réussite sur le belvédère du mont Royal."
+        "correct": 1
       }
     ]
   }
