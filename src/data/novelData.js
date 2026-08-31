@@ -420,59 +420,54 @@ export const NOVEL_CHAPTERS = [
     ],
     "quiz": [
       {
-        "id": 1,
+        "id": "q1",
         "question": "D'où le grand-père de Julien, Amadou, était-il originaire ?",
         "options": [
           "De Montréal, Canada",
           "De Saint-Louis, au Sénégal",
           "De Paris, en France"
         ],
-        "correctIdx": 1,
-        "explanation": "Amadou était un maître artisan horloger originaire de Saint-Louis, au Sénégal."
+        "correct": 1
       },
       {
-        "id": 2,
+        "id": "q2",
         "question": "De quoi Julien a-t-il souffert lors de son déménagement à Montréal ?",
         "options": [
           "De problèmes de santé physique",
-          "De stéréotypes réducteurs et de préjugés sur ses origines",
+          "De préjugés et de stéréotypes sur ses origines",
           "D'une perte de mémoire"
         ],
-        "correctIdx": 1,
-        "explanation": "Julien a souffert de préjugés et d'étiquettes injustes imposées par les autres élèves à son arrivée à Montréal."
+        "correct": 1
       },
       {
-        "id": 3,
-        "question": "Qu'est-ce que Julien découvre en démontant la plaque arrière de l'Horloge Boréale ?",
+        "id": "q3",
+        "question": "Qu'est-ce que Julien découvre en démontant l'Horloge Boréale ?",
         "options": [
           "Un diamant bleu caché",
-          "Un médaillon central amovible en argent",
+          "Un médaillon en argent",
           "Un vieux rouleau de parchemin"
         ],
-        "correctIdx": 1,
-        "explanation": "Julien découvre un médaillon en argent au cœur du mécanisme de l'horloge."
+        "correct": 1
       },
       {
-        "id": 4,
-        "question": "Qu'est-ce qui est gravé au revers du médaillon d'argent ?",
+        "id": "q4",
+        "question": "Qu'est-ce qui est gravé derrière le médaillon d'argent ?",
         "options": [
           "Un poème d'amour",
-          "Un alphabet codé mêlant des symboles traditionnels et des coordonnées géographiques",
+          "Des symboles traditionnels et des coordonnées géographiques",
           "Une signature du capitaine Vaneau"
         ],
-        "correctIdx": 1,
-        "explanation": "Le revers du médaillon contient un alphabet codé sénégalais et des coordonnées géographiques précises."
+        "correct": 1
       },
       {
-        "id": 5,
+        "id": "q5",
         "question": "Où mènent les coordonnées géographiques indiquées par le médaillon ?",
         "options": [
           "Au Musée des Beaux-Arts",
-          "À un ancien domaine forestier privé dans les Laurentides",
+          "À un grand terrain forestier dans les Laurentides",
           "À Saint-Louis au Sénégal"
         ],
-        "correctIdx": 1,
-        "explanation": "Les coordonnées indiquent l'emplacement d'un laboratoire secret d'Amadou dans la région des Laurentides."
+        "correct": 1
       }
     ]
   },
