@@ -253,7 +253,7 @@ function ChapterView() {
             <div className="tab-icon-badge vocab-badge">
               <span className="font-black text-2xl">P</span>
             </div>
-            <h3>Practice</h3>
+            <h3>Pratique</h3>
           </NavLink>
 
           <NavLink 

@@ -184,10 +184,10 @@ export default function TowerDefenseVocab() {
       newMonsters.push({
         id: i + 1,
         name: "Oubli d'Été #" + (i + 1),
-        progress: -i * 24, // staggered start positions
+        progress: -i * 35, // staggered start positions
         hp: 60 + waveNum * 25,
         maxHp: 60 + waveNum * 25,
-        speed: 0.65 + waveNum * 0.08,
+        speed: 0.35 + waveNum * 0.05,
         isFrozen: false
       });
     }
@@ -254,7 +254,7 @@ export default function TowerDefenseVocab() {
 
         return updated;
       });
-    }, 150);
+    }, 180);
 
     return () => clearInterval(gameInterval);
   }, [gameState, builtTowers, currentWave]);
