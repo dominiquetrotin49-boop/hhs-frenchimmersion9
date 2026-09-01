@@ -1,406 +1,497 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, CheckCircle, RotateCcw } from 'lucide-react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { CheckCircle2, RefreshCw, ArrowLeft } from 'lucide-react';
+
+const ACCENTS = ['É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ù', 'Û', 'Ç', 'Ô', 'Î', 'Ï', 'Œ'];
 
 export default function Crossword({ title, description, numRows, numCols, puzzleData, onBack }) {
-  const [grid, setGrid] = useState([]);
-  const [userInputs, setUserInputs] = useState({});
-  const [activeWordId, setActiveWordId] = useState(puzzleData[0]?.id || 1);
-  const [activeDirection, setActiveDirection] = useState(puzzleData[0]?.dir || 'across');
-  const [focusedCell, setFocusedCell] = useState(null);
-  const [isCompleted, setIsCompleted] = useState(false);
+  const NUM_ROWS = numRows;
+  const NUM_COLS = numCols;
+  // Calculate zoom scale specifically for large grids (like IR: 17 cols x 16 rows)
+  const gridScale = (numCols >= 16 || numRows >= 15) ? 0.78 : 1;
 
-  const inputRefs = useRef({});
+  const gridMeta = useMemo(() => {
+    const meta = Array.from({ length: numRows }, () => 
+      Array.from({ length: numCols }, () => ({
+        isActive: false,
+        answer: '',
+        words: [],
+        startNum: null
+      }))
+    );
 
-  // Compact scaling so full grids fit without vertical page scroll
-  const maxDim = Math.max(numRows, numCols);
-  const cellSize = maxDim > 18 ? 20 : maxDim > 14 ? 23 : 26;
-  const fontSize = maxDim > 18 ? 10 : maxDim > 14 ? 11 : 12;
-  const numFontSize = maxDim > 18 ? 6 : 7;
-
-  useEffect(() => {
-    const newGrid = Array(numRows).fill(null).map(() => Array(numCols).fill(null));
-
-    puzzleData.forEach((item) => {
-      const word = item.word.toUpperCase();
-      for (let i = 0; i < word.length; i++) {
-        const r = item.dir === 'down' ? item.r + i : item.r;
-        const c = item.dir === 'across' ? item.c + i : item.c;
+    puzzleData.forEach((w) => {
+      meta[w.r][w.c].startNum = w.id;
+      
+      for (let i = 0; i < w.word.length; i++) {
+        const r = w.r + (w.dir === 'down' ? i : 0);
+        const c = w.c + (w.dir === 'across' ? i : 0);
         if (r < numRows && c < numCols) {
-          if (!newGrid[r][c]) {
-            newGrid[r][c] = {
-              letter: word[i],
-              number: i === 0 ? item.id : null,
-              words: [{ id: item.id, dir: item.dir, index: i }]
-            };
-          } else {
-            if (i === 0) newGrid[r][c].number = item.id;
-            newGrid[r][c].words.push({ id: item.id, dir: item.dir, index: i });
-          }
+          meta[r][c].isActive = true;
+          meta[r][c].answer = w.word[i];
+          meta[r][c].words.push(w);
         }
       }
     });
+    return meta;
+  }, [puzzleData, numRows, numCols]);
 
-    setGrid(newGrid);
-    setUserInputs({});
-    setIsCompleted(false);
-
-    if (puzzleData.length > 0) {
-      setActiveWordId(puzzleData[0].id);
-      setActiveDirection(puzzleData[0].dir);
-      setFocusedCell({ r: puzzleData[0].r, c: puzzleData[0].c });
-    }
-  }, [numRows, numCols, puzzleData]);
+  const [inputs, setInputs] = useState({});
+  const [activeWord, setActiveWord] = useState(null);
+  const [activeCell, setActiveCell] = useState(null);
+  const [showErrors, setShowErrors] = useState(false);
+  const [isWon, setIsWon] = useState(false);
+  
+  const inputRefs = useRef({});
 
   useEffect(() => {
-    if (focusedCell) {
-      const key = `${focusedCell.r}-${focusedCell.c}`;
-      if (inputRefs.current[key]) {
-        inputRefs.current[key].focus();
-        inputRefs.current[key].select();
-      }
+    if (puzzleData && puzzleData.length > 0) {
+      setActiveWord(puzzleData[0]);
+      setActiveCell({ r: puzzleData[0].r, c: puzzleData[0].c });
     }
-  }, [focusedCell]);
-
-  const getActiveWord = () => puzzleData.find(p => p.id === activeWordId);
-
-  const isCellInActiveWord = (r, c) => {
-    const cell = grid[r]?.[c];
-    if (!cell) return false;
-    return cell.words.some(w => w.id === activeWordId);
-  };
+  }, [puzzleData]);
 
   const handleCellClick = (r, c) => {
-    const cell = grid[r]?.[c];
-    if (!cell) return;
+    const cellMeta = gridMeta[r][c];
+    if (!cellMeta.isActive) return;
 
-    setFocusedCell({ r, c });
-
-    const matchingWord = cell.words.find(w => w.id === activeWordId);
-    if (matchingWord) {
-      if (cell.words.length > 1) {
-        const otherWord = cell.words.find(w => w.id !== activeWordId);
-        if (otherWord) {
-          setActiveWordId(otherWord.id);
-          setActiveDirection(otherWord.dir);
-        }
+    setShowErrors(false);
+    
+    if (activeCell?.r === r && activeCell?.c === c && cellMeta.words.length > 1) {
+      const currentWordIndex = cellMeta.words.findIndex(w => w.id === activeWord?.id);
+      const nextWord = cellMeta.words[(currentWordIndex + 1) % cellMeta.words.length];
+      setActiveWord(nextWord);
+    } else {
+      setActiveCell({ r, c });
+      if (!cellMeta.words.find(w => w.id === activeWord?.id)) {
+        setActiveWord(cellMeta.words[0]);
       }
-    } else {
-      setActiveWordId(cell.words[0].id);
-      setActiveDirection(cell.words[0].dir);
+    }
+    
+    inputRefs.current[`${r}-${c}`]?.focus();
+  };
+
+  const moveCursor = (r, c, step) => {
+    if (!activeWord) return;
+    const isAcross = activeWord.dir === 'across';
+    const nextR = r + (isAcross ? 0 : step);
+    const nextC = c + (isAcross ? step : 0);
+    
+    if (nextR >= 0 && nextR < NUM_ROWS && nextC >= 0 && nextC < NUM_COLS && gridMeta[nextR][nextC].isActive) {
+      setActiveCell({ r: nextR, c: nextC });
+      const nextInput = inputRefs.current[`${nextR}-${nextC}`];
+      if (nextInput) {
+        nextInput.focus();
+        nextInput.select();
+      }
     }
   };
 
-  const handleClueClick = (item) => {
-    setActiveWordId(item.id);
-    setActiveDirection(item.dir);
-    setFocusedCell({ r: item.r, c: item.c });
-  };
-
-  const moveToNextCell = (r, c) => {
-    const active = getActiveWord();
-    if (!active) return;
-
-    let nextR = r;
-    let nextC = c;
-
-    if (active.dir === 'across') {
-      nextC += 1;
-    } else {
-      nextR += 1;
-    }
-
-    if (nextR < numRows && nextC < numCols && grid[nextR]?.[nextC] && isCellInActiveWord(nextR, nextC)) {
-      setFocusedCell({ r: nextR, c: nextC });
+  const moveInGrid = (r, c, dr, dc) => {
+    const nextR = r + dr;
+    const nextC = c + dc;
+    if (nextR >= 0 && nextR < NUM_ROWS && nextC >= 0 && nextC < NUM_COLS && gridMeta[nextR][nextC].isActive) {
+      handleCellClick(nextR, nextC);
     }
   };
 
-  const moveToPrevCell = (r, c) => {
-    const active = getActiveWord();
-    if (!active) return;
+  const handleInputChange = (e, r, c) => {
+    const val = e.target.value.slice(-1).toUpperCase();
+    setShowErrors(false);
+    
+    setInputs(prev => ({
+      ...prev,
+      [`${r}-${c}`]: val
+    }));
 
-    let prevR = r;
-    let prevC = c;
-
-    if (active.dir === 'across') {
-      prevC -= 1;
-    } else {
-      prevR -= 1;
-    }
-
-    if (prevR >= 0 && prevC >= 0 && grid[prevR]?.[prevC] && isCellInActiveWord(prevR, prevC)) {
-      setFocusedCell({ r: prevR, c: prevC });
+    if (val) {
+      moveCursor(r, c, 1);
     }
   };
 
   const handleKeyDown = (e, r, c) => {
+    setShowErrors(false);
+    
     if (e.key === 'Backspace') {
       e.preventDefault();
-      const key = `${r}-${c}`;
-      if (userInputs[key]) {
-        setUserInputs(prev => ({ ...prev, [key]: '' }));
+      if (inputs[`${r}-${c}`]) {
+        setInputs(prev => ({ ...prev, [`${r}-${c}`]: '' }));
       } else {
-        moveToPrevCell(r, c);
+        moveCursor(r, c, -1);
       }
-    } else if (e.key === 'ArrowRight') {
-      e.preventDefault();
-      if (c + 1 < numCols && grid[r]?.[c + 1]) setFocusedCell({ r, c: c + 1 });
-    } else if (e.key === 'ArrowLeft') {
-      e.preventDefault();
-      if (c - 1 >= 0 && grid[r]?.[c - 1]) setFocusedCell({ r, c: c - 1 });
-    } else if (e.key === 'ArrowDown') {
-      e.preventDefault();
-      if (r + 1 < numRows && grid[r + 1]?.[c]) setFocusedCell({ r: r + 1, c });
     } else if (e.key === 'ArrowUp') {
       e.preventDefault();
-      if (r - 1 >= 0 && grid[r - 1]?.[c]) setFocusedCell({ r: r - 1, c });
-    } else if (/^[a-zA-ZÀ-ÿ]$/.test(e.key)) {
+      moveInGrid(r, c, -1, 0);
+    } else if (e.key === 'ArrowDown') {
       e.preventDefault();
-      const letter = e.key.toUpperCase();
-      const key = `${r}-${c}`;
-      const newInputs = { ...userInputs, [key]: letter };
-      setUserInputs(newInputs);
+      moveInGrid(r, c, 1, 0);
+    } else if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      moveInGrid(r, c, 0, -1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      moveInGrid(r, c, 0, 1);
+    }
+  };
 
-      moveToNextCell(r, c);
+  const handleInsertAccent = (char) => {
+    if (!activeCell) return;
+    const { r, c } = activeCell;
+    setShowErrors(false);
+    setInputs(prev => ({ ...prev, [`${r}-${c}`]: char }));
+    moveCursor(r, c, 1);
+  };
 
-      let complete = true;
-      for (let row = 0; row < numRows; row++) {
-        for (let col = 0; col < numCols; col++) {
-          if (grid[row] && grid[row][col]) {
-            const expected = grid[row][col].letter;
-            if (newInputs[`${row}-${col}`] !== expected) {
-              complete = false;
-              break;
-            }
+  const checkAnswers = () => {
+    let correct = true;
+    for (let r = 0; r < numRows; r++) {
+      for (let c = 0; c < numCols; c++) {
+        if (gridMeta[r][c].isActive) {
+          const expected = gridMeta[r][c].answer.toUpperCase();
+          const actual = (inputs[`${r}-${c}`] || '').toUpperCase();
+          if (actual !== expected) {
+            correct = false;
           }
         }
       }
-      if (complete) setIsCompleted(true);
+    }
+    
+    setShowErrors(true);
+    if (correct) {
+      setIsWon(true);
     }
   };
 
-  const resetGame = () => {
-    setUserInputs({});
-    setIsCompleted(false);
-    if (puzzleData.length > 0) {
-      setActiveWordId(puzzleData[0].id);
-      setActiveDirection(puzzleData[0].dir);
-      setFocusedCell({ r: puzzleData[0].r, c: puzzleData[0].c });
-    }
+  const handleReset = () => {
+    setInputs({});
+    setShowErrors(false);
+    setIsWon(false);
   };
+
+  const cellSize = Math.max(18, Math.min(32, Math.floor(480 / Math.max(numCols, numRows * 0.85))));
+  const fontSize = Math.max(11, Math.floor(cellSize * 0.55));
+  const numFontSize = Math.max(7, Math.floor(cellSize * 0.32));
 
   return (
-    <div style={{
-      width: '100%',
-      maxWidth: '960px',
-      margin: '0 auto',
-      padding: '8px 12px',
-      boxSizing: 'border-box',
-      color: '#ffffff'
-    }}>
-      <div style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: '10px',
-        flexWrap: 'wrap',
-        gap: '8px'
-      }}>
+    <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <button
           onClick={onBack}
           style={{
-            display: 'flex',
+            display: 'inline-flex',
             alignItems: 'center',
-            gap: '6px',
-            background: 'rgba(255, 255, 255, 0.1)',
-            border: '1px solid rgba(255, 255, 255, 0.2)',
-            color: '#fff',
-            padding: '5px 12px',
-            borderRadius: '6px',
+            gap: '0.5rem',
+            background: 'rgba(255, 255, 255, 0.15)',
+            color: '#ffffff',
+            border: '1px solid rgba(255, 255, 255, 0.25)',
+            borderRadius: '0.5rem',
+            padding: '0.5rem 1rem',
             cursor: 'pointer',
-            fontSize: '0.8rem',
             fontWeight: 600
           }}
         >
-          <ArrowLeft size={14} />
-          Retour aux grilles
+          <ArrowLeft size={16} /> Retour au menu
         </button>
 
-        <button
-          onClick={resetGame}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '6px',
-            background: 'rgba(255, 255, 255, 0.08)',
-            border: '1px solid rgba(255, 255, 255, 0.15)',
-            color: '#fff',
-            padding: '5px 10px',
-            borderRadius: '6px',
-            cursor: 'pointer',
-            fontSize: '0.75rem'
-          }}
-        >
-          <RotateCcw size={13} />
-          Réinitialiser
-        </button>
+        {isWon && (
+          <div style={{ background: '#22c55e', color: '#ffffff', padding: '0.4rem 1rem', borderRadius: '0.5rem', fontWeight: 700, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <CheckCircle2 size={18} /> Félicitations ! Grille complétée !
+          </div>
+        )}
       </div>
 
-      <div style={{ marginBottom: '10px' }}>
-        <h2 style={{ fontSize: '1.2rem', fontWeight: 800, margin: '0 0 2px 0' }}>{title}</h2>
-        <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.7)', fontSize: '0.8rem' }}>{description}</p>
+      <div style={{ background: 'rgba(255, 255, 255, 0.08)', borderRadius: '1rem', padding: '1rem 1.5rem', border: '1px solid rgba(255, 255, 255, 0.15)' }}>
+        <h2 style={{ color: '#ffffff', margin: 0, fontSize: '1.5rem', fontWeight: 700 }}>{title}</h2>
+        <p style={{ color: '#cbd5e1', margin: '0.35rem 0 0 0', fontSize: '0.95rem' }}>{description}</p>
+      </div>
+
+      {/* Floating Accent Toolbar Bar */}
+      <div style={{
+        background: 'rgba(15, 23, 42, 0.85)',
+        backdropFilter: 'blur(12px)',
+        border: '1px solid rgba(255, 255, 255, 0.15)',
+        borderRadius: '0.75rem',
+        padding: '0.65rem 1rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '0.5rem',
+        flexWrap: 'wrap'
+      }}>
+        <span style={{ color: '#94a3b8', fontSize: '0.85rem', fontWeight: 700, textTransform: 'uppercase', marginRight: '0.25rem' }}>
+          Accents :
+        </span>
+        {ACCENTS.map((char) => (
+          <button
+            key={char}
+            type="button"
+            onMouseDown={(e) => e.preventDefault()}
+            onClick={() => handleInsertAccent(char)}
+            style={{
+              background: 'rgba(255, 255, 255, 0.12)',
+              color: '#ffffff',
+              border: '1px solid rgba(255, 255, 255, 0.2)',
+              borderRadius: '0.4rem',
+              width: '32px',
+              height: '32px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 700,
+              fontSize: '0.95rem',
+              cursor: 'pointer',
+              transition: 'background 0.15s ease, transform 0.1s ease'
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.25)';
+              e.currentTarget.style.transform = 'scale(1.08)';
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)';
+              e.currentTarget.style.transform = 'scale(1)';
+            }}
+          >
+            {char}
+          </button>
+        ))}
       </div>
 
       <div style={{
         display: 'grid',
-        gridTemplateColumns: 'minmax(280px, 1fr) minmax(240px, 320px)',
-        gap: '12px',
+        gridTemplateColumns: 'minmax(0, 1.4fr) minmax(280px, 1fr)',
+        gap: '1.25rem',
         alignItems: 'start'
       }}>
+        {/* Crossword Board */}
         <div style={{
-          background: 'rgba(15, 23, 42, 0.75)',
-          borderRadius: '10px',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          padding: '12px',
+          background: '#ffffff',
+          borderRadius: '1rem',
+          padding: '1.25rem',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
           overflowX: 'auto'
         }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateRows: `repeat(${numRows}, ${cellSize}px)`,
-            gridTemplateColumns: `repeat(${numCols}, ${cellSize}px)`,
-            gap: '1.5px',
-            background: 'rgba(0, 0, 0, 0.5)',
-            padding: '3px',
-            borderRadius: '4px',
-            border: '1px solid rgba(255, 255, 255, 0.08)'
-          }}>
-            {grid.map((row, rIdx) =>
-              row.map((cell, cIdx) => {
-                const cellKey = `${rIdx}-${cIdx}`;
-                const val = userInputs[cellKey] || '';
-                const isCell = cell !== null;
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            {gridMeta.map((row, r) => (
+              <div key={r} style={{ display: 'flex' }}>
+                {row.map((cell, c) => {
+                  if (!cell.isActive) {
+                    return (
+                      <div
+                        key={`${r}-${c}`}
+                        style={{
+                          width: `${cellSize}px`,
+                          height: `${cellSize}px`,
+                          background: 'transparent'
+                        }}
+                      />
+                    );
+                  }
 
-                if (!isCell) {
-                  return <div key={cellKey} style={{ width: `${cellSize}px`, height: `${cellSize}px` }} />;
-                }
+                  const isActiveCell = activeCell?.r === r && activeCell?.c === c;
+                  const isWordCell = activeWord && cell.words.some(w => w.id === activeWord.id);
+                  const isChecked = showErrors && inputs[`${r}-${c}`];
+                  const isCorrect = isChecked && inputs[`${r}-${c}`].toUpperCase() === cell.answer.toUpperCase();
+                  const isWrong = isChecked && !isCorrect;
 
-                const inActiveWord = isCellInActiveWord(rIdx, cIdx);
-                const isFocused = focusedCell?.r === rIdx && focusedCell?.c === cIdx;
+                  let cellBg = '#ffffff';
+                  let borderColor = '#94a3b8';
 
-                return (
-                  <div
-                    key={cellKey}
-                    onClick={() => handleCellClick(rIdx, cIdx)}
-                    style={{
-                      width: `${cellSize}px`,
-                      height: `${cellSize}px`,
-                      position: 'relative',
-                      background: isFocused ? '#38bdf8' : inActiveWord ? '#bae6fd' : '#ffffff',
-                      borderRadius: '2px',
-                      cursor: 'pointer',
-                      transition: 'background 0.15s ease'
-                    }}
-                  >
-                    {cell.number && (
-                      <span style={{
-                        position: 'absolute',
-                        top: '1px',
-                        left: '1.5px',
-                        fontSize: `${numFontSize}px`,
-                        fontWeight: 800,
-                        color: isFocused ? '#0369a1' : '#0f172a',
-                        lineHeight: 1,
-                        pointerEvents: 'none'
-                      }}>
-                        {cell.number}
-                      </span>
-                    )}
-                    <input
-                      ref={el => inputRefs.current[cellKey] = el}
-                      type="text"
-                      maxLength={1}
-                      value={val}
-                      onKeyDown={(e) => handleKeyDown(e, rIdx, cIdx)}
-                      onChange={() => {}}
+                  if (isCorrect) {
+                    cellBg = '#bbf7d0';
+                    borderColor = '#22c55e';
+                  } else if (isWrong) {
+                    cellBg = '#fecaca';
+                    borderColor = '#ef4444';
+                  } else if (isActiveCell) {
+                    cellBg = '#fed7aa';
+                    borderColor = '#ea580c';
+                  } else if (isWordCell) {
+                    cellBg = '#ffedd5';
+                    borderColor = '#fb923c';
+                  }
+
+                  return (
+                    <div
+                      key={`${r}-${c}`}
+                      onClick={() => handleCellClick(r, c)}
                       style={{
-                        width: '100%',
-                        height: '100%',
-                        border: 'none',
-                        outline: 'none',
-                        background: 'transparent',
-                        textAlign: 'center',
-                        fontSize: `${fontSize}px`,
-                        fontWeight: 700,
-                        color: isFocused ? '#082f49' : '#0f172a',
-                        textTransform: 'uppercase',
-                        padding: 0,
-                        cursor: 'pointer'
+                        width: `${cellSize}px`,
+                        height: `${cellSize}px`,
+                        position: 'relative',
+                        border: `1px solid ${borderColor}`,
+                        background: cellBg,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        cursor: 'pointer',
+                        boxSizing: 'border-box'
                       }}
-                    />
-                  </div>
-                );
-              })
-            )}
+                    >
+                      {cell.startNum && (
+                        <span style={{
+                          position: 'absolute',
+                          top: '1px',
+                          left: '2px',
+                          fontSize: `${numFontSize}px`,
+                          fontWeight: 800,
+                          color: '#475569',
+                          lineHeight: 1,
+                          pointerEvents: 'none'
+                        }}>
+                          {cell.startNum}
+                        </span>
+                      )}
+                      <input
+                        ref={el => (inputRefs.current[`${r}-${c}`] = el)}
+                        type="text"
+                        maxLength={2}
+                        value={inputs[`${r}-${c}`] || ''}
+                        onChange={e => handleInputChange(e, r, c)}
+                        onKeyDown={e => handleKeyDown(e, r, c)}
+                        onFocus={() => handleCellClick(r, c)}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          border: 'none',
+                          background: 'transparent',
+                          textAlign: 'center',
+                          fontSize: `${fontSize}px`,
+                          fontWeight: 800,
+                          color: '#0f172a',
+                          textTransform: 'uppercase',
+                          outline: 'none',
+                          padding: 0
+                        }}
+                      />
+                    </div>
+                  );
+                })}
+              </div>
+            ))}
           </div>
         </div>
 
+        {/* Clues Panel */}
         <div style={{
-          background: 'rgba(15, 23, 42, 0.75)',
-          borderRadius: '10px',
-          border: '1px solid rgba(255, 255, 255, 0.12)',
-          padding: '12px',
-          boxSizing: 'border-box'
+          background: '#ffffff',
+          borderRadius: '1rem',
+          padding: '1.25rem',
+          boxShadow: '0 8px 30px rgba(0,0,0,0.25)',
+          maxHeight: '520px',
+          overflowY: 'auto',
+          color: '#1e293b'
         }}>
-          <h3 style={{ fontSize: '0.9rem', fontWeight: 700, marginTop: 0, marginBottom: '8px', color: '#38bdf8' }}>
-            Indices
+          <h3 style={{ margin: '0 0 1rem 0', color: '#0f172a', fontSize: '1.15rem', fontWeight: 700 }}>
+            Indices (Clues)
           </h3>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px', maxHeight: '380px', overflowY: 'auto', paddingRight: '4px' }}>
-            {puzzleData.map((item) => {
-              const isSelected = item.id === activeWordId;
-              return (
-                <div
-                  key={item.id}
-                  onClick={() => handleClueClick(item)}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    gap: '6px',
-                    fontSize: '0.78rem',
-                    color: isSelected ? '#ffffff' : 'rgba(255, 255, 255, 0.75)',
-                    background: isSelected ? 'rgba(56, 189, 248, 0.2)' : 'transparent',
-                    border: isSelected ? '1px solid rgba(56, 189, 248, 0.4)' : '1px solid transparent',
-                    borderRadius: '4px',
-                    padding: '4px 6px',
-                    cursor: 'pointer',
-                    transition: 'all 0.15s ease'
-                  }}
-                >
-                  <strong style={{ color: isSelected ? '#38bdf8' : '#94a3b8', minWidth: '18px' }}>{item.id}.</strong>
-                  <span style={{ flex: 1 }}>{item.clue} <span style={{ fontSize: '0.68rem', opacity: 0.6 }}>({item.dir === 'across' ? 'Horiz.' : 'Vert.'})</span></span>
-                </div>
-              );
-            })}
+
+          <div style={{ marginBottom: '1.25rem' }}>
+            <h4 style={{ color: '#d97706', fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0' }}>
+              Horizontal (Across)
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              {puzzleData.filter(w => w.dir === 'across').map(w => {
+                const isSelected = activeWord?.id === w.id;
+                return (
+                  <div
+                    key={w.id}
+                    onClick={() => {
+                      setActiveWord(w);
+                      setActiveCell({ r: w.r, c: w.c });
+                      inputRefs.current[`${w.r}-${w.c}`]?.focus();
+                    }}
+                    style={{
+                      padding: '0.45rem 0.65rem',
+                      borderRadius: '0.5rem',
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      background: isSelected ? '#ffedd5' : 'transparent',
+                      color: isSelected ? '#c2410c' : '#334155',
+                      fontWeight: isSelected ? 700 : 500,
+                      borderLeft: isSelected ? '3px solid #ea580c' : '3px solid transparent'
+                    }}
+                  >
+                    <strong>{w.id}.</strong> {w.clue}
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          {isCompleted && (
-            <div style={{
-              marginTop: '10px',
-              padding: '8px',
-              borderRadius: '6px',
-              background: 'rgba(34, 197, 94, 0.2)',
-              border: '1px solid #22c55e',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: '#4ade80',
-              fontSize: '0.8rem'
-            }}>
-              <CheckCircle size={16} />
-              <span style={{ fontWeight: 700 }}>Félicitations ! Grille complétée.</span>
+          <div style={{ marginBottom: '1.25rem' }}>
+            <h4 style={{ color: '#d97706', fontSize: '0.95rem', fontWeight: 700, margin: '0 0 0.5rem 0' }}>
+              Vertical (Down)
+            </h4>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.35rem' }}>
+              {puzzleData.filter(w => w.dir === 'down').map(w => {
+                const isSelected = activeWord?.id === w.id;
+                return (
+                  <div
+                    key={w.id}
+                    onClick={() => {
+                      setActiveWord(w);
+                      setActiveCell({ r: w.r, c: w.c });
+                      inputRefs.current[`${w.r}-${w.c}`]?.focus();
+                    }}
+                    style={{
+                      padding: '0.45rem 0.65rem',
+                      borderRadius: '0.5rem',
+                      fontSize: '0.85rem',
+                      cursor: 'pointer',
+                      background: isSelected ? '#ffedd5' : 'transparent',
+                      color: isSelected ? '#c2410c' : '#334155',
+                      fontWeight: isSelected ? 700 : 500,
+                      borderLeft: isSelected ? '3px solid #ea580c' : '3px solid transparent'
+                    }}
+                  >
+                    <strong>{w.id}.</strong> {w.clue}
+                  </div>
+                );
+              })}
             </div>
-          )}
+          </div>
+
+          <div style={{ display: 'flex', gap: '0.75rem', marginTop: '1rem', paddingTop: '1rem', borderTop: '1px solid #e2e8f0' }}>
+            <button
+              onClick={checkAnswers}
+              style={{
+                flex: 1,
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                background: '#2563eb',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '0.5rem',
+                padding: '0.65rem 1rem',
+                fontWeight: 700,
+                cursor: 'pointer'
+              }}
+            >
+              <CheckCircle2 size={16} /> Vérifier
+            </button>
+            <button
+              onClick={handleReset}
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '0.5rem',
+                background: '#f1f5f9',
+                color: '#475569',
+                border: '1px solid #cbd5e1',
+                borderRadius: '0.5rem',
+                padding: '0.65rem 1rem',
+                fontWeight: 600,
+                cursor: 'pointer'
+              }}
+            >
+              <RefreshCw size={16} /> Réinitialiser
+            </button>
+          </div>
         </div>
       </div>
     </div>

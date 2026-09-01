@@ -47,9 +47,9 @@ const RE_PUZZLE = {
   numCols: 11,
   puzzleData: [
     { id: 1, word: "CONFONDENT", r: 9, c: 1, dir: "across", clue: "Ils + Confondre" },
-    { id: 2, word: "REPONDENT", r: 6, c: 2, dir: "down", clue: "Ils + Répondre" },
+    { id: 2, word: "RÉPONDENT", r: 6, c: 2, dir: "down", clue: "Ils + Répondre" },
     { id: 3, word: "DESCENDEZ", r: 4, c: 6, dir: "down", clue: "Vous + Descendre" },
-    { id: 4, word: "DEFENDONS", r: 7, c: 4, dir: "down", clue: "Nous + Défendre" },
+    { id: 4, word: "DÉFENDONS", r: 7, c: 4, dir: "down", clue: "Nous + Défendre" },
     { id: 5, word: "VENDONS", r: 8, c: 8, dir: "down", clue: "Nous + Vendre" },
     { id: 6, word: "ATTENDS", r: 8, c: 10, dir: "down", clue: "Tu + Attendre" },
     { id: 7, word: "ENTENDS", r: 14, c: 0, dir: "across", clue: "Je + Entendre" },

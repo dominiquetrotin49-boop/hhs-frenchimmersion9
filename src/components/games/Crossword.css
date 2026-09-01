@@ -188,3 +188,5 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(231, 111, 81, 0.4);
 }
+
+.crossword-grid-wrapper, .crossword-board { overflow: auto; display: flex; justify-content: flex-start; }
