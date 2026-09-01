@@ -5,19 +5,19 @@ import Crossword from '../games/Crossword';
 const ER_PUZZLE = {
   title: "Mots Croisés: Verbes en -ER",
   description: "Remplissez la grille avec les conjugaisons correctes au présent.",
-  numRows: 16,
-  numCols: 16,
+  numRows: 21,
+  numCols: 12,
   puzzleData: [
-    { id: 1, word: "REGARDENT", r: 3, c: 7, dir: "across", clue: "Ils + Regarder" },
-    { id: 2, word: "ECOUTONS", r: 1, c: 8, dir: "down", clue: "Nous + Écouter" },
-    { id: 3, word: "TRAVAILLEZ", r: 3, c: 13, dir: "down", clue: "Vous + Travailler" },
-    { id: 4, word: "VOYAGEONS", r: 7, c: 4, dir: "across", clue: "Nous + Voyager" },
-    { id: 5, word: "HABITENT", r: 6, c: 11, dir: "down", clue: "Ils + Habiter" },
-    { id: 6, word: "AIMES", r: 0, c: 10, dir: "down", clue: "Tu + Aimer" },
-    { id: 7, word: "PARLE", r: 5, c: 1, dir: "across", clue: "Je + Parler" },
-    { id: 8, word: "JOUENT", r: 11, c: 3, dir: "across", clue: "Elles + Jouer" },
-    { id: 9, word: "MANGE", r: 11, c: 3, dir: "down", clue: "Il + Manger" },
-    { id: 10, word: "CHANTES", r: 13, c: 8, dir: "across", clue: "Tu + Chanter" }
+    { id: 1, word: "HABITEZ", r: 0, c: 9, dir: "down", clue: "Vous + Habiter" },
+    { id: 2, word: "TRAVAILLENT", r: 4, c: 3, dir: "down", clue: "Ils + Travailler" },
+    { id: 3, word: "REGARDE", r: 5, c: 3, dir: "across", clue: "Je + Regarder" },
+    { id: 4, word: "AIME", r: 3, c: 8, dir: "across", clue: "Elle + Aimer" },
+    { id: 5, word: "PARLONS", r: 8, c: 2, dir: "across", clue: "Nous + Parler" },
+    { id: 6, word: "JOUE", r: 12, c: 0, dir: "across", clue: "Je + Jouer" },
+    { id: 7, word: "ÉCOUTONS", r: 12, c: 5, dir: "down", clue: "Nous + Écouter" },
+    { id: 8, word: "MANGES", r: 12, c: 9, dir: "down", clue: "Tu + Manger" },
+    { id: 9, word: "TROUVENT", r: 14, c: 3, dir: "across", clue: "Ils + Trouver" },
+    { id: 10, word: "ÉTUDIES", r: 16, c: 4, dir: "across", clue: "Tu + Étudier" }
   ]
 };
 
