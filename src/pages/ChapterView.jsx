@@ -13,7 +13,7 @@ function ChapterView() {
   const navigate = useNavigate();
   const chapter = chapters.find(c => c.id === chapterId);
 
-  const activeSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : 'prononciation');
+  const activeSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : 'pratique');
   
   const [isStoryAudioPlaying, setIsStoryAudioPlaying] = useState(false);
   const storyAudioRef = useRef(null);
@@ -84,12 +84,11 @@ function ChapterView() {
     }
   };
 
-  // Unit Intro Tips from Jasmine & Kader (Using recorded teenager human voices)
   const avatarTips = {
     'unite-reprise': {
       avatar: 'jasmine',
       name: 'Jasmine',
-      text: 'Bienvenue dans l\'Unité Reprise de Rentrée ! Révise les prépositions et les verbes au présent en jouant au Speed-Runner des Prépositions Disney !'
+      text: 'Bienvenue dans l\'Unité Reprise de Rentrée ! Révise les prépositions et les verbes au présent avec les Mots Croisés !'
     },
     'unite-1': {
       avatar: 'jasmine',
@@ -188,15 +187,17 @@ function ChapterView() {
     switch(activeSection) {
       case 'grammaire':
         return <GrammarSection data={chapter.grammar} />;
+      case 'pratique':
       case 'prononciation':
       case 'vocabulaire':
         return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
       case 'jeux':
         return <GameSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
-      case 'pratique':
+      case 'exercices':
+      case 'exercices-pratiques':
         return <PracticeSection practiceData={chapter.practice} />;
       default:
-        return <VocabularySection data={chapter.vocabulary} />;
+        return <PracticeSection practiceData={chapter.practice} />;
     }
   };
 
@@ -207,7 +208,6 @@ function ChapterView() {
         <p>{chapter.description}</p>
       </div>
 
-      {/* Interactive Avatar Speaker Widget (Jasmine & Kader) */}
       <UnitAvatarSpeaker 
         avatar={currentTip.avatar}
         name={currentTip.name}
@@ -215,14 +215,13 @@ function ChapterView() {
         audioUrl={currentTip.audioUrl}
       />
 
-      {/* Section Navigation Tabs Matched to Overall Page Design */}
       {chapter.isStoryUnit ? (
         <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-8">
           {chapter.chapters.map((ch, idx) => {
             const isActive = activeSection === ch.id;
             return (
               <NavLink 
-                key={ch.id}
+                key={ch.id} 
                 to={`/chapter/${chapter.id}/${ch.id}`} 
                 className={`section-card ${isActive ? 'active' : ''}`}
               >
@@ -247,8 +246,8 @@ function ChapterView() {
           </NavLink>
 
           <NavLink 
-            to={`/chapter/${chapter.id}/prononciation`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'prononciation' || activeSection === 'vocabulaire' ? 'active' : ''}`}
+            to={`/chapter/${chapter.id}/pratique`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'pratique' || activeSection === 'prononciation' || activeSection === 'vocabulaire' ? 'active' : ''}`}
           >
             <div className="tab-icon-badge vocab-badge">
               <span className="font-black text-2xl">P</span>
@@ -257,8 +256,8 @@ function ChapterView() {
           </NavLink>
 
           <NavLink 
-            to={`/chapter/${chapter.id}/pratique`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'pratique' ? 'active' : ''}`}
+            to={`/chapter/${chapter.id}/exercices`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'exercices' ? 'active' : ''}`}
           >
             <div className="tab-icon-badge practice-badge">
               <PenTool size={28} />
@@ -268,7 +267,6 @@ function ChapterView() {
         </div>
       )}
 
-      {/* Content for the Selected Section */}
       <div className="chapter-content">
         {renderSection()}
       </div>

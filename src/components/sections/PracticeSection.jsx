@@ -7,6 +7,11 @@ import CrosswordSection from './CrosswordSection';
 
 const ACTIVITIES = [
   {
+    id: 'mots_croises',
+    title: 'Mots Croisés (7 Grilles)',
+    isCrosswordHub: true
+  },
+  {
     id: 'prep_1_4',
     title: 'Activité 1 : à, en, chez, dans',
     description: "Complétez chaque phrase avec la préposition appropriée : à (ou ses formes contractées : au, à la, à l', aux), en, chez, ou dans.",
@@ -69,88 +74,23 @@ const ACTIVITIES = [
       { id: 'p3_12', textBefore: "Merci beaucoup ", textAfter: " votre attention pendant cette présentation.", hint: "de / par / pour / avec / sans", answer: "pour" },
       { id: 'p3_13', textBefore: "Ils ont traversé toute la cour sous la pluie ", textAfter: " parapluie.", hint: "de / par / pour / avec / sans", answer: "sans" },
       { id: 'p3_14', textBefore: "Le professeur de français est très fier ", textAfter: " progrès réalisés par les élèves.", hint: "de / par / pour / avec / sans", answer: "des" },
-      { id: 'p3_15', textBefore: "Nous allons étudier ce poème ", id_override: "p3_15", textAfter: " beaucoup d'attention.", hint: "de / par / pour / avec / sans", answer: "avec" }
+      { id: 'p3_15', textBefore: "Nous allons étudier ce poème ", textAfter: " beaucoup d'attention.", hint: "de / par / pour / avec / sans", answer: "avec" }
     ]
   },
   {
     id: 'writing_prompt',
     title: "Activité 4 : Atelier d'Écriture",
     description: "Rédigez un court texte en appliquant les notions de la rentrée."
-  },
-  {
-    id: 'mots_croises',
-    title: 'Mots Croisés (7 Grilles)',
-    isCrosswordHub: true
-  }
-];
-
-const UNITE1_PROMPTS = [
-  {
-    id: 1,
-    title: "Votre héros ou héroïne préféré(e) 🦸‍♂️",
-    prompt: "Décrivez votre héros ou héroïne préféré(e) (réel ou fictif) au présent. Quelles sont ses qualités morales et ses pouvoirs ?"
-  },
-  {
-    id: 2,
-    title: "Le portrait d'un anti-héros 🖤",
-    prompt: "Présentez un anti-héros célèbre (de livre ou de film) au présent. Expliquez pourquoi ce personnage est complexe et quelles sont ses faiblesses."
-  },
-  {
-    id: 3,
-    title: "Si vous étiez un super-héros ⚡",
-    prompt: "Si vous étiez un super-héros, quel serait votre pouvoir spécial ? Décrivez vos actions quotidiennes pour sauver le monde au présent."
-  },
-  {
-    id: 4,
-    title: "Le rival ou le méchant 👹",
-    prompt: "Décrivez un méchant ou un rival marquant d'une histoire au présent. Quelles sont ses motivations et ses traits de caractère principaux ?"
   }
 ];
 
 export default function PracticeSection() {
   const { chapterId } = useParams();
-  const isReprise = chapterId === 'unite-reprise';
-  const isUnite1 = chapterId === 'unite-1';
-
-  const [activeActivityId, setActiveActivityId] = useState('prep_1_4');
-  const [activeUnite1Tab, setActiveUnite1Tab] = useState('production_ecrite');
+  const isReprise = !chapterId || chapterId === 'unite-reprise';
+  const [activeActivityId, setActiveActivityId] = useState('mots_croises');
   const [userAnswers, setUserAnswers] = useState({});
   const [validationResults, setValidationResults] = useState({});
   const [focusedInputId, setFocusedInputId] = useState(null);
-
-  if (isUnite1) {
-    return (
-      <div className="practice-section-container fade-in">
-        <div className="activity-tabs-nav" style={{ gridTemplateColumns: '1fr', maxWidth: '250px' }}>
-          <button
-            onClick={() => setActiveUnite1Tab('production_ecrite')}
-            className={`activity-tab-btn ${activeUnite1Tab === 'production_ecrite' ? 'active' : ''}`}
-          >
-            Production Écrite
-          </button>
-        </div>
-
-        <div className="activity-main-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
-          {activeUnite1Tab === 'production_ecrite' && (
-            <WritingPrompt 
-              prompts={UNITE1_PROMPTS} 
-              title="Atelier d'Écriture : Héros & Anti-Héros 🦸‍♂️" 
-              subtitle="Rédigez un paragraphe au présent sur les héros et anti-héros et recevez des corrections de grammaire et d'accords immédiates !"
-            />
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  if (!isReprise) {
-    return (
-      <div className="practice-empty-state">
-        <h3>Section d'Exercices</h3>
-        <p>Sélectionnez l'unité de reprise pour accéder aux exercices de grammaire interactifs.</p>
-      </div>
-    );
-  }
 
   const currentActivity = ACTIVITIES.find(act => act.id === activeActivityId);
 
@@ -250,23 +190,23 @@ export default function PracticeSection() {
         ))}
       </div>
 
-      {activeActivityId === 'writing_prompt' ? (
+      {activeActivityId === 'mots_croises' ? (
+        <div style={{ width: '100%' }}>
+          <CrosswordSection />
+        </div>
+      ) : activeActivityId === 'writing_prompt' ? (
         <div className="activity-main-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
           <WritingPrompt />
-        </div>
-      ) : activeActivityId === 'mots_croises' ? (
-        <div className="activity-main-card glass-panel" style={{ background: 'rgba(15, 23, 42, 0.75)', borderRadius: '1.25rem', padding: '1.5rem', border: '1px solid rgba(255, 255, 255, 0.1)' }}>
-          <CrosswordSection />
         </div>
       ) : (
         <div className="activity-main-card">
           <div className="activity-card-header">
-            <h2>{currentActivity.title}</h2>
-            <p className="activity-description">{currentActivity.description}</p>
+            <h2>{currentActivity?.title}</h2>
+            <p className="activity-description">{currentActivity?.description}</p>
           </div>
 
           <div className="questions-list-grid">
-            {currentActivity.questions.map((q, idx) => {
+            {currentActivity?.questions?.map((q, idx) => {
               const valState = validationResults[currentActivity.id];
               const isCorrect = valState?.results?.[q.id];
               let statusClass = '';
@@ -317,7 +257,7 @@ export default function PracticeSection() {
           </div>
 
           <div className="activity-footer-controls">
-            {validationResults[currentActivity.id]?.isChecked ? (
+            {validationResults[currentActivity?.id]?.isChecked ? (
               <div className="activity-results-summary">
                 <div className="score-summary-badge">
                   <Award size={20} />
