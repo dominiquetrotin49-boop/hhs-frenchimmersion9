@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import { Grid3X3 } from 'lucide-react';
 import Crossword from '../games/Crossword';
-import '../games/Games.css';
+import './CrosswordSection.css';
 
 const ER_PUZZLE = {
   title: "Mots Croisés: Verbes en -ER",
   description: "Remplissez la grille avec les conjugaisons correctes au présent.",
-  numRows: 13,
-  numCols: 18,
+  numRows: 21,
+  numCols: 12,
   puzzleData: [
-    { id: 1, word: "TRAVAILLENT", r: 7, c: 6, dir: "across", clue: "Ils + Travailler" },
-    { id: 2, word: "ECOUTONS", r: 3, c: 6, dir: "down", clue: "Nous + Écouter" },
-    { id: 3, word: "TROUVENT", r: 3, c: 9, dir: "down", clue: "Ils + Trouver" },
-    { id: 4, word: "PARLONS", r: 4, c: 12, dir: "down", clue: "Nous + Parler" },
-    { id: 5, word: "HABITEZ", r: 2, c: 14, dir: "down", clue: "Vous + Habiter" },
-    { id: 6, word: "REGARDE", r: 3, c: 0, dir: "across", clue: "Je + Regarder" },
-    { id: 7, word: "ETUDIES", r: 6, c: 16, dir: "down", clue: "Tu + Étudier" },
-    { id: 8, word: "MANGES", r: 10, c: 1, dir: "across", clue: "Tu + Manger" },
-    { id: 9, word: "JOUE", r: 0, c: 1, dir: "down", clue: "Je + Jouer" },
-    { id: 10, word: "AIME", r: 3, c: 14, dir: "across", clue: "Elle + Aimer" }
+    { id: 1, word: "HABITEZ", r: 0, c: 9, dir: "down", clue: "Vous + Habiter" },
+    { id: 2, word: "TRAVAILLENT", r: 4, c: 3, dir: "down", clue: "Ils + Travailler" },
+    { id: 3, word: "REGARDE", r: 5, c: 3, dir: "across", clue: "Je + Regarder" },
+    { id: 4, word: "AIME", r: 3, c: 8, dir: "across", clue: "Elle + Aimer" },
+    { id: 5, word: "PARLONS", r: 8, c: 2, dir: "across", clue: "Nous + Parler" },
+    { id: 6, word: "JOUE", r: 12, c: 0, dir: "across", clue: "Je + Jouer" },
+    { id: 7, word: "ECOUTONS", r: 12, c: 5, dir: "down", clue: "Nous + Écouter" },
+    { id: 8, word: "MANGES", r: 12, c: 9, dir: "down", clue: "Tu + Manger" },
+    { id: 9, word: "TROUVENT", r: 14, c: 3, dir: "across", clue: "Ils + Trouver" },
+    { id: 10, word: "ETUDIES", r: 16, c: 4, dir: "across", clue: "Tu + Étudier" }
   ]
 };
 
@@ -132,44 +132,57 @@ const IRR_PUZZLE_3 = {
     { id: 7, word: "DISONS", r: 8, c: 6, dir: "across", clue: "Nous + Dire" },
     { id: 8, word: "BUVONS", r: 6, c: 0, dir: "down", clue: "Nous + Boire" },
     { id: 9, word: "SORTEZ", r: 2, c: 4, dir: "down", clue: "Vous + Sortir" },
-    { id: 10, word: "PAYENT", r: 3, c: 7, dir: "across", clue: "Ils + Payer" }
+    { id: 10, word: "LISEZ", r: 7, c: 7, dir: "down", clue: "Vous + Lire" }
   ]
 };
 
-const PUZZLE_LIST = [
-  { id: 'crossword-er', iconColor: '#fdf6e3', title: "Mots Croisés: Verbes -ER", desc: "Remplissez la grille en conjuguant 10 verbes courants en -ER !", btnText: "Jouer (Grille -ER)", btnClass: "play-btn-default", puzzle: ER_PUZZLE },
-  { id: 'crossword-ir', iconColor: '#fbbf24', title: "Mots Croisés: Verbes -IR", desc: "Testez vos connaissances des verbes réguliers du 2ème groupe (-IR) !", btnText: "Jouer (Grille -IR)", btnClass: "play-btn-accent", puzzle: IR_PUZZLE },
-  { id: 'crossword-re', iconColor: '#4ade80', title: "Mots Croisés: Verbes -RE", desc: "Conjuguez les verbes du 3ème groupe en -RE comme attendre ou vendre !", btnText: "Jouer (Grille -RE)", btnClass: "play-btn-success", puzzle: RE_PUZZLE },
-  { id: 'crossword-aux', iconColor: '#f87171', title: "Mots Croisés: Être & Avoir", desc: "Révisez les deux auxiliaires les plus importants de la langue française !", btnText: "Jouer (Grille Auxiliaires)", btnClass: "play-btn-danger", puzzle: AUX_PUZZLE },
-  { id: 'crossword-irr1', iconColor: '#fdf6e3', title: "Grille 1: Super Irréguliers & -OIR", desc: "Conjuguez Être, Avoir, Aller, Faire, Pouvoir, Vouloir, Devoir, Savoir, Voir.", btnText: "Jouer (Grille 1)", btnClass: "play-btn-default", puzzle: IRR_PUZZLE_1 },
-  { id: 'crossword-irr2', iconColor: '#fbbf24', title: "Grille 2: Les verbes \"Botte\"", desc: "Conjuguez Venir, Tenir, Prendre, Acheter, Préférer, Appeler, Payer.", btnText: "Jouer (Grille 2)", btnClass: "play-btn-accent", puzzle: IRR_PUZZLE_2 },
-  { id: 'crossword-irr3', iconColor: '#4ade80', title: "Grille 3: Autres Irréguliers", desc: "Conjuguez Mettre, Dire, Lire, Écrire, Boire, Croire, Sortir, Partir, Dormir.", btnText: "Jouer (Grille 3)", btnClass: "play-btn-success", puzzle: IRR_PUZZLE_3 },
+const PUZZLES = [
+  { id: 'er', name: 'Verbes en -ER', desc: '10 verbes réguliers du 1er groupe', puzzle: ER_PUZZLE, color: '#ea580c', bg: 'rgba(234, 88, 12, 0.15)' },
+  { id: 'ir', name: 'Verbes en -IR', desc: '10 verbes réguliers du 2ème groupe', puzzle: IR_PUZZLE, color: '#d97706', bg: 'rgba(217, 119, 6, 0.15)' },
+  { id: 're', name: 'Verbes en -RE', desc: '10 verbes réguliers du 3ème groupe', puzzle: RE_PUZZLE, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.15)' },
+  { id: 'aux', name: 'Être & Avoir', desc: 'Les auxiliaires essentiels', puzzle: AUX_PUZZLE, color: '#dc2626', bg: 'rgba(220, 38, 38, 0.15)' },
+  { id: 'irr1', name: 'Super Irréguliers', desc: 'Être, Avoir, Aller, Faire, Pouvoir...', puzzle: IRR_PUZZLE_1, color: '#9333ea', bg: 'rgba(147, 51, 234, 0.15)' },
+  { id: 'irr2', name: 'Verbes « Botte »', desc: 'Venir, Tenir, Prendre, Acheter...', puzzle: IRR_PUZZLE_2, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.15)' },
+  { id: 'irr3', name: 'Autres Irréguliers', desc: 'Mettre, Dire, Lire, Écrire, Boire...', puzzle: IRR_PUZZLE_3, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.15)' },
 ];
 
 export default function CrosswordSection() {
   const [activeGame, setActiveGame] = useState(null);
 
-  const selected = PUZZLE_LIST.find(p => p.id === activeGame);
-  if (selected) {
-    return <Crossword {...selected.puzzle} onBack={() => setActiveGame(null)} />;
+  if (activeGame) {
+    const selected = PUZZLES.find(p => p.id === activeGame);
+    if (selected) {
+      return <Crossword {...selected.puzzle} onBack={() => setActiveGame(null)} />;
+    }
   }
 
   return (
-    <div className="custom-crossword-grid">
-      {PUZZLE_LIST.map((item) => (
-        <div
-          key={item.id}
-          className="custom-crossword-card"
-          onClick={() => setActiveGame(item.id)}
-        >
-          <Grid3X3 size={48} style={{ color: item.iconColor }} />
-          <h4>{item.title}</h4>
-          <p>{item.desc}</p>
-          <button className={`play-btn ${item.btnClass}`}>
-            {item.btnText}
-          </button>
-        </div>
-      ))}
+    <div className="crossword-section">
+      <div className="crossword-hub-header">
+        <h2>Mots Croisés: Le Défi de Conjugaison</h2>
+        <p>Sélectionnez une grille pour tester vos compétences de conjugaison au présent.</p>
+      </div>
+
+      <div className="crossword-grid-cards">
+        {PUZZLES.map((item) => (
+          <div 
+            key={item.id} 
+            className="crossword-hub-card"
+            onClick={() => setActiveGame(item.id)}
+          >
+            <div className="hub-card-icon" style={{ background: item.bg, color: item.color }}>
+              <Grid3X3 size={28} />
+            </div>
+            <div className="hub-card-body">
+              <h3>{item.name}</h3>
+              <p>{item.desc}</p>
+            </div>
+            <button className="hub-play-btn" style={{ background: item.color }}>
+              Jouer
+            </button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
