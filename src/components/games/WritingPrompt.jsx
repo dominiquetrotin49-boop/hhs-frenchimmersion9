@@ -508,30 +508,6 @@ export default function WritingPrompt({ onBack, unitId }) {
             {/* Textarea Input */}
             <div className="relative">
               
-            {/* Barre d'accents rapides */}
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "5px", marginBottom: "8px" }}>
-              <span style={{ fontSize: "12px", fontWeight: "600", color: "#94a3b8", alignSelf: "center", marginRight: "4px" }}>Accents :</span>
-              {ACCENTS.map(acc => (
-                <button
-                  key={acc}
-                  type="button"
-                  onClick={() => insertAccent(acc)}
-                  style={{
-                    padding: "3px 8px",
-                    fontSize: "13px",
-                    fontWeight: "600",
-                    borderRadius: "6px",
-                    border: "1px solid rgba(255,255,255,0.15)",
-                    background: "rgba(255,255,255,0.08)",
-                    color: "#f8fafc",
-                    cursor: "pointer"
-                  }}
-                >
-                  {acc}
-                </button>
-              ))}
-            </div>
-
             <textarea
                 ref={textareaRef}
                 value={text}
