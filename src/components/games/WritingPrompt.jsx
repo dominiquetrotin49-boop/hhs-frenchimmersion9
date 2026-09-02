@@ -329,7 +329,8 @@ const localAnalyzeText = (text, prompt) => {
   };
 };
 
-const ACCENTS = ["é", "è", "à", "ù", "ç", "â", "ê", "î", "ô", "û", "ë", "ï", "œ"];
+const LOWER_ACCENTS = ["é", "è", "à", "ù", "ç", "â", "ê", "î", "ô", "û", "ë", "ï", "œ"];
+const UPPER_ACCENTS = ["É", "È", "À", "Ù", "Ç", "Â", "Ê", "Î", "Ô", "Û", "Ë", "Ï", "Œ"];
 
 export default function WritingPrompt({ onBack, unitId }) {
 
@@ -487,17 +488,39 @@ export default function WritingPrompt({ onBack, unitId }) {
             </div>
 
             {/* Accent Bar */}
-            <div className="mb-2">
-              <div className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-1.5">
-                Accents utiles :
+            <div className="mb-2 space-y-1.5">
+              <div className="flex items-center justify-between">
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                  Accents minuscules :
+                </span>
               </div>
               <div className="flex flex-wrap gap-1">
-                {ACCENTS.map((char) => (
+                {LOWER_ACCENTS.map((char) => (
                   <button
                     key={char}
+                    type="button"
                     disabled={loading}
                     onClick={() => handleAccentClick(char)}
                     className="accent-key-btn"
+                  >
+                    {char}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center justify-between pt-1">
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                  Accents majuscules :
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-1">
+                {UPPER_ACCENTS.map((char) => (
+                  <button
+                    key={char}
+                    type="button"
+                    disabled={loading}
+                    onClick={() => handleAccentClick(char)}
+                    className="accent-key-btn font-bold"
                   >
                     {char}
                   </button>

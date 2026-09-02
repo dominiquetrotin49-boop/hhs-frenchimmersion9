@@ -96,7 +96,6 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
 
   const handleInputChange = (e, r, c) => {
     const val = e.target.value.slice(-1).toUpperCase();
-    setShowErrors(false);
     
     setInputs(prev => ({
       ...prev,
@@ -109,7 +108,6 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
   };
 
   const handleKeyDown = (e, r, c) => {
-    setShowErrors(false);
     
     if (e.key === 'Backspace') {
       e.preventDefault();
@@ -136,7 +134,6 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
   const handleInsertAccent = (char) => {
     if (!activeCell) return;
     const { r, c } = activeCell;
-    setShowErrors(false);
     setInputs(prev => ({ ...prev, [`${r}-${c}`]: char }));
     moveCursor(r, c, 1);
   };

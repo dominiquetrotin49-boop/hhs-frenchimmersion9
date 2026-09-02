@@ -79,17 +79,17 @@ const AUX_PUZZLE = {
 const IRR_PUZZLE_1 = {
   title: "Mots Croisés: Super Irréguliers",
   description: "Conjugaisons des verbes essentiels : Faire, Aller, Pouvoir, Vouloir...",
-  numRows: 14,
-  numCols: 14,
+  numRows: 12,
+  numCols: 15,
   puzzleData: [
-    { id: 1, word: "FONT", r: 1, c: 2, dir: "across", clue: "Ils + Faire" },
-    { id: 2, word: "FAISONS", r: 1, c: 2, dir: "down", clue: "Nous + Faire" },
-    { id: 3, word: "VONT", r: 3, c: 0, dir: "across", clue: "Ils + Aller" },
-    { id: 4, word: "ALLONS", r: 0, c: 6, dir: "down", clue: "Nous + Aller" },
-    { id: 5, word: "PEUVENT", r: 6, c: 3, dir: "across", clue: "Ils + Pouvoir" },
-    { id: 6, word: "POUVONS", r: 4, c: 9, dir: "down", clue: "Nous + Pouvoir" },
-    { id: 7, word: "VEULENT", r: 10, c: 1, dir: "across", clue: "Ils + Vouloir" },
-    { id: 8, word: "VOULONS", r: 5, c: 1, dir: "down", clue: "Nous + Vouloir" }
+    { id: 1, word: "FONT", r: 8, c: 1, dir: "down", clue: "Ils + Faire" },
+    { id: 2, word: "FAISONS", r: 1, c: 8, dir: "across", clue: "Nous + Faire" },
+    { id: 3, word: "VONT", r: 0, c: 12, dir: "down", clue: "Ils + Aller" },
+    { id: 4, word: "ALLONS", r: 1, c: 9, dir: "down", clue: "Nous + Aller" },
+    { id: 5, word: "PEUVENT", r: 5, c: 4, dir: "across", clue: "Ils + Pouvoir" },
+    { id: 6, word: "POUVONS", r: 9, c: 0, dir: "across", clue: "Nous + Pouvoir" },
+    { id: 7, word: "VEULENT", r: 4, c: 5, dir: "down", clue: "Ils + Vouloir" },
+    { id: 8, word: "VOULONS", r: 7, c: 2, dir: "across", clue: "Nous + Vouloir" }
   ]
 };
 
