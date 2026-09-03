@@ -78,8 +78,190 @@ const ACTIVITIES = [
     ]
   },
   {
-    id: 'writing_prompt',
-    title: "Activité 4 : Atelier d'Écriture",
+    id: "routine_matinale",
+    title: "Activité 4 : Ma routine matinale vs. Ta routine",
+    description: "Complète chaque phrase avec la forme correcte du verbe pronominal entre parenthèses au présent de l'indicatif. Fais attention au pronom réfléchi (me / m' ou te / t') et aux terminaisons.",
+    questions: [
+      {
+        id: "rm_1",
+        textBefore: "Chaque matin d'école, je ",
+        textAfter: " dès que mon réveil sonne à six heures et demie.",
+        hint: "se lever",
+        answer: "me lève"
+      },
+      {
+        id: "rm_2",
+        textBefore: "Et toi, à quelle heure est-ce que tu ",
+        textAfter: " d'habitude ?",
+        hint: "se lever",
+        answer: "te lèves"
+      },
+      {
+        id: "rm_3",
+        textBefore: "D'abord, je vais dans la salle de bain et je ",
+        textAfter: " le visage avec de l'eau bien fraîche.",
+        hint: "se laver",
+        answer: "me lave"
+      },
+      {
+        id: "rm_4",
+        textBefore: "Est-ce que tu ",
+        textAfter: " les cheveux sous la douche le matin ou le soir ?",
+        hint: "se laver",
+        answer: "te laves"
+      },
+      {
+        id: "rm_5",
+        textBefore: "Après la douche, je ",
+        textAfter: " les dents pendant au moins deux minutes.",
+        hint: "se brosser",
+        answer: "me brosse"
+      },
+      {
+        id: "rm_6",
+        textBefore: "Tu ",
+        textAfter: " aussi les dents avant de prendre ton petit-déjeuner ?",
+        hint: "se brosser",
+        answer: "te brosses"
+      },
+      {
+        id: "rm_7",
+        textBefore: "Ensuite, je retourne dans ma chambre et je ",
+        textAfter: " rapidement avec mon jean préféré.",
+        hint: "s'habiller",
+        answer: "m'habille"
+      },
+      {
+        id: "rm_8",
+        textBefore: "Dis-moi, tu ",
+        textAfter: " chaudement quand il commence à faire froid dehors ?",
+        hint: "s'habiller",
+        answer: "t'habilles"
+      },
+      {
+        id: "rm_9",
+        textBefore: "Quand nous avons un cours d'éducation physique, je ",
+        textAfter: " un sac de sport avec mes baskets.",
+        hint: "se préparer",
+        answer: "me prépare"
+      },
+      {
+        id: "rm_10",
+        textBefore: "Tu ",
+        textAfter: " toujours la veille au soir pour ne pas être en retard le matin ?",
+        hint: "se préparer",
+        answer: "te prépares"
+      },
+      {
+        id: "rm_11",
+        textBefore: "Vers sept heures et quart, je ",
+        textAfter: " à partir pour prendre le bus scolaire.",
+        hint: "se préparer",
+        answer: "me prépare"
+      },
+      {
+        id: "rm_12",
+        textBefore: "Si tu ",
+        textAfter: " vite, tu seras prêt à l'heure pour le premier cours !",
+        hint: "s'habiller (ou se dépêcher)",
+        answer: "t'habilles"
+      }
+    ]
+  },
+  {
+    id: "routine_weekend_negation",
+    title: "Activité 5 : La routine du week-end (La forme négative)",
+    description: "Rappel : Sujet + ne / n' + pronom réfléchi + verbe + pas (Ex : Je ne me réveille pas tôt). Complète chaque phrase avec la forme négative au présent du verbe pronominal entre parenthèses.",
+    questions: [
+      {
+        id: "rwn_1",
+        textBefore: "Le samedi matin, je ",
+        textAfter: " avant dix heures.",
+        hint: "se lever",
+        answer: "ne me lève pas"
+      },
+      {
+        id: "rwn_2",
+        textBefore: "Pourquoi est-ce que tu ",
+        textAfter: " quand ton réveil sonne ?",
+        hint: "se lever",
+        answer: "ne te lèves pas"
+      },
+      {
+        id: "rwn_3",
+        textBefore: "Quand j'ai congé, je ",
+        textAfter: " en vitesse ; je prends tout mon temps.",
+        hint: "se préparer",
+        answer: "ne me prépare pas"
+      },
+      {
+        id: "rwn_4",
+        textBefore: "Tu ",
+        textAfter: " pour aller au match de soccer ce matin ?",
+        hint: "se préparer",
+        answer: "ne te prépares pas"
+      },
+      {
+        id: "rwn_5",
+        textBefore: "Si je reste à la maison toute la journée, je ",
+        textAfter: " en vêtements chics ; je garde mon pyjama !",
+        hint: "s'habiller",
+        answer: "ne m'habille pas"
+      },
+      {
+        id: "rwn_6",
+        textBefore: "Tu ",
+        textAfter: " avec ton manteau d'hiver alors qu'il fait très froid ?",
+        hint: "s'habiller",
+        answer: "ne t'habilles pas"
+      },
+      {
+        id: "rwn_7",
+        textBefore: "Je suis distrait : parfois, le soir, je ",
+        textAfter: " les dents avant d'avoir fini mon dessert.",
+        hint: "se brosser",
+        answer: "ne me brosse pas"
+      },
+      {
+        id: "rwn_8",
+        textBefore: "Est-ce vrai que tu ",
+        textAfter: " les cheveux quand ils sont encore mouillés ?",
+        hint: "se brosser",
+        answer: "ne te brosses pas"
+      },
+      {
+        id: "rwn_9",
+        textBefore: "Je ",
+        textAfter: " le visage avec du savon trop agressif pour la peau.",
+        hint: "se laver",
+        answer: "ne me lave pas"
+      },
+      {
+        id: "rwn_10",
+        textBefore: "Tu as l'air fatigué : tu ",
+        textAfter: " les mains à l'eau froide pour te réveiller ?",
+        hint: "se laver",
+        answer: "ne te laves pas"
+      },
+      {
+        id: "rwn_11",
+        textBefore: "Quand je n'ai pas de devoirs, je ",
+        textAfter: " d'avance pour le lundi matin.",
+        hint: "se préparer",
+        answer: "ne me prépare pas"
+      },
+      {
+        id: "rwn_12",
+        textBefore: "C'est le week-end, alors tu ",
+        textAfter: " avec ta tenue d'école !",
+        hint: "s'habiller",
+        answer: "ne t'habilles pas"
+      }
+    ]
+  },
+  {
+    id: "writing_prompt",
+    title: "Activité 6 : Atelier d'Écriture",
     description: "Rédigez un court texte en appliquant les notions de la rentrée."
   }
 ];
@@ -276,7 +458,7 @@ export default function PracticeSection() {
                   onClick={() => handleVerify(currentActivity.id)}
                   className="control-btn verify-btn"
                 >
-                  <CheckCircle2 size={16} /> Vérifier mes réponses
+                  <CheckCircle2 size={16} /> Vérification
                 </button>
                 <button
                   onClick={() => handleReset(currentActivity.id)}
