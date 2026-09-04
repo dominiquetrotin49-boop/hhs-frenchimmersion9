@@ -4,31 +4,31 @@ import { BookOpen, RefreshCw, Send, CheckCircle2, AlertTriangle, HelpCircle } fr
 const PROMPTS = [
   {
     id: 1,
-    title: "1. La Routine du Matin",
-    prompt: "Décris ta routine du matin au présent. Qu'est-ce que tu fais en premier ? Que manges-tu ?",
-    focus: "Présent de l'indicatif & Verbes pronominaux",
-    minWords: 40
+    title: "1. L'Origine d'un Héros ou d'une Héroïne",
+    prompt: "Racontez la jeunesse d'un héros ou d'une héroïne avant sa célébrité. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
+    focus: "Imparfait vs Passé Composé & Connecteurs",
+    minWords: 45
   },
   {
     id: 2,
-    title: "2. Les Loisirs Préférés",
-    prompt: "Parle de tes loisirs préférés. Pourquoi aimes-tu ces activités et quand les pratiques-tu ?",
-    focus: "Verbes d'appréciation & Expressions de fréquence",
-    minWords: 40
+    title: "2. Le Dilemme Moral de l'Anti-Héros",
+    prompt: "Présentez un anti-héros confronté à un choix déchirant. Décrivez ses doutes et ses faiblesses (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et ses réactions avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
+    focus: "Passé Composé, Verbes Réfléchis & Nuance Morale",
+    minWords: 45
   },
   {
     id: 3,
-    title: "3. Meilleur(e) Ami(e)",
-    prompt: "Décris ton meilleur ami ou ta meilleure amie. Comment est-il ou est-elle physiquement et mentalement ?",
-    focus: "Adjectifs, Description physique & Psychologique",
-    minWords: 40
+    title: "3. La Mission Périlleuse : Récit d'une Épreuve",
+    prompt: "Racontez une mission ou un sauvetage difficile. Décrivez l'atmosphère et le décor (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis la fin de l'épreuve avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
+    focus: "Passé Composé avec Être (accords) & Récit d'aventure",
+    minWords: 45
   },
   {
     id: 4,
-    title: "4. Le Week-end Idéal",
-    prompt: "Raconte ton week-end ou tes vacances de rêve. Quelles activités fais-tu et avec qui ?",
-    focus: "Activités & Expression personnelle",
-    minWords: 40
+    title: "4. L'Affrontement ou la Réconciliation",
+    prompt: "Racontez la confrontation décisive entre deux personnages rivaux. Expliquez l'origine de leur conflit (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques : s'affronter, se regarder, se comprendre), et le dénouement de leur face-à-face (passé composé).",
+    focus: "Verbes Réciproques, Passé Composé & Connecteurs d'opposition",
+    minWords: 45
   }
 ];
 const WRITING_PROMPTS = PROMPTS;
@@ -36,23 +36,31 @@ const WRITING_PROMPTS = PROMPTS;
 const UNIT1_PROMPTS = [
   {
     id: 1,
-    title: "Votre héros ou héroïne préféré(e)",
-    prompt: "Décrivez votre héros ou héroïne préféré(e) (réel ou fictif) au présent. Quelles sont ses qualités morales et ses pouvoirs ?"
+    title: "1. L'Origine d'un Héros ou d'une Héroïne",
+    prompt: "Racontez la jeunesse d'un héros ou d'une héroïne avant qu'il/elle ne devienne célèbre. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
+    focus: "Imparfait vs Passé Composé & Connecteurs",
+    minWords: 45
   },
   {
     id: 2,
-    title: "Le portrait d'un anti-héros",
-    prompt: "Présentez un anti-héros célèbre (de livre ou de film) au présent. Expliquez pourquoi ce personnage est complexe et quelles sont ses faiblesses."
+    title: "2. Le Dilemme Moral de l'Anti-Héros",
+    prompt: "Présentez un anti-héros face à une décision difficile. Expliquez ses sentiments et ses défauts (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et comment il s'est senti ou s'est préparé avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
+    focus: "Passé Composé, Verbes Réfléchis & Nuance Morale",
+    minWords: 45
   },
   {
     id: 3,
-    title: "Si vous étiez un super-héros",
-    prompt: "Si vous étiez un super-héros, quel serait votre pouvoir spécial ? Décrivez vos actions quotidiennes pour sauver le monde au présent."
+    title: "3. La Mission Périlleuse : Récit d'une Épreuve",
+    prompt: "Racontez une mission ou un sauvetage difficile. Décrivez le décor et la météo (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis le dénouement de la mission avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
+    focus: "Passé Composé avec Être (accords) & Récit d'aventure",
+    minWords: 45
   },
   {
     id: 4,
-    title: "Le rival ou le méchant",
-    prompt: "Décrivez un méchant ou un rival marquant d'une histoire au présent. Quelles sont ses motivations et ses traits de caractère principaux ?"
+    title: "4. L'Affrontement ou la Réconciliation",
+    prompt: "Racontez une rencontre décisive entre deux personnages rivaux. Expliquez pourquoi ils étaient ennemis (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques au passé ou présent : s'affronter, se regarder, se comprendre), et le résultat de leur duel (passé composé).",
+    focus: "Verbes Réciproques, Passé Composé & Connecteurs d'opposition",
+    minWords: 45
   }
 ];
 
@@ -451,8 +459,8 @@ export default function WritingPrompt({ onBack, unitId }) {
       {/* Header */}
       <div className="wp-header">
         <div className="wp-title-group">
-          <h2>Atelier d'Écriture : Le Présent 📝</h2>
-          <p>Entraînez-vous à rédiger au présent et recevez des corrections grammaticales immédiates.</p>
+          <h2>Atelier d'Écriture : Récits et Portraits Héroïques 📝</h2>
+          <p>Rédigez vos récits au passé (imparfait / passé composé), intégrez les verbes pronominaux et structurez votre texte avec des connecteurs logiques.</p>
         </div>
         <div className="flex items-center gap-3">
           <button onClick={handleNextPrompt} className="wp-secondary-btn flex items-center gap-2">
@@ -475,7 +483,7 @@ export default function WritingPrompt({ onBack, unitId }) {
             <div className="flex items-center gap-2 mb-4">
               <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
               <h3 className="text-xs font-black uppercase tracking-widest text-blue-400">
-                Sujet d'écriture (Niveau Intermédiaire-Bas)
+                Sujet d'écriture
               </h3>
             </div>
 
