@@ -88,94 +88,22 @@ const ACTIVITIES = [
     ]
   },
   {
-    id: "routine_weekend_negation",
-    title: "Activité 5 : La routine du week-end (La forme négative)",
-    description: "Rappel : Sujet + ne / n' + pronom réfléchi + verbe + pas (Ex : Je ne me réveille pas tôt). Complète chaque phrase avec la forme négative au présent du verbe pronominal entre parenthèses.",
+    id: "connecteurs_logiques_1_5",
+    title: "Activité 5 : Les Connecteurs Logiques — Structurer l'Analyse Héroïque",
+    description: "Complétez chaque phrase avec le connecteur logique qui convient le mieux selon la relation exprimée (introduction, ajout, opposition, conséquence ou conclusion).",
     questions: [
-      {
-        id: "rwn_1",
-        textBefore: "Le samedi matin, je ",
-        textAfter: " avant dix heures.",
-        hint: "se lever",
-        answer: "ne me lève pas"
-      },
-      {
-        id: "rwn_2",
-        textBefore: "Pourquoi est-ce que tu ",
-        textAfter: " quand ton réveil sonne ?",
-        hint: "se lever",
-        answer: "ne te lèves pas"
-      },
-      {
-        id: "rwn_3",
-        textBefore: "Quand j'ai congé, je ",
-        textAfter: " en vitesse ; je prends tout mon temps.",
-        hint: "se préparer",
-        answer: "ne me prépare pas"
-      },
-      {
-        id: "rwn_4",
-        textBefore: "Tu ",
-        textAfter: " pour aller au match de soccer ce matin ?",
-        hint: "se préparer",
-        answer: "ne te prépares pas"
-      },
-      {
-        id: "rwn_5",
-        textBefore: "Si je reste à la maison toute la journée, je ",
-        textAfter: " en vêtements chics ; je garde mon pyjama !",
-        hint: "s'habiller",
-        answer: "ne m'habille pas"
-      },
-      {
-        id: "rwn_6",
-        textBefore: "Tu ",
-        textAfter: " avec ton manteau d'hiver alors qu'il fait très froid ?",
-        hint: "s'habiller",
-        answer: "ne t'habilles pas"
-      },
-      {
-        id: "rwn_7",
-        textBefore: "Je suis distrait : parfois, le soir, je ",
-        textAfter: " les dents avant d'avoir fini mon dessert.",
-        hint: "se brosser",
-        answer: "ne me brosse pas"
-      },
-      {
-        id: "rwn_8",
-        textBefore: "Est-ce vrai que tu ",
-        textAfter: " les cheveux quand ils sont encore mouillés ?",
-        hint: "se brosser",
-        answer: "ne te brosses pas"
-      },
-      {
-        id: "rwn_9",
-        textBefore: "Je ",
-        textAfter: " le visage avec du savon trop agressif pour la peau.",
-        hint: "se laver",
-        answer: "ne me lave pas"
-      },
-      {
-        id: "rwn_10",
-        textBefore: "Tu as l'air fatigué : tu ",
-        textAfter: " les mains à l'eau froide pour te réveiller ?",
-        hint: "se laver",
-        answer: "ne te laves pas"
-      },
-      {
-        id: "rwn_11",
-        textBefore: "Quand je n'ai pas de devoirs, je ",
-        textAfter: " d'avance pour le lundi matin.",
-        hint: "se préparer",
-        answer: "ne me prépare pas"
-      },
-      {
-        id: "rwn_12",
-        textBefore: "C'est le week-end, alors tu ",
-        textAfter: " avec ta tenue d'école !",
-        hint: "s'habiller",
-        answer: "ne t'habilles pas"
-      }
+      { id: "cl_1", textBefore: "", textAfter: ", il convient de définir les critères moraux qui séparent le héros classique du simple justicier.", hint: "Tout d'abord / Cependant / Ainsi (Introduction)", answer: "Tout d'abord" },
+      { id: "cl_2", textBefore: "Ce personnage fait preuve d'un dévouement admirable envers son peuple. ", textAfter: ", il refuse tout privilège ou récompense matérielle.", hint: "De plus / Toutefois / En conclusion (Ajout)", answer: "De plus" },
+      { id: "cl_3", textBefore: "Le protagoniste commet des fautes graves tout au long de l'histoire. ", textAfter: ", il conserve la sympathie du public grâce à sa sincérité.", hint: "Néanmoins / En premier lieu / C'est pourquoi (Opposition)", answer: "Néanmoins" },
+      { id: "cl_4", textBefore: "L'anti-héros a trahi le pacte secret qui le liait à sa guilde. ", textAfter: ", il doit maintenant affronter seul la colère de ses anciens alliés.", hint: "Par conséquent / En outre / Premièrement (Conséquence)", answer: "Par conséquent" },
+      { id: "cl_5", textBefore: "Le guerrier ne possède aucun pouvoir magique ni armure protectrice. ", textAfter: ", son courage et son intelligence tactique suffisent à déjouer le piège.", hint: "Cependant / Également / Donc (Opposition)", answer: "Cependant" },
+      { id: "cl_6", textBefore: "Pour analyser cette œuvre, nous examinerons ", textAfter: " la genèse du personnage avant d'étudier son évolution psychologique.", hint: "en premier lieu / par ailleurs / finalement (Introduction)", answer: "en premier lieu" },
+      { id: "cl_7", textBefore: "Ce film explore les traumatismes passés du détective. ", textAfter: ", il propose une critique subtile de la justice moderne.", hint: "En outre / C'est pourquoi / Néanmoins (Ajout)", answer: "En outre" },
+      { id: "cl_8", textBefore: "Le justicier refuse de blesser un adversaire désarmé ; ", textAfter: ", il incarne un idéal d'honneur chevaleresque très strict.", hint: "ainsi / toutefois / d'abord (Conséquence)", answer: "ainsi" },
+      { id: "cl_9", textBefore: "Le héros traditionnel agit pour le bien commun sans la moindre hésitation. ", textAfter: ", l'anti-héros ne s'engage que si sa propre survie est menacée.", hint: "En revanche / Également / Donc (Opposition)", answer: "En revanche" },
+      { id: "cl_10", textBefore: "Ses motivations restaient obscures aux yeux des citoyens. ", textAfter: " la police locale a décidé de le placer sous haute surveillance.", hint: "C'est pourquoi / Par ailleurs / Premièrement (Conséquence)", answer: "C'est pourquoi" },
+      { id: "cl_11", textBefore: "Les citoyens honorent le dévouement du héros. Ils saluent ", textAfter: " la bravoure des volontaires restés anonymes.", hint: "également / cependant / d'abord (Ajout)", answer: "également" },
+      { id: "cl_12", textBefore: "", textAfter: ", l'anti-héros moderne séduit les spectateurs car sa vulnérabilité reflète les contradictions humaines.", hint: "En conclusion / De plus / En premier lieu (Conclusion)", answer: "En conclusion" }
     ]
   },
   {
