@@ -289,7 +289,7 @@ function GameSection({ chapterId, vocabulary }) {
               <span className="section-header-icon-badge game-badge">
                 <Gamepad2 size={24} />
               </span>
-              <span className="font-extrabold text-lg text-slate-900">Flashcard Practice</span>
+              <span className="font-extrabold text-lg text-slate-900">Pratique Ludique</span>
             </span>
           </div>
 

@@ -165,7 +165,7 @@ function VocabularySection({ data, chapterId }) {
           <h3>Orthographe</h3>
         </div>
 
-        {/* Header Tab 3: Flashcard Practice */}
+        {/* Header Tab 3: Pratique Ludique */}
         <div 
           onClick={() => setActiveHeaderTab(activeHeaderTab === 'flashcard_practice' ? null : 'flashcard_practice')}
           className={`section-card cursor-pointer ${
@@ -176,22 +176,24 @@ function VocabularySection({ data, chapterId }) {
           <div className="tab-icon-badge game-badge">
             <Gamepad2 size={28} />
           </div>
-          <h3>{chapterId === 'unite-reprise' ? 'Jeux' : 'Flashcard Practice'}</h3>
+          <h3>{chapterId === 'unite-reprise' ? 'Jeux' : 'Pratique Ludique'}</h3>
         </div>
 
-        {/* Header Tab 4: Jeux (Francotopia RPG) */}
-        <div 
-          onClick={() => setActiveHeaderTab(activeHeaderTab === "jeux" ? null : "jeux")}
-          className={`section-card cursor-pointer ${
-            activeHeaderTab === "jeux" ? "active" : ""
-          }`}
-          style={{ paddingTop: "1.12rem", paddingBottom: "1.12rem" }}
-        >
-          <div className="tab-icon-badge game-badge" style={{ background: "rgba(168, 85, 247, 0.2)", color: "#c084fc" }}>
-            <Gamepad2 size={28} />
+        {/* Header Tab 4: Jeux (Francotopia RPG) - Units 1-4 only */}
+        {chapterId !== "unite-reprise" && (
+          <div 
+            onClick={() => setActiveHeaderTab(activeHeaderTab === "jeux" ? null : "jeux")}
+            className={`section-card cursor-pointer ${
+              activeHeaderTab === "jeux" ? "active" : ""
+            }`}
+            style={{ paddingTop: "1.12rem", paddingBottom: "1.12rem" }}
+          >
+            <div className="tab-icon-badge game-badge" style={{ background: "rgba(168, 85, 247, 0.2)", color: "#c084fc" }}>
+              <Gamepad2 size={28} />
+            </div>
+            <h3>Jeux</h3>
           </div>
-          <h3>Jeux</h3>
-        </div>
+        )}
 
       </div>
 
@@ -404,13 +406,13 @@ function VocabularySection({ data, chapterId }) {
         </div>
       )}
 
-      {/* Frame 3: Flashcard Practice */}
+      {/* Frame 3: Pratique Ludique */}
       {activeHeaderTab === 'flashcard_practice' && (
         <GameSection chapterId={chapterId} vocabulary={data} />
       )}
 
-      {/* Frame 4: Jeux (Francotopia RPG) */}
-      {activeHeaderTab === 'jeux' && (
+      {/* Frame 4: Jeux (Francotopia RPG) - Units 1-4 only */}
+      {chapterId !== "unite-reprise" && activeHeaderTab === "jeux" && (
         <div className="section-container glass-container fade-in">
           <Francotopia 
             chapterId={chapterId} 
