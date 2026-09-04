@@ -1,4 +1,5 @@
 import Francotopia from "../games/Francotopia";
+import MineurFou from "../games/MineurFou";
 import React, { useState } from 'react';
 import { speakFrench } from "../../utils/speechUtils";
 import { Volume2, SpellCheck, CheckCircle2, AlertTriangle, XCircle, Sparkles, Award, Gamepad2 } from 'lucide-react';
@@ -134,8 +135,8 @@ function VocabularySection({ data, chapterId }) {
   return (
     <div className="practice-header-container fade-in text-left">
       
-      {/* Secondary Header Tab Bar matching exact 3-column grid layout, size, shape, and structure of top header tabs */}
-      <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      {/* Secondary Header Tab Bar */}
+      <div className={`section-navigation grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8 ${chapterId !== 'unite-reprise' ? 'md:grid-cols-5' : 'md:grid-cols-3'}`}>
         
         {/* Header Tab 1: Prononciation (Aligned on left) */}
         <div 
@@ -179,7 +180,7 @@ function VocabularySection({ data, chapterId }) {
           <h3>{chapterId === 'unite-reprise' ? 'Jeux' : 'Pratique Ludique'}</h3>
         </div>
 
-        {/* Header Tab 4: Jeux (Francotopia RPG) - Units 1-4 only */}
+        {/* Header Tab 4: Francotopia RPG - Units 1-4 only */}
         {chapterId !== "unite-reprise" && (
           <div 
             onClick={() => setActiveHeaderTab(activeHeaderTab === "jeux" ? null : "jeux")}
@@ -191,11 +192,28 @@ function VocabularySection({ data, chapterId }) {
             <div className="tab-icon-badge game-badge" style={{ background: "rgba(168, 85, 247, 0.2)", color: "#c084fc" }}>
               <Gamepad2 size={28} />
             </div>
-            <h3>Jeux</h3>
+            <h3>Francotopia</h3>
+          </div>
+        )}
+
+        {/* Header Tab 5: Mineur Fou - Units 1-4 only */}
+        {chapterId !== "unite-reprise" && (
+          <div
+            onClick={() => setActiveHeaderTab(activeHeaderTab === "mineur" ? null : "mineur")}
+            className={`section-card cursor-pointer ${
+              activeHeaderTab === "mineur" ? "active" : ""
+            }`}
+            style={{ paddingTop: "1.12rem", paddingBottom: "1.12rem" }}
+          >
+            <div className="tab-icon-badge game-badge" style={{ background: "rgba(212,160,26,0.2)", color: "#d4a01a" }}>
+              <Gamepad2 size={28} />
+            </div>
+            <h3>Mineur Fou</h3>
           </div>
         )}
 
       </div>
+
 
       {/* Frame 1: Prononciation Activity */}
       {activeHeaderTab === 'prononciation' && (
@@ -411,13 +429,22 @@ function VocabularySection({ data, chapterId }) {
         <GameSection chapterId={chapterId} vocabulary={data} />
       )}
 
-      {/* Frame 4: Jeux (Francotopia RPG) - Units 1-4 only */}
+      {/* Frame 4: Francotopia RPG - Units 1-4 only */}
       {chapterId !== "unite-reprise" && activeHeaderTab === "jeux" && (
         <div className="section-container glass-container fade-in">
           <Francotopia 
             chapterId={chapterId} 
             vocabulary={data} 
             onBack={() => setActiveHeaderTab(null)} 
+          />
+        </div>
+      )}
+
+      {/* Frame 5: Mineur Fou - Units 1-4 only */}
+      {chapterId !== "unite-reprise" && activeHeaderTab === "mineur" && (
+        <div className="section-container glass-container fade-in">
+          <MineurFou
+            onBack={() => setActiveHeaderTab(null)}
           />
         </div>
       )}

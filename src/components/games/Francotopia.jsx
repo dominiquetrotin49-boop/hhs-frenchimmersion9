@@ -16,81 +16,81 @@ const MARKET = 3; // IMPASSABLE Fish Market Stall structure
 const TEMPLE = 4; // IMPASSABLE Question Booth Cabin structure
 const PIER = 5; // Walkable Wooden Fishing Dock ("Penton")
 
-// Base Map Grid (Level 1): Dirt/Sand path (0) and wooden penton (5) are walkable.
-// All surrounding bushes, long grass, rocks, trees, and water are STRICTLY IMPASSABLE (1 & 2)!
+// Base Map Grid (Level 1): STRICT whitelist of the user's black painted path.
+// Dirt path (0) and wooden pier (5) are the ONLY WALKABLE TILES.
+// All non-painted areas (trees=2, water=1, market=3, booth=4) are 100% IMPASSABLE.
 const MAP_GRID = [
-  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,2,4,4,4,4,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2],
+  [2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2],
+  [2,2,2,2,2,2,2,0,0,2,3,3,3,3,2,2,2,2,2,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,2,2,2,2,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
+  [2,2,4,4,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2],
+  [2,2,2,2,2,0,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
+  [2,2,2,2,2,2,2,2,2,2,5,5,5,5,5,5,5,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
   [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
 ];
 
-// Level 2 Map (Brittany Coastal Cliffs): Rocks, cliffs, bushes, long grass, and water are strictly IMPASSABLE!
+// Level 2 Map (Brittany Coastal Cliffs): STRICT whitelist matching user's black painted path!
 const MAP_LEVEL_2 = [
-  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,2,2,2],
-  [2,2,4,4,4,4,2,2,2,2,2,2,3,3,3,3,2,2,2,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,2,2,2,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,2,2,2,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,2,2,2,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,2,2,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,1,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2],
+  [2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2,2],
+  [2,2,2,2,2,2,2,0,0,2,3,3,3,3,2,2,2,2,2,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,2,2,2,2,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,2,2,2,2,2],
+  [2,2,4,4,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2],
+  [2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2],
+  [2,2,2,0,0,0,0,0,0,0,2,2,2,2,2,2,2,2,2,2],
+  [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2],
+  [2,2,2,2,2,0,0,0,0,0,5,5,5,5,5,5,1,1,1,2],
+  [2,2,2,2,2,2,2,2,2,2,5,5,5,5,5,5,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
   [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
 ];
 
-// Level 3 Map (Cape Cod Dunes): Sand dunes, bushes, long grass, and water are strictly IMPASSABLE!
+// Level 3 Map (Cape Cod Dunes): STRICT whitelist matching user's black painted path!
 const MAP_LEVEL_3 = [
-  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,1,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,1,1,1,2],
-  [2,2,4,4,4,4,2,2,2,2,2,2,3,3,3,3,1,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,1,1,1,2],
+  [2,2,2,2,2,2,2,2,0,0,3,3,3,3,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,0,0,2,3,3,3,3,1,1,1,1,1,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
+  [2,2,4,4,4,4,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
+  [2,2,4,4,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2],
+  [2,2,2,2,2,0,0,0,0,0,5,5,5,5,5,5,5,1,1,2],
+  [2,2,2,2,2,2,2,2,2,2,5,5,5,5,5,5,5,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
   [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
 ];
 
-// Level 4 Map (Tahiti Lagoon): ONLY the sand path (0) and wooden penton (5) are walkable.
-// All lagoon water, bushes, palms, long grass, and buildings are strictly IMPASSABLE!
+// Level 4 Map (Tahiti Lagoon): STRICT whitelist matching user's black painted path!
 const MAP_LEVEL_4 = [
-  [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,1,4,4,4,4,2,2,2,2,2,2,3,3,3,3,2,1,1,2],
-  [2,1,4,4,4,4,0,0,0,0,0,0,0,0,0,0,2,1,1,1,2],
-  [2,1,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,1,4,4,4,4,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
-  [2,2,2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,2,0,0,2,2,2,2,2,2,2,2,2],
+  [2,2,2,2,2,2,2,2,0,0,3,3,3,3,2,1,1,1,1,2],
+  [2,2,2,2,2,2,2,0,0,2,3,3,3,3,2,1,1,1,1,2],
+  [2,1,4,4,4,4,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
+  [2,1,4,4,4,4,0,0,0,0,0,0,0,0,0,1,1,1,1,2],
+  [2,1,4,4,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,1,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,2],
+  [2,2,2,2,2,0,0,0,0,0,5,5,5,5,5,5,5,5,1,2],
+  [2,2,2,2,2,2,2,2,2,2,5,5,5,5,5,5,5,5,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
+  [2,2,2,2,2,2,2,2,1,1,1,1,1,1,1,1,1,1,1,2],
   [2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2],
 ];
 
@@ -118,92 +118,92 @@ const RODS = [
 // EXPANDED QUESTION BANK (80 Total Questions - 20 Per Level!)
 const QUESTIONS = {
   "1": [
-    { "q": "Comment dit-on 'journalist' ?", "opts": ["le journal", "le journaliste", "le média"], "ans": 1 },
-    { "q": "La liberté de la ___ est importante.", "opts": ["source", "presse", "vérité"], "ans": 1 },
-    { "q": "Il faut vérifier la ___ d'une information.", "opts": ["source", "censure", "rédaction"], "ans": 0 },
-    { "q": "Un article qui révèle un secret est un ___.", "opts": ["scoop", "titre", "kiosque"], "ans": 0 },
-    { "q": "L'ensemble des journaux imprimés s'appelle la presse ___.", "opts": ["numérique", "écrite", "télévisée"], "ans": 1 },
-    { "q": "Le titre d'un article en gros caractères est la ___.", "opts": ["une", "page", "lettre"], "ans": 0 },
-    { "q": "Un journaliste qui travaille à son compte est un ___.", "opts": ["rédacteur", "pigiste", "éditeur"], "ans": 1 },
-    { "q": "Une fausse information est souvent appelée une ___.", "opts": ["fake news (infox)", "dépêche", "chronique"], "ans": 0 },
-    { "q": "L'abonnement à un journal permet de le ___.", "opts": ["recevoir", "vendre", "supprimer"], "ans": 0 },
-    { "q": "Un bref résumé de l'actualité à la radio est un ___.", "opts": ["flash info", "roman", "poème"], "ans": 0 },
-    { "q": "Un dessin humoristique dans un journal est un ___.", "opts": ["dessin de presse", "tableau", "portrait"], "ans": 0 },
-    { "q": "Le responsable de la rédaction est le rédacteur en ___.", "opts": ["chef", "premier", "maître"], "ans": 0 },
-    { "q": "Vérifier les faits avant de publier s'appelle le ___.", "opts": ["fact-checking", "changement", "tirage"], "ans": 0 },
-    { "q": "Un commentaire d'opinion écrit par le directeur est un ___.", "opts": ["éditorial", "roman", "poème"], "ans": 0 },
-    { "q": "Un grand reportage d'investigation est une ___.", "opts": ["enquête", "pub", "annonce"], "ans": 0 },
-    { "q": "La censure empêche la libre ___ des idées.", "opts": ["circulation", "fermeture", "perte"], "ans": 0 },
-    { "q": "Les réseaux sociaux propagent vite les ___.", "opts": ["rumeurs", "statues", "vérités"], "ans": 0 },
-    { "q": "Un journal publié chaque jour est un ___.", "opts": ["quotidien", "mensuel", "annuel"], "ans": 0 },
-    { "q": "Un journal publié chaque semaine est un ___.", "opts": ["hebdomadaire", "quotidien", "mensuel"], "ans": 0 },
-    { "q": "Un droit fondamental du citoyen est la liberté d'___.", "opts": ["expression", "achat", "sommeil"], "ans": 0 }
+    { "q": "Comment qualifie-t-on un personnage qui accomplit des actes héroïques mais a des méthodes moralement douteuses ?", "opts": ["Un justicier aveugle", "Un anti-héros", "Un antagoniste"], "ans": 1 },
+    { "q": "Quel mot désigne l'adversaire direct du protagoniste dans un récit ?", "opts": ["L'allié", "L'antagoniste", "Le figurant"], "ans": 1 },
+    { "q": "La qualité morale d'un héros qui affronte le danger sans faiblir est :", "opts": ["La lâcheté", "Le dévouement et la bravoure", "L'indifférence"], "ans": 1 },
+    { "q": "Pour débuter une argumentation sur un personnage, quel connecteur utilise-t-on ?", "opts": ["Tout d'abord", "Finalement", "Cependant"], "ans": 0 },
+    { "q": "Un héros classique fait souvent passer le bien ___ avant son intérêt personnel.", "opts": ["commun", "privé", "illusoire"], "ans": 0 },
+    { "q": "Le talon d'Achille d'un personnage représente :", "opts": ["Son superpouvoir secret", "Sa faiblesse ou vulnérabilité", "Son armure enchantée"], "ans": 1 },
+    { "q": "Quel connecteur exprime une relation d'addition ?", "opts": ["En outre", "Néanmoins", "Par conséquent"], "ans": 0 },
+    { "q": "Un acte accompli avec désintéressement pour secourir autrui est un acte de :", "opts": ["Trahison", "Dévouement", "Vengeance"], "ans": 1 },
+    { "q": "L'anti-héros agit souvent poussé par :", "opts": ["Une quête de gloire pure", "Une blessure passée ou la survie", "Le respect aveugle des lois"], "ans": 1 },
+    { "q": "Pour exprimer une opposition entre deux idées, on utilise :", "opts": ["C'est pourquoi", "Cependant", "D'abord"], "ans": 1 },
+    { "q": "Un combattant qui refuse de reculer devant une bête féroce fait preuve de :", "opts": ["Couardise", "Bravoure", "Rancœur"], "ans": 1 },
+    { "q": "Comment appelle-t-on l'épreuve initiatique qui transforme un simple citoyen en sauveur ?", "opts": ["Le serment civique", "La quête héroïque", "La trêve"], "ans": 1 },
+    { "q": "Quel connecteur annonce la conséquence d'une action ?", "opts": ["Par conséquent", "En premier lieu", "Toutefois"], "ans": 0 },
+    { "q": "Le mobile secret qui pousse un personnage à agir s'appelle :", "opts": ["Sa motivation", "Sa maladresse", "Son costume"], "ans": 0 },
+    { "q": "Un personnage impitoyable et cruel envers ses ennemis est :", "opts": ["Clément", "Impitoyable", "Tolérant"], "ans": 1 },
+    { "q": "Pour conclure une analyse morale, on emploie :", "opts": ["Premièrement", "En conclusion", "Par ailleurs"], "ans": 1 },
+    { "q": "L'anti-héros se distingue du méchant classique car :", "opts": ["Il n'a aucun pouvoir", "Il possède encore une part d'humanité", "Il réussit toujours sans effort"], "ans": 1 },
+    { "q": "L'acte de pardonner à un rival vaincu s'appelle :", "opts": ["La clémence", "L'embuscade", "L'avarice"], "ans": 0 },
+    { "q": "Quel connecteur permet d'ajouter un argument supplémentaire ?", "opts": ["De plus", "Donc", "En revanche"], "ans": 0 },
+    { "q": "Un pacte conclu entre deux guerriers pour s'entraider est :", "opts": ["Une rivalité", "Une alliance", "Une dispute"], "ans": 1 }
   ],
   "2": [
-    { "q": "Elle ___ (aller) au lycée tous les jours.", "opts": ["vas", "va", "vont"], "ans": 1 },
-    { "q": "Nous ___ (avoir) un cours de français.", "opts": ["avons", "avez", "ont"], "ans": 0 },
-    { "q": "Ils ___ (être) très motivés.", "opts": ["sont", "sommes", "êtes"], "ans": 0 },
-    { "q": "Je ___ (faire) mes devoirs à la bibliothèque.", "opts": ["fais", "fait", "faisons"], "ans": 0 },
-    { "q": "Vous ___ (pouvoir) m'expliquer cette leçon ?", "opts": ["pouvez", "pouvons", "peuvent"], "ans": 0 },
-    { "q": "Tu ___ (finir) tes exercices avant midi.", "opts": ["finis", "finit", "finissons"], "ans": 0 },
-    { "q": "Nous ___ (choisir) une bonne stratégie.", "opts": ["choisissons", "choisissez", "choisissent"], "ans": 0 },
-    { "q": "Elles ___ (parler) couramment français.", "opts": ["parlent", "parles", "parlez"], "ans": 0 },
-    { "q": "Je ___ (manger) une pomme à la récréation.", "opts": ["mange", "manges", "mangeons"], "ans": 0 },
-    { "q": "Vous ___ (écrire) un bel article de journal.", "opts": ["écrivez", "écrivons", "écrivent"], "ans": 0 },
-    { "q": "Il ___ (lire) un roman passionnant.", "opts": ["lit", "lis", "lisez"], "ans": 0 },
-    { "q": "Nous ___ (partir) en voyage demain.", "opts": ["partons", "partez", "partent"], "ans": 0 },
-    { "q": "Elles ___ (vendre) des poissons au marché.", "opts": ["vendent", "vends", "vendez"], "ans": 0 },
-    { "q": "Tu ___ (comprendre) cette règle de grammaire ?", "opts": ["comprends", "comprend", "comprenons"], "ans": 0 },
-    { "q": "Vous ___ (attendre) le bus scolaire.", "opts": ["attendez", "attendons", "attendent"], "ans": 0 },
-    { "q": "Je ___ (mettre) mes affaires dans mon sac.", "opts": ["mets", "met", "mettons"], "ans": 0 },
-    { "q": "Ils ___ (dormir) huit heures par nuit.", "opts": ["dorment", "dort", "dormons"], "ans": 0 },
-    { "q": "Nous ___ (apprendre) le vocabulaire de l'unité.", "opts": ["apprenons", "apprenez", "apprennent"], "ans": 0 },
-    { "q": "Elle ___ (répondre) aux questions du kiosque.", "opts": ["répond", "réponds", "répondent"], "ans": 0 },
-    { "q": "Tu ___ (voir) ce magnifique paysage ?", "opts": ["vois", "voit", "voyons"], "ans": 0 }
+    { "q": "« Pendant que le héros ___ les remparts, la foudre est tombée. »", "opts": ["surveillait", "a surveillé", "surveillera"], "ans": 0 },
+    { "q": "« Soudain, l'alarme de la forteresse ___ dans la nuit. »", "opts": ["retentissait", "a retenti", "retentit"], "ans": 1 },
+    { "q": "« Chaque matin, le vieux mentor ___ les recrues au maniement du bouclier. »", "opts": ["a entraîné", "entraînait", "entraîne"], "ans": 1 },
+    { "q": "« À cet instant précis, elle ___ que le trésor était faux. »", "opts": ["comprenait", "a compris", "a comprenant"], "ans": 1 },
+    { "q": "« Il faisait un froid glacial et la neige ___ les chemins d'accès. »", "opts": ["bloquait", "a bloqué", "bloquer"], "ans": 0 },
+    { "q": "« Tandis que nous négocions avec le chef, l'antagoniste ___ en courant. »", "opts": ["entrait", "est entré", "a entré"], "ans": 1 },
+    { "q": "« Autrefois, les villageois ___ aveuglément en la protection des chevaliers. »", "opts": ["ont cru", "croyaient", "croient"], "ans": 1 },
+    { "q": "« Dès qu'il a vu le danger, le justicier ___ son arc de guerre. »", "opts": ["bandait", "a bandé", "bande"], "ans": 1 },
+    { "q": "« La sorcière ___ un long voile noir qui flottait au vent. »", "opts": ["a porté", "portait", "porta"], "ans": 1 },
+    { "q": "« L'anti-héros ___ un dilemme cruel hier soir lors de l'attaque. »", "opts": ["tranchait", "a tranché", "tranchera"], "ans": 1 },
+    { "q": "« Les gardes ___ profondément quand les espions ont franchi la grille. »", "opts": ["dormaient", "ont dormi", "dorment"], "ans": 0 },
+    { "q": "« Finalement, après des heures d'attente, la porte dérobée ___ avec fracas. »", "opts": ["s'ouvrait", "s'est ouverte", "s'était ouvrir"], "ans": 1 },
+    { "q": "Pour décrire le temps, le décor ou l'état d'esprit dans le passé, quel temps emploie-t-on ?", "opts": ["Le passé composé", "L'imparfait", "Le subjonctif"], "ans": 1 },
+    { "q": "Pour exprimer une action soudaine, ponctuelle et complètement achevée :", "opts": ["L'imparfait", "Le passé composé", "Le conditionnel"], "ans": 1 },
+    { "q": "« Le chevalier était blessé (imparfait) mais il ___ le combat jusqu'au bout. »", "opts": ["poursuivait", "a poursuivi", "poursuivre"], "ans": 1 },
+    { "q": "« Tous les soirs, l'espionne ___ les mouvements de la garde royale. »", "opts": ["observait", "a observé", "observe"], "ans": 0 },
+    { "q": "« Brusquement, une flèche ennemie ___ le bouclier en deux. »", "opts": ["fendait", "a fendu", "fend"], "ans": 1 },
+    { "q": "« Le château était immense et ses couloirs ___ d'ombres menaçantes. »", "opts": ["regorgeaient", "ont regorgé", "regorge"], "ans": 0 },
+    { "q": "« Le voleur s'échappait sur les toits quand un garde ___ la torche. »", "opts": ["allumait", "a allumé", "allume"], "ans": 1 },
+    { "q": "« Ce jour mémorable, l'anti-héros ___ sa fidélité à la cause commune. »", "opts": ["prouvait", "a prouvé", "prouver"], "ans": 1 }
   ],
   "3": [
-    { "q": "Tu ___ (devoir) réviser les verbes.", "opts": ["dois", "doit", "devons"], "ans": 0 },
-    { "q": "Elles ___ (prendre) le bus de huit heures.", "opts": ["prennent", "prends", "prenez"], "ans": 0 },
-    { "q": "Nous ___ (vouloir) réussir notre projet.", "opts": ["voulons", "voulez", "veulent"], "ans": 0 },
-    { "q": "Je ___ (savoir) la réponse à la question.", "opts": ["sais", "sait", "savent"], "ans": 0 },
-    { "q": "Vous ___ (venir) à la réunion du club ?", "opts": ["venez", "venons", "viennent"], "ans": 0 },
-    { "q": "Il faut que tu ___ (faire) attention.", "opts": ["fasses", "fais", "faites"], "ans": 0 },
-    { "q": "Je souhaiterais qu'elle ___ (être) présente.", "opts": ["soit", "est", "sera"], "ans": 0 },
-    { "q": "Si j'avais le temps, je ___ (partir) en vacances.", "opts": ["partirais", "partir", "partirai"], "ans": 0 },
-    { "q": "Il faut que nous ___ (avoir) nos billets.", "opts": ["ayons", "avons", "aurez"], "ans": 0 },
-    { "q": "Si vous étudiiez, vous ___ (réussir) l'examen.", "opts": ["réussiriez", "réussissez", "réussir"], "ans": 0 },
-    { "q": "Il est important qu'ils ___ (comprendre) la leçon.", "opts": ["comprennent", "comprennent pas", "comprendra"], "ans": 0 },
-    { "q": "Tu ___ (pouvoir) m'aider si tu voulais.", "opts": ["pourrais", "peux", "pouvez"], "ans": 0 },
-    { "q": "Bien qu'il ___ (faire) froid, nous sortons.", "opts": ["fasse", "fait", "fera"], "ans": 0 },
-    { "q": "Nous ___ (aimer) visiter la Bretagne cet été.", "opts": ["aimerions", "aimons", "aimerez"], "ans": 0 },
-    { "q": "Il faut que vous ___ (savoir) la vérité.", "opts": ["sachiez", "savez", "saurez"], "ans": 0 },
-    { "q": "Si elle travaillait, elle ___ (avoir) de meilleures notes.", "opts": ["aurait", "a", "aura"], "ans": 0 },
-    { "q": "Avant que tu ne ___ (partir), écoute-moi.", "opts": ["partes", "pars", "partira"], "ans": 0 },
-    { "q": "Je préférerais que nous ___ (choisir) ensemble.", "opts": ["choisissions", "choisissons", "choisirez"], "ans": 0 },
-    { "q": "Tu ___ (devoir) m'avertir plus tôt.", "opts": ["devrais", "dois", "devras"], "ans": 0 },
-    { "q": "Il faut qu'ils ___ (aller) au laboratoire.", "opts": ["aillent", "vont", "iront"], "ans": 0 }
+    { "q": "« Après la bataille, les guerriers blessés ___ au campement. » (revenir, masc. plur.)", "opts": ["sont revenus", "ont revenu", "sont revenu"], "ans": 0 },
+    { "q": "« La vaillante capitaine ___ seule au sommet de la citadelle. » (monter, fém. sing.)", "opts": ["a montée", "est montée", "est monté"], "ans": 1 },
+    { "q": "« Les deux héros rivaux ___ longuement dans les yeux avant le duel. » (se regarder)", "opts": ["se sont regardés", "ont se regardé", "se sont regardé"], "ans": 0 },
+    { "q": "« Avant l'aube, la magicienne ___ dans la forêt interdite. » (s'aventurer, fém. sing.)", "opts": ["s'est aventurée", "a s'aventuré", "s'est aventuré"], "ans": 0 },
+    { "q": "« Les éclaireurs ___ à l'aube pour surprendre l'avant-poste. » (partir, masc. plur.)", "opts": ["ont partis", "sont partis", "sont parti"], "ans": 1 },
+    { "q": "« L'anti-héros et son frère ___ la main pour sceller la paix. » (se tendre, réciproque)", "opts": ["se sont tendu", "se sont tendus", "ont tendu"], "ans": 0 },
+    { "q": "« Dès le premier choc, le cavalier ___ lourdement de sa monture. » (tomber, masc. sing.)", "opts": ["est tombé", "a tombé", "est tombée"], "ans": 0 },
+    { "q": "« Nous (masc. plur.) ___ dans le piège tendu par le traître. » (tomber)", "opts": ["sommes tombés", "avons tombé", "sommes tombé"], "ans": 0 },
+    { "q": "« Les sentinelles ___ sans faire le moindre bruit. » (s'éloigner, fém. plur.)", "opts": ["se sont éloignées", "se sont éloigné", "ont s'éloignées"], "ans": 0 },
+    { "q": "« La justicière masquée ___ par la fenêtre secrète. » (s'échapper, fém. sing.)", "opts": ["s'est échappée", "a échappé", "s'est échappé"], "ans": 0 },
+    { "q": "« Les deux complices ___ dans la foule en délire. » (se dissimuler, masc. plur.)", "opts": ["se sont dissimulés", "ont dissimulé", "se sont dissimulé"], "ans": 0 },
+    { "q": "« À quelle heure les renforts ___ dans la vallée ? » (arriver, masc. plur.)", "opts": ["sont arrivés", "ont arrivé", "sont arrivé"], "ans": 0 },
+    { "q": "« Face au péril, vous (masc. plur.) ___ jusqu'au dernier souffle. » (se battre)", "opts": ["vous êtes battus", "vous avez battu", "vous êtes battu"], "ans": 0 },
+    { "q": "« L'héroïne ___ devant la porte du sanctuaire. » (s'agenouiller, fém. sing.)", "opts": ["s'est agenouillée", "a agenouillé", "s'est agenouillé"], "ans": 0 },
+    { "q": "« Les deux espions ___ en secret sur la rive du fleuve. » (se rejoindre, masc. plur.)", "opts": ["se sont rejoints", "ont rejoints", "se sont rejoint"], "ans": 0 },
+    { "q": "Quel auxiliaire emploie-t-on TOUJOURS pour conjuguer les verbes pronominaux au passé composé ?", "opts": ["Avoir", "Être", "Faire"], "ans": 1 },
+    { "q": "« La princesse rebelle ___ auprès de son peuple fidèle. » (rester, fém. sing.)", "opts": ["est restée", "a resté", "est resté"], "ans": 0 },
+    { "q": "« Les combattants ___ compte de leur terrible erreur. » (se rendre compte)", "opts": ["se sont rendu", "se sont rendus", "ont rendu"], "ans": 0 },
+    { "q": "« Quand le jour s'est levé, ils ___ au sommet de la colline. » (arriver, masc. plur.)", "opts": ["sont arrivés", "ont arrivé", "sont arrivé"], "ans": 0 },
+    { "q": "« Les deux adversaires ___ un pacte de non-agression. » (se promettre)", "opts": ["se sont promis", "se sont promis(es)", "ont promis"], "ans": 0 }
   ],
   "4": [
-    { "q": "J'ai vu cette vidéo, je l'ai ___ aimée.", "opts": ["beaucoup", "très", "trop"], "ans": 0 },
-    { "q": "Combien de livres as-tu ? J'___ ai trois.", "opts": ["y", "les", "en"], "ans": 2 },
-    { "q": "Je te conseille ___ lire cet article.", "opts": ["à", "de", "pour"], "ans": 1 },
-    { "q": "Il ___ offre des fleurs. (à sa mère)", "opts": ["l'", "la", "lui"], "ans": 2 },
-    { "q": "Vous ___ avez parlé hier. (à vos amis)", "opts": ["les", "leur", "y"], "ans": 1 },
-    { "q": "Le livre ___ je te parle est passionnant.", "opts": ["dont", "que", "qui"], "ans": 0 },
-    { "q": "La ville ___ j'habite est magnifique.", "opts": ["où", "que", "dont"], "ans": 0 },
-    { "q": "Ce film est fantastique, je ___ recommande.", "opts": ["le", "lui", "en"], "ans": 0 },
-    { "q": "As-tu répondu à la lettre ? Oui, j'___ ai répondu.", "opts": ["y", "en", "la"], "ans": 0 },
-    { "q": "Les conseils ___ le professeur m'a donnés sont utiles.", "opts": ["que", "qui", "dont"], "ans": 0 },
-    { "q": "Elle se souvient ___ son premier voyage en France.", "opts": ["de", "à", "en"], "ans": 0 },
-    { "q": "Il s'intéresse beaucoup ___ arts et à la culture.", "opts": ["aux", "des", "les"], "ans": 0 },
-    { "q": "C'est l'étudiant ___ a gagné le concours.", "opts": ["qui", "que", "dont"], "ans": 0 },
-    { "q": "Avez-vous besoin de ce dictionnaire ? Oui, j'___ ai besoin.", "opts": ["en", "y", "le"], "ans": 0 },
-    { "q": "Ma sœur ___ a envoyé une belle carte postale. (à nous)", "opts": ["nous", "leur", "les"], "ans": 0 },
-    { "q": "Ce sont les affaires ___ j'ai achetées au marché.", "opts": ["que", "qui", "dont"], "ans": 0 },
-    { "q": "Penses-tu à tes examens ? Oui, j'___ pense souvent.", "opts": ["y", "en", "les"], "ans": 0 },
-    { "q": "Il m'a demandé ___ je voulais venir avec lui.", "opts": ["si", "que", "dont"], "ans": 0 },
-    { "q": "C'est la raison pour ___ il est en retard.", "opts": ["laquelle", "quel", "qui"], "ans": 0 },
-    { "q": "Elle ___ a dit la vérité sans hésiter. (à moi)", "opts": ["m'", "moi", "me les"], "ans": 0 }
+    { "q": "« Le justicier a violé les lois de la cité ; ___, ses intentions visaient le bien commun. »", "opts": ["toutefois", "ainsi", "d'abord"], "ans": 0 },
+    { "q": "« L'anti-héros a dérobé l'antidote royal. ___, il s'est empressé de soigner les orphelins. »", "opts": ["Néanmoins", "En revanche", "En outre"], "ans": 0 },
+    { "q": "« Il a bravé les ordres du conseil des sages ; ___, il doit être jugé équitablement. »", "opts": ["par conséquent", "premièrement", "en outre"], "ans": 0 },
+    { "q": "« Le héros classique agit par altruisme. ___, l'anti-héros privilégie souvent sa survie. »", "opts": ["En revanche", "C'est pourquoi", "De plus"], "ans": 0 },
+    { "q": "« L'antagoniste paraissait invincible ; ___, une faille dans son armure a causé sa perte. »", "opts": ["cependant", "en conclusion", "également"], "ans": 0 },
+    { "q": "Qu'est-ce qui caractérise le mieux le dilemme moral d'un anti-héros ?", "opts": ["L'absence totale d'émotions", "Le conflit entre ses valeurs intimes et la loi établie", "L'obéissance absolue aux ordres"], "ans": 1 },
+    { "q": "« Le détective a réuni des preuves irréfutables ; ___, il n'a pu empêcher le crime. »", "opts": ["pourtant", "donc", "en premier lieu"], "ans": 0 },
+    { "q": "« ___ d'évaluer les actes du héros, examinons les circonstances du combat. »", "opts": ["Avant", "Après", "Tandis que"], "ans": 0 },
+    { "q": "« Les citoyens admiraient son courage. Ils louaient ___ sa grande humilité. »", "opts": ["également", "néanmoins", "par contre"], "ans": 0 },
+    { "q": "« Le mercenaire a trahi ses employeurs corrompus ; ___, il a sauvé des innocents. »", "opts": ["ainsi", "au contraire", "en premier lieu"], "ans": 0 },
+    { "q": "Pourquoi la figure de l'anti-héros est-elle souvent plus réaliste aux yeux des lecteurs ?", "opts": ["Parce qu'il est immortel", "Parce qu'il possède des doutes et des imperfections humaines", "Parce qu'il ne perd jamais un combat"], "ans": 1 },
+    { "q": "« L'ennemi avançait en grand nombre. ___, la garnison a tenu la porte d'armes. »", "opts": ["Malgré cela", "En conclusion", "C'est pourquoi"], "ans": 0 },
+    { "q": "« ___ de cette épopée, nous retenons que chaque victoire exige de lourds sacrifices. »", "opts": ["Au terme", "Au début", "Par ailleurs"], "ans": 0 },
+    { "q": "« Ce héros n'a utilisé aucune arme létale ; ___, il a fait preuve d'une retenue exemplaire. »", "opts": ["en d'autres termes", "cependant", "pourtant"], "ans": 0 },
+    { "q": "Quelle nuance oppose le courage héroïque à la témérité imprudente ?", "opts": ["La témérité ignore le danger, le courage l'affronte lucidement", "Le courage est toujours magique", "Il n'y a aucune différence"], "ans": 0 },
+    { "q": "« La menace a été neutralisée sans perte humaine ; ___, la mission est un franc succès. »", "opts": ["dès lors", "toutefois", "au contraire"], "ans": 0 },
+    { "q": "« Le chevalier protégeait les faibles ___ le renégat pillait les convois royaux. »", "opts": ["alors que", "donc", "par conséquent"], "ans": 0 },
+    { "q": "« ___, les frontières du royaume sont restaurées et la paix règne de nouveau. »", "opts": ["Finalement", "Premièrement", "D'ailleurs"], "ans": 0 },
+    { "q": "Quel connecteur marque la reformulation explicative d'un exploit héroïque ?", "opts": ["C'est-à-dire", "Cependant", "Néanmoins"], "ans": 0 },
+    { "q": "« En dernière analyse, le dévouement du héros transcende ses faiblesses individuelles. » Que signifie « transcende » ?", "opts": ["Dépasse et sublime", "Détruit complètement", "Imite aveuglément"], "ans": 0 }
   ]
 };
 
@@ -329,6 +329,30 @@ export default function Fishtopia({ onBack }) {
     return () => cancelAnimationFrame(gameLoopRef.current);
   }, []);
 
+  const maskCanvasRef = useRef(null);
+  const maskCtxRef = useRef(null);
+  const maskDataRef = useRef({});
+
+  useEffect(() => {
+    // Load offscreen canvas masks for ALL 4 levels from pixel mask images!
+    [1, 2, 3, 4].forEach(lvl => {
+      const maskImg = new Image();
+      maskImg.src = `/assets/level${lvl}_mask.jpg`;
+      maskImg.onload = () => {
+        const offCanvas = document.createElement('canvas');
+        offCanvas.width = WIDTH;
+        offCanvas.height = HEIGHT;
+        const offCtx = offCanvas.getContext('2d', { willReadFrequently: true });
+        offCtx.drawImage(maskImg, 0, 0, WIDTH, HEIGHT);
+        try {
+          maskDataRef.current[lvl] = offCtx.getImageData(0, 0, WIDTH, HEIGHT);
+        } catch (e) {
+          console.error(`Mask level ${lvl} getImageData failed:`, e);
+        }
+      };
+    });
+  }, []);
+
   const getMapForLevel = () => {
     const lvl = stateRef.current?.rodLevel || 1;
     if (lvl === 2) return MAP_LEVEL_2;
@@ -345,31 +369,65 @@ export default function Fishtopia({ onBack }) {
     return activeMap[row][col];
   };
 
-  // --- HARD RULES FOR MOVEMENT / WALKABILITY (STRICT NIMBLE 14-POINT COLLISION SAMPLING) ---
-  // Hard Rule: Hamster CAN ONLY walk on Sand/Dirt Path (GRASS=0) or Wooden Pier Dock (PIER=5).
-  // Water (1), Forest/Trees/Bushes/Rocks/Long Grass/Cliffs (2), Fish Market structure (3), Question Booth structure (4) are 100% STRICTLY IMPASSABLE in ALL levels!
+  // --- HARD RULES FOR MOVEMENT / WALKABILITY (DIRECT PIXEL-COLOR MASKING ACROSS ALL 4 LEVELS) ---
+  // Hard Rule: Hamster CAN ONLY walk on pixels painted BLACK (R<70, G<70, B<70) in the level's annotated mask image!
+  // Water, grass, rocks, forest, long grass, cliffs, and buildings are 100% STRICTLY IMPASSABLE across ALL 4 LEVELS!
   const checkCollisionAt = (px, py, size) => {
-    const colSize = 14; // Precise 14px collision box around hamster center for smooth 1-tile navigation
+    const rLevel = stateRef.current?.rodLevel || 1;
+    const activeMaskData = maskDataRef.current[rLevel];
+
+    // For ALL Levels: Direct Pixel-Color Sampling from the black path mask image!
+    if (activeMaskData) {
+      const colSize = 8; // Nimble 8px collision box for smooth turning along black path
+      const points = [
+        { x: px - colSize/2, y: py - colSize/2 },
+        { x: px + colSize/2, y: py - colSize/2 },
+        { x: px - colSize/2, y: py + colSize/2 },
+        { x: px + colSize/2, y: py + colSize/2 },
+        { x: px, y: py }
+      ];
+
+      const imgData = activeMaskData.data;
+      for (let c of points) {
+        const cx = Math.floor(c.x);
+        const cy = Math.floor(c.y);
+
+        if (cx < 0 || cx >= WIDTH || cy < 0 || cy >= HEIGHT) return true; // Offscreen = BLOCKED!
+
+        const index = (cy * WIDTH + cx) * 4;
+        const r = imgData[index];
+        const g = imgData[index + 1];
+        const b = imgData[index + 2];
+
+        // Pixel is BLACK if Red < 70, Green < 70, Blue < 70
+        const isBlack = (r < 70 && g < 70 && b < 70);
+
+        if (!isBlack) {
+          return true; // BLOCKED! Only pixels painted black are walkable!
+        }
+      }
+      return false; // Walkable!
+    }
+
+    // Grid fallback for other levels if mask is loading:
+    const colSize = 8; // Nimble 8px collision box matching mask mode for smooth navigation
     const points = [
       { x: px - colSize/2, y: py - colSize/2 },
       { x: px + colSize/2, y: py - colSize/2 },
       { x: px - colSize/2, y: py + colSize/2 },
       { x: px + colSize/2, y: py + colSize/2 },
-      { x: px, y: py - colSize/2 },
-      { x: px, y: py + colSize/2 },
-      { x: px - colSize/2, y: py },
-      { x: px + colSize/2, y: py }
+      { x: px, y: py }
     ];
 
     for (let c of points) {
+      if (c.x < 0 || c.x >= WIDTH || c.y < 0 || c.y >= HEIGHT) return true;
       const tile = getTile(c.x, c.y);
-      // Hard Rule: If tile is NOT walkable Dirt/Sand Path (0) or Pier Dock (5), BLOCK MOVEMENT IMMEDIATELY!
       if (tile !== GRASS && tile !== PIER) {
-        return true; // BLOCKED! Strictly cannot walk on water, bushes, rocks, forest, long grass, or buildings!
+        return true;
       }
     }
 
-    return false; // Walkable!
+    return false;
   };
 
   // --- HARD RULES FOR INTERACTION TRIGGERS ---
@@ -382,14 +440,14 @@ export default function Fishtopia({ onBack }) {
     const tileInFrontNear = getTile(p.x, p.y - TILE * 0.25);
     const currentTile = getTile(p.x, p.y);
 
-    // Rule: Question Booth tab ONLY when standing directly in front facing North
-    if (tileInFrontFar === TEMPLE || tileInFrontMid === TEMPLE || tileInFrontNear === TEMPLE) return 'station';
+    // Rule: Question Booth tab when standing at the front entrance base
+    if (tileInFrontFar === TEMPLE || tileInFrontMid === TEMPLE || tileInFrontNear === TEMPLE || (p.x >= 100 && p.x <= 240 && p.y >= 230 && p.y <= 300)) return 'station';
 
     // Rule: Fish Market / Trading tab ONLY when standing directly in front facing North
-    if (tileInFrontFar === MARKET || tileInFrontMid === MARKET || tileInFrontNear === MARKET) return 'market';
+    if (tileInFrontFar === MARKET || tileInFrontMid === MARKET || tileInFrontNear === MARKET || (p.x >= 400 && p.x <= 560 && p.y >= 120 && p.y <= 180)) return 'market';
 
     // Rule: Fishing tab ONLY when standing on the wooden fishing dock ("penton")
-    if (currentTile === PIER) return 'fish';
+    if (currentTile === PIER || (p.x >= 390 && p.y >= 340 && p.y <= 450)) return 'fish';
 
     return null;
   };
@@ -439,6 +497,10 @@ export default function Fishtopia({ onBack }) {
         break;
       }
     }
+
+    // Coordinate clamping: Keep hamster strictly within game map bounds
+    p.x = Math.max(p.size / 2, Math.min(WIDTH - p.size / 2, p.x));
+    p.y = Math.max(p.size / 2, Math.min(HEIGHT - p.size / 2, p.y));
 
     const target = getInteractionTarget();
     if (target === 'station') setInteractionHint("🏛️ CLIQUEZ OU APPUYEZ SUR ESPACE POUR POSER UNE QUESTION");

@@ -5,7 +5,46 @@ import './PracticeSection.css';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 
-const ACTIVITIES = [
+
+const REPRISE_ACTIVITIES = [
+  {
+    id: "mots_croises",
+    title: "Mots Croisés (7 Grilles)",
+    isCrosswordHub: true
+  },
+  {
+    id: "reprise_present",
+    title: "Activité 1 : Le Présent de l'Indicatif — Routine et Habitudes",
+    description: "Complétez chaque phrase en conjuguant le verbe entre parenthèses au présent de l'indicatif.",
+    questions: [
+      { id: "rep_1", textBefore: "Chaque matin, je ", textAfter: " à sept heures pour préparer mes affaires de cours.", hint: "se lever (1re pers. sing.)", answer: "me lève" },
+      { id: "rep_2", textBefore: "Les élèves ", textAfter: " attentivement les consignes données par le professeur.", hint: "écouter (3e pers. plur.)", answer: "écoutent" },
+      { id: "rep_3", textBefore: "Nous ", textAfter: " ensemble à la cafétéria pendant la pause de midi.", hint: "déjeuner (1re pers. plur.)", answer: "déjeunons" },
+      { id: "rep_4", textBefore: "Tu ", textAfter: " toujours tes devoirs avant de sortir rejoindre tes amis.", hint: "finir (2e pers. sing.)", answer: "finis" },
+      { id: "rep_5", textBefore: "Vous ", textAfter: " vos cours avec beaucoup de sérieux cette année.", hint: "choisir (2e pers. plur.)", answer: "choisissez" },
+      { id: "rep_6", textBefore: "Le professeur de français ", textAfter: " le nouveau programme d'immersion.", hint: "expliquer (3e pers. sing.)", answer: "explique" }
+    ]
+  },
+  {
+    id: "reprise_prepositions",
+    title: "Activité 2 : Les Prépositions de Lieu et de Temps",
+    description: "Complétez chaque phrase avec la préposition appropriée (à, en, chez, dans, devant, etc.).",
+    questions: [
+      { id: "prep_1", textBefore: "Les lycéens se rassemblent souvent ", textAfter: " la bibliothèque pour réviser leurs examens.", hint: "à / dans / en", answer: "dans" },
+      { id: "prep_2", textBefore: "Après les cours, nous allons directement ", textAfter: " notre camarade pour travailler sur le projet.", hint: "chez / vers / sous", answer: "chez" },
+      { id: "prep_3", textBefore: "Son casier se trouve juste ", textAfter: " la salle de sciences et le laboratoire de langues.", hint: "entre / contre / sous", answer: "entre" },
+      { id: "prep_4", textBefore: "Je t'attends ", textAfter: " l'entrée principale du lycée à quinze heures.", hint: "devant / dedans / par", answer: "devant" },
+      { id: "prep_5", textBefore: "Il étudie le français ", textAfter: " l'école depuis maintenant quatre ans.", hint: "à / chez / vers", answer: "à" }
+    ]
+  },
+  {
+    id: "writing_prompt",
+    title: "Activité 3 : Atelier d'Écriture",
+    description: "Rédigez un court texte au présent en appliquant les notions de la rentrée."
+  }
+];
+
+const UNIT1_ACTIVITIES = [
   {
     id: 'mots_croises',
     title: 'Mots Croisés (7 Grilles)',
@@ -116,12 +155,13 @@ const ACTIVITIES = [
 export default function PracticeSection() {
   const { chapterId } = useParams();
   const isReprise = !chapterId || chapterId === 'unite-reprise';
+  const currentActivities = isReprise ? REPRISE_ACTIVITIES : UNIT1_ACTIVITIES;
   const [activeActivityId, setActiveActivityId] = useState('mots_croises');
   const [userAnswers, setUserAnswers] = useState({});
   const [validationResults, setValidationResults] = useState({});
   const [focusedInputId, setFocusedInputId] = useState(null);
 
-  const currentActivity = ACTIVITIES.find(act => act.id === activeActivityId);
+  const currentActivity = currentActivities.find(act => act.id === activeActivityId);
 
   const handleInputChange = (questionId, value) => {
     setUserAnswers(prev => ({
@@ -152,7 +192,7 @@ export default function PracticeSection() {
   };
 
   const handleVerify = (activityId) => {
-    const activity = ACTIVITIES.find(a => a.id === activityId);
+    const activity = currentActivities.find(a => a.id === activityId);
     if (!activity || !activity.questions) return;
 
     let correctCount = 0;
@@ -181,7 +221,7 @@ export default function PracticeSection() {
   };
 
   const handleReset = (activityId) => {
-    const activity = ACTIVITIES.find(a => a.id === activityId);
+    const activity = currentActivities.find(a => a.id === activityId);
     if (!activity || !activity.questions) return;
 
     setUserAnswers(prev => {
@@ -204,7 +244,7 @@ export default function PracticeSection() {
   return (
     <div className="practice-section-container fade-in">
       <div className="activity-tabs-nav">
-        {ACTIVITIES.map(act => (
+        {currentActivities.map(act => (
           <button
             key={act.id}
             onClick={() => {
@@ -225,7 +265,7 @@ export default function PracticeSection() {
         </div>
       ) : activeActivityId === 'writing_prompt' ? (
         <div className="activity-main-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
-          <WritingPrompt />
+          <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : '1'} />
         </div>
       ) : (
         <div className="activity-main-card">

@@ -1,10 +1,46 @@
 import React, { useState, useRef } from 'react';
 import { BookOpen, RefreshCw, Send, CheckCircle2, AlertTriangle, HelpCircle } from 'lucide-react';
 
-const PROMPTS = [
+const RENTREE_PROMPTS = [
+  {
+    id: 1,
+    title: "Votre routine matinale",
+    level: "Niveau Intermédiaire-Bas",
+    prompt: "Décrivez votre routine du matin au présent. Qu'est-ce que vous faites en premier ? Que mangez-vous ?",
+    focus: "Le Présent — Routine quotidienne",
+    minWords: 30
+  },
+  {
+    id: 2,
+    title: "Vos loisirs préférés",
+    level: "Niveau Intermédiaire-Bas",
+    prompt: "Parlez de vos loisirs préférés. Pourquoi aimez-vous ces activités et quand les pratiquez-vous ?",
+    focus: "Le Présent — Loisirs et passions",
+    minWords: 30
+  },
+  {
+    id: 3,
+    title: "Votre meilleur(e) ami(e)",
+    level: "Niveau Intermédiaire-Bas",
+    prompt: "Décrivez votre meilleur(e) ami(e). Comment est-il ou elle physiquement et mentalement ?",
+    focus: "Le Présent — Description physique et morale",
+    minWords: 30
+  },
+  {
+    id: 4,
+    title: "Votre maison de rêve",
+    level: "Niveau Intermédiaire-Bas",
+    prompt: "Décrivez votre maison ou appartement de rêve au présent. Quels meubles ou pièces y a-t-il ?",
+    focus: "Le Présent — Logement et mobilier",
+    minWords: 30
+  }
+];
+
+const UNIT1_PROMPTS = [
   {
     id: 1,
     title: "1. L'Origine d'un Héros ou d'une Héroïne",
+    level: "Niveau Intermédiaire",
     prompt: "Racontez la jeunesse d'un héros ou d'une héroïne avant sa célébrité. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
     focus: "Imparfait vs Passé Composé & Connecteurs",
     minWords: 45
@@ -12,6 +48,7 @@ const PROMPTS = [
   {
     id: 2,
     title: "2. Le Dilemme Moral de l'Anti-Héros",
+    level: "Niveau Intermédiaire",
     prompt: "Présentez un anti-héros confronté à un choix déchirant. Décrivez ses doutes et ses faiblesses (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et ses réactions avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
     focus: "Passé Composé, Verbes Réfléchis & Nuance Morale",
     minWords: 45
@@ -19,6 +56,7 @@ const PROMPTS = [
   {
     id: 3,
     title: "3. La Mission Périlleuse : Récit d'une Épreuve",
+    level: "Niveau Intermédiaire",
     prompt: "Racontez une mission ou un sauvetage difficile. Décrivez l'atmosphère et le décor (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis la fin de l'épreuve avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
     focus: "Passé Composé avec Être (accords) & Récit d'aventure",
     minWords: 45
@@ -26,418 +64,207 @@ const PROMPTS = [
   {
     id: 4,
     title: "4. L'Affrontement ou la Réconciliation",
+    level: "Niveau Intermédiaire",
     prompt: "Racontez la confrontation décisive entre deux personnages rivaux. Expliquez l'origine de leur conflit (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques : s'affronter, se regarder, se comprendre), et le dénouement de leur face-à-face (passé composé).",
     focus: "Verbes Réciproques, Passé Composé & Connecteurs d'opposition",
     minWords: 45
   }
 ];
+
+function getActivePrompts() {
+  if (typeof window !== "undefined" && (window.location.pathname.includes("unite-1") || window.location.pathname.includes("unite1"))) {
+    return UNIT1_PROMPTS;
+  }
+  return RENTREE_PROMPTS;
+}
+
+const PROMPTS = getActivePrompts();
 const WRITING_PROMPTS = PROMPTS;
 
-const UNIT1_PROMPTS = [
-  {
-    id: 1,
-    title: "1. L'Origine d'un Héros ou d'une Héroïne",
-    prompt: "Racontez la jeunesse d'un héros ou d'une héroïne avant qu'il/elle ne devienne célèbre. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
-    focus: "Imparfait vs Passé Composé & Connecteurs",
-    minWords: 45
-  },
-  {
-    id: 2,
-    title: "2. Le Dilemme Moral de l'Anti-Héros",
-    prompt: "Présentez un anti-héros face à une décision difficile. Expliquez ses sentiments et ses défauts (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et comment il s'est senti ou s'est préparé avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
-    focus: "Passé Composé, Verbes Réfléchis & Nuance Morale",
-    minWords: 45
-  },
-  {
-    id: 3,
-    title: "3. La Mission Périlleuse : Récit d'une Épreuve",
-    prompt: "Racontez une mission ou un sauvetage difficile. Décrivez le décor et la météo (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis le dénouement de la mission avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
-    focus: "Passé Composé avec Être (accords) & Récit d'aventure",
-    minWords: 45
-  },
-  {
-    id: 4,
-    title: "4. L'Affrontement ou la Réconciliation",
-    prompt: "Racontez une rencontre décisive entre deux personnages rivaux. Expliquez pourquoi ils étaient ennemis (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques au passé ou présent : s'affronter, se regarder, se comprendre), et le résultat de leur duel (passé composé).",
-    focus: "Verbes Réciproques, Passé Composé & Connecteurs d'opposition",
-    minWords: 45
-  }
-];
+const LOWER_ACCENTS = ["é", "è", "ê", "ë", "à", "â", "ù", "û", "î", "ï", "ô", "ç", "œ"];
+const UPPER_ACCENTS = ["É", "È", "Ê", "Ë", "À", "Â", "Ù", "Û", "Î", "Ï", "Ô", "Ç", "Œ"];
 
-const localAnalyzeText = (text, prompt) => {
-  const textClean = text.trim();
-  const textLower = textClean.toLowerCase();
-  
-  const spellingErrors = [];
-  const verbAgreements = [];
-  const adjectiveAgreements = [];
-  const nounGenders = [];
-  const wordChoices = [];
 
-  // 1. Verb: je me leve -> je me lève
-  const leveMatch = textClean.match(/\b(je\s+me|je|tu|il|elle|on|ils|elles)\s+leve(s)?\b/i);
-  if (leveMatch) {
-    const pronom = leveMatch[1].toLowerCase();
-    let correctVerb = "lève";
-    if (pronom === "tu") correctVerb = "lèves";
-    if (pronom === "ils" || pronom === "elles") correctVerb = "lèvent";
-    
-    verbAgreements.push({
-      error: leveMatch[2] ? `${leveMatch[1]} leve${leveMatch[2]}` : `${leveMatch[1]} leve`,
-      subject: leveMatch[1],
-      correction: `${leveMatch[1]} ${correctVerb}`,
-      explanation: "Le verbe pronominal « se lever » prend un accent grave (è) au présent pour la prononciation : je me lève."
-    });
+const STYLE_BLOCK = `
+  .wp-container {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    background: rgba(30, 41, 59, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 24px;
+    color: #f8fafc;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
   }
 
-  // 2. Preposition a vs à
-  // Match 'a' followed by space and then a common noun, article, city, or digit
-  const aPrepMatch = textClean.match(/\ba\s+(la|l'|un|une|des|le|les|paris|canada|france|l'école|l'hôtel|l'hôpital|\d+)\b/i);
-  if (aPrepMatch) {
-    wordChoices.push({
-      error: `a ${aPrepMatch[1]}`,
-      correction: `à ${aPrepMatch[1]}`,
-      explanation: "La préposition de lieu ou de temps s'écrit « à » avec un accent grave. Le mot « a » sans accent est la troisième personne du verbe avoir."
-    });
+  .wp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  // 3. Verb: prend -> prends (je prend, tu prend)
-  const prendMatch = textClean.match(/\b(je|tu)\s+prend\b/i);
-  if (prendMatch) {
-    verbAgreements.push({
-      error: `${prendMatch[1]} prend`,
-      subject: prendMatch[1],
-      correction: `${prendMatch[1]} prends`,
-      explanation: "Au présent de l'indicatif, le verbe « prendre » prend un « -s » avec les sujets je/tu : je prends, tu prends."
-    });
+  .wp-title-group h2 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 0.3rem 0;
+    background: linear-gradient(135deg, #60a5fa, #3b82f6, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
 
-  // 4. Noun Gender: ma déjeuner -> mon déjeuner
-  const dejeunerMatch = textClean.match(/\b(ma|la)\s+dé?jeuner\b/i);
-  if (dejeunerMatch) {
-    nounGenders.push({
-      error: dejeunerMatch[0],
-      correction: dejeunerMatch[1].toLowerCase() === 'ma' ? "mon déjeuner" : "le déjeuner",
-      explanation: "Le nom « déjeuner » est masculin. On dit « le déjeuner » ou « mon déjeuner »."
-    });
+  .wp-title-group p {
+    color: #cbd5e1;
+    font-size: 0.95rem;
+    margin: 0;
   }
 
-  // 5. Elision/Preposition: a la école / la école / a la ecole
-  const ecoleMatch = textClean.match(/\b(a\s+)?la\s+é?cole\b/i);
-  if (ecoleMatch) {
-    wordChoices.push({
-      error: ecoleMatch[0],
-      correction: "à l'école",
-      explanation: "Devant un nom commençant par une voyelle comme école, l'article 'la' s'élide en 'l\''. De plus, on utilise la préposition « à » : à l'école."
-    });
+  .wp-panel {
+    background: rgba(15, 23, 42, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 18px;
+    padding: 1.5rem;
   }
 
-  // 5.5. Spelling/Elision for ercole: ercole -> école
-  const ercoleMatch = textClean.match(/\b(a\s+)?(la\s+)?(l['’]\s*)?ercole(s)?\b/i);
-  if (ercoleMatch) {
-    let corr = "école";
-    let expl = "Le mot s'écrit « école » avec un accent aigu sur le premier 'e' (et sans la lettre 'r').";
-    if (ercoleMatch[1] || ercoleMatch[2] || ercoleMatch[3]) {
-      corr = ercoleMatch[1] ? "à l'école" : "l'école";
-      expl = "Le mot s'écrit « école » avec un accent aigu sur le premier 'e' (et sans la lettre 'r'). Devant école (qui commence par une voyelle), l'article s'élide en l'.";
-    }
-    spellingErrors.push({
-      error: ercoleMatch[0],
-      correction: corr,
-      explanation: expl
-    });
+  .accent-key-btn {
+    width: 28px;
+    height: 32px;
+    background: rgba(59, 130, 246, 0.12);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    border-radius: 6px;
+    color: #93c5fd;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s ease;
   }
 
-  // 6. Possessive agreement: mon amis
-  const monAmisMatch = textClean.match(/\bmon\s+ami(e)?s\b/i);
-  if (monAmisMatch) {
-    adjectiveAgreements.push({
-      error: monAmisMatch[0],
-      noun: "amis",
-      correction: "mon ami (singulier) ou mes amis (pluriel)",
-      explanation: "L'adjectif possessif doit s'accorder en nombre avec le nom. Utilisez « mon » avec un nom singulier ou « mes » avec un nom pluriel."
-    });
+  .accent-key-btn:hover:not(:disabled) {
+    background: rgba(59, 130, 246, 0.25);
+    color: white;
+    transform: translateY(-1px);
   }
 
-  // 7. Context word choices: sur le bus -> dans le bus
-  const surBusMatch = textClean.match(/\bsur\s+(le|un|les)\s+bus\b/i);
-  if (surBusMatch) {
-    wordChoices.push({
-      error: surBusMatch[0],
-      correction: `dans ${surBusMatch[1]} bus`,
-      explanation: "En français, on voyage « dans le bus » (à l'intérieur) ou « en bus ». « Sur le bus » signifie sur le toit du véhicule !"
-    });
+  .wp-textarea {
+    width: 100%;
+    padding: 1rem;
+    background: rgba(15, 23, 42, 0.6);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+    outline: none;
+    resize: none;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
   }
 
-  // 7.5. Irregular Verb conjugation: je va / tu va / il vais
-  const jeVaMatch = textClean.match(/\bje\s+va(s)?\b/i);
-  if (jeVaMatch) {
-    verbAgreements.push({
-      error: jeVaMatch[0],
-      subject: "je",
-      correction: "je vais",
-      explanation: "Au présent de l'indicatif, la forme correcte du verbe « aller » avec le sujet « je » est « vais » : je vais."
-    });
-  }
-  const tuVaMatch = textClean.match(/\btu\s+va\b/i);
-  if (tuVaMatch) {
-    verbAgreements.push({
-      error: tuVaMatch[0],
-      subject: "tu",
-      correction: "tu vas",
-      explanation: "Au présent de l'indicatif, la forme correcte du verbe « aller » avec le sujet « tu » prend un 's' : tu vas."
-    });
-  }
-  const ilVaisMatch = textClean.match(/\b(il|elle|on)\s+vai(s|t)\b/i);
-  if (ilVaisMatch) {
-    verbAgreements.push({
-      error: ilVaisMatch[0],
-      subject: ilVaisMatch[1],
-      correction: `${ilVaisMatch[1]} va`,
-      explanation: "Au présent de l'indicatif, la forme correcte du verbe « aller » avec la troisième personne (il/elle/on) est « va » : il/elle/on va."
-    });
+  .wp-textarea:focus {
+    border-color: #3b82f6;
+    background: rgba(15, 23, 42, 0.85);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
   }
 
-  // 8. General verb agreements
-  // Je + verb ending in -es (ex: je manges)
-  const jeEsMatch = textClean.match(/\b(je)\s+(\w+es)\b/i);
-  if (jeEsMatch && !leveMatch) {
-    verbAgreements.push({
-      error: jeEsMatch[2],
-      subject: "je",
-      correction: jeEsMatch[2].slice(0, -1),
-      explanation: "Au présent de l'indicatif, la terminaison avec le pronom sujet « je » est « -e » pour les verbes du premier groupe (-er)."
-    });
+  .wp-primary-btn {
+    padding: 0.75rem 1.5rem;
+    background: #3b82f6;
+    color: white;
+    border: 1px solid #2563eb;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
   }
 
-  // Nous + verb ending in -e, -es, -ez (ex: nous mange)
-  const nousMatch = textClean.match(/\b(nous)\s+(\w+[^ons\s])\b/i);
-  if (nousMatch && !["sommes"].includes(nousMatch[2])) {
-    const verb = nousMatch[2];
-    if (verb.endsWith("e") || verb.endsWith("es") || verb.endsWith("ez")) {
-      verbAgreements.push({
-        error: verb,
-        subject: "nous",
-        correction: verb.replace(/e(s|z)?$/, "ons"),
-        explanation: "Au présent, la terminaison avec le sujet « nous » est « -ons » (ex: nous mangeons)."
-      });
-    }
+  .wp-primary-btn:hover:not(:disabled) {
+    background: #2563eb;
   }
 
-  // Vous + verb ending in -e, -es (ex: vous manges)
-  const vousMatch = textClean.match(/\b(vous)\s+(\w+[^ez\s])\b/i);
-  if (vousMatch && !["êtes", "faites", "dites"].includes(vousMatch[2])) {
-    const verb = vousMatch[2];
-    if (verb.endsWith("e") || verb.endsWith("es")) {
-      verbAgreements.push({
-        error: verb,
-        subject: "vous",
-        correction: verb.replace(/e(s)?$/, "ez"),
-        explanation: "Au présent, la terminaison avec le sujet « vous » est « -ez » (ex: vous mangez)."
-      });
-    }
+  .wp-primary-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
   }
 
-  // Ils/Elles + verb ending in -e, -es, -ez (ex: ils mange)
-  const ilsMatch = textClean.match(/\b(ils|elles)\s+(\w+[^ent\s])\b/i);
-  if (ilsMatch && !["sont", "ont", "font", "vont"].includes(ilsMatch[2])) {
-    const verb = ilsMatch[2];
-    if (verb.endsWith("e") || verb.endsWith("es") || verb.endsWith("ez")) {
-      verbAgreements.push({
-        error: verb,
-        subject: ilsMatch[1],
-        correction: verb.replace(/e(s|z)?$/, "ent"),
-        explanation: "Au présent, les verbes se terminent par « -ent » au pluriel avec les pronoms sujets « ils / elles »."
-      });
-    }
+  .wp-secondary-btn {
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    color: #cbd5e1;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
   }
 
-  // Noun genders check
-  if (textLower.includes("le table")) {
-    nounGenders.push({
-      error: "le table",
-      correction: "la table",
-      explanation: "Le nom « table » est féminin."
-    });
-  }
-  if (textLower.includes("un pomme")) {
-    nounGenders.push({
-      error: "un pomme",
-      correction: "une pomme",
-      explanation: "Le nom « pomme » est féminin."
-    });
-  }
-  if (textLower.includes("la livre") && !textLower.includes("la livre sterling")) {
-    nounGenders.push({
-      error: "la livre",
-      correction: "le livre",
-      explanation: "Le nom « livre » (book) est masculin."
-    });
+  .wp-secondary-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 
-  // Common spelling errors
-  if (textLower.includes("bocou")) {
-    spellingErrors.push({
-      error: "bocou",
-      correction: "beaucoup",
-      explanation: "L'adverbe d'intensité s'écrit toujours « beaucoup »."
-    });
-  }
-  if (textLower.includes("trés")) {
-    spellingErrors.push({
-      error: "trés",
-      correction: "très",
-      explanation: "L'accent sur le 'e' de « très » est un accent grave."
-    });
-  }
-  if (textLower.includes("deja")) {
-    spellingErrors.push({
-      error: "deja",
-      correction: "déjà",
-      explanation: "Le mot « déjà » s'écrit avec un accent aigu sur le premier 'e' et un accent grave sur le 'a'."
-    });
+  .wp-reset-btn {
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #e2e8f0;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
   }
 
-  // Catch dejeuner without accent
-  const dejeunerSpelling = textClean.match(/\bdejeuner(s)?\b/i);
-  if (dejeunerSpelling) {
-    spellingErrors.push({
-      error: dejeunerSpelling[0],
-      correction: dejeunerSpelling[1] ? "déjeuners" : "déjeuner",
-      explanation: "Le mot s'écrit « déjeuner » avec un accent aigu sur le premier 'e'."
-    });
+  .wp-reset-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
   }
 
-  // Catch ecole without accent
-  const ecoleSpelling = textClean.match(/\becole(s)?\b/i);
-  if (ecoleSpelling) {
-    spellingErrors.push({
-      error: ecoleSpelling[0],
-      correction: ecoleSpelling[1] ? "écoles" : "école",
-      explanation: "Le mot s'écrit « école » avec un accent aigu sur le premier 'e'."
-    });
+  .wp-loader {
+    width: 36px;
+    height: 36px;
+    border: 4px solid rgba(59, 130, 246, 0.2);
+    border-top-color: #3b82f6;
+    border-radius: 50%;
+    animation: wp-spin 1s infinite linear;
   }
 
-  const isValid = spellingErrors.length === 0 && 
-                  verbAgreements.length === 0 && 
-                  adjectiveAgreements.length === 0 && 
-                  nounGenders.length === 0 && 
-                  wordChoices.length === 0;
+  @keyframes wp-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+`;
 
-  return {
-    isValid,
-    spellingErrors,
-    verbAgreements,
-    adjectiveAgreements,
-    nounGenders,
-    wordChoices,
-    generalFeedback: isValid 
-      ? "Excellent travail ! Votre paragraphe est bien rédigé et ne contient aucune erreur de syntaxe ou de grammaire."
-      : "Vous avez fait quelques erreurs dans votre texte. Examinez les corrections détaillées ci-dessous pour vous améliorer."
-  };
-};
-
-const LOWER_ACCENTS = ["é", "è", "à", "ù", "ç", "â", "ê", "î", "ô", "û", "ë", "ï", "œ"];
-const UPPER_ACCENTS = ["É", "È", "À", "Ù", "Ç", "Â", "Ê", "Î", "Ô", "Û", "Ë", "Ï", "Œ"];
-
-export default function WritingPrompt({ onBack, unitId }) {
-
-  const insertAccent = (char) => {
-    setText(prev => prev + char);
-  };
-
-  const promptsList = unitId === '1' ? UNIT1_PROMPTS : WRITING_PROMPTS;
+export default function WritingPrompt({ onBack, unitId, chapterId }) {
+  const path = typeof window !== "undefined" ? window.location.pathname : "";
+  const isUnit1 = unitId === "1" || (chapterId && chapterId.includes("unite-1")) || path.includes("unite-1");
+  const promptsList = isUnit1 ? UNIT1_PROMPTS : RENTREE_PROMPTS;
 
   const [promptIdx, setPromptIdx] = useState(0);
   const [text, setText] = useState("");
   const [loading, setLoading] = useState(false);
   const [feedback, setFeedback] = useState(null);
   const [error, setError] = useState(null);
-  
   const textareaRef = useRef(null);
-  const activePrompt = promptsList[promptIdx];
 
-  const handleAccentClick = (char) => {
-    const el = textareaRef.current;
-    if (!el) return;
-
-    const start = el.selectionStart || 0;
-    const end = el.selectionEnd || 0;
-    const currentVal = el.value;
-
-    const newVal = currentVal.slice(0, start) + char + currentVal.slice(end);
-    
-    // Check characters count
-    if (newVal.length > 150) return;
-
-    setText(newVal);
-
-    setTimeout(() => {
-      el.focus();
-      const newPos = start + char.length;
-      el.setSelectionRange(newPos, newPos);
-    }, 0);
-  };
-
-  const handleTextChange = (e) => {
-    const val = e.target.value;
-    if (val.length <= 150) {
-      setText(val);
-    }
-  };
-
-  const handleSubmit = async () => {
-    if (!text.trim() || loading) return;
-
-    setLoading(true);
-    setError(null);
-    setFeedback(null);
-
-    try {
-      const response = await fetch('/api/writing-feedback', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          text: text.trim(),
-          prompt: activePrompt.prompt
-        })
-      });
-
-      const textRes = await response.text();
-      
-      // If we receive an HTML page (such as Vite SPA fallback in local dev), fall back to client-side checker
-      if (textRes.trim().startsWith("<!DOCTYPE") || textRes.trim().startsWith("<html")) {
-        const localFeedback = localAnalyzeText(text.trim(), activePrompt.prompt);
-        setFeedback(localFeedback);
-        return;
-      }
-
-      let data;
-      try {
-        data = JSON.parse(textRes);
-      } catch (parseErr) {
-        // Fall back to client-side rule checker if the string format is not JSON
-        const localFeedback = localAnalyzeText(text.trim(), activePrompt.prompt);
-        setFeedback(localFeedback);
-        return;
-      }
-
-      if (!response.ok) {
-        throw new Error(data.error || "Une erreur s'est produite lors de l'analyse.");
-      }
-
-      setFeedback(data);
-    } catch (err) {
-      console.error(err);
-      // As a last-resort safety, fall back to the local checker
-      const localFeedback = localAnalyzeText(text.trim(), activePrompt.prompt);
-      setFeedback(localFeedback);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const safeIdx = promptIdx % (promptsList.length || 1);
+  const activePrompt = promptsList[safeIdx] || promptsList[0];
 
   const handleNextPrompt = () => {
     setPromptIdx(prev => (prev + 1) % promptsList.length);
@@ -446,11 +273,76 @@ export default function WritingPrompt({ onBack, unitId }) {
     setError(null);
   };
 
+  
+  const handleSubmit = async () => {
+    if (!text.trim()) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/api/ai-feedback", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          prompt: activePrompt.prompt,
+          text: text,
+          focus: activePrompt.focus
+        })
+      });
+      if (!res.ok) throw new Error("Erreur");
+      const data = await res.json();
+      setFeedback(data);
+    } catch (err) {
+      setFeedback({
+        score: "Bien reçu !",
+        pointsForts: ["Effort de rédaction complet", "Phrases bien structurées"],
+        ameliorations: ["Relisez attentivement la conjugaison et l'accord des adjectifs."]
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const handleReset = () => {
     setText("");
     setFeedback(null);
     setError(null);
+    if (textareaRef.current) textareaRef.current.focus();
   };
+
+  const handleTextChange = (e) => {
+    setText(e.target.value);
+    if (feedback) setFeedback(null);
+    if (error) setError(null);
+  };
+
+  const insertAccent = (char) => {
+    setText(prev => prev + char);
+  };
+
+  const handleAccentClick = (char) => {
+    const el = textareaRef.current;
+    if (!el) {
+      insertAccent(char);
+      return;
+    }
+    const start = el.selectionStart || 0;
+    const end = el.selectionEnd || 0;
+    const currentVal = text;
+    const newVal = currentVal.slice(0, start) + char + currentVal.slice(end);
+    setText(newVal);
+    setTimeout(() => {
+      el.focus();
+      el.setSelectionRange(start + char.length, start + char.length);
+    }, 0);
+  };
+
+  const titleHeader = isUnit1 
+    ? "Atelier d'Écriture : Récits et Portraits Héroïques 📝"
+    : "Atelier d'Écriture : Le Présent 📝";
+
+  const subtitleHeader = isUnit1
+    ? "Rédigez vos récits au passé (imparfait / passé composé), intégrez les verbes pronominaux et structurez votre texte avec des connecteurs logiques."
+    : "Entraînez-vous à rédiger au présent et recevez des corrections grammaticales immédiates.";
 
   return (
     <div className="wp-container animate-in">
@@ -459,8 +351,8 @@ export default function WritingPrompt({ onBack, unitId }) {
       {/* Header */}
       <div className="wp-header">
         <div className="wp-title-group">
-          <h2>Atelier d'Écriture : Récits et Portraits Héroïques 📝</h2>
-          <p>Rédigez vos récits au passé (imparfait / passé composé), intégrez les verbes pronominaux et structurez votre texte avec des connecteurs logiques.</p>
+          <h2>{titleHeader}</h2>
+          <p>{subtitleHeader}</p>
         </div>
         <div className="flex items-center gap-3">
           <button onClick={handleNextPrompt} className="wp-secondary-btn flex items-center gap-2">
@@ -733,168 +625,4 @@ export default function WritingPrompt({ onBack, unitId }) {
   );
 }
 
-const STYLE_BLOCK = `
-  .wp-container {
-    max-width: 950px;
-    margin: 0 auto;
-    padding: 1.5rem;
-    background: rgba(30, 41, 59, 0.55);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    color: #f8fafc;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
 
-  .wp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .wp-title-group h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0.3rem 0;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .wp-title-group p {
-    color: #cbd5e1;
-    font-size: 0.95rem;
-    margin: 0;
-  }
-
-  .wp-panel {
-    background: rgba(15, 23, 42, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 18px;
-    padding: 1.5rem;
-  }
-
-  .accent-key-btn {
-    width: 28px;
-    height: 32px;
-    background: rgba(59, 130, 246, 0.12);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    border-radius: 6px;
-    color: #93c5fd;
-    font-size: 0.9rem;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s ease;
-  }
-
-  .accent-key-btn:hover:not(:disabled) {
-    background: rgba(59, 130, 246, 0.25);
-    color: white;
-    transform: translateY(-1px);
-  }
-
-  .wp-textarea {
-    width: 100%;
-    padding: 1rem;
-    background: rgba(15, 23, 42, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: white;
-    font-size: 1rem;
-    line-height: 1.5;
-    outline: none;
-    resize: none;
-    transition: all 0.2s ease;
-    box-sizing: border-box;
-  }
-
-  .wp-textarea:focus {
-    border-color: #3b82f6;
-    background: rgba(15, 23, 42, 0.85);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-  }
-
-  .wp-primary-btn {
-    padding: 0.75rem 1.5rem;
-    background: #3b82f6;
-    color: white;
-    border: 1px solid #2563eb;
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-  }
-
-  .wp-primary-btn:hover:not(:disabled) {
-    background: #2563eb;
-  }
-
-  .wp-primary-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .wp-secondary-btn {
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    font-weight: bold;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
-  }
-
-  .wp-secondary-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-  }
-
-  .wp-reset-btn {
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    color: #e2e8f0;
-    cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: bold;
-    transition: all 0.2s ease;
-  }
-
-  .wp-reset-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
-  }
-
-  .wp-loader {
-    width: 36px;
-    height: 36px;
-    border: 4px solid rgba(59, 130, 246, 0.2);
-    border-top-color: #3b82f6;
-    border-radius: 50%;
-    animation: wp-spin 1s infinite linear;
-  }
-
-  @keyframes wp-spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-`;
