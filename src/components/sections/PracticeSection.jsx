@@ -69,94 +69,22 @@ const ACTIVITIES = [
     ]
   },
   {
-    id: "routine_matinale",
-    title: "Activité 4 : Ma routine matinale vs. Ta routine",
-    description: "Complète chaque phrase avec la forme correcte du verbe pronominal entre parenthèses au présent de l'indicatif. Fais attention au pronom réfléchi (me / m' ou te / t') et aux terminaisons.",
+    id: "imp_vs_pc_1_4",
+    title: "Activité 4 : Imparfait vs. Passé Composé — Récits et Coups de Théâtre",
+    description: "Complétez chaque phrase en choisissant entre l'imparfait (contexte, description, habitude) et le passé composé (action ponctuelle, soudaine ou délimitée).",
     questions: [
-      {
-        id: "rm_1",
-        textBefore: "Chaque matin d'école, je ",
-        textAfter: " dès que mon réveil sonne à six heures et demie.",
-        hint: "se lever",
-        answer: "me lève"
-      },
-      {
-        id: "rm_2",
-        textBefore: "Et toi, à quelle heure est-ce que tu ",
-        textAfter: " d'habitude ?",
-        hint: "se lever",
-        answer: "te lèves"
-      },
-      {
-        id: "rm_3",
-        textBefore: "D'abord, je vais dans la salle de bain et je ",
-        textAfter: " le visage avec de l'eau bien fraîche.",
-        hint: "se laver",
-        answer: "me lave"
-      },
-      {
-        id: "rm_4",
-        textBefore: "Est-ce que tu ",
-        textAfter: " les cheveux sous la douche le matin ou le soir ?",
-        hint: "se laver",
-        answer: "te laves"
-      },
-      {
-        id: "rm_5",
-        textBefore: "Après la douche, je ",
-        textAfter: " les dents pendant au moins deux minutes.",
-        hint: "se brosser",
-        answer: "me brosse"
-      },
-      {
-        id: "rm_6",
-        textBefore: "Tu ",
-        textAfter: " aussi les dents avant de prendre ton petit-déjeuner ?",
-        hint: "se brosser",
-        answer: "te brosses"
-      },
-      {
-        id: "rm_7",
-        textBefore: "Ensuite, je retourne dans ma chambre et je ",
-        textAfter: " rapidement avec mon jean préféré.",
-        hint: "s'habiller",
-        answer: "m'habille"
-      },
-      {
-        id: "rm_8",
-        textBefore: "Dis-moi, tu ",
-        textAfter: " chaudement quand il commence à faire froid dehors ?",
-        hint: "s'habiller",
-        answer: "t'habilles"
-      },
-      {
-        id: "rm_9",
-        textBefore: "Quand nous avons un cours d'éducation physique, je ",
-        textAfter: " un sac de sport avec mes baskets.",
-        hint: "se préparer",
-        answer: "me prépare"
-      },
-      {
-        id: "rm_10",
-        textBefore: "Tu ",
-        textAfter: " toujours la veille au soir pour ne pas être en retard le matin ?",
-        hint: "se préparer",
-        answer: "te prépares"
-      },
-      {
-        id: "rm_11",
-        textBefore: "Vers sept heures et quart, je ",
-        textAfter: " à partir pour prendre le bus scolaire.",
-        hint: "se préparer",
-        answer: "me prépare"
-      },
-      {
-        id: "rm_12",
-        textBefore: "Si tu ",
-        textAfter: " vite, tu seras prêt à l'heure pour le premier cours !",
-        hint: "s'habiller (ou se dépêcher)",
-        answer: "t'habilles"
-      }
+      { id: "ipc_1", textBefore: "Pendant que le justicier ", textAfter: " la forteresse ennemie, l'alarme générale a retenti. (surveiller)", hint: "surveiller (action continue en cours)", answer: "surveillait" },
+      { id: "ipc_2", textBefore: "Soudain, une explosion assourdissante ", textAfter: " le silence pesant de la nuit. (briser)", hint: "briser (action soudaine / ponctuelle)", answer: "a brisé" },
+      { id: "ipc_3", textBefore: "Il ", textAfter: " un épais manteau sombre quand il s'est glissé parmi la foule. (porter)", hint: "porter (description physique / état)", answer: "portait" },
+      { id: "ipc_4", textBefore: "Tandis que nous discutions calmement du plan, notre informateur ", textAfter: " en catastrophe dans la pièce. (entrer)", hint: "entrer (événement qui interrompt)", answer: "est entré" },
+      { id: "ipc_5", textBefore: "Autrefois, cet anti-héros ", textAfter: " toujours les conseils avisés de ses aînés avant de prendre un risque. (écouter)", hint: "écouter (habitude passée)", answer: "écoutait" },
+      { id: "ipc_6", textBefore: "Dès qu'il a aperçu la détresse des otages, le brave chevalier ", textAfter: " immédiatement son épée. (dégainer)", hint: "dégainer (action précise et rapide)", answer: "a dégainé" },
+      { id: "ipc_7", textBefore: "Le vent ", textAfter: " avec violence et rendait toute progression quasi impossible. (souffler)", hint: "souffler (décor / météo d'arrière-plan)", answer: "soufflait" },
+      { id: "ipc_8", textBefore: "À cet instant précis, elle ", textAfter: " que son allié le plus fidèle l'avait trahie. (comprendre)", hint: "comprendre (déclic mental / prise de conscience)", answer: "a compris" },
+      { id: "ipc_9", textBefore: "Les sentinelles ", textAfter: " profondément lorsque les rebelles ont franchi le rempart sans bruit. (dormir)", hint: "dormir (état continu interrompu)", answer: "dormaient" },
+      { id: "ipc_10", textBefore: "Ce jour-là, l'antagoniste ", textAfter: " son véritable visage devant tous les membres de l'assemblée. (dévoiler)", hint: "dévoiler (événement marquant et achevé)", answer: "a dévoilé" },
+      { id: "ipc_11", textBefore: "Chaque matin, la guérisseuse ", textAfter: " les blessures des combattants avec patience. (soigner)", hint: "soigner (habitude répétée)", answer: "soignait" },
+      { id: "ipc_12", textBefore: "Finalement, après des heures de pourparlers, les deux rivaux ", textAfter: " un pacte historique. (signer)", hint: "signer (conclusion ponctuelle)", answer: "ont signé" }
     ]
   },
   {
