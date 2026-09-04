@@ -1,5 +1,6 @@
+import Francotopia from "../games/Francotopia";
 import React, { useState } from 'react';
-import { speakFrench } from '../../utils/speechUtils';
+import { speakFrench } from "../../utils/speechUtils";
 import { Volume2, SpellCheck, CheckCircle2, AlertTriangle, XCircle, Sparkles, Award, Gamepad2 } from 'lucide-react';
 import GameSection from './GameSection';
 import './VocabularySection.css';
@@ -134,7 +135,7 @@ function VocabularySection({ data, chapterId }) {
     <div className="practice-header-container fade-in text-left">
       
       {/* Secondary Header Tab Bar matching exact 3-column grid layout, size, shape, and structure of top header tabs */}
-      <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+      <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         
         {/* Header Tab 1: Prononciation (Aligned on left) */}
         <div 
@@ -176,6 +177,20 @@ function VocabularySection({ data, chapterId }) {
             <Gamepad2 size={28} />
           </div>
           <h3>{chapterId === 'unite-reprise' ? 'Jeux' : 'Flashcard Practice'}</h3>
+        </div>
+
+        {/* Header Tab 4: Jeux (Francotopia RPG) */}
+        <div 
+          onClick={() => setActiveHeaderTab(activeHeaderTab === "jeux" ? null : "jeux")}
+          className={`section-card cursor-pointer ${
+            activeHeaderTab === "jeux" ? "active" : ""
+          }`}
+          style={{ paddingTop: "1.12rem", paddingBottom: "1.12rem" }}
+        >
+          <div className="tab-icon-badge game-badge" style={{ background: "rgba(168, 85, 247, 0.2)", color: "#c084fc" }}>
+            <Gamepad2 size={28} />
+          </div>
+          <h3>Jeux</h3>
         </div>
 
       </div>
@@ -392,6 +407,17 @@ function VocabularySection({ data, chapterId }) {
       {/* Frame 3: Flashcard Practice */}
       {activeHeaderTab === 'flashcard_practice' && (
         <GameSection chapterId={chapterId} vocabulary={data} />
+      )}
+
+      {/* Frame 4: Jeux (Francotopia RPG) */}
+      {activeHeaderTab === 'jeux' && (
+        <div className="section-container glass-container fade-in">
+          <Francotopia 
+            chapterId={chapterId} 
+            vocabulary={data} 
+            onBack={() => setActiveHeaderTab(null)} 
+          />
+        </div>
       )}
 
     </div>
