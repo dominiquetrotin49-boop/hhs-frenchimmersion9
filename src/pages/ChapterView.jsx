@@ -5,6 +5,7 @@ import GrammarSection from '../components/sections/GrammarSection';
 import VocabularySection from '../components/sections/VocabularySection';
 import PracticeSection from '../components/sections/PracticeSection';
 import GameSection from '../components/sections/GameSection';
+import JeuxSection from '../components/sections/JeuxSection';
 import UnitAvatarSpeaker from '../components/UnitAvatarSpeaker';
 import { BookOpenCheck, Languages, Gamepad2, PenTool, Lock, Volume2, VolumeX } from 'lucide-react';
 
@@ -192,7 +193,7 @@ function ChapterView() {
       case 'vocabulaire':
         return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
       case 'jeux':
-        return <GameSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
+        return <JeuxSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
       case 'exercices':
       case 'exercices-pratiques':
         return <PracticeSection practiceData={chapter.practice} />;
@@ -234,7 +235,7 @@ function ChapterView() {
           })}
         </div>
       ) : (
-        <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+        <div className={`section-navigation grid grid-cols-1 gap-4 mb-8 ${chapterId === 'unite-1' ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'}`}>
           <NavLink 
             to={`/chapter/${chapter.id}/grammaire`} 
             className={({ isActive }) => `section-card ${isActive || activeSection === 'grammaire' ? 'active' : ''}`}
@@ -242,7 +243,7 @@ function ChapterView() {
             <div className="tab-icon-badge grammar-badge">
               <BookOpenCheck size={28} />
             </div>
-            <h3>Grammaire & Formules</h3>
+            <h3>Grammaire &amp; Formules</h3>
           </NavLink>
 
           <NavLink 
@@ -264,6 +265,18 @@ function ChapterView() {
             </div>
             <h3>Exercices</h3>
           </NavLink>
+
+          {chapterId === 'unite-1' && (
+            <NavLink
+              to={`/chapter/${chapter.id}/jeux`}
+              className={({ isActive }) => `section-card ${isActive || activeSection === 'jeux' ? 'active' : ''}`}
+            >
+              <div className="tab-icon-badge game-badge" style={{ background: 'rgba(124,58,237,0.18)', color: '#7c3aed' }}>
+                <Gamepad2 size={28} />
+              </div>
+              <h3>Jeux</h3>
+            </NavLink>
+          )}
         </div>
       )}
 
