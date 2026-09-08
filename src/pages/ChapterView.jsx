@@ -13,8 +13,9 @@ function ChapterView() {
   const { chapterId, section } = useParams();
   const navigate = useNavigate();
   const chapter = chapters.find(c => c.id === chapterId);
+  const rawSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : 'vocabulaire');
+  const activeSection = (rawSection === 'pratique' || rawSection === 'prononciation' || rawSection === 'orthographe') ? 'vocabulaire' : rawSection;
 
-  const activeSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : 'pratique');
   
   const [isStoryAudioPlaying, setIsStoryAudioPlaying] = useState(false);
   const storyAudioRef = useRef(null);
@@ -186,19 +187,20 @@ function ChapterView() {
     }
 
     switch(activeSection) {
-      case 'grammaire':
-        return <GrammarSection data={chapter.grammar} />;
+      case 'vocabulaire':
       case 'pratique':
       case 'prononciation':
-      case 'vocabulaire':
+      case 'orthographe':
         return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
-      case 'jeux':
-        return <JeuxSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
+      case 'grammaire':
+        return <GrammarSection data={chapter.grammar} />;
       case 'exercices':
       case 'exercices-pratiques':
         return <PracticeSection practiceData={chapter.practice} />;
+      case 'jeux':
+        return <JeuxSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
       default:
-        return <PracticeSection practiceData={chapter.practice} />;
+        return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
     }
   };
 
@@ -235,7 +237,19 @@ function ChapterView() {
           })}
         </div>
       ) : (
-        <div className={`section-navigation grid grid-cols-1 gap-4 mb-8 ${chapterId === 'unite-1' ? 'sm:grid-cols-2 lg:grid-cols-4' : 'sm:grid-cols-3'}`}>
+        <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          {/* Tab 1: Vocabulaire & Écoute */}
+          <NavLink 
+            to={`/chapter/${chapter.id}/vocabulaire`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'vocabulaire' ? 'active' : ''}`}
+          >
+            <div className="tab-icon-badge vocab-badge">
+              <Languages size={28} />
+            </div>
+            <h3>Vocabulaire &amp; Écoute</h3>
+          </NavLink>
+
+          {/* Tab 2: Grammaire & Règles */}
           <NavLink 
             to={`/chapter/${chapter.id}/grammaire`} 
             className={({ isActive }) => `section-card ${isActive || activeSection === 'grammaire' ? 'active' : ''}`}
@@ -243,19 +257,10 @@ function ChapterView() {
             <div className="tab-icon-badge grammar-badge">
               <BookOpenCheck size={28} />
             </div>
-            <h3>Grammaire &amp; Formules</h3>
+            <h3>Grammaire &amp; Règles</h3>
           </NavLink>
 
-          <NavLink 
-            to={`/chapter/${chapter.id}/pratique`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'pratique' || activeSection === 'prononciation' || activeSection === 'vocabulaire' ? 'active' : ''}`}
-          >
-            <div className="tab-icon-badge vocab-badge">
-              <span className="font-black text-2xl">P</span>
-            </div>
-            <h3>Pratique</h3>
-          </NavLink>
-
+          {/* Tab 3: Entraînement & Exercices */}
           <NavLink 
             to={`/chapter/${chapter.id}/exercices`} 
             className={({ isActive }) => `section-card ${isActive || activeSection === 'exercices' ? 'active' : ''}`}
@@ -263,22 +268,22 @@ function ChapterView() {
             <div className="tab-icon-badge practice-badge">
               <PenTool size={28} />
             </div>
-            <h3>Exercices</h3>
+            <h3>Entraînement &amp; Exercices</h3>
           </NavLink>
 
-          {chapterId === 'unite-1' && (
-            <NavLink
-              to={`/chapter/${chapter.id}/jeux`}
-              className={({ isActive }) => `section-card ${isActive || activeSection === 'jeux' ? 'active' : ''}`}
-            >
-              <div className="tab-icon-badge game-badge" style={{ background: 'rgba(124,58,237,0.18)', color: '#7c3aed' }}>
-                <Gamepad2 size={28} />
-              </div>
-              <h3>Jeux</h3>
-            </NavLink>
-          )}
+          {/* Tab 4: Jeux & Défis */}
+          <NavLink
+            to={`/chapter/${chapter.id}/jeux`}
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'jeux' ? 'active' : ''}`}
+          >
+            <div className="tab-icon-badge game-badge" style={{ background: 'rgba(124,58,237,0.18)', color: '#7c3aed' }}>
+              <Gamepad2 size={28} />
+            </div>
+            <h3>Jeux &amp; Défis</h3>
+          </NavLink>
         </div>
       )}
+
 
       <div className="chapter-content">
         {renderSection()}

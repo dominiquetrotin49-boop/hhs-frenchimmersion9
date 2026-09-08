@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { Grid3X3, Sparkles } from 'lucide-react';
+import { Grid3X3 } from 'lucide-react';
 import Crossword from '../games/Crossword';
+import './CrosswordSection.css';
+
 
 const ER_PUZZLE = {
   title: "Mots Croisés: Verbes en -ER",
@@ -123,14 +125,15 @@ const IRR_PUZZLE_3 = {
   ]
 };
 
+// Summer-mapped accent colors for each puzzle's postcard stripe & stamp
 const PUZZLES = [
-  { id: 'er', name: 'Verbes en -ER', desc: '10 verbes réguliers du 1er groupe', puzzle: ER_PUZZLE, color: '#ea580c', bg: 'rgba(234, 88, 12, 0.22)' },
-  { id: 'ir', name: 'Verbes en -IR', desc: '10 verbes réguliers du 2ème groupe', puzzle: IR_PUZZLE, color: '#d97706', bg: 'rgba(217, 119, 6, 0.22)' },
-  { id: 're', name: 'Verbes en -RE', desc: '10 verbes réguliers du 3ème groupe', puzzle: RE_PUZZLE, color: '#16a34a', bg: 'rgba(22, 163, 74, 0.22)' },
-  { id: 'aux', name: 'Être & Avoir', desc: 'Les auxiliaires essentiels', puzzle: AUX_PUZZLE, color: '#dc2626', bg: 'rgba(220, 38, 38, 0.22)' },
-  { id: 'irr1', name: 'Super Irréguliers', desc: 'Être, Avoir, Aller, Faire, Pouvoir...', puzzle: IRR_PUZZLE_1, color: '#9333ea', bg: 'rgba(147, 51, 234, 0.22)' },
-  { id: 'irr2', name: 'Verbes « Botte »', desc: 'Venir, Tenir, Prendre, Acheter...', puzzle: IRR_PUZZLE_2, color: '#f59e0b', bg: 'rgba(245, 158, 11, 0.22)' },
-  { id: 'irr3', name: 'Autres Irréguliers', desc: 'Mettre, Dire, Lire, Écrire, Boire...', puzzle: IRR_PUZZLE_3, color: '#2563eb', bg: 'rgba(37, 99, 235, 0.22)' },
+  { id: 'er',   name: 'Verbes en -ER',       desc: '10 verbes réguliers du 1er groupe',         puzzle: ER_PUZZLE,    color: '#ea580c', bg: 'rgba(234,88,12,0.18)',   emoji: '🌅' },
+  { id: 'ir',   name: 'Verbes en -IR',        desc: '10 verbes réguliers du 2ème groupe',        puzzle: IR_PUZZLE,    color: '#d97706', bg: 'rgba(217,119,6,0.18)',  emoji: '🌻' },
+  { id: 're',   name: 'Verbes en -RE',        desc: '10 verbes réguliers du 3ème groupe',        puzzle: RE_PUZZLE,    color: '#0284c7', bg: 'rgba(2,132,199,0.18)',  emoji: '🌊' },
+  { id: 'aux',  name: 'Être & Avoir',         desc: 'Les auxiliaires essentiels',                puzzle: AUX_PUZZLE,   color: '#e11d48', bg: 'rgba(225,29,72,0.18)', emoji: '🏖️' },
+  { id: 'irr1', name: 'Super Irréguliers',    desc: 'Faire, Aller, Pouvoir, Vouloir…',          puzzle: IRR_PUZZLE_1, color: '#7c3aed', bg: 'rgba(124,58,237,0.18)', emoji: '⛵' },
+  { id: 'irr2', name: 'Verbes « Botte »',    desc: 'Venir, Tenir, Prendre, Acheter…',           puzzle: IRR_PUZZLE_2, color: '#f59e0b', bg: 'rgba(245,158,11,0.18)', emoji: '🌴' },
+  { id: 'irr3', name: 'Autres Irréguliers',   desc: 'Dire, Lire, Écrire, Boire, Mettre…',      puzzle: IRR_PUZZLE_3, color: '#0ea5e9', bg: 'rgba(14,165,233,0.18)', emoji: '✈️' },
 ];
 
 export default function CrosswordSection() {
@@ -144,79 +147,53 @@ export default function CrosswordSection() {
   }
 
   return (
-    <div style={{ width: '100%', color: '#ffffff' }}>
-      <div style={{ marginBottom: '20px' }}>
-        <h2 style={{ fontSize: '1.4rem', fontWeight: 800, margin: '0 0 6px 0', display: 'flex', alignItems: 'center', gap: '8px', color: '#ffffff' }}>
-          <Sparkles size={22} color="#f59e0b" />
-          Mots Croisés : Le Défi de Conjugaison (7 Grilles)
+    <div className="summer-hub">
+      {/* ── Hub Header ── */}
+      <div className="summer-hub-header">
+        <h2>
+          ☀️ Mots Croisés : Le Défi de Conjugaison
         </h2>
-        <p style={{ margin: 0, color: 'rgba(255, 255, 255, 0.85)', fontSize: '0.9rem' }}>
-          Sélectionnez une grille ci-dessous pour tester vos compétences de conjugaison au présent.
-        </p>
+        <p>Sélectionnez une grille ci-dessous pour tester vos compétences de conjugaison au présent.</p>
       </div>
 
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-        gap: '14px'
-      }}>
+      {/* ── Postcard Card Grid ── */}
+      <div className="summer-puzzle-grid">
         {PUZZLES.map((item) => (
           <div
             key={item.id}
+            className="summer-card"
             onClick={() => setActiveGame(item.id)}
-            style={{
-              background: 'rgba(15, 23, 42, 0.82)',
-              border: `1.5px solid ${item.color}70`,
-              borderRadius: '12px',
-              padding: '16px 18px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease',
-              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.25)'
-            }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '14px' }}>
-              <div style={{
-                width: '44px',
-                height: '44px',
-                borderRadius: '10px',
-                background: item.bg,
-                color: item.color,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                flexShrink: 0
-              }}>
-                <Grid3X3 size={24} />
+            {/* Colored top stripe like a postcard band */}
+            <div
+              className="summer-card-stripe"
+              style={{ background: item.color }}
+            />
+
+            {/* Card body: stamp icon + text */}
+            <div className="summer-card-body">
+              <div
+                className="summer-card-stamp"
+                style={{ background: item.bg }}
+              >
+                <span style={{ fontSize: '1.45rem', lineHeight: 1 }}>{item.emoji}</span>
               </div>
-              <div>
-                <h3 style={{ margin: '0 0 4px 0', fontSize: '1rem', fontWeight: 700, color: '#ffffff' }}>
-                  {item.name}
-                </h3>
-                <p style={{ margin: 0, fontSize: '0.8rem', color: 'rgba(255, 255, 255, 0.7)' }}>
-                  {item.desc}
-                </p>
+              <div className="summer-card-info">
+                <h3>{item.name}</h3>
+                <p>{item.desc}</p>
               </div>
             </div>
 
-            <button
-              style={{
-                background: item.color,
-                color: '#ffffff',
-                border: 'none',
-                padding: '8px 16px',
-                borderRadius: '8px',
-                fontWeight: 700,
-                fontSize: '0.82rem',
-                cursor: 'pointer',
-                marginLeft: '10px',
-                flexShrink: 0
-              }}
-            >
-              Jouer
-            </button>
+            {/* Footer with play button */}
+            <div className="summer-card-footer">
+              <button
+                className="summer-play-btn"
+                style={{ background: item.color }}
+                onClick={(e) => { e.stopPropagation(); setActiveGame(item.id); }}
+              >
+                Jouer →
+              </button>
+            </div>
           </div>
         ))}
       </div>

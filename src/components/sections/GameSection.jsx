@@ -156,9 +156,10 @@ const STYLE_BLOCK = `
 }
 `;
 
-function GameSection({ chapterId, vocabulary }) {
-  // If we are in 'unite-reprise', default to 'speedrunner', otherwise 'menu'
-  const [mode, setMode] = useState(chapterId === 'unite-reprise' ? 'speedrunner' : 'menu');
+function GameSection({ chapterId, vocabulary, initialMode }) {
+  // If initialMode is provided use it, else if 'unite-reprise' default to 'speedrunner', otherwise 'menu'
+  const [mode, setMode] = useState(initialMode || (chapterId === 'unite-reprise' ? 'speedrunner' : 'menu'));
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFlipped, setIsFlipped] = useState(false);
   const [knownWords, setKnownWords] = useState(new Set());

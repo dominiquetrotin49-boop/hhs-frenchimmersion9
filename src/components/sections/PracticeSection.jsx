@@ -1,17 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { CheckCircle2, RefreshCw, XCircle, Award, AlertTriangle } from 'lucide-react';
 import './PracticeSection.css';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
+import HeroCrosswordSection from './HeroCrosswordSection';
+
 
 
 const REPRISE_ACTIVITIES = [
-  {
-    id: "mots_croises",
-    title: "Mots Croisés (7 Grilles)",
-    isCrosswordHub: true
-  },
   {
     id: "reprise_present",
     title: "Activité 1 : Le Présent de l'Indicatif — Routine et Habitudes",
@@ -38,18 +35,81 @@ const REPRISE_ACTIVITIES = [
     ]
   },
   {
+    id: "reprise_verbes_er",
+    title: "Activité 3 : Verbes en -ER (Texte à trous)",
+    description: "Complétez chaque phrase en conjuguant le verbe régulier en -er au présent de l'indicatif. Attention aux particularités orthographiques des verbes en -cer (nous -çons) et en -ger (nous -geons) !",
+    questions: [
+      { id: "er_1", textBefore: "Pendant les cours d'immersion, nous ", infinitive: "parler", textAfter: " uniquement en français pour améliorer notre aisance.", answer: "parlons" },
+      { id: "er_2", textBefore: "Est-ce que tu ", infinitive: "habiter", textAfter: " tout près de l'école ou prends-tu le transport en commun ?", answer: "habites" },
+      { id: "er_3", textBefore: "Ensemble, les élèves de 9e année ", infinitive: "regarder", textAfter: " un documentaire captivant sur l'histoire francophone.", answer: "regardent" },
+      { id: "er_4", textBefore: "Chaque matin dans le bus, j'", infinitive: "écouter", textAfter: " de la musique et des balados en français.", answer: "écoute" },
+      { id: "er_5", textBefore: "Vous ", infinitive: "aimer", textAfter: " participer aux débats animés et exprimer vos opinions.", answer: "aimez" },
+      { id: "er_6", textBefore: "Elle ", infinitive: "chercher", textAfter: " des documents historiques fiables pour son projet de recherche.", answer: "cherche" },
+      { id: "er_7", textBefore: "Pour préparer les évaluations sommatives, j'", infinitive: "étudier", textAfter: " régulièrement mes fiches de révision.", answer: "étudie" },
+      { id: "er_8", textBefore: "Mes camarades ", infinitive: "partager", textAfter: " généreusement leurs conseils d'écriture avec toute la classe.", answer: "partagent" },
+      { id: "er_9", textBefore: "Pendant les vacances scolaires, tu ", infinitive: "voyager", textAfter: " souvent avec ta famille pour découvrir de nouvelles régions.", answer: "voyages" },
+      { id: "er_10", textBefore: "Dès que le cours commence, nous ", infinitive: "commencer", textAfter: " l'analyse du texte littéraire sans perdre de temps.", answer: "commençons" },
+      { id: "er_11", textBefore: "À midi, nous ", infinitive: "manger", textAfter: " tous ensemble à la cafétéria dans la bonne humeur.", answer: "mangeons" },
+      { id: "er_12", textBefore: "Dans ce travail de groupe, nous ", infinitive: "partager", textAfter: " équitablement les tâches entre chaque coéquipier.", answer: "partageons" }
+    ]
+  },
+  {
+    id: "reprise_verbes_ir",
+    title: "Activité 4 : Verbes en -IR (Texte à trous)",
+    description: "Complétez chaque phrase en conjuguant le verbe régulier du 2e groupe au présent de l'indicatif. N'oubliez pas l'élargissement en -iss- aux personnes du pluriel (-issons, -issez, -issent) !",
+    questions: [
+      { id: "ir_1", textBefore: "Nous ", infinitive: "finir", textAfter: " toujours la lecture de notre roman avant d'entamer la rédaction.", answer: "finissons" },
+      { id: "ir_2", textBefore: "Tu ", infinitive: "choisir", textAfter: " judicieusement tes arguments pour convaincre tes interlocuteurs.", answer: "choisis" },
+      { id: "ir_3", textBefore: "Grâce à leur travail assidu, ces élèves ", infinitive: "réussir", textAfter: " avec brio tous leurs projets académiques.", answer: "réussissent" },
+      { id: "ir_4", textBefore: "Avant de prendre la parole en classe, nous ", infinitive: "réfléchir", textAfter: " à la meilleure façon de formuler notre idée.", answer: "réfléchissons" },
+      { id: "ir_5", textBefore: "Au fil de ses apprentissages en immersion, l'adolescent ", infinitive: "grandir", textAfter: " et gagne en maturité intellectuelle.", answer: "grandit" },
+      { id: "ir_6", textBefore: "Dans le laboratoire de sciences, vous ", infinitive: "obéir", textAfter: " scrupuleusement aux consignes du protocole d'expérience.", answer: "obéissez" },
+      { id: "ir_7", textBefore: "À la fin de la représentation, les spectateurs ", infinitive: "applaudir", textAfter: " chaleureusement la prestation des jeunes comédiens.", answer: "applaudissent" },
+      { id: "ir_8", textBefore: "Le règlement intérieur du lycée ", infinitive: "punir", textAfter: " formellement le manque de respect et les retards répétés.", answer: "punit" },
+      { id: "ir_9", textBefore: "Pour notre présentation orale, nous ", infinitive: "choisir", textAfter: " un sujet d'actualité qui suscite la réflexion.", answer: "choisissons" },
+      { id: "ir_10", textBefore: "Chaque soir, je ", infinitive: "finir", textAfter: " mes révisions de vocabulaire avant vingt heures.", answer: "finis" },
+      { id: "ir_11", textBefore: "Si vous persévérez dans vos efforts, vous ", infinitive: "réussir", textAfter: " à vous exprimer avec une grande fluidité.", answer: "réussissez" },
+      { id: "ir_12", textBefore: "Sur le terrain de sport, j'", infinitive: "obéir", textAfter: " sans hésiter aux directives de notre entraîneur.", answer: "obéis" }
+    ]
+  },
+  {
+    id: "reprise_verbes_re",
+    title: "Activité 5 : Verbes en -RE (Texte à trous)",
+    description: "Complétez chaque phrase en conjuguant le verbe du 3e groupe en -dre au présent de l'indicatif. Attention particulière : à la 3e personne du singulier (il / elle / on), le verbe conserve son 'd' et ne prend jamais de 't' !",
+    questions: [
+      { id: "re_1", textBefore: "L'étudiant ", infinitive: "attendre", textAfter: " calmement devant la porte de la classe que le cours commence.", answer: "attend" },
+      { id: "re_2", textBefore: "Elle ", infinitive: "répondre", textAfter: " avec assurance et clarté aux questions posées lors de l'exposé.", answer: "répond" },
+      { id: "re_3", textBefore: "Quand on reste bien concentré sur ses objectifs, on ne ", infinitive: "perdre", textAfter: " jamais son temps.", answer: "perd" },
+      { id: "re_4", textBefore: "Depuis le couloir du pavillon principal, nous ", infinitive: "entendre", textAfter: " les répétitions de la chorale du lycée.", answer: "entendons" },
+      { id: "re_5", textBefore: "À la fin de la journée scolaire, vous ", infinitive: "descendre", textAfter: " les grands escaliers pour rejoindre la sortie.", answer: "descendez" },
+      { id: "re_6", textBefore: "Les élèves de 9e année ", infinitive: "rendre", textAfter: " leur portfolio d'apprentissage à la date limite fixée.", answer: "rendent" },
+      { id: "re_7", textBefore: "J'", infinitive: "attendre", textAfter: " mon coéquipier devant le gymnase pour préparer notre match.", answer: "attends" },
+      { id: "re_8", textBefore: "Pour soutenir leur projet communautaire, les bénévoles ", infinitive: "vendre", textAfter: " des collations faites maison.", answer: "vendent" },
+      { id: "re_9", textBefore: "Le bibliothécaire ", infinitive: "descendre", textAfter: " aux archives pour retrouver un ouvrage de référence précieux.", answer: "descend" },
+      { id: "re_10", textBefore: "Lorsque nous recevons une rétroaction de l'enseignant, nous ", infinitive: "répondre", textAfter: " en formulant nos pistes d'amélioration.", answer: "répondons" },
+      { id: "re_11", textBefore: "Ce remarquable travail d'équipe ", infinitive: "rendre", textAfter: " tout le groupe particulièrement fier du résultat.", answer: "rend" },
+      { id: "re_12", textBefore: "Tu as beaucoup de talent pour l'écriture ; si tu t'exerces chaque jour, tu ne ", infinitive: "perdre", textAfter: " pas la main.", answer: "perds" }
+    ]
+  },
+  {
     id: "writing_prompt",
-    title: "Activité 3 : Atelier d'Écriture",
+    title: "Activité 6 : Travail d'écriture",
     description: "Rédigez un court texte au présent en appliquant les notions de la rentrée."
+  },
+  {
+    id: "mots_croises",
+    title: "Mots Croisés (7 grilles)",
+    isCrosswordHub: true
   }
 ];
 
 const UNIT1_ACTIVITIES = [
   {
     id: 'mots_croises',
-    title: 'Mots Croisés (7 Grilles)',
+    title: 'Mots Croisés (5 Grilles) — Héros et Anti-héros',
     isCrosswordHub: true
   },
+
   {
     id: "imparfait_1_1",
     title: "Activité 1 : L'Imparfait — Portraits et Récits d'Héros",
@@ -156,10 +216,14 @@ export default function PracticeSection() {
   const { chapterId } = useParams();
   const isReprise = !chapterId || chapterId === 'unite-reprise';
   const currentActivities = isReprise ? REPRISE_ACTIVITIES : UNIT1_ACTIVITIES;
-  const [activeActivityId, setActiveActivityId] = useState('mots_croises');
+  const [activeActivityId, setActiveActivityId] = useState(isReprise ? 'reprise_present' : 'mots_croises');
   const [userAnswers, setUserAnswers] = useState({});
   const [validationResults, setValidationResults] = useState({});
   const [focusedInputId, setFocusedInputId] = useState(null);
+
+  useEffect(() => {
+    setActiveActivityId(isReprise ? 'reprise_present' : 'mots_croises');
+  }, [chapterId, isReprise]);
 
   const currentActivity = currentActivities.find(act => act.id === activeActivityId);
 
@@ -261,8 +325,9 @@ export default function PracticeSection() {
 
       {activeActivityId === 'mots_croises' ? (
         <div style={{ width: '100%' }}>
-          <CrosswordSection />
+          {isReprise ? <CrosswordSection /> : <HeroCrosswordSection />}
         </div>
+
       ) : activeActivityId === 'writing_prompt' ? (
         <div className="activity-main-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
           <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : '1'} />
@@ -310,6 +375,7 @@ export default function PracticeSection() {
                           </span>
                         )}
                       </div>
+                      {q.infinitive && (<span className="question-infinitive-badge">({q.infinitive})</span>)}
                       <span className="text-after">{q.textAfter}</span>
                       {q.hint && (<span className="question-hint-pill">({q.hint})</span>)}
                     </div>

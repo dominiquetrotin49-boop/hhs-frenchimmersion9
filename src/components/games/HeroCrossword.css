@@ -1,0 +1,397 @@
+/* ── HERO CROSSWORD — FRANCO-BELGIAN BANDE DESSINÉE & COMIC HERO THEME ──────── */
+
+.hero-cw-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  font-family: inherit;
+}
+
+/* ── Comic Navigation & Top Bar ────────────────────────────────────────────── */
+.hero-cw-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.hero-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid #334155;
+  border-radius: 8px;
+  padding: 0.5rem 1.1rem;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 0.9rem;
+  box-shadow: 3px 3px 0px #eab308;
+  transition: all 0.15s ease;
+  letter-spacing: 0.02em;
+}
+
+.hero-back-btn:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 5px 5px 0px #eab308;
+  background: #1e293b;
+  color: #fef08a;
+}
+
+/* ── 5-Grille Switcher Tabs in Topbar ───────────────────────────────────────── */
+.hero-tabs-bar {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.hero-tab-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.85rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  border: 2px solid #0f172a;
+  background: #f8fafc;
+  color: #0f172a;
+  box-shadow: 2px 2px 0px #0f172a;
+  transition: all 0.12s ease;
+}
+
+.hero-tab-pill:hover {
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #0f172a;
+  background: #fef08a;
+}
+
+.hero-tab-pill.active {
+  background: #eab308;
+  color: #0f172a;
+  box-shadow: 3px 3px 0px #0f172a;
+  border-color: #0f172a;
+}
+
+/* ── Comic Book Mission Header ─────────────────────────────────────────────── */
+.hero-cw-header {
+  background: #0f172a;
+  border: 3px solid #1e293b;
+  border-left: 8px solid #eab308;
+  border-radius: 12px;
+  padding: 1.1rem 1.4rem;
+  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-cw-header::before {
+  content: "DOSSIER CONFIDENTIEL";
+  position: absolute;
+  top: 6px;
+  right: 14px;
+  font-size: 0.65rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  color: #eab308;
+  opacity: 0.85;
+}
+
+.hero-cw-header h2 {
+  color: #f8fafc;
+  margin: 0 0 0.4rem 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hero-cw-header p {
+  color: #cbd5e1;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+.hero-cw-rule-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(234, 179, 8, 0.15);
+  border: 1px dashed #eab308;
+  border-radius: 6px;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fef08a;
+  margin-top: 0.6rem;
+}
+
+/* ── Comic Accent Character Toolbar ────────────────────────────────────────── */
+.hero-cw-accent-bar {
+  background: #1e293b;
+  border: 2px solid #334155;
+  border-radius: 10px;
+  padding: 0.55rem 0.9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  box-shadow: 3px 3px 0px #0f172a;
+}
+
+.hero-accent-label {
+  color: #eab308;
+  font-size: 0.78rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-right: 0.35rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.hero-accent-btn {
+  background: #0f172a;
+  color: #f8fafc;
+  border: 2px solid #eab308;
+  border-radius: 6px;
+  width: 33px;
+  height: 33px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 2px 2px 0px #000000;
+  transition: all 0.1s ease;
+}
+
+.hero-accent-btn:hover {
+  background: #eab308;
+  color: #0f172a;
+  transform: translate(-1px, -1px);
+  box-shadow: 3px 3px 0px #000000;
+}
+
+/* ── Layout: Comic Board + Classified Clues ─────────────────────────────────── */
+.hero-cw-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+/* ── Comic Grid Panel ──────────────────────────────────────────────────────── */
+.hero-cw-grid-panel {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.35rem;
+  border: 3.5px solid #0f172a;
+  box-shadow: 6px 6px 0px #0f172a;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  overflow-x: auto;
+  position: relative;
+}
+
+/* ── Classified Clues Panel (BD Speech / Narration Panel) ──────────────────── */
+.hero-cw-clues-panel {
+  background: #f8fafc;
+  border-radius: 12px;
+  padding: 1.25rem;
+  border: 3.5px solid #0f172a;
+  box-shadow: 6px 6px 0px #0f172a;
+  max-height: 540px;
+  overflow-y: auto;
+  color: #0f172a;
+}
+
+.hero-clues-title {
+  margin: 0 0 0.9rem 0;
+  color: #0f172a;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2.5px solid #0f172a;
+  padding-bottom: 0.45rem;
+}
+
+.hero-clue-section-header {
+  color: #dc2626;
+  font-size: 0.85rem;
+  font-weight: 900;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.hero-clue-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  margin-bottom: 1.2rem;
+}
+
+.hero-clue-item {
+  padding: 0.5rem 0.7rem;
+  border-radius: 7px;
+  font-size: 0.83rem;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  border-left: 4px solid #cbd5e1;
+  background: #ffffff;
+  transition: all 0.12s ease;
+  color: #334155;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.hero-clue-item:hover {
+  background: #fef08a;
+  color: #0f172a;
+  border-left-color: #eab308;
+  transform: translateX(2px);
+}
+
+.hero-clue-item.active {
+  background: #fef08a;
+  color: #0f172a;
+  font-weight: 800;
+  border: 1.5px solid #0f172a;
+  border-left: 5px solid #dc2626;
+  box-shadow: 2px 2px 0px #0f172a;
+}
+
+/* Solved clue: comic strikethrough with vibrant green badge */
+.hero-clue-item.solved {
+  color: #64748b;
+  text-decoration: line-through;
+  text-decoration-color: #10b981;
+  text-decoration-thickness: 2px;
+  border-left-color: #10b981;
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.hero-clue-item.solved::before {
+  content: '✓ ';
+  color: #10b981;
+  font-weight: 900;
+  text-decoration: none;
+}
+
+/* ── Comic Action Buttons ─────────────────────────────────────────────────── */
+.hero-actions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 2.5px solid #0f172a;
+}
+
+.hero-check-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #dc2626;
+  color: #ffffff;
+  border: 2.5px solid #0f172a;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-weight: 900;
+  font-size: 0.92rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #0f172a;
+  transition: all 0.12s ease;
+  letter-spacing: 0.02em;
+}
+
+.hero-check-btn:hover {
+  background: #b91c1c;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #0f172a;
+}
+
+.hero-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  color: #0f172a;
+  border: 2.5px solid #0f172a;
+  border-radius: 8px;
+  padding: 0.7rem 1rem;
+  font-weight: 800;
+  font-size: 0.88rem;
+  cursor: pointer;
+  box-shadow: 3px 3px 0px #0f172a;
+  transition: all 0.12s ease;
+}
+
+.hero-reset-btn:hover {
+  background: #f1f5f9;
+  transform: translate(-1px, -1px);
+  box-shadow: 4px 4px 0px #0f172a;
+}
+
+/* ── Victory Comic Soundburst Banner ──────────────────────────────────────── */
+.hero-cw-victory {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: linear-gradient(135deg, #eab308, #facc15);
+  color: #0f172a;
+  border: 3px solid #0f172a;
+  padding: 0.65rem 1.3rem;
+  border-radius: 10px;
+  font-weight: 900;
+  font-size: 0.95rem;
+  box-shadow: 4px 4px 0px #0f172a;
+  animation: heroBurstPulse 1.6s ease-in-out infinite;
+  letter-spacing: 0.02em;
+}
+
+@keyframes heroBurstPulse {
+  0%, 100% { transform: scale(1); box-shadow: 4px 4px 0px #0f172a; }
+  50%       { transform: scale(1.03); box-shadow: 6px 6px 0px #dc2626; }
+}
+
+/* ── Responsive ───────────────────────────────────────────────────────────── */
+@media (max-width: 800px) {
+  .hero-cw-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cw-clues-panel {
+    max-height: 350px;
+  }
+
+  .hero-cw-header h2 {
+    font-size: 1.15rem;
+  }
+
+  .hero-tabs-bar {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 4px;
+  }
+}

@@ -68,8 +68,8 @@ const CLARIFICATION_QUESTIONS = [
 ];
 
 function VocabularySection({ data, chapterId }) {
-  // State for the secondary header tab inside Practice (null by default)
-  const [activeHeaderTab, setActiveHeaderTab] = useState(null);
+  // State for the secondary header tab inside Vocabulary (defaults to 'prononciation')
+  const [activeHeaderTab, setActiveHeaderTab] = useState('prononciation');
 
   // State for Orthographe practice input
   const [userSpellings, setUserSpellings] = useState({});
@@ -136,34 +136,34 @@ function VocabularySection({ data, chapterId }) {
       {/* Secondary Header Tab Bar */}
       <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
         
-        {/* Tab 1: Prononciation */}
+        {/* Tab 1: Prononciation & Audio */}
         <div 
-          onClick={() => setActiveHeaderTab(activeHeaderTab === 'prononciation' ? null : 'prononciation')}
+          onClick={() => setActiveHeaderTab('prononciation')}
           className={`section-card cursor-pointer ${activeHeaderTab === 'prononciation' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
           <div className="tab-icon-badge vocab-badge"><Volume2 size={28} /></div>
-          <h3>Prononciation</h3>
+          <h3>Prononciation &amp; Audio</h3>
         </div>
 
-        {/* Tab 2: Orthographe */}
+        {/* Tab 2: Dictée & Orthographe */}
         <div 
-          onClick={() => setActiveHeaderTab(activeHeaderTab === 'orthographe' ? null : 'orthographe')}
+          onClick={() => setActiveHeaderTab('orthographe')}
           className={`section-card cursor-pointer ${activeHeaderTab === 'orthographe' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
           <div className="tab-icon-badge practice-badge"><SpellCheck size={28} /></div>
-          <h3>Orthographe</h3>
+          <h3>Dictée &amp; Orthographe</h3>
         </div>
 
-        {/* Tab 3: Pratique Ludique */}
+        {/* Tab 3: Cartes Mémoire 3D & Quiz */}
         <div 
-          onClick={() => setActiveHeaderTab(activeHeaderTab === 'flashcard_practice' ? null : 'flashcard_practice')}
+          onClick={() => setActiveHeaderTab('flashcard_practice')}
           className={`section-card cursor-pointer ${activeHeaderTab === 'flashcard_practice' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
-          <div className="tab-icon-badge game-badge"><Gamepad2 size={28} /></div>
-          <h3>{chapterId === 'unite-reprise' ? 'Jeux' : 'Pratique Ludique'}</h3>
+          <div className="tab-icon-badge game-badge" style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#0891b2' }}><Sparkles size={28} /></div>
+          <h3>Cartes Mémoire 3D &amp; Quiz</h3>
         </div>
 
       </div>
@@ -378,10 +378,11 @@ function VocabularySection({ data, chapterId }) {
         </div>
       )}
 
-      {/* Frame 3: Pratique Ludique */}
+      {/* Frame 3: Cartes Mémoire 3D & Quiz */}
       {activeHeaderTab === 'flashcard_practice' && (
-        <GameSection chapterId={chapterId} vocabulary={data} />
+        <GameSection chapterId={chapterId} vocabulary={data} initialMode="menu" />
       )}
+
 
     </div>
   );
