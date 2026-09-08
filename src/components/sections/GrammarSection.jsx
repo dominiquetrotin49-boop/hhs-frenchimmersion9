@@ -2607,10 +2607,14 @@ function GrammarSection() {
                             onClick={() => setSelectedAccordPronoun(pronoun)}
                             className={`avatar-choice-btn ${isSelected ? 'selected' : ''}`}
                           >
-                            <span className="text-xl sm:text-2xl">{data.avatar}</span>
-                            <div className="text-left">
-                              <strong className="block text-xs sm:text-sm">{pronoun}</strong>
-                              <span className="text-[10px] text-slate-500 font-semibold">{data.genreLabel}</span>
+                            <span className="text-xl sm:text-2xl shrink-0">{data.avatar}</span>
+                            <div className="avatar-choice-text text-left flex flex-col items-start">
+                              <strong className="block text-xs sm:text-sm font-black text-slate-900 mr-1.5">
+                                {pronoun}&nbsp;
+                              </strong>
+                              <span className="block text-[10px] text-slate-500 font-semibold">
+                                {data.genreLabel}
+                              </span>
                             </div>
                           </button>
                         );
