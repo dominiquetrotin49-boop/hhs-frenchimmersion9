@@ -105,6 +105,61 @@ const ARSENAL_MODULES = [
   }
 ];
 
+const PRONOUN_CHIPS = ["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"];
+
+const getAvoirParticipleConjugation = (pp, pIdx) => {
+  switch (pIdx) {
+    case 0: return /^[aeiouyéèêâ]/i.test(pp) ? `j'ai ${pp}` : `J'ai ${pp}`;
+    case 1: return `Tu as ${pp}`;
+    case 2: return `Il / Elle a ${pp}`;
+    case 3: return `Nous avons ${pp}`;
+    case 4: return `Vous avez ${pp}`;
+    case 5: return `Ils / Elles ont ${pp}`;
+    default: return `ai / as / a / avons / avez / ont + ${pp}`;
+  }
+};
+
+const getEtreVandertrampConjugation = (v, pIdx) => {
+  const pp = v.pp;
+  const fem = v.fem || `${pp}e`;
+  const plMasc = v.pl ? v.pl.split(' / ')[0] : `${pp}s`;
+  const plFem = v.pl && v.pl.includes(' / ') ? v.pl.split(' / ')[1] : `${fem}s`;
+
+  switch (pIdx) {
+    case 0: return `Je suis ${pp}(e)`;
+    case 1: return `Tu es ${pp}(e)`;
+    case 2: return `Il est ${pp} / Elle est ${fem}`;
+    case 3: return `Nous sommes ${plMasc} / ${plFem}`;
+    case 4: return `Vous êtes ${pp}(e)(s)`;
+    case 5: return `Ils sont ${plMasc} / Elles sont ${plFem}`;
+    default: return `suis / es / est / sommes... + ${pp}(e)(s)`;
+  }
+};
+
+const matchesDemoPronoun = (sujet, pIdx) => {
+  if (pIdx === null || pIdx === undefined) return false;
+  const s = (sujet || '').toLowerCase();
+  if (pIdx === 0 && s.startsWith('je')) return true;
+  if (pIdx === 1 && s.startsWith('tu')) return true;
+  if (pIdx === 2 && (s.includes('il') || s.includes('elle') || s.includes('on'))) return true;
+  if (pIdx === 3 && s.startsWith('nous')) return true;
+  if (pIdx === 4 && s.startsWith('vous')) return true;
+  if (pIdx === 5 && (s.startsWith('ils') || s.startsWith('elles'))) return true;
+  return false;
+};
+
+const matchesPronominalPronoun = (pr, pIdx) => {
+  if (pIdx === null || pIdx === undefined) return false;
+  const p = (pr || '').toLowerCase();
+  if (pIdx === 0 && p.includes('je')) return true;
+  if (pIdx === 1 && p.includes('tu')) return true;
+  if (pIdx === 2 && (p.includes('il') || p.includes('elle') || p.includes('on'))) return true;
+  if (pIdx === 3 && p.includes('nous')) return true;
+  if (pIdx === 4 && p.includes('vous')) return true;
+  if (pIdx === 5 && (p.includes('ils') || p.includes('elles'))) return true;
+  return false;
+};
+
 const VANDERTRAMP_HERO_VERBS = [
   { l: "D", verb: "Devenir", icon: "🌱", meaning: "To become", ex: "Julien est devenu courageux face au danger." },
   { l: "R", verb: "Revenir", icon: "🔄", meaning: "To come back", ex: "Elle est revenue au repaire avec l'horloge." },
@@ -619,6 +674,8 @@ const LE_PASSE_CONJ_DATA = {
       { sujet: "Elle", forme: "est descendue", tag: "+e (Féminin singulier)" },
       { sujet: "Nous (masc.)", forme: "sommes arrivés", tag: "+s (Masculin pluriel)" },
       { sujet: "Nous (fém.)", forme: "sommes arrivées", tag: "+es (Féminin pluriel)" },
+      { sujet: "Vous (masc.)", forme: "êtes parti(s)", tag: "+s si pluriel (Vous de politesse ou groupe)" },
+      { sujet: "Vous (fém.)", forme: "êtes partie(s)", tag: "+es si groupe féminin" },
       { sujet: "Ils", forme: "sont venus", tag: "+s (Masculin pluriel)" },
       { sujet: "Elles", forme: "sont venues", tag: "+es (Féminin pluriel)" }
     ],
@@ -1152,7 +1209,7 @@ function GrammarSection() {
                     >
                       Tous
                     </button>
-                    {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((pr, pIdx) => (
+                    {PRONOUN_CHIPS.map((pr, pIdx) => (
                       <button
                         key={pIdx}
                         type="button"
@@ -1165,6 +1222,22 @@ function GrammarSection() {
                   </div>
                 </div>
               </div>
+
+              {highlightPronounIdx !== null && (
+                <div className="arsenal-pronoun-alert mt-3 flex items-center justify-between">
+                  <span className="text-xs font-black text-indigo-950 flex items-center gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400 border border-amber-600 animate-pulse inline-block"></span>
+                    <span>Surbrillance de la ligne active : <strong>« {PRONOUN_CHIPS[highlightPronounIdx]} »</strong> dans les Modules 1, 2, 3 et 4</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setHighlightPronounIdx(null)}
+                    className="text-xs font-extrabold text-indigo-700 underline hover:text-indigo-900"
+                  >
+                    Désactiver la surbrillance (Tous)
+                  </button>
+                </div>
+              )}
 
               {verbSearchQuery && (
                 <div className="arsenal-search-alert mt-3 flex items-center justify-between">
@@ -1267,8 +1340,11 @@ function GrammarSection() {
                         <thead>
                           <tr>
                             <th className="conjugation-sticky-cell">Modèle</th>
-                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
-                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-indigo-800 text-amber-300 font-black' : ''}>
+                            {PRONOUN_CHIPS.map((p, pIdx) => (
+                              <th 
+                                key={pIdx} 
+                                className={highlightPronounIdx === pIdx ? 'highlight-pronoun-th' : ''}
+                              >
                                 {p}
                               </th>
                             ))}
@@ -1291,11 +1367,11 @@ function GrammarSection() {
                                 }
                                 const isHighlighted = highlightPronounIdx === cIdx;
                                 return (
-                                  <td key={cIdx} className={isHighlighted ? 'bg-sky-50 font-black' : ''}>
+                                  <td key={cIdx} className={isHighlighted ? 'highlight-pronoun-cell' : ''}>
                                     <div className="conjugation-cell-flex">
-                                      <span className="conjugation-pronoun-tag">{p}</span>
+                                      <span className={`conjugation-pronoun-tag ${isHighlighted ? 'active-tag' : ''}`}>{p}</span>
                                       {space && <span>&nbsp;</span>}
-                                      <span className="conjugation-verb-bold text-sky-900">{c}</span>
+                                      <span className={`conjugation-verb-bold ${isHighlighted ? 'active-verb-text' : 'text-sky-900'}`}>{c}</span>
                                     </div>
                                   </td>
                                 );
@@ -1318,8 +1394,11 @@ function GrammarSection() {
                         <thead>
                           <tr>
                             <th className="conjugation-sticky-cell">Verbe</th>
-                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
-                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-indigo-800 text-amber-300 font-black' : ''}>
+                            {PRONOUN_CHIPS.map((p, pIdx) => (
+                              <th 
+                                key={pIdx} 
+                                className={highlightPronounIdx === pIdx ? 'highlight-pronoun-th' : ''}
+                              >
                                 {p}
                               </th>
                             ))}
@@ -1342,11 +1421,11 @@ function GrammarSection() {
                                 }
                                 const isHighlighted = highlightPronounIdx === cIdx;
                                 return (
-                                  <td key={cIdx} className={isHighlighted ? 'bg-sky-50 font-black' : ''}>
+                                  <td key={cIdx} className={isHighlighted ? 'highlight-pronoun-cell' : ''}>
                                     <div className="conjugation-cell-flex">
-                                      <span className="conjugation-pronoun-tag">{p}</span>
+                                      <span className={`conjugation-pronoun-tag ${isHighlighted ? 'active-tag' : ''}`}>{p}</span>
                                       {space && <span>&nbsp;</span>}
-                                      <span className="conjugation-verb-bold text-slate-900">{c}</span>
+                                      <span className={`conjugation-verb-bold ${isHighlighted ? 'active-verb-text' : 'text-slate-900'}`}>{c}</span>
                                     </div>
                                   </td>
                                 );
@@ -1420,8 +1499,11 @@ function GrammarSection() {
                           <tr>
                             <th className="conjugation-sticky-cell">Modèle</th>
                             <th>Participe</th>
-                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
-                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-amber-800 text-amber-200 font-black' : ''}>
+                            {PRONOUN_CHIPS.map((p, pIdx) => (
+                              <th 
+                                key={pIdx} 
+                                className={highlightPronounIdx === pIdx ? 'highlight-pronoun-th' : ''}
+                              >
                                 {p}
                               </th>
                             ))}
@@ -1438,8 +1520,8 @@ function GrammarSection() {
                               {v.conj.map((c, cIdx) => {
                                 const isHighlighted = highlightPronounIdx === cIdx;
                                 return (
-                                  <td key={cIdx} className={isHighlighted ? 'bg-amber-50 font-black' : ''}>
-                                    <span className="conjugation-verb-bold text-slate-900">{c}</span>
+                                  <td key={cIdx} className={isHighlighted ? 'highlight-pronoun-cell' : ''}>
+                                    <span className={`conjugation-verb-bold ${isHighlighted ? 'active-verb-text' : 'text-slate-900'}`}>{c}</span>
                                   </td>
                                 );
                               })}
@@ -1496,6 +1578,11 @@ function GrammarSection() {
                           <tr>
                             <th className="conjugation-sticky-cell">Infinitif</th>
                             <th>Participe Passé</th>
+                            <th className={highlightPronounIdx !== null ? 'highlight-pronoun-th' : ''}>
+                              {highlightPronounIdx !== null 
+                                ? `Forme Ciblée (${PRONOUN_CHIPS[highlightPronounIdx]})` 
+                                : 'Forme Conjuguée (Avoir)'}
+                            </th>
                             <th>Exemple au Singulier</th>
                             <th>Exemple au Pluriel</th>
                             <th>Astuce de Mémorisation</th>
@@ -1522,6 +1609,9 @@ function GrammarSection() {
                                 <span className="inline-block bg-amber-100 text-amber-950 font-black px-2.5 py-0.5 rounded-md border border-amber-300 shadow-2xs">
                                   {v.pp}
                                 </span>
+                              </td>
+                              <td className={highlightPronounIdx !== null ? 'highlight-pronoun-cell font-black' : 'text-xs font-semibold text-slate-700'}>
+                                {getAvoirParticipleConjugation(v.pp, highlightPronounIdx)}
                               </td>
                               <td className="font-semibold text-slate-800 italic">« {v.exSg} »</td>
                               <td className="font-semibold text-slate-800 italic">« {v.exPl} »</td>
@@ -1595,17 +1685,24 @@ function GrammarSection() {
                           </tr>
                         </thead>
                         <tbody>
-                          {LE_PASSE_CONJ_DATA.pcEtre.accordsDemo.map((a, idx) => (
-                            <tr key={idx}>
-                              <td className="conjugation-sticky-cell font-bold">{a.sujet}</td>
-                              <td className="font-extrabold text-emerald-800 text-sm">{a.forme}</td>
-                              <td>
-                                <span className="conjugation-accord-chip">
-                                  {a.tag}
-                                </span>
-                              </td>
-                            </tr>
-                          ))}
+                          {LE_PASSE_CONJ_DATA.pcEtre.accordsDemo.map((a, idx) => {
+                            const isHighlighted = matchesDemoPronoun(a.sujet, highlightPronounIdx);
+                            return (
+                              <tr key={idx} className={isHighlighted ? 'highlight-pronoun-row' : ''}>
+                                <td className={`conjugation-sticky-cell font-bold ${isHighlighted ? 'highlight-pronoun-cell' : ''}`}>
+                                  {a.sujet}
+                                </td>
+                                <td className={`font-extrabold text-sm ${isHighlighted ? 'highlight-pronoun-cell active-verb-text' : 'text-emerald-800'}`}>
+                                  {a.forme}
+                                </td>
+                                <td className={isHighlighted ? 'highlight-pronoun-cell' : ''}>
+                                  <span className={`conjugation-accord-chip ${isHighlighted ? 'active-tag' : ''}`}>
+                                    {a.tag}
+                                  </span>
+                                </td>
+                              </tr>
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>
@@ -1623,6 +1720,11 @@ function GrammarSection() {
                             <th className="conjugation-sticky-cell">Lettre</th>
                             <th>Verbe (Infinitif)</th>
                             <th>Participe (Masc. Sg.)</th>
+                            <th className={highlightPronounIdx !== null ? 'highlight-pronoun-th' : ''}>
+                              {highlightPronounIdx !== null 
+                                ? `Forme Ciblée (${PRONOUN_CHIPS[highlightPronounIdx]})` 
+                                : 'Forme Conjuguée (Être)'}
+                            </th>
                             <th>Féminin (+e)</th>
                             <th>Pluriel (+s / +es)</th>
                             <th>Phrase Exemple dans le Récit</th>
@@ -1640,6 +1742,9 @@ function GrammarSection() {
                               </td>
                               <td className="font-bold text-slate-900">{v.inf}</td>
                               <td className="font-extrabold text-emerald-700">{v.pp}</td>
+                              <td className={highlightPronounIdx !== null ? 'highlight-pronoun-cell font-black' : 'text-xs font-semibold text-slate-700'}>
+                                {getEtreVandertrampConjugation(v, highlightPronounIdx)}
+                              </td>
                               <td>
                                 <span className="font-bold text-rose-700">{v.fem}</span>
                               </td>
@@ -1710,12 +1815,26 @@ function GrammarSection() {
                           {pGroup.inf}
                         </h6>
                         <ul className="space-y-1.5 text-xs">
-                          {pGroup.formes.map((row, rIdx) => (
-                            <li key={rIdx} className="flex items-center justify-between bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/80">
-                              <span className="font-bold text-slate-500">{row.pr} :</span>
-                              <span className="font-extrabold text-slate-900">{row.v}</span>
-                            </li>
-                          ))}
+                          {pGroup.formes.map((row, rIdx) => {
+                            const isHighlighted = matchesPronominalPronoun(row.pr, highlightPronounIdx);
+                            return (
+                              <li 
+                                key={rIdx} 
+                                className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg border transition-all ${
+                                  isHighlighted 
+                                    ? 'highlight-pronominal-row' 
+                                    : 'bg-slate-50 border-slate-200/80'
+                                }`}
+                              >
+                                <span className={`font-bold ${isHighlighted ? 'text-amber-950 font-black' : 'text-slate-500'}`}>
+                                  {row.pr} :
+                                </span>
+                                <span className={`font-extrabold ${isHighlighted ? 'text-amber-950 font-black' : 'text-slate-900'}`}>
+                                  {row.v}
+                                </span>
+                              </li>
+                            );
+                          })}
                         </ul>
                       </div>
                     ))}
