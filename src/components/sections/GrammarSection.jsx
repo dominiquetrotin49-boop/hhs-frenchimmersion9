@@ -1804,40 +1804,112 @@ function GrammarSection() {
                     🔑 Formule : Sujet + Pronom Réfléchi (me, te, se, nous, vous, se) + ÊTRE au présent + Participe Passé
                   </div>
 
-                  {/* 3 Verbes Modèles Cards */}
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
-                    {LE_PASSE_CONJ_DATA.pronominaux
-                      .filter(pGroup => !verbSearchQuery || pGroup.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
-                      .map((pGroup, pIdx) => (
-                      <div key={pIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-                        <h6 className="font-black text-rose-900 text-sm mb-3 flex items-center gap-1.5 border-b border-rose-200 pb-2">
-                          <span>🪞</span>
-                          {pGroup.inf}
-                        </h6>
-                        <ul className="space-y-1.5 text-xs">
-                          {pGroup.formes.map((row, rIdx) => {
-                            const isHighlighted = matchesPronominalPronoun(row.pr, highlightPronounIdx);
-                            return (
-                              <li 
-                                key={rIdx} 
-                                className={`flex items-center justify-between px-2.5 py-1.5 rounded-lg border transition-all ${
-                                  isHighlighted 
-                                    ? 'highlight-pronominal-row' 
-                                    : 'bg-slate-50 border-slate-200/80'
-                                }`}
+                  {/* Table 4.1: Tableau Modèle des Verbes Pronominaux (Same background and table format as Modules 1, 2, 3) */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>🪞</span> A. Modèles de Conjugaison des Verbes Réfléchis (Passé Composé avec ÊTRE)
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Verbe (Pronominal)</th>
+                            {PRONOUN_CHIPS.map((p, pIdx) => (
+                              <th 
+                                key={pIdx} 
+                                className={highlightPronounIdx === pIdx ? 'highlight-pronoun-th' : ''}
                               >
-                                <span className={`font-bold ${isHighlighted ? 'text-amber-950 font-black' : 'text-slate-500'}`}>
-                                  {row.pr} :
-                                </span>
-                                <span className={`font-extrabold ${isHighlighted ? 'text-amber-950 font-black' : 'text-slate-900'}`}>
-                                  {row.v}
-                                </span>
-                              </li>
-                            );
-                          })}
-                        </ul>
-                      </div>
-                    ))}
+                                {p}
+                              </th>
+                            ))}
+                            <th>Règle & Élision</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.pronominaux
+                            .filter(pGroup => !verbSearchQuery || pGroup.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((pGroup, idx) => {
+                              const fJe = pGroup.formes.find(f => f.pr === 'Je')?.v || '';
+                              const fTu = pGroup.formes.find(f => f.pr === 'Tu')?.v || '';
+                              const fIl = pGroup.formes.find(f => f.pr === 'Il / On')?.v || '';
+                              const fElle = pGroup.formes.find(f => f.pr === 'Elle')?.v || '';
+                              const fNous = pGroup.formes.find(f => f.pr === 'Nous')?.v || '';
+                              const fVous = pGroup.formes.find(f => f.pr === 'Vous')?.v || '';
+                              const fIls = pGroup.formes.find(f => f.pr === 'Ils')?.v || '';
+                              const fElles = pGroup.formes.find(f => f.pr === 'Elles')?.v || '';
+
+                              const prForms = [
+                                fJe,
+                                fTu,
+                                `${fIl} / ${fElle}`,
+                                fNous,
+                                fVous,
+                                `${fIls} / ${fElles}`
+                              ];
+
+                              return (
+                                <tr key={idx}>
+                                  <td className="conjugation-sticky-cell font-black">{pGroup.inf}</td>
+                                  {prForms.map((val, cIdx) => {
+                                    const isHighlighted = highlightPronounIdx === cIdx;
+                                    return (
+                                      <td key={cIdx} className={isHighlighted ? 'highlight-pronoun-cell' : ''}>
+                                        <span className={`conjugation-verb-bold ${isHighlighted ? 'active-verb-text' : 'text-slate-900'}`}>
+                                          {val}
+                                        </span>
+                                      </td>
+                                    );
+                                  })}
+                                  <td className="text-xs text-slate-600 font-medium">
+                                    {pGroup.inf === 'Se souvenir' ? 'Famille de venir (participe en -u)' : 'Auxiliaire ÊTRE systématique + accord'}
+                                  </td>
+                                </tr>
+                              );
+                            })}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* 3 Verbes Modèles Cards — Solid White Cards Matching Modules 1, 2, 3 */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>🔍</span> B. Fiches Détaillées par Pronom (Singulier & Pluriel)
+                    </h5>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+                      {LE_PASSE_CONJ_DATA.pronominaux
+                        .filter(pGroup => !verbSearchQuery || pGroup.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                        .map((pGroup, pIdx) => (
+                        <div key={pIdx} className="bg-slate-50 p-4 rounded-xl border border-slate-200 shadow-2xs">
+                          <h6 className="font-black text-rose-900 text-sm mb-3 flex items-center gap-1.5 border-b border-rose-200 pb-2">
+                            <span>🪞</span>
+                            {pGroup.inf}
+                          </h6>
+                          <ul className="space-y-1.5 text-xs">
+                            {pGroup.formes.map((row, rIdx) => {
+                              const isHighlighted = matchesPronominalPronoun(row.pr, highlightPronounIdx);
+                              return (
+                                <li 
+                                  key={rIdx} 
+                                  className={`flex items-center justify-between px-3 py-2 rounded-lg border transition-all ${
+                                    isHighlighted 
+                                      ? 'highlight-pronominal-row' 
+                                      : 'bg-white border-slate-200 shadow-2xs'
+                                  }`}
+                                >
+                                  <span className={`font-black ${isHighlighted ? 'text-amber-950' : 'text-slate-600'}`}>
+                                    {row.pr} :
+                                  </span>
+                                  <span className={`font-extrabold ${isHighlighted ? 'text-amber-950' : 'text-slate-900'}`}>
+                                    {row.v}
+                                  </span>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   {/* Elision Callout */}
