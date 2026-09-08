@@ -207,8 +207,8 @@ const UNIT1_ACTIVITIES = [
   },
   {
     id: "writing_prompt",
-    title: "Activité 6 : Atelier d'Écriture",
-    description: "Rédigez un court texte en appliquant les notions de la rentrée."
+    title: "Activité 6 : Travail d'écriture",
+    description: "Rédigez un court récit au passé en appliquant les notions de l'unité 1."
   }
 ];
 
