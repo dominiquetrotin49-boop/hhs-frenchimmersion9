@@ -3,10 +3,183 @@ import { useParams } from 'react-router-dom';
 import { 
   BookOpen, Compass, Clock, Zap, BookOpenCheck, ChevronDown, ChevronUp, 
   CheckCircle2, HelpCircle, Layers, Sparkles, Shield, Flame, 
-  FileText, Lightbulb, AlertTriangle, PenTool, Bookmark
+  FileText, Lightbulb, AlertTriangle, PenTool, Bookmark, Film, ArrowRight, Eye, Award
 } from 'lucide-react';
 import './GrammarSection.css';
 import './VocabularySection.css';
+
+const STUDIO_STATIONS = [
+  {
+    id: 'imparfait',
+    num: "01",
+    icon: "🎥",
+    tag: "Station 1 • Décor",
+    title: "La Caméra & Le Décor",
+    subtitle: "L'Imparfait : Plante l'ambiance et la météo",
+    accentColor: "sky"
+  },
+  {
+    id: 'pc_avoir',
+    num: "02",
+    icon: "⚡",
+    tag: "Station 2 • Action",
+    title: "Le Coup de Théâtre",
+    subtitle: "Passé Composé (AVOIR) : Déclenche l'événement",
+    accentColor: "amber"
+  },
+  {
+    id: 'pc_etre',
+    num: "03",
+    icon: "🧭",
+    tag: "Station 3 • Déplacements",
+    title: "La Carte des Déplacements",
+    subtitle: "Passé Composé (ÊTRE) : Trajets & Accords obligatoires",
+    accentColor: "emerald"
+  },
+  {
+    id: 'combinaison',
+    num: "04",
+    icon: "🎬",
+    tag: "Station 4 • Duo Scénique",
+    title: "La Régie du Réalisateur",
+    subtitle: "Imparfait vs Passé Composé : Le duo de choc",
+    accentColor: "indigo"
+  },
+  {
+    id: 'connecteurs',
+    num: "05",
+    icon: "🧩",
+    tag: "Station 5 • Architecture",
+    title: "L'Architecte de l'Intrigue",
+    subtitle: "Les Balises & Connecteurs : Rythme ton récit",
+    accentColor: "rose"
+  }
+];
+
+const VANDERTRAMP_HERO_VERBS = [
+  { l: "D", verb: "Devenir", icon: "🌱", meaning: "To become", ex: "Julien est devenu courageux face au danger." },
+  { l: "R", verb: "Revenir", icon: "🔄", meaning: "To come back", ex: "Elle est revenue au repaire avec l'horloge." },
+  { l: "M", verb: "Monter", icon: "🧗", meaning: "To climb / go up", ex: "Le héros est monté sur le toit du musée." },
+  { l: "R", verb: "Rester", icon: "🛑", meaning: "To stay", ex: "Les deux amis sont restés calmes dans la nuit." },
+  { l: "S", verb: "Sortir", icon: "🚪", meaning: "To go out", ex: "Coralie est sortie discrètement par la fenêtre." },
+  { l: "V", verb: "Venir", icon: "👋", meaning: "To come", ex: "Marc est venu avec sa trousse de secours." },
+  { l: "A", verb: "Aller", icon: "➡️", meaning: "To go", ex: "Elles sont allées chercher de l'aide." },
+  { l: "N", verb: "Naître", icon: "✨", meaning: "To be born", ex: "Une légende inoubliable est née à Montréal." },
+  { l: "D", verb: "Descendre", icon: "🪜", meaning: "To go down", ex: "Il est descendu prudemment le long de la corde." },
+  { l: "E", verb: "Entrer", icon: "🚪", meaning: "To enter", ex: "Elle est entrée dans la pièce secrète." },
+  { l: "R", verb: "Rentrer", icon: "🏠", meaning: "To return home", ex: "Nous sommes rentrés sains et saufs." },
+  { l: "T", verb: "Tomber", icon: "🍂", meaning: "To fall", ex: "Une lourde poutre est tombée près du policier." },
+  { l: "R", verb: "Retourner", icon: "↩️", meaning: "To return", ex: "Julien est retourné auprès du capitaine blessé." },
+  { l: "A", verb: "Arriver", icon: "🏁", meaning: "To arrive", ex: "Les renforts sont arrivés avant minuit." },
+  { l: "M", verb: "Mourir", icon: "💀", meaning: "To die", ex: "La petite flamme est morte sous l'extincteur." },
+  { l: "P", verb: "Partir", icon: "🏃", meaning: "To leave", ex: "L'héroïne est partie sans faire de bruit." },
+  { l: "+", verb: "Passer (par)", icon: "🌉", meaning: "To pass through", ex: "Le jeune justicier est passé par les toits." }
+];
+
+const POWER_PARTICIPLES = [
+  { inf: "Boire", icon: "☕", pp: "bu", ex: "« Julien a bu une gorgée de tisane. »", note: "Participe court en -u" },
+  { inf: "Faire", icon: "⚔️", pp: "fait", ex: "« Il a fait le choix le plus difficile. »", note: "Terminaison muette en -t" },
+  { inf: "Lire", icon: "📖", pp: "lu", ex: "« Samira a lu les notes du détective. »", note: "Participe court en -u" },
+  { inf: "Écrire", icon: "✍️", pp: "écrit", ex: "« Elle a écrit un message codé sur le mur. »", note: "Terminaison muette en -t" },
+  { inf: "Prendre", icon: "🗝️", pp: "pris", ex: "« Coralie a pris la pierre précieuse. »", note: "Terminaison muette en -s" },
+  { inf: "Voir", icon: "👁️", pp: "vu", ex: "« Julien a vu le capitaine coincé. »", note: "Participe court en -u" },
+  { inf: "Dire", icon: "🗣️", pp: "dit", ex: "« L'officier a dit toute la vérité. »", note: "Terminaison muette en -t" },
+  { inf: "Avoir", icon: "🏆", pp: "eu", ex: "« Le héros a eu le courage d'agir. »", note: "Prononcé [y] comme la lettre « u »" },
+  { inf: "Être", icon: "⭐", pp: "été", ex: "« Son geste a été particulièrement héroïque. »", note: "Toujours invariable avec avoir" },
+  { inf: "Ouvrir", icon: "🔓", pp: "ouvert", ex: "« Il a ouvert la trappe d'évacuation. »", note: "Terminaison muette en -t" },
+  { inf: "Pouvoir", icon: "🛡️", pp: "pu", ex: "« Grâce à son aide, ils ont pu fuir. »", note: "Participe court en -u" },
+  { inf: "Vouloir", icon: "💫", pp: "voulu", ex: "« Elle a voulu réparer son erreur. »", note: "Participe régulier en -u" }
+];
+
+const ACCORD_MIRROR_DATA = {
+  Il: {
+    avatar: "👦",
+    heroType: "Le héros solitaire",
+    genreLabel: "Masculin singulier",
+    auxiliary: "est",
+    stem: "parti",
+    ending: "",
+    endingBadge: "Forme de base (aucun ajout)",
+    badgeStyle: "bg-slate-100 text-slate-700 border-slate-300",
+    example: "Le jeune héros est parti dans la nuit."
+  },
+  Elle: {
+    avatar: "👧",
+    heroType: "L'héroïne intrépide",
+    genreLabel: "Féminin singulier",
+    auxiliary: "est",
+    stem: "parti",
+    ending: "e",
+    endingBadge: "+e (Accord féminin obligatoire)",
+    badgeStyle: "bg-rose-100 text-rose-800 border-rose-300",
+    example: "La vaillante héroïne est partie à la rescousse."
+  },
+  Ils: {
+    avatar: "👦👦",
+    heroType: "Les deux justiciers",
+    genreLabel: "Masculin pluriel",
+    auxiliary: "sont",
+    stem: "parti",
+    ending: "s",
+    endingBadge: "+s (Accord pluriel obligatoire)",
+    badgeStyle: "bg-indigo-100 text-indigo-800 border-indigo-300",
+    example: "Les braves justiciers sont partis au bon moment."
+  },
+  Elles: {
+    avatar: "👧👧",
+    heroType: "Les deux protectrices",
+    genreLabel: "Féminin pluriel",
+    auxiliary: "sont",
+    stem: "parti",
+    ending: "es",
+    endingBadge: "+es (Accord féminin pluriel obligatoire)",
+    badgeStyle: "bg-emerald-100 text-emerald-800 border-emerald-300",
+    example: "Les deux protectrices sont parties vers le musée."
+  }
+};
+
+const SCREENPLAY_ROADMAP = [
+  {
+    step: "1. Le Départ (Introduction)",
+    badge: "Planter l'intrigue",
+    icon: "🚩",
+    words: ["D'abord", "Tout d'abord", "En premier lieu"],
+    example: "« Tout d'abord, Julien prépare soigneusement son matériel. »",
+    color: "sky"
+  },
+  {
+    step: "2. La Progression (Ajout)",
+    badge: "Faire avancer l'action",
+    icon: "➕",
+    words: ["De plus", "En outre", "Également", "Par ailleurs"],
+    example: "« De plus, il repère les faisceaux lasers de la salle d'exposition. »",
+    color: "indigo"
+  },
+  {
+    step: "3. L'Obstacle (Opposition)",
+    badge: "Créer le suspense",
+    icon: "⚠️",
+    words: ["Cependant", "Pourtant", "Néanmoins", "Toutefois"],
+    example: "« Cependant, une porte blindée se referme soudainement devant lui ! »",
+    color: "amber"
+  },
+  {
+    step: "4. Le Rebondissement (Conséquence)",
+    badge: "Déclencher l'effet",
+    icon: "🎯",
+    words: ["Donc", "C'est pourquoi", "Par conséquent", "Ainsi"],
+    example: "« Par conséquent, Julien doit trouver une issue de secours immédiate. »",
+    color: "purple"
+  },
+  {
+    step: "5. Le Dénouement (Conclusion)",
+    badge: "Fermer l'épisode",
+    icon: "🏁",
+    words: ["Finalement", "Enfin", "Pour conclure", "En conclusion"],
+    example: "« Finalement, il sauve son allié et s'échappe avec l'Horloge Boréale. »",
+    color: "emerald"
+  }
+];
 
 const LE_PASSE_GRAMMAR_DOSSIERS = [
   {
@@ -562,6 +735,12 @@ function GrammarSection() {
   // Filter for Conjugation Guide tables
   const [conjugationFilter, setConjugationFilter] = useState('all');
 
+  // Creative Studio Station state (for Unit 1)
+  const [activeStationId, setActiveStationId] = useState('imparfait');
+
+  // Interactive Accord Mirror for ÊTRE (for Unit 1)
+  const [selectedAccordPronoun, setSelectedAccordPronoun] = useState('Elle');
+
   // Accordion state: tracks which folder ID is currently open
   const [openFolderId, setOpenFolderId] = useState(isReprise ? 'prep_destination' : 'imparfait');
 
@@ -585,6 +764,59 @@ function GrammarSection() {
       ...userQuizAnswers,
       [folderId]: selectedOpt
     });
+  };
+
+  const renderTriviaChallenge = (dossierId) => {
+    const folder = LE_PASSE_GRAMMAR_DOSSIERS.find(d => d.id === dossierId);
+    if (!folder || !folder.trivia) return null;
+    const trivia = folder.trivia;
+    const answer = userQuizAnswers[dossierId];
+
+    return (
+      <div className="studio-trivia-challenge-card mt-6">
+        <div className="flex items-center gap-2 mb-2">
+          <HelpCircle size={18} className="text-indigo-600 shrink-0" />
+          <span className="font-black text-xs uppercase tracking-wider text-slate-900">
+            🎯 Défi Éclair du Scénariste :
+          </span>
+        </div>
+        <p className="text-sm font-bold text-slate-800 mb-3">{trivia.question}</p>
+        <div className="flex flex-wrap gap-2.5">
+          {trivia.options.map((opt, oIdx) => {
+            const isSelected = answer === opt;
+            const isCorrect = opt === trivia.correct;
+            let btnClass = "comprehension-option-btn";
+            if (answer) {
+              if (isSelected) {
+                btnClass += isCorrect ? " correct" : " incorrect";
+              }
+            }
+            return (
+              <button
+                key={oIdx}
+                type="button"
+                onClick={() => handleQuizAnswer(dossierId, opt)}
+                className={btnClass}
+              >
+                {opt}
+              </button>
+            );
+          })}
+        </div>
+        {answer && (
+          <div className={`comprehension-feedback ${answer === trivia.correct ? 'correct' : 'incorrect'} mt-3`}>
+            {answer === trivia.correct ? (
+              <div className="flex items-center gap-2">
+                <CheckCircle2 size={18} className="shrink-0 text-emerald-600" />
+                <span>{trivia.explanation}</span>
+              </div>
+            ) : (
+              <span>❌ Ce n'est pas tout à fait cela. Réessayez pour identifier la bonne forme !</span>
+            )}
+          </div>
+        )}
+      </div>
+    );
   };
 
   return (
@@ -1278,681 +1510,1006 @@ function GrammarSection() {
         </div>
       )}
 
-      {/* Frame housing the Interactive Dossiers List */}
+          {/* Frame housing the Interactive Dossiers or Studio de Narration */}
       {activeHeaderTab === 'dossiers' && (
-        <div className="grammar-accordion-frame fade-in">
-          
-          {/* Header Banner */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-3 border-b border-indigo-200/40">
-            <div>
-              <h3 className="font-black text-slate-900 text-xl sm:text-2xl flex items-center gap-2">
-                <Bookmark className="text-indigo-600" size={24} />
-                {isReprise 
-                  ? "Dossiers Pédagogiques : Verbes au Présent & Prépositions" 
-                  : "L'Atelier du Récit : Maîtriser le Passé & La Narration"}
-              </h3>
-              <p className="text-xs text-slate-600 font-semibold mt-1">
-                Explorez les clés grammaticales, simulez les conjugaisons et structurez vos récits avec rigueur !
-              </p>
+        isReprise ? (
+          <div className="grammar-accordion-frame fade-in">
+            {/* Header Banner */}
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-3 border-b border-indigo-200/40">
+              <div>
+                <h3 className="font-black text-slate-900 text-xl sm:text-2xl flex items-center gap-2">
+                  <Bookmark className="text-indigo-600" size={24} />
+                  Dossiers Pédagogiques : Verbes au Présent & Prépositions
+                </h3>
+                <p className="text-xs text-slate-600 font-semibold mt-1">
+                  Explorez les clés grammaticales, simulez les conjugaisons et structurez vos récits avec rigueur !
+                </p>
+              </div>
+
+              <span className="text-xs font-black bg-indigo-50 text-indigo-700 px-3.5 py-1.5 rounded-full border border-indigo-200 shadow-xs">
+                🖋️ Niveau Immersion 9e Année
+              </span>
             </div>
 
-            <span className="text-xs font-black bg-indigo-50 text-indigo-700 px-3.5 py-1.5 rounded-full border border-indigo-200 shadow-xs">
-              🖋️ Niveau Immersion 9e Année
-            </span>
-          </div>
+            {/* Dossiers Accordion Stack for Reprise */}
+            <div className="folders-accordion-stack flex flex-col gap-4">
+              {REPRISE_GRAMMAR_DOSSIERS.map((folder) => {
+                const isOpen = openFolderId === folder.id;
+                const quizAnswer = userQuizAnswers[folder.id];
 
-          {/* Dossiers Accordion Stack */}
-          <div className="folders-accordion-stack flex flex-col gap-4">
-            {currentDossiers.map((folder) => {
-              const isOpen = openFolderId === folder.id;
-              const quizAnswer = userQuizAnswers[folder.id];
-
-              return (
-                <div key={folder.id} className={`grammar-folder-card ${isOpen ? 'open' : ''}`}>
-                  
-                  {/* Clickable Header Row */}
-                  <div 
-                    className="folder-header-row"
-                    onClick={() => toggleFolder(folder.id)}
-                  >
-                    <div className="flex items-center gap-4">
-                      {/* Dossier Index Badge */}
-                      <div className="dossier-index-badge">
-                        <span>{folder.number || folder.id.slice(0, 2).toUpperCase()}</span>
-                      </div>
-                      
-                      {/* Dossier Titles */}
-                      <div className="flex flex-col text-left">
-                        <div className="flex items-center gap-2 flex-wrap">
-                          <span className="dossier-pill-badge">
-                            {folder.badge}
+                return (
+                  <div key={folder.id} className={`grammar-folder-card ${isOpen ? 'open' : ''}`}>
+                    
+                    {/* Clickable Header Row */}
+                    <div 
+                      className="folder-header-row"
+                      onClick={() => toggleFolder(folder.id)}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className="dossier-index-badge">
+                          <span>{folder.number || folder.id.slice(0, 2).toUpperCase()}</span>
+                        </div>
+                        
+                        <div className="flex flex-col text-left">
+                          <div className="flex items-center gap-2 flex-wrap">
+                            <span className="dossier-pill-badge">
+                              {folder.badge}
+                            </span>
+                          </div>
+                          <h4 className="font-extrabold text-base sm:text-lg text-slate-900 m-0 mt-1 tracking-tight">
+                            {folder.title}
+                          </h4>
+                          <span className="text-xs text-slate-600 font-medium mt-0.5">
+                            {folder.subtitle}
                           </span>
                         </div>
-                        <h4 className="font-extrabold text-base sm:text-lg text-slate-900 m-0 mt-1 tracking-tight">
-                          {folder.title}
-                        </h4>
-                        <span className="text-xs text-slate-600 font-medium mt-0.5">
-                          {folder.subtitle}
-                        </span>
+                      </div>
+
+                      <div className="flex items-center gap-4 flex-shrink-0">
+                        <div className="folder-expand-indicator">
+                          {isOpen ? (
+                            <ChevronUp size={20} className="text-indigo-600" />
+                          ) : (
+                            <ChevronDown size={20} className="text-slate-500" />
+                          )}
+                        </div>
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 flex-shrink-0">
-                      <div className="folder-expand-indicator">
-                        {isOpen ? (
-                          <ChevronUp size={20} className="text-indigo-600" />
-                        ) : (
-                          <ChevronDown size={20} className="text-slate-500" />
+                    {/* Expandable Folder Body */}
+                    {isOpen && (
+                      <div className="folder-expanded-body fade-in">
+                        
+                        {folder.calloutRegleOr && (
+                          <div className="narrative-callout callout-regle-or mb-4">
+                            <div className="callout-header">
+                              <Lightbulb size={18} className="text-amber-600" />
+                              <span className="callout-title">Règle d'or :</span>
+                            </div>
+                            <p className="callout-text">{folder.calloutRegleOr}</p>
+                          </div>
                         )}
+
+                        {folder.id === 'reflechis' && (
+                          <div className="flex flex-col gap-4">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                              {folder.miroir.map((item, mIdx) => (
+                                <div key={mIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                                  <h6 className="font-black text-rose-950 text-xs mb-1.5">{item.mode}</h6>
+                                  <p className="text-xs text-slate-700 font-medium leading-relaxed">{item.example}</p>
+                                </div>
+                              ))}
+                            </div>
+
+                            <div className="pronominal-vault-card">
+                              <span className="pronominal-vault-title">
+                                📊 Conjugaison Modèle au Présent : Se passionner (pour l'art)
+                              </span>
+                              <div className="pronominal-grid">
+                                {folder.conjugatorWheel.map((row, rIdx) => (
+                                  <div key={rIdx} className="pronominal-cell">
+                                    <div className="pronominal-text">
+                                      <span className="pronominal-pronoun">{row.pronoun}</span>
+                                      <span>&nbsp;</span>
+                                      <span className="pronominal-reflex">{row.reflex}</span>
+                                      <span>&nbsp;</span>
+                                      <span className="pronominal-verb">{row.verb}</span>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+
+                            {folder.calloutPiege && (
+                              <div className="narrative-callout callout-piege">
+                                <div className="callout-header">
+                                  <AlertTriangle size={18} className="text-rose-600" />
+                                  <span className="callout-title text-rose-700">Attention à l'élision :</span>
+                                </div>
+                                <p className="callout-text">{folder.calloutPiege}</p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {folder.id !== 'reflechis' && (
+                          <div className="flex flex-col gap-4">
+                            {folder.formula && (
+                              <div className="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-xs border border-indigo-800/40">
+                                <span className="text-[11px] font-black uppercase tracking-wider text-amber-300 block mb-1">
+                                  🔑 Formule & Repères Essentiels :
+                                </span>
+                                <p className="font-bold text-xs sm:text-sm text-slate-100 leading-relaxed">{folder.formula}</p>
+                              </div>
+                            )}
+
+                            {folder.piliers && (
+                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {folder.piliers.map((pil, pIdx) => (
+                                  <div key={pIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-start gap-3">
+                                    <span className="text-2xl flex-shrink-0">{pil.icon}</span>
+                                    <div>
+                                      <h6 className="font-black text-slate-900 text-xs sm:text-sm mb-1">{pil.title}</h6>
+                                      <p className="text-xs text-slate-600 font-medium leading-relaxed whitespace-pre-line">{pil.desc}</p>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+
+                            {folder.calloutPiege && (
+                              <div className="narrative-callout callout-piege">
+                                <div className="callout-header">
+                                  <AlertTriangle size={18} className="text-rose-600" />
+                                  <span className="callout-title text-rose-700">Attention au piège :</span>
+                                </div>
+                                <p className="callout-text">{folder.calloutPiege}</p>
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                        {folder.trivia && (
+                          <div className="comprehension-check-card mt-5">
+                            <div className="comprehension-header">
+                              <HelpCircle size={18} className="text-indigo-600" />
+                              <span className="comprehension-title">
+                                Vérification de Compréhension : Testez vos Réflexes
+                              </span>
+                            </div>
+
+                            <p className="comprehension-question">
+                              {folder.trivia.question}
+                            </p>
+
+                            <div className="comprehension-options">
+                              {folder.trivia.options.map((opt, oIdx) => {
+                                const isSelected = quizAnswer === opt;
+                                const isCorrectOption = opt === folder.trivia.correct;
+                                let btnClass = "comprehension-option-btn";
+                                if (quizAnswer) {
+                                  if (isSelected) {
+                                    btnClass += isCorrectOption ? " correct" : " incorrect";
+                                  }
+                                }
+                                return (
+                                  <button
+                                    key={oIdx}
+                                    type="button"
+                                    onClick={() => handleQuizAnswer(folder.id, opt)}
+                                    className={btnClass}
+                                  >
+                                    {opt}
+                                  </button>
+                                );
+                              })}
+                            </div>
+
+                            {quizAnswer && (
+                              <div className={`comprehension-feedback ${
+                                quizAnswer === folder.trivia.correct ? 'correct' : 'incorrect'
+                              }`}>
+                                {quizAnswer === folder.trivia.correct ? (
+                                  <>
+                                    <CheckCircle2 size={18} className="flex-shrink-0" />
+                                    <span>{folder.trivia.explanation}</span>
+                                  </>
+                                ) : (
+                                  <span>❌ Ce n'est pas tout à fait cela. Réessayez pour identifier la bonne forme !</span>
+                                )}
+                              </div>
+                            )}
+                          </div>
+                        )}
+
+                      </div>
+                    )}
+
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        ) : (
+          /* Studio de Narration for Unité 1 */
+          <div className="studio-narratif-container fade-in">
+            {/* Header Banner */}
+            <div className="studio-header-banner">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-black uppercase tracking-wider text-amber-700 bg-amber-100 px-3 py-0.5 rounded-full border border-amber-300">
+                      🎬 Le Studio du Scénariste
+                    </span>
+                    <span className="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-3 py-0.5 rounded-full border border-indigo-200">
+                      Immersion 9e Année
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <span>L'Art du Récit : Passé & Narration</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-semibold mt-1">
+                    Explorez les 5 stations interactives pour planter l'atmosphère, déclencher l'action et maîtriser les rouages de l'écriture romanesque !
+                  </p>
+                </div>
+                <div className="shrink-0">
+                  <span className="text-xs font-black text-indigo-900 bg-indigo-100/80 px-3.5 py-1.5 rounded-xl border border-indigo-200 shadow-xs inline-flex items-center gap-1.5">
+                    <Film size={16} className="text-indigo-600" />
+                    5 Stations Interactives
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* 5-Station Top Navigator Grid */}
+            <div className="studio-stations-nav-grid">
+              {STUDIO_STATIONS.map((station) => {
+                const isActive = activeStationId === station.id;
+                return (
+                  <button
+                    key={station.id}
+                    type="button"
+                    onClick={() => setActiveStationId(station.id)}
+                    className={`studio-station-tab-card station-${station.accentColor} ${isActive ? 'active' : ''}`}
+                  >
+                    <div className="station-tab-top">
+                      <span className="station-tab-num">{station.num}</span>
+                      <span className="station-tab-tag">{station.tag}</span>
+                    </div>
+                    <div className="station-tab-main">
+                      <span className="station-tab-icon">{station.icon}</span>
+                      <div className="text-left">
+                        <h4 className="station-tab-title">{station.title}</h4>
+                        <p className="station-tab-subtitle">{station.subtitle}</p>
+                      </div>
+                    </div>
+                    <div className="station-tab-footer">
+                      {isActive ? (
+                        <span className="station-status-active">
+                          <span className="pulse-dot"></span> En exploration
+                        </span>
+                      ) : (
+                        <span className="station-status-inactive">
+                          Explorer la station <ArrowRight size={13} className="inline ml-0.5" />
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Station Content Panels */}
+            <div className="studio-station-content-wrapper">
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* STATION 1: L'IMPARFAIT                         */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeStationId === 'imparfait' && (
+                <div className="studio-station-panel fade-in">
+                  {/* Station Hero Header */}
+                  <div className="station-hero-banner bg-gradient-to-r from-sky-950 via-sky-900 to-indigo-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-sky-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🎥
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-sky-400/20 text-sky-200 px-2.5 py-0.5 rounded-full border border-sky-400/30">
+                              Station 01 • Atmosphère & Décor
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">La Caméra & Le Décor : L'Imparfait</h3>
+                        </div>
+                      </div>
+                      <div className="bg-sky-950/60 border border-sky-500/30 rounded-xl px-3 py-1.5 text-xs text-sky-200 font-semibold">
+                        🎬 Arrière-Plan & Continuité
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-sky-100/90 font-medium leading-relaxed">
+                      L'imparfait est la caméra qui filme en continu : il brosse le décor, peint la météo, révèle les sentiments et suit les habitudes sans fixer de début ni de fin précis dans le temps.
+                    </p>
+                  </div>
+
+                  {/* 4 Cinematic Objective Cards */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                    <div className="film-objective-card">
+                      <div className="film-card-header">
+                        <span className="film-card-icon">🌤️</span>
+                        <h4 className="film-card-title">1. Météo, Climat & Décors</h4>
+                      </div>
+                      <p className="film-card-desc">Plante l'ambiance visuelle et sonore du lieu où se déroule l'histoire.</p>
+                      <div className="film-card-example">
+                        « Il <strong>faisait</strong> un froid glacial et le vent <strong>soufflait</strong> sur les toits de Montréal. »
+                      </div>
+                    </div>
+
+                    <div className="film-objective-card">
+                      <div className="film-card-header">
+                        <span className="film-card-icon">🕰️</span>
+                        <h4 className="film-card-title">2. Habitudes & Répétition</h4>
+                      </div>
+                      <p className="film-card-desc">Décrit les actions régulières ou les routines répétées dans le passé.</p>
+                      <div className="film-card-example">
+                        « Tous les matins, le jeune horloger <strong>nettoyait</strong> les rouages avec minutie. »
+                      </div>
+                    </div>
+
+                    <div className="film-objective-card">
+                      <div className="film-card-header">
+                        <span className="film-card-icon">💭</span>
+                        <h4 className="film-card-title">3. Sentiments & États d'Âme</h4>
+                      </div>
+                      <p className="film-card-desc">Exprime ce que ressentaient ou pensaient les personnages.</p>
+                      <div className="film-card-example">
+                        « Julien <strong>avait</strong> peur de faire du bruit et <strong>se sentait</strong> anxieux. »
+                      </div>
+                    </div>
+
+                    <div className="film-objective-card">
+                      <div className="film-card-header">
+                        <span className="film-card-icon">⏳</span>
+                        <h4 className="film-card-title">4. Action Continue en Cours</h4>
+                      </div>
+                      <p className="film-card-desc">Une action déjà en progression qui sert de toile de fond.</p>
+                      <div className="film-card-example">
+                        « Pendant que nous <strong>marchions</strong> silencieusement dans le long couloir sombre... »
                       </div>
                     </div>
                   </div>
 
-                  {/* Expandable Folder Body */}
-                  {isOpen && (
-                    <div className="folder-expanded-body fade-in">
-                      
-                      {/* 💡 CALLOUT PANEL: RÈGLE D'OR */}
-                      {folder.calloutRegleOr && (
-                        <div className="narrative-callout callout-regle-or mb-4">
-                          <div className="callout-header">
-                            <Lightbulb size={18} className="text-amber-600" />
-                            <span className="callout-title">Règle d'or :</span>
-                          </div>
-                          <p className="callout-text">{folder.calloutRegleOr}</p>
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 1: L'IMPARFAIT                         */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'imparfait' && (
-                        <div className="flex flex-col gap-5">
-                          
-                          {/* Les 3 Piliers */}
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            {folder.piliers.map((pil, pIdx) => (
-                              <div key={pIdx} className="bg-white p-4 rounded-xl border border-sky-100 shadow-xs flex flex-col justify-between">
-                                <div>
-                                  <span className="text-2xl mb-2 block">{pil.icon}</span>
-                                  <h6 className="font-black text-slate-900 text-sm mb-1">{pil.title}</h6>
-                                  <p className="text-xs text-slate-600 font-medium leading-relaxed">{pil.desc}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Formule de Formation */}
-                          <div className="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-xs border border-indigo-800/40">
-                            <span className="text-[11px] font-black uppercase tracking-wider text-amber-300 block mb-1">
-                              🔑 La Règle de Formation de l'Imparfait :
-                            </span>
-                            <p className="font-bold text-xs sm:text-sm text-slate-100 leading-relaxed">{folder.formula}</p>
-                          </div>
-
-                          {/* ⚠️ CALLOUT PIÈGE */}
-                          {folder.calloutPiege && (
-                            <div className="narrative-callout callout-piege">
-                              <div className="callout-header">
-                                <AlertTriangle size={18} className="text-rose-600" />
-                                <span className="callout-title text-rose-700">Attention au piège :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutPiege}</p>
-                            </div>
-                          )}
-
-                          {/* Simulateur de Conjugaison Interactif */}
-                          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-                            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
-                              <h5 className="font-black text-xs uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                                <Zap size={16} className="text-amber-500" />
-                                {folder.conjugation.title}
-                              </h5>
-                              <span className="text-xs text-slate-500 font-semibold">Choisissez un pronom sujet :</span>
-                            </div>
-
-                            {/* Pronom Selector Buttons */}
-                            <div className="flex flex-wrap gap-1.5 mb-4">
-                              {pronounsList.map((pName, pIdx) => (
-                                <button
-                                  key={pIdx}
-                                  type="button"
-                                  onClick={() => setActivePronounIdx(pIdx)}
-                                  className={`px-3 py-1.5 text-xs rounded-lg font-black transition-all cursor-pointer ${
-                                    activePronounIdx === pIdx
-                                      ? 'bg-indigo-600 text-white shadow-sm border border-indigo-700'
-                                      : 'bg-slate-100 text-slate-700 hover:bg-indigo-50 hover:text-indigo-900'
-                                  }`}
-                                >
-                                  {pName}
-                                </button>
-                              ))}
-                            </div>
-
-                            {/* Conjugation Results */}
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                              {folder.conjugation.stems.map((st, sIdx) => {
-                                const conj = formatConjugatedVerb(activePronounIdx, st);
-                                return (
-                                  <div key={sIdx} className="p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-center">
-                                    <span className="text-xs font-bold text-slate-500 block mb-1.5">{st.verb}</span>
-                                    <div className="text-base font-black text-slate-900 flex items-center justify-center">
-                                      <span className="text-slate-700">{conj.subject}</span>
-                                      {conj.hasSpace && <span>&nbsp;</span>}
-                                      <span className="text-indigo-700">{conj.stem}</span>
-                                      <span className="text-amber-600 font-extrabold underline">{conj.ending}</span>
-                                    </div>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 2: PASSÉ COMPOSÉ AVOIR                 */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'pc_avoir' && (
-                        <div className="flex flex-col gap-5">
-                          <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-                            {folder.piliers.map((pil, pIdx) => (
-                              <div key={pIdx} className="bg-white p-4 rounded-xl border border-amber-100 shadow-xs">
-                                <span className="text-2xl mb-2 block">{pil.icon}</span>
-                                <h6 className="font-black text-slate-900 text-sm mb-1">{pil.title}</h6>
-                                <p className="text-xs text-slate-600 font-medium leading-relaxed">{pil.desc}</p>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Formule */}
-                          <div className="bg-gradient-to-r from-slate-900 to-amber-950 text-white p-4 rounded-xl shadow-xs border border-amber-800/40">
-                            <span className="text-[11px] font-black uppercase tracking-wider text-amber-300 block mb-1">
-                              🔑 Formule de Structure (AVOIR) :
-                            </span>
-                            <p className="font-bold text-xs sm:text-sm text-slate-100 leading-relaxed">{folder.formula}</p>
-                          </div>
-
-                          {/* Participes Irréguliers Vault */}
-                          <div className="irregulars-vault-card">
-                            <span className="irregulars-vault-title">
-                              <Shield size={16} />
-                              Coffre des Participes Passés Irréguliers Incontournables :
-                            </span>
-                            <div className="irregulars-vault-grid">
-                              {folder.irregularsVault.map((item, iIdx) => (
-                                <div key={iIdx} className="irregular-verb-cell">
-                                  <span className="irregular-inf">{item.inf}</span>
-                                  <div className="irregular-pp">
-                                    <span className="irregular-subj">{item.subj}</span>
-                                    <span>&nbsp;</span>
-                                    <span>{item.pp}</span>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* ⚠️ CALLOUT PIÈGE */}
-                          {folder.calloutPiege && (
-                            <div className="narrative-callout callout-piege">
-                              <div className="callout-header">
-                                <AlertTriangle size={18} className="text-rose-600" />
-                                <span className="callout-title text-rose-700">Règle essentielle :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutPiege}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 3: PASSÉ COMPOSÉ ÊTRE                  */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'pc_etre' && (
-                        <div className="flex flex-col gap-5">
-                          
-                          {/* DR & MRS VANDERTRAMP Grid with guaranteed spacing */}
-                          <div className="vandertramp-container">
-                            <span className="vandertramp-header-title">
-                              <Compass size={18} />
-                              Les 17 Verbes de Mouvement &amp; d'État (DR &amp; MRS VANDERTRAMP) :
-                            </span>
-                            <div className="vandertramp-badges-grid">
-                              {folder.vandertramp.map((v, vIdx) => (
-                                <span key={vIdx} className="vandertramp-chip">
-                                  <strong className="vandertramp-acrostic-letter">{v.charAt(0)}</strong>
-                                  {v.slice(1)}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* Accord Demo Cards */}
-                          <div className="bg-white p-5 rounded-xl border border-slate-200 shadow-xs">
-                            <h5 className="font-black text-xs uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-1.5">
-                              <BookOpenCheck size={16} className="text-indigo-600" />
-                              L'Accord Systématique avec le Sujet (ÊTRE) :
-                            </h5>
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              {folder.accordDemo.map((item, aIdx) => (
-                                <div key={aIdx} className="p-3.5 bg-emerald-50/60 rounded-xl border border-emerald-200 flex items-center justify-between">
-                                  <div>
-                                    <div className="flex items-center text-sm font-black text-slate-900 mb-0.5">
-                                      <span className="text-slate-950 font-black">{item.pronoun}</span>
-                                      <span>&nbsp;</span>
-                                      <span className="text-emerald-800 font-extrabold">{item.verb}</span>
-                                    </div>
-                                    <span className="text-[11px] text-slate-500 font-semibold">({item.label})</span>
-                                  </div>
-                                  <span className="text-[11px] font-black bg-emerald-200 text-emerald-950 px-2.5 py-1 rounded-md">
-                                    {item.tag}
-                                  </span>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* ⚠️ CALLOUT PIÈGE */}
-                          {folder.calloutPiege && (
-                            <div className="narrative-callout callout-piege">
-                              <div className="callout-header">
-                                <AlertTriangle size={18} className="text-rose-600" />
-                                <span className="callout-title text-rose-700">À ne pas oublier :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutPiege}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 4: L'ART DE RACONTER (SPLIT VIEW & TL)  */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'combinaison' && (
-                        <div className="flex flex-col gap-6">
-                          
-                          {/* 1. THE SPLIT VIEW : Passé Composé vs Imparfait */}
-                          {folder.splitView && (
-                            <div>
-                              <h5 className="font-black text-xs uppercase tracking-wider text-slate-900 mb-3 flex items-center gap-1.5">
-                                <Layers size={16} className="text-indigo-600" />
-                                Tableau Comparatif : Deux Rôles Complémentaires dans le Récit
-                              </h5>
-
-                              <div className="split-view-container">
-                                {/* Carte Imparfait */}
-                                <div className="split-card split-imparfait">
-                                  <div>
-                                    <div className="split-badge-row">
-                                      <span className="split-badge imparfait">
-                                        Arrière-Plan
-                                      </span>
-                                      <span className="text-xl">🎨</span>
-                                    </div>
-                                    <h4 className="split-title">{folder.splitView.imparfait.title}</h4>
-                                    <p className="split-role imparfait">{folder.splitView.imparfait.role}</p>
-                                    <p className="split-desc">{folder.splitView.imparfait.description}</p>
-                                    
-                                    <div className="split-question-box">
-                                      <span className="split-question-label">❓ Question clef :</span>
-                                      <p className="split-question-text">{folder.splitView.imparfait.question}</p>
-                                    </div>
-
-                                    <div className="split-points-list">
-                                      {folder.splitView.imparfait.points.map((pt, ptIdx) => (
-                                        <div key={ptIdx} className="split-point-item">
-                                          <span className="split-bullet">•</span>
-                                          <span>{pt}</span>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-
-                                  <div className="split-examples-box">
-                                    <span className="split-examples-label">Exemples types :</span>
-                                    <ul className="split-examples-list">
-                                      {folder.splitView.imparfait.exemples.map((ex, exIdx) => (
-                                        <li key={exIdx}>« {ex} »</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </div>
-
-                                {/* Carte Passé Composé */}
-                                <div className="split-card split-pc">
-                                  <div>
-                                    <div className="split-badge-row">
-                                      <span className="split-badge pc">
-                                        Premier Plan
-                                      </span>
-                                      <span className="text-xl">⚡</span>
-                                    </div>
-                                    <h4 className="split-title">{folder.splitView.passeCompose.title}</h4>
-                                    <p className="split-role pc">{folder.splitView.passeCompose.role}</p>
-                                    <p className="split-desc">{folder.splitView.passeCompose.description}</p>
-                                    
-                                    <div className="split-question-box">
-                                      <span className="split-question-label">❓ Question clef :</span>
-                                      <p className="split-question-text">{folder.splitView.passeCompose.question}</p>
-                                    </div>
-
-                                    <div className="split-points-list">
-                                      {folder.splitView.passeCompose.points.map((pt, ptIdx) => (
-                                        <div key={ptIdx} className="split-point-item">
-                                          <span className="split-bullet">•</span>
-                                          <span>{pt}</span>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-
-                                  <div className="split-examples-box">
-                                    <span className="split-examples-label">Exemples types :</span>
-                                    <ul className="split-examples-list">
-                                      {folder.splitView.passeCompose.exemples.map((ex, exIdx) => (
-                                        <li key={exIdx}>« {ex} »</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* 2. INTERACTIVE STORY TIMELINE */}
-                          <div className="timeline-flow-container">
-                            <div className="timeline-flow-header">
-                              <h5 className="timeline-flow-title">
-                                <Clock size={18} className="text-indigo-600" />
-                                Ligne Chronologique du Récit : Comprendre l'Interruption
-                              </h5>
-                              <span className="timeline-flow-subtitle">
-                                Observez comment l'Imparfait pose l'action continue et comment le Passé Composé surgit pour faire basculer l'histoire !
-                              </span>
-                            </div>
-
-                            <div className="timeline-steps-list">
-                              {folder.storyTimeline.map((item, tIdx) => {
-                                const isPC = item.color === 'pc';
-                                return (
-                                  <React.Fragment key={tIdx}>
-                                    <div className={`timeline-step-card ${isPC ? 'pc' : 'imparfait'}`}>
-                                      <div className="timeline-step-header">
-                                        <div className="flex items-center gap-2">
-                                          <span className="text-xl">{item.icon}</span>
-                                          <span className={`timeline-step-pill ${isPC ? 'pc' : 'imparfait'}`}>
-                                            Étape {item.step} : {item.tense}
-                                          </span>
-                                        </div>
-                                        <span className={`timeline-step-label ${isPC ? 'pc' : 'imparfait'}`}>
-                                          {item.label}
-                                        </span>
-                                      </div>
-                                      <p className="timeline-step-text">
-                                        « {item.text} »
-                                      </p>
-                                    </div>
-                                    {tIdx === 1 && (
-                                      <div className="timeline-step-connector">
-                                        <span>⚡ SOUDAIN... UN ÉVÉNEMENT COUPE L'ACTION ! ⚡</span>
-                                      </div>
-                                    )}
-                                  </React.Fragment>
-                                );
-                              })}
-                            </div>
-                          </div>
-
-                          {/* 3. SIGNAL WORD BANK / BALISES TEMPORELLES */}
-                          {folder.signalWords && (
-                            <div className="signal-words-card">
-                              <h5 className="signal-words-header-title">
-                                <Compass size={18} className="text-indigo-600" />
-                                Banque de Balises Temporelles : Les Mots Déclencheurs
-                              </h5>
-                              <div className="signal-words-grid">
-                                {/* Balises Imparfait */}
-                                <div className="signal-column-card imparfait">
-                                  <span className="signal-column-title">
-                                    🕒 Déclencheurs de l'Imparfait (Habitudes / Continuité) :
-                                  </span>
-                                  <div className="signal-tags-wrap">
-                                    {folder.signalWords.imparfait.map((w, wIdx) => (
-                                      <span key={wIdx} className="signal-word-chip imparfait">
-                                        {w}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-
-                                {/* Balises Passé Composé */}
-                                <div className="signal-column-card pc">
-                                  <span className="signal-column-title">
-                                    ⚡ Déclencheurs du Passé Composé (Soudaineté / Rupture) :
-                                  </span>
-                                  <div className="signal-tags-wrap">
-                                    {folder.signalWords.passeCompose.map((w, wIdx) => (
-                                      <span key={wIdx} className="signal-word-chip pc">
-                                        {w}
-                                      </span>
-                                    ))}
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-
-                          {/* ✍️ CALLOUT ASTUCE DE RÉDACTION */}
-                          {folder.calloutAstuce && (
-                            <div className="narrative-callout callout-astuce">
-                              <div className="callout-header">
-                                <PenTool size={18} className="text-indigo-600" />
-                                <span className="callout-title text-indigo-800">Astuce de rédaction :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutAstuce}</p>
-                            </div>
-                          )}
-
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 5: CONNECTEURS LOGIQUES                */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'connecteurs' && (
-                        <div className="flex flex-col gap-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-                            {folder.categories.map((cat, cIdx) => (
-                              <div key={cIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-                                <h6 className="font-black text-indigo-950 text-xs mb-2.5">{cat.title}</h6>
-                                <div className="flex flex-wrap gap-1.5">
-                                  {cat.words.map((w, wIdx) => (
-                                    <span key={wIdx} className="text-xs font-bold bg-indigo-50 text-indigo-900 px-2.5 py-1 rounded-md border border-indigo-100">
-                                      {w}
-                                    </span>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* ✍️ CALLOUT ASTUCE */}
-                          {folder.calloutAstuce && (
-                            <div className="narrative-callout callout-astuce">
-                              <div className="callout-header">
-                                <PenTool size={18} className="text-indigo-600" />
-                                <span className="callout-title text-indigo-800">Conseil de style :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutAstuce}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIER 6: VERBES RÉFLÉCHIS                    */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id === 'reflechis' && (
-                        <div className="flex flex-col gap-4">
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {folder.miroir.map((item, mIdx) => (
-                              <div key={mIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
-                                <h6 className="font-black text-rose-950 text-xs mb-1.5">{item.mode}</h6>
-                                <p className="text-xs text-slate-700 font-medium leading-relaxed">{item.example}</p>
-                              </div>
-                            ))}
-                          </div>
-
-                          {/* Tableau de Conjugaison Pronominale */}
-                          <div className="pronominal-vault-card">
-                            <span className="pronominal-vault-title">
-                              📊 Conjugaison Modèle au Présent : Se passionner (pour l'art)
-                            </span>
-                            <div className="pronominal-grid">
-                              {folder.conjugatorWheel.map((row, rIdx) => (
-                                <div key={rIdx} className="pronominal-cell">
-                                  <div className="pronominal-text">
-                                    <span className="pronominal-pronoun">{row.pronoun}</span>
-                                    <span>&nbsp;</span>
-                                    <span className="pronominal-reflex">{row.reflex}</span>
-                                    <span>&nbsp;</span>
-                                    <span className="pronominal-verb">{row.verb}</span>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-
-                          {/* ⚠️ CALLOUT PIÈGE */}
-                          {folder.calloutPiege && (
-                            <div className="narrative-callout callout-piege">
-                              <div className="callout-header">
-                                <AlertTriangle size={18} className="text-rose-600" />
-                                <span className="callout-title text-rose-700">Attention à l'élision :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutPiege}</p>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* DOSSIERS SPÉCIFIQUES REPRISE (PRÉPOSITIONS ETC)*/}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.id !== 'imparfait' && 
-                       folder.id !== 'pc_avoir' && 
-                       folder.id !== 'pc_etre' && 
-                       folder.id !== 'combinaison' && 
-                       folder.id !== 'connecteurs' && 
-                       folder.id !== 'reflechis' && (
-                        <div className="flex flex-col gap-4">
-                          
-                          {/* Formule Fondamentale */}
-                          {folder.formula && (
-                            <div className="bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-4 rounded-xl shadow-xs border border-indigo-800/40">
-                              <span className="text-[11px] font-black uppercase tracking-wider text-amber-300 block mb-1">
-                                🔑 Formule & Repères Essentiels :
-                              </span>
-                              <p className="font-bold text-xs sm:text-sm text-slate-100 leading-relaxed">{folder.formula}</p>
-                            </div>
-                          )}
-
-                          {/* Pillars Grid */}
-                          {folder.piliers && (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                              {folder.piliers.map((pil, pIdx) => (
-                                <div key={pIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs flex items-start gap-3">
-                                  <span className="text-2xl flex-shrink-0">{pil.icon}</span>
-                                  <div>
-                                    <h6 className="font-black text-slate-900 text-xs sm:text-sm mb-1">{pil.title}</h6>
-                                    <p className="text-xs text-slate-600 font-medium leading-relaxed whitespace-pre-line">{pil.desc}</p>
-                                  </div>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-
-                          {/* ⚠️ CALLOUT PIÈGE */}
-                          {folder.calloutPiege && (
-                            <div className="narrative-callout callout-piege">
-                              <div className="callout-header">
-                                <AlertTriangle size={18} className="text-rose-600" />
-                                <span className="callout-title text-rose-700">Attention au piège :</span>
-                              </div>
-                              <p className="callout-text">{folder.calloutPiege}</p>
-                            </div>
-                          )}
-
-                        </div>
-                      )}
-
-                      {/* ══════════════════════════════════════════════ */}
-                      {/* 🎯 VÉRIFICATION DE COMPRÉHENSION (QUIZ)       */}
-                      {/* ══════════════════════════════════════════════ */}
-                      {folder.trivia && (
-                        <div className="comprehension-check-card mt-5">
-                          <div className="comprehension-header">
-                            <HelpCircle size={18} className="text-indigo-600" />
-                            <span className="comprehension-title">
-                              Vérification de Compréhension : Testez vos Réflexes
-                            </span>
-                          </div>
-
-                          <p className="comprehension-question">
-                            {folder.trivia.question}
-                          </p>
-
-                          <div className="comprehension-options">
-                            {folder.trivia.options.map((opt, oIdx) => {
-                              const isSelected = quizAnswer === opt;
-                              const isCorrectOption = opt === folder.trivia.correct;
-                              let btnClass = "comprehension-option-btn";
-                              if (quizAnswer) {
-                                if (isSelected) {
-                                  btnClass += isCorrectOption ? " correct" : " incorrect";
-                                }
-                              }
-                              return (
-                                <button
-                                  key={oIdx}
-                                  type="button"
-                                  onClick={() => handleQuizAnswer(folder.id, opt)}
-                                  className={btnClass}
-                                >
-                                  {opt}
-                                </button>
-                              );
-                            })}
-                          </div>
-
-                          {quizAnswer && (
-                            <div className={`comprehension-feedback ${
-                              quizAnswer === folder.trivia.correct ? 'correct' : 'incorrect'
-                            }`}>
-                              {quizAnswer === folder.trivia.correct ? (
-                                <>
-                                  <CheckCircle2 size={18} className="flex-shrink-0" />
-                                  <span>{folder.trivia.explanation}</span>
-                                </>
-                              ) : (
-                                <span>❌ Ce n'est pas tout à fait cela. Réessayez pour identifier la bonne forme !</span>
-                              )}
-                            </div>
-                          )}
-                        </div>
-                      )}
-
+                  {/* Machine à Terminaisons Card */}
+                  <div className="studio-formula-box mb-6 border-sky-200">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3 pb-2 border-b border-sky-200/60">
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="text-sky-600 shrink-0" size={18} />
+                        <h4 className="font-black text-slate-900 text-sm sm:text-base">
+                          La Machine à Terminaisons de l'Imparfait
+                        </h4>
+                      </div>
+                      <span className="text-[11px] font-extrabold bg-sky-100 text-sky-800 px-2.5 py-0.5 rounded-full">
+                        Règle Unique & Universelle
+                      </span>
                     </div>
-                  )}
 
+                    <div className="bg-white p-3.5 rounded-xl border border-sky-200 mb-4 shadow-xs">
+                      <span className="text-xs font-black text-sky-900 block mb-1">🔑 La Formule Magique :</span>
+                      <p className="text-xs sm:text-sm font-bold text-slate-700 leading-relaxed">
+                        Prenez le verbe au <strong>présent avec NOUS</strong>, retirez <em>-ons</em> pour trouver le radical, puis ajoutez les 6 terminaisons invariables :
+                      </p>
+                      <div className="flex flex-wrap gap-2 mt-2">
+                        {["-ais", "-ais", "-ait", "-ions", "-iez", "-aient"].map((end, eIdx) => (
+                          <span key={eIdx} className="px-2.5 py-1 bg-sky-50 text-sky-800 font-extrabold text-xs rounded-lg border border-sky-300">
+                            {end}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Simulator Table */}
+                    <div className="overflow-x-auto rounded-xl border border-slate-200 shadow-xs bg-white">
+                      <table className="w-full text-left text-xs border-collapse">
+                        <thead>
+                          <tr className="bg-slate-900 text-white font-extrabold">
+                            <th className="p-2.5">Sujet</th>
+                            <th className="p-2.5">Aimer (-ER)</th>
+                            <th className="p-2.5">Finir (-IR)</th>
+                            <th className="p-2.5">Vendre (-RE)</th>
+                            <th className="p-2.5 text-amber-300">Être (Exception : ét-)</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-200 font-medium">
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Je / J'</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">ais</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Tu</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">ais</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">ais</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Il / Elle / On</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">ait</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">ait</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">ait</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">ait</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Nous</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">ions</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">ions</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">ions</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">ions</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Vous</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">iez</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">iez</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">iez</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">iez</strong></td>
+                          </tr>
+                          <tr>
+                            <td className="p-2.5 font-bold text-slate-700 bg-slate-50">Ils / Elles</td>
+                            <td className="p-2.5">aim<strong className="text-sky-600 font-black">aient</strong></td>
+                            <td className="p-2.5">finiss<strong className="text-sky-600 font-black">aient</strong></td>
+                            <td className="p-2.5">vend<strong className="text-sky-600 font-black">aient</strong></td>
+                            <td className="p-2.5 font-bold text-amber-700">ét<strong className="text-sky-600 font-black">aient</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Trivia Challenge */}
+                  {renderTriviaChallenge('imparfait')}
                 </div>
-              );
-            })}
-          </div>
+              )}
 
-        </div>
+              {/* ══════════════════════════════════════════════ */}
+              {/* STATION 2: PASSÉ COMPOSÉ AVEC AVOIR           */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeStationId === 'pc_avoir' && (
+                <div className="studio-station-panel fade-in">
+                  {/* Station Hero Header */}
+                  <div className="station-hero-banner bg-gradient-to-r from-amber-950 via-amber-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-amber-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-2xl shrink-0">
+                          ⚡
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-amber-400/20 text-amber-200 px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                              Station 02 • L'Action & Le Coup de Théâtre
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">Le Coup de Théâtre : Passé Composé avec AVOIR</h3>
+                        </div>
+                      </div>
+                      <div className="bg-amber-950/60 border border-amber-500/30 rounded-xl px-3 py-1.5 text-xs text-amber-200 font-semibold">
+                        💥 ~90 % des Verbes Français
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-amber-100/90 font-medium leading-relaxed">
+                      Le passé composé propulse l'action ! Il déclenche un événement soudain, précis et daté qui bouleverse la quiétude du décor et fait bondir le récit vers l'avant.
+                    </p>
+                  </div>
+
+                  {/* Formula Card */}
+                  <div className="studio-formula-box mb-6 border-amber-200">
+                    <span className="text-xs font-black uppercase tracking-wider text-amber-800 block mb-2">
+                      🔑 La Formule Essentielle du Passé Composé :
+                    </span>
+                    <div className="bg-slate-900 text-white p-3.5 rounded-xl flex flex-wrap items-center justify-center gap-2 text-center text-xs sm:text-sm font-bold shadow-inner">
+                      <span className="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200">[ Sujet ]</span>
+                      <span className="text-amber-400 text-base font-black">+</span>
+                      <span className="bg-amber-500 text-slate-950 px-3 py-1.5 rounded-lg font-black border border-amber-400">
+                        AVOIR au présent <span className="text-[11px] font-normal block text-slate-900">(ai, as, a, avons, avez, ont)</span>
+                      </span>
+                      <span className="text-amber-400 text-base font-black">+</span>
+                      <span className="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-emerald-400">[ Participe Passé ]</span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
+                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
+                        <span className="text-xs font-black text-slate-700 block">Verbes en -ER</span>
+                        <span className="text-sm font-black text-amber-700">➔ -é</span>
+                        <span className="text-[11px] text-slate-500 block italic">parler ➔ parlé</span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
+                        <span className="text-xs font-black text-slate-700 block">Verbes en -IR</span>
+                        <span className="text-sm font-black text-amber-700">➔ -i</span>
+                        <span className="text-[11px] text-slate-500 block italic">finir ➔ fini</span>
+                      </div>
+                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
+                        <span className="text-xs font-black text-slate-700 block">Verbes en -RE</span>
+                        <span className="text-sm font-black text-amber-700">➔ -u</span>
+                        <span className="text-[11px] text-slate-500 block italic">vendre ➔ vendu</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Golden Rule Callout */}
+                  <div className="narrative-callout callout-regle-or mb-6">
+                    <div className="callout-header">
+                      <Shield size={18} className="text-amber-600" />
+                      <span className="callout-title">Règle d'or de l'auxiliaire AVOIR :</span>
+                    </div>
+                    <p className="callout-text">
+                      Avec l'auxiliaire <strong>AVOIR</strong>, le participe passé <strong>NE S'ACCORDE JAMAIS avec le sujet</strong> ! Exemple : <em>Elle a parlé</em> (aucun 'e' supplémentaire), <em>Elles ont fini</em> (aucun 'es').
+                    </p>
+                  </div>
+
+                  {/* 12 Collector Power Cards Grid */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <Flame size={20} className="text-amber-500" />
+                        <h4 className="font-black text-slate-900 text-base sm:text-lg">
+                          Les 12 Cartes « Power Participe » (Irréguliers Incontournables)
+                        </h4>
+                      </div>
+                      <span className="text-xs font-extrabold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full border border-amber-200">
+                        Collector
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                      {POWER_PARTICIPLES.map((card, cIdx) => (
+                        <div key={cIdx} className="power-card-item">
+                          <div className="power-card-top">
+                            <div className="flex items-center gap-2">
+                              <span className="power-card-icon">{card.icon}</span>
+                              <div>
+                                <span className="power-card-inf">{card.inf}</span>
+                                <span className="power-card-note">{card.note}</span>
+                              </div>
+                            </div>
+                            <div className="power-card-pp-badge">
+                              {card.pp}
+                            </div>
+                          </div>
+                          <div className="power-card-body">
+                            <p className="power-card-example">{card.ex}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Trivia Challenge */}
+                  {renderTriviaChallenge('pc_avoir')}
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* STATION 3: PASSÉ COMPOSÉ AVEC ÊTRE           */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeStationId === 'pc_etre' && (
+                <div className="studio-station-panel fade-in">
+                  {/* Station Hero Header */}
+                  <div className="station-hero-banner bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-emerald-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🧭
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-emerald-400/20 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-400/30">
+                              Station 03 • Trajets, Changements & Accords
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">La Carte des Déplacements : Passé Composé avec ÊTRE</h3>
+                        </div>
+                      </div>
+                      <div className="bg-emerald-950/60 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-xs text-emerald-200 font-semibold">
+                        ⚠️ Accord avec le Sujet OBLIGATOIRE
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-emerald-100/90 font-medium leading-relaxed">
+                      17 verbes d'état ou de mouvement physique (DR & MRS VANDERTRAMP) ainsi que tous les verbes pronominaux utilisent l'auxiliaire ÊTRE. La règle d'or : le participe passé s'accorde en genre et en nombre avec le sujet !
+                    </p>
+                  </div>
+
+                  {/* Interactive Accord Mirror */}
+                  <div className="accord-mirror-container mb-6">
+                    <div className="accord-mirror-header">
+                      <div className="flex items-center gap-2">
+                        <span className="text-2xl">🪞</span>
+                        <div>
+                          <h4 className="font-black text-slate-900 text-sm sm:text-base">
+                            Le Miroir Magique des Accords avec ÊTRE
+                          </h4>
+                          <p className="text-xs text-slate-600 font-medium">
+                            Clique sur chaque avatar pour observer comment le participe passé s'ajuste instantanément au sujet :
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Avatar Buttons */}
+                    <div className="avatar-selector-grid">
+                      {Object.keys(ACCORD_MIRROR_DATA).map((pronoun) => {
+                        const isSelected = selectedAccordPronoun === pronoun;
+                        const data = ACCORD_MIRROR_DATA[pronoun];
+                        return (
+                          <button
+                            key={pronoun}
+                            type="button"
+                            onClick={() => setSelectedAccordPronoun(pronoun)}
+                            className={`avatar-choice-btn ${isSelected ? 'selected' : ''}`}
+                          >
+                            <span className="text-xl sm:text-2xl">{data.avatar}</span>
+                            <div className="text-left">
+                              <strong className="block text-xs sm:text-sm">{pronoun}</strong>
+                              <span className="text-[10px] text-slate-500 font-semibold">{data.genreLabel}</span>
+                            </div>
+                          </button>
+                        );
+                      })}
+                    </div>
+
+                    {/* Live Mirror Result Box */}
+                    {selectedAccordPronoun && (
+                      <div className="live-mirror-display">
+                        <div className="live-mirror-formula">
+                          <span className="mirror-avatar">{ACCORD_MIRROR_DATA[selectedAccordPronoun].avatar}</span>
+                          <span className="mirror-subject">{selectedAccordPronoun}</span>
+                          <span className="mirror-plus">+</span>
+                          <span className="mirror-aux">{ACCORD_MIRROR_DATA[selectedAccordPronoun].auxiliary}</span>
+                          <span className="mirror-plus">+</span>
+                          <span className="mirror-verb-block">
+                            {ACCORD_MIRROR_DATA[selectedAccordPronoun].stem}
+                            {ACCORD_MIRROR_DATA[selectedAccordPronoun].ending ? (
+                              <span className="mirror-ending-badge">
+                                {ACCORD_MIRROR_DATA[selectedAccordPronoun].ending}
+                              </span>
+                            ) : null}
+                          </span>
+                        </div>
+
+                        <div className="live-mirror-details">
+                          <div className={`accord-rule-pill ${ACCORD_MIRROR_DATA[selectedAccordPronoun].badgeStyle}`}>
+                            ✨ {ACCORD_MIRROR_DATA[selectedAccordPronoun].endingBadge}
+                          </div>
+                          <p className="live-mirror-example">
+                            « {ACCORD_MIRROR_DATA[selectedAccordPronoun].example} »
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* 17 DR & MRS VANDERTRAMP Verbs Grid */}
+                  <div className="mb-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center gap-2">
+                        <Compass size={20} className="text-emerald-600" />
+                        <h4 className="font-black text-slate-900 text-base sm:text-lg">
+                          La Boussole des 17 Verbes d'Action (DR & MRS VANDERTRAMP)
+                        </h4>
+                      </div>
+                      <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+                        Auxiliaire ÊTRE
+                      </span>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                      {VANDERTRAMP_HERO_VERBS.map((verbItem, vIdx) => (
+                        <div key={vIdx} className="vandertramp-hero-card">
+                          <div className="flex items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="vandertramp-letter-chip">{verbItem.l}</span>
+                              <span className="vandertramp-verb-name">{verbItem.verb}</span>
+                            </div>
+                            <span className="text-lg">{verbItem.icon}</span>
+                          </div>
+                          <span className="vandertramp-meaning-label">{verbItem.meaning}</span>
+                          <p className="vandertramp-story-example">« {verbItem.ex} »</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Reflexive Verbs Note */}
+                  <div className="narrative-callout callout-astuce mb-6">
+                    <div className="callout-header">
+                      <Layers size={18} className="text-teal-700" />
+                      <span className="callout-title text-teal-900">Et les Verbes Pronominaux / Réfléchis ?</span>
+                    </div>
+                    <p className="callout-text">
+                      Tous les verbes pronominaux (<em>se lever, se souvenir, se réveiller, s'échapper</em>) prennent <strong>systématiquement l'auxiliaire ÊTRE</strong> au passé composé et s'accordent avec le sujet : <em>« Coralie s'est réveill<strong>ée</strong> en sursaut. »</em>
+                    </p>
+                  </div>
+
+                  {/* Trivia Challenge */}
+                  {renderTriviaChallenge('pc_etre')}
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* STATION 4: DUEL IMPARFAIT vs PASSÉ COMPOSÉ    */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeStationId === 'combinaison' && (
+                <div className="studio-station-panel fade-in">
+                  {/* Station Hero Header */}
+                  <div className="station-hero-banner bg-gradient-to-r from-indigo-950 via-slate-900 to-amber-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-indigo-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-indigo-500/20 border border-indigo-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🎬
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-indigo-400/20 text-indigo-200 px-2.5 py-0.5 rounded-full border border-indigo-400/30">
+                              Station 04 • La Régie du Réalisateur
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">Imparfait vs Passé Composé : Le Duo de Choc</h3>
+                        </div>
+                      </div>
+                      <div className="bg-indigo-950/60 border border-indigo-500/30 rounded-xl px-3 py-1.5 text-xs text-indigo-200 font-semibold">
+                        🎭 Rythme & Tension Narrative
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-indigo-100/90 font-medium leading-relaxed">
+                      Ce n'est pas une simple liste de règles : c'est un duel cinématographique ! L'imparfait prépare l'atmosphère de votre plan large, et le passé composé frappe comme un coup de tonnerre au premier plan.
+                    </p>
+                  </div>
+
+                  {/* Comic Strip Duel */}
+                  <div className="comic-strip-duel-grid mb-6">
+                    {/* Planche Bleue: Imparfait */}
+                    <div className="comic-strip-panel comic-imparfait">
+                      <div className="comic-panel-badge bg-sky-100 text-sky-900 border border-sky-300">
+                        🎥 Plan Large • Arrière-Plan
+                      </div>
+                      <h4 className="comic-panel-title text-sky-950">L'Imparfait</h4>
+                      <span className="comic-panel-role text-sky-700">Le Décor & L'Atmosphère</span>
+                      
+                      <div className="comic-question-bubble bg-sky-50 border border-sky-200">
+                        <span className="text-[11px] font-black text-sky-800 uppercase block mb-1">Repère Clé :</span>
+                        <p className="text-xs italic text-slate-800 font-semibold">
+                          « Que se passait-il ? Quelle ambiance régnait ? Quelle action était déjà en cours ? »
+                        </p>
+                      </div>
+
+                      <ul className="comic-features-list">
+                        <li><span>⏳</span> <strong>Action continue</strong> sans limite temporelle fixée.</li>
+                        <li><span>🏔️</span> <strong>Description des lieux</strong>, de la météo et des émotions.</li>
+                        <li><span>🔁</span> <strong>Habitudes régulières</strong> dans le passé.</li>
+                      </ul>
+
+                      <div className="comic-quote-box border-sky-300 bg-sky-50/70">
+                        <span className="text-[11px] font-black text-sky-900 block mb-1">Exemple dans le récit :</span>
+                        <p className="text-xs sm:text-sm italic font-bold text-slate-800">
+                          « Il <strong>faisait</strong> nuit noire, la pluie <strong>tombait</strong> sans arrêt et le capitaine <strong>hésitait</strong> sur le chemin à prendre... »
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Planche Dorée: Passé Composé */}
+                    <div className="comic-strip-panel comic-pc">
+                      <div className="comic-panel-badge bg-amber-100 text-amber-900 border border-amber-300">
+                        ⚡ Gros Plan • Premier Plan
+                      </div>
+                      <h4 className="comic-panel-title text-amber-950">Le Passé Composé</h4>
+                      <span className="comic-panel-role text-amber-700">L'Événement & La Rupture</span>
+
+                      <div className="comic-question-bubble bg-amber-50 border border-amber-200">
+                        <span className="text-[11px] font-black text-amber-800 uppercase block mb-1">Repère Clé :</span>
+                        <p className="text-xs italic text-slate-800 font-semibold">
+                          « Que s'est-il produit soudainement ? Quel acte précis a fait basculer l'histoire ? »
+                        </p>
+                      </div>
+
+                      <ul className="comic-features-list">
+                        <li><span>⚡</span> <strong>Coup de théâtre soudain</strong> qui interrompt le décor.</li>
+                        <li><span>🎯</span> <strong>Action délimitée</strong>, achevée et datée.</li>
+                        <li><span>➡️</span> <strong>Succession d'actions</strong> : il a ouvert, a vu, a réagi.</li>
+                      </ul>
+
+                      <div className="comic-quote-box border-amber-300 bg-amber-50/70">
+                        <span className="text-[11px] font-black text-amber-900 block mb-1">Exemple dans le récit :</span>
+                        <p className="text-xs sm:text-sm italic font-bold text-slate-800">
+                          « ...quand <strong>SOUDAIN</strong> une sirène <strong>a retenti</strong> et Coralie <strong>a sauté</strong> par-dessus le mur d'enceinte ! »
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Story Timeline Stepper */}
+                  <div className="story-timeline-card mb-6">
+                    <div className="flex items-center gap-2 mb-3 pb-2 border-b border-slate-200">
+                      <Clock size={18} className="text-indigo-600" />
+                      <h4 className="font-black text-slate-900 text-sm sm:text-base">
+                        La Frise Chronologique : Déroulement d'une Scène de Suspense
+                      </h4>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+                      <div className="timeline-step-item bg-sky-50 border border-sky-200">
+                        <div className="timeline-step-header">
+                          <span className="timeline-step-badge bg-sky-200 text-sky-900">Étape 1 • Imparfait</span>
+                          <span className="text-lg">🌄</span>
+                        </div>
+                        <strong className="text-xs text-sky-950 block mb-1">Le Décor</strong>
+                        <p className="text-xs text-slate-700 font-medium">
+                          « Il faisait frais et la brume voilait les tours du musée. »
+                        </p>
+                      </div>
+
+                      <div className="timeline-step-item bg-sky-50 border border-sky-200">
+                        <div className="timeline-step-header">
+                          <span className="timeline-step-badge bg-sky-200 text-sky-900">Étape 2 • Imparfait</span>
+                          <span className="text-lg">🚶‍♂️</span>
+                        </div>
+                        <strong className="text-xs text-sky-950 block mb-1">L'Action Continue</strong>
+                        <p className="text-xs text-slate-700 font-medium">
+                          « Julien marchait à pas feutrés le long des galeries silencieuses. »
+                        </p>
+                      </div>
+
+                      <div className="timeline-step-item bg-amber-50 border border-amber-300 shadow-xs">
+                        <div className="timeline-step-header">
+                          <span className="timeline-step-badge bg-amber-200 text-amber-950">Étape 3 • Passé Composé</span>
+                          <span className="text-lg">⚡</span>
+                        </div>
+                        <strong className="text-xs text-amber-950 block mb-1">La Rupture Nette</strong>
+                        <p className="text-xs text-slate-800 font-bold">
+                          « SOUDAIN, un cri perçant a déchiré le silence nocturne ! »
+                        </p>
+                      </div>
+
+                      <div className="timeline-step-item bg-amber-50 border border-amber-300 shadow-xs">
+                        <div className="timeline-step-header">
+                          <span className="timeline-step-badge bg-amber-200 text-amber-950">Étape 4 • Passé Composé</span>
+                          <span className="text-lg">🏃‍♂️</span>
+                        </div>
+                        <strong className="text-xs text-amber-950 block mb-1">La Réaction Vive</strong>
+                        <p className="text-xs text-slate-800 font-bold">
+                          « Julien a braqué sa lampe torche et a couru vers la sortie. »
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trigger Words Palette */}
+                  <div className="trigger-palette-card mb-6">
+                    <h4 className="font-black text-slate-900 text-sm sm:text-base mb-3 flex items-center gap-2">
+                      <Zap size={18} className="text-indigo-600" />
+                      Les Mots Déclencheurs (Vos Balises Réflexes)
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="trigger-column trigger-col-imparfait">
+                        <span className="trigger-column-title text-sky-800">
+                          🎥 Déclencheurs de l'Imparfait (Durée, Routine, Climat) :
+                        </span>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {["Chaque jour", "Tous les soirs", "D'habitude", "Toujours", "Pendant que", "Autrefois", "En ce temps-là", "Régulièrement"].map((word, wIdx) => (
+                            <span key={wIdx} className="trigger-word-pill pill-imparfait">{word}</span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="trigger-column trigger-col-pc">
+                        <span className="trigger-column-title text-amber-800">
+                          ⚡ Déclencheurs du Passé Composé (Rupture, Chronologie) :
+                        </span>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {["Soudain", "Tout à coup", "Un jour", "À ce moment précis", "Brusquement", "Aussitôt", "Immédiatement", "Puis"].map((word, wIdx) => (
+                            <span key={wIdx} className="trigger-word-pill pill-pc">{word}</span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Trivia Challenge */}
+                  {renderTriviaChallenge('combinaison')}
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* STATION 5: LES CONNECTEURS LOGIQUES            */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeStationId === 'connecteurs' && (
+                <div className="studio-station-panel fade-in">
+                  {/* Station Hero Header */}
+                  <div className="station-hero-banner bg-gradient-to-r from-rose-950 via-purple-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-rose-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🧩
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-rose-400/20 text-rose-200 px-2.5 py-0.5 rounded-full border border-rose-400/30">
+                              Station 05 • Architecture du Récit
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">L'Architecte de l'Intrigue : Balises & Connecteurs</h3>
+                        </div>
+                      </div>
+                      <div className="bg-rose-950/60 border border-rose-500/30 rounded-xl px-3 py-1.5 text-xs text-rose-200 font-semibold">
+                        📐 Cadence & Transitions
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-rose-100/90 font-medium leading-relaxed">
+                      Les connecteurs sont les aiguillages de votre scénario. Ils créent des ponts fluides entre les scènes, accentuent le suspense et évitent l'effet monotone de la répétition !
+                    </p>
+                  </div>
+
+                  {/* Screenplay Roadmap: 5 Stages */}
+                  <div className="mb-6">
+                    <div className="flex items-center justify-between mb-3">
+                      <div className="flex items-center gap-2">
+                        <FileText size={20} className="text-rose-600" />
+                        <h4 className="font-black text-slate-900 text-base sm:text-lg">
+                          La Feuille de Route du Scénario (5 Étapes Narratives)
+                        </h4>
+                      </div>
+                      <span className="text-xs font-bold text-rose-800 bg-rose-100 px-2.5 py-1 rounded-full border border-rose-200">
+                        Guide de Rédaction
+                      </span>
+                    </div>
+
+                    <div className="space-y-3.5">
+                      {SCREENPLAY_ROADMAP.map((item, sIdx) => (
+                        <div key={sIdx} className={`roadmap-step-card border-l-4 border-${item.color}-500`}>
+                          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-2">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xl">{item.icon}</span>
+                              <h5 className="font-black text-slate-900 text-sm sm:text-base">{item.step}</h5>
+                            </div>
+                            <span className={`text-[11px] font-extrabold px-2.5 py-0.5 rounded-full bg-${item.color}-100 text-${item.color}-800 border border-${item.color}-200`}>
+                              {item.badge}
+                            </span>
+                          </div>
+
+                          <div className="flex flex-wrap gap-1.5 mb-2.5">
+                            {item.words.map((w, wIdx) => (
+                              <span key={wIdx} className="roadmap-word-pill">
+                                {w}
+                              </span>
+                            ))}
+                          </div>
+
+                          <p className="text-xs italic text-slate-700 font-semibold bg-slate-50 p-2.5 rounded-lg border border-slate-200">
+                            {item.example}
+                          </p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Pro-Tip Box */}
+                  <div className="narrative-callout callout-astuce mb-6">
+                    <div className="callout-header">
+                      <Lightbulb size={18} className="text-rose-600" />
+                      <span className="callout-title text-rose-800">Conseil de Rédaction Grade 9 :</span>
+                    </div>
+                    <p className="callout-text">
+                      Ne dites pas toujours <em>« et puis... et puis... »</em>. Alternez plutôt entre l'opposition (<em>« pourtant », « cependant »</em>) et la conséquence (<em>« par conséquent », « ainsi »</em>) pour donner à votre écriture le souffle d'un véritable roman d'aventure !
+                    </p>
+                  </div>
+
+                  {/* Trivia Challenge */}
+                  {renderTriviaChallenge('connecteurs')}
+                </div>
+              )}
+
+            </div>
+          </div>
+        )
       )}
 
     </div>

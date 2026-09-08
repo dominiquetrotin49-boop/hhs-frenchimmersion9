@@ -1514,3 +1514,718 @@
   color: #0f172a;
 }
 
+/* ═══════════════════════════════════════════════════════════════ */
+/* 🎬 LE STUDIO DU SCÉNARISTE : L'ART DU RÉCIT AU PASSÉ            */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.studio-narratif-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.studio-header-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.05);
+}
+
+/* 5-Station Navigator Grid */
+.studio-stations-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+@media (min-width: 640px) {
+  .studio-stations-nav-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .studio-stations-nav-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+.studio-station-tab-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1rem 1rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+.studio-station-tab-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px -4px rgba(15, 23, 42, 0.1);
+  border-color: #cbd5e1;
+}
+
+.station-tab-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.65rem;
+}
+
+.station-tab-num {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.05em;
+}
+
+.station-tab-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.station-tab-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.station-tab-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  margin-top: -0.1rem;
+}
+
+.station-tab-title {
+  font-size: 0.875rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.25;
+  margin: 0 0 0.2rem;
+}
+
+.station-tab-subtitle {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #64748b;
+  line-height: 1.35;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.station-tab-footer {
+  border-top: 1px dashed #e2e8f0;
+  padding-top: 0.5rem;
+  margin-top: auto;
+}
+
+.station-status-active {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.station-status-inactive {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #94a3b8;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+/* Active Station Theme Accents */
+.studio-station-tab-card.station-sky.active {
+  border-color: #0284c7;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px -4px rgba(2, 132, 199, 0.2), 0 0 0 1.5px #0284c7;
+}
+.studio-station-tab-card.station-sky.active .station-tab-tag {
+  background: #e0f2fe;
+  color: #0369a1;
+}
+
+.studio-station-tab-card.station-amber.active {
+  border-color: #d97706;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px -4px rgba(217, 119, 6, 0.2), 0 0 0 1.5px #d97706;
+}
+.studio-station-tab-card.station-amber.active .station-tab-tag {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.studio-station-tab-card.station-emerald.active {
+  border-color: #059669;
+  background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px -4px rgba(5, 150, 105, 0.2), 0 0 0 1.5px #059669;
+}
+.studio-station-tab-card.station-emerald.active .station-tab-tag {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.studio-station-tab-card.station-indigo.active {
+  border-color: #4f46e5;
+  background: linear-gradient(180deg, #eef2ff 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px -4px rgba(79, 70, 229, 0.2), 0 0 0 1.5px #4f46e5;
+}
+.studio-station-tab-card.station-indigo.active .station-tab-tag {
+  background: #e0e7ff;
+  color: #3730a3;
+}
+
+.studio-station-tab-card.station-rose.active {
+  border-color: #e11d48;
+  background: linear-gradient(180deg, #fff1f2 0%, #ffffff 100%);
+  box-shadow: 0 8px 20px -4px rgba(225, 29, 72, 0.2), 0 0 0 1.5px #e11d48;
+}
+.studio-station-tab-card.station-rose.active .station-tab-tag {
+  background: #ffe4e6;
+  color: #9f1239;
+}
+
+/* 🎥 FILM OBJECTIVE CARDS (STATION 1) */
+.film-objective-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.15rem;
+  box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.film-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.film-card-icon {
+  font-size: 1.3rem;
+}
+
+.film-card-title {
+  font-size: 0.875rem;
+  font-weight: 900;
+  color: #0f172a;
+  margin: 0;
+}
+
+.film-card-desc {
+  font-size: 0.75rem;
+  color: #475569;
+  font-weight: 600;
+  line-height: 1.45;
+  margin-bottom: 0.75rem;
+}
+
+.film-card-example {
+  background: #f8fafc;
+  border-left: 3px solid #0284c7;
+  padding: 0.55rem 0.75rem;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 0.75rem;
+  color: #0f172a;
+  font-style: italic;
+  line-height: 1.45;
+}
+
+.film-card-example strong {
+  color: #0284c7;
+  font-weight: 900;
+}
+
+/* ⚡ POWER PARTICIPLES (STATION 2) */
+.power-card-item {
+  background: #ffffff;
+  border: 1.5px solid #fed7aa;
+  border-radius: 1rem;
+  padding: 0.95rem;
+  box-shadow: 0 2px 8px -2px rgba(217, 119, 6, 0.08);
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.power-card-item:hover {
+  transform: translateY(-2px);
+  border-color: #f59e0b;
+  box-shadow: 0 8px 16px -3px rgba(217, 119, 6, 0.15);
+}
+
+.power-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.65rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px dashed #fed7aa;
+}
+
+.power-card-icon {
+  font-size: 1.25rem;
+}
+
+.power-card-inf {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.power-card-note {
+  display: block;
+  font-size: 0.68rem;
+  color: #78350f;
+  font-weight: 600;
+}
+
+.power-card-pp-badge {
+  font-size: 0.95rem;
+  font-weight: 900;
+  background: #fef3c7;
+  color: #92400e;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.65rem;
+  border: 1px solid #fde68a;
+  box-shadow: 0 1px 3px rgba(217, 119, 6, 0.1);
+}
+
+.power-card-example {
+  font-size: 0.72rem;
+  color: #334155;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 0;
+}
+
+/* 🧭 ACCORD MIRROR (STATION 3) */
+.accord-mirror-container {
+  background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+  border: 1.5px solid #a7f3d0;
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px -2px rgba(5, 150, 105, 0.06);
+}
+
+.accord-mirror-header {
+  margin-bottom: 1rem;
+}
+
+.avatar-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.15rem;
+}
+
+@media (min-width: 640px) {
+  .avatar-selector-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.avatar-choice-btn {
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.85rem;
+  padding: 0.65rem 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.avatar-choice-btn:hover {
+  border-color: #059669;
+  background: #f0fdf4;
+}
+
+.avatar-choice-btn.selected {
+  border-color: #059669;
+  background: #ecfdf5;
+  box-shadow: 0 0 0 2px #059669, 0 4px 10px rgba(5, 150, 105, 0.15);
+}
+
+.live-mirror-display {
+  background: #0f172a;
+  color: #ffffff;
+  border-radius: 1rem;
+  padding: 1.25rem;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.live-mirror-formula {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 1.15rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+}
+
+.mirror-avatar {
+  font-size: 1.4rem;
+}
+
+.mirror-subject {
+  color: #ffffff;
+  background: #1e293b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #334155;
+}
+
+.mirror-plus {
+  color: #10b981;
+}
+
+.mirror-aux {
+  color: #6ee7b7;
+  background: #064e3b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #059669;
+}
+
+.mirror-verb-block {
+  color: #ffffff;
+  background: #1e293b;
+  padding: 0.25rem 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #334155;
+  display: inline-flex;
+  align-items: center;
+}
+
+.mirror-ending-badge {
+  background: #f43f5e;
+  color: #ffffff;
+  font-weight: 900;
+  padding: 0.05rem 0.35rem;
+  border-radius: 0.35rem;
+  margin-left: 0.2rem;
+  box-shadow: 0 0 8px rgba(244, 63, 94, 0.6);
+  animation: pulse-badge 1.8s infinite;
+}
+
+@keyframes pulse-badge {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+}
+
+.live-mirror-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.65rem;
+  text-align: center;
+}
+
+.accord-rule-pill {
+  font-size: 0.75rem;
+  font-weight: 900;
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid;
+}
+
+.live-mirror-example {
+  font-size: 0.85rem;
+  font-style: italic;
+  color: #e2e8f0;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* VANDERTRAMP HERO CARDS */
+.vandertramp-hero-card {
+  background: #ffffff;
+  border: 1.5px solid #d1fae5;
+  border-radius: 0.85rem;
+  padding: 0.75rem 0.85rem;
+  box-shadow: 0 2px 6px -1px rgba(5, 150, 105, 0.04);
+  transition: all 0.2s ease;
+}
+
+.vandertramp-hero-card:hover {
+  transform: translateY(-2px);
+  border-color: #10b981;
+  box-shadow: 0 6px 12px -2px rgba(5, 150, 105, 0.1);
+}
+
+.vandertramp-letter-chip {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: #0f172a;
+  color: #34d399;
+  font-size: 0.72rem;
+  font-weight: 900;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vandertramp-verb-name {
+  font-size: 0.85rem;
+  font-weight: 900;
+  color: #0f172a;
+}
+
+.vandertramp-meaning-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #059669;
+  display: block;
+  margin-bottom: 0.35rem;
+}
+
+.vandertramp-story-example {
+  font-size: 0.72rem;
+  color: #334155;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* 🎬 COMIC STRIP DUEL (STATION 4) */
+.comic-strip-duel-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .comic-strip-duel-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.comic-strip-panel {
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 12px -2px rgba(15, 23, 42, 0.06);
+  display: flex;
+  flex-direction: column;
+  border: 2px solid;
+}
+
+.comic-strip-panel.comic-imparfait {
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+  border-color: #7dd3fc;
+}
+
+.comic-strip-panel.comic-pc {
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+  border-color: #fcd34d;
+}
+
+.comic-panel-badge {
+  font-size: 0.7rem;
+  font-weight: 900;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  display: inline-block;
+  align-self: flex-start;
+  margin-bottom: 0.65rem;
+}
+
+.comic-panel-title {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0 0 0.2rem;
+}
+
+.comic-panel-role {
+  font-size: 0.8rem;
+  font-weight: 800;
+  margin-bottom: 0.85rem;
+}
+
+.comic-question-bubble {
+  border-radius: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  margin-bottom: 0.85rem;
+}
+
+.comic-features-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  font-size: 0.75rem;
+  color: #334155;
+  font-weight: 600;
+}
+
+.comic-features-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.comic-quote-box {
+  border-radius: 0.75rem;
+  border: 1.5px dashed;
+  padding: 0.75rem 0.85rem;
+  margin-top: auto;
+}
+
+/* STORY TIMELINE STEPPER */
+.story-timeline-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.15rem;
+  padding: 1.15rem;
+  box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+.timeline-step-item {
+  border-radius: 0.85rem;
+  padding: 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-step-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.45rem;
+}
+
+.timeline-step-badge {
+  font-size: 0.65rem;
+  font-weight: 900;
+  padding: 0.15rem 0.45rem;
+  border-radius: 9999px;
+}
+
+/* TRIGGER WORDS PALETTE */
+.trigger-palette-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.15rem;
+  padding: 1.15rem;
+}
+
+.trigger-column {
+  border-radius: 0.85rem;
+  padding: 0.85rem;
+  border: 1px solid;
+}
+
+.trigger-col-imparfait {
+  background: #f0f9ff;
+  border-color: #bae6fd;
+}
+
+.trigger-col-pc {
+  background: #fffbeb;
+  border-color: #fde68a;
+}
+
+.trigger-column-title {
+  font-size: 0.75rem;
+  font-weight: 900;
+  display: block;
+}
+
+.trigger-word-pill {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid;
+}
+
+.pill-imparfait {
+  background: #ffffff;
+  color: #0369a1;
+  border-color: #7dd3fc;
+}
+
+.pill-pc {
+  background: #ffffff;
+  color: #92400e;
+  border-color: #fcd34d;
+}
+
+/* 🧩 ROADMAP STEP CARDS (STATION 5) */
+.roadmap-step-card {
+  background: #ffffff;
+  border-radius: 0.85rem;
+  border: 1.5px solid #e2e8f0;
+  padding: 1rem;
+  box-shadow: 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+}
+
+.roadmap-word-pill {
+  background: #f1f5f9;
+  color: #334155;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.45rem;
+  border: 1px solid #cbd5e1;
+}
+
+/* 🎯 STUDIO TRIVIA CHALLENGE */
+.studio-trivia-challenge-card {
+  background: #ffffff;
+  border: 1.5px solid #c7d2fe;
+  border-radius: 1rem;
+  padding: 1.15rem;
+  box-shadow: 0 4px 12px -2px rgba(79, 70, 229, 0.08);
+}
+
+.studio-formula-box {
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1rem;
+  padding: 1.15rem;
+}
+
