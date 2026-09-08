@@ -847,6 +847,7 @@ function GrammarSection() {
   // Interactive Accord Mirror for ÊTRE (for Unit 1)
   const [selectedAccordPronoun, setSelectedAccordPronoun] = useState('Elle');
   const [vandertrampGridMode, setVandertrampGridMode] = useState('6x3');
+  const [powerCardGridMode, setPowerCardGridMode] = useState('3x4');
 
   // Arsenal du Scénariste (Conjugation Guide in Unit 1)
   const [verbSearchQuery, setVerbSearchQuery] = useState('');
@@ -2508,32 +2509,60 @@ function GrammarSection() {
                     </p>
                   </div>
 
-                  {/* 12 Collector Power Cards Grid */}
+                  {/* 12 Collector Power Cards Grid (3 x 4 / 4 x 3) */}
                   <div className="mb-6">
-                    <div className="flex items-center justify-between mb-3">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
                       <div className="flex items-center gap-2">
                         <Flame size={20} className="text-amber-500" />
                         <h4 className="font-black text-slate-900 text-base sm:text-lg">
                           Les 12 Cartes « Power Participe » (Irréguliers Incontournables)
                         </h4>
                       </div>
-                      <span className="text-xs font-extrabold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full border border-amber-200">
-                        Collector
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-extrabold text-amber-800 bg-amber-100 px-2.5 py-1 rounded-full border border-amber-200">
+                          Collector
+                        </span>
+                        <div className="inline-flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                          <button
+                            type="button"
+                            onClick={() => setPowerCardGridMode('3x4')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              powerCardGridMode === '3x4' 
+                                ? 'bg-white text-amber-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille 3 × 4 (3 colonnes, 4 rangées)"
+                          >
+                            3 × 4
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setPowerCardGridMode('4x3')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              powerCardGridMode === '4x3' 
+                                ? 'bg-white text-amber-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille panoramique 4 × 3 (4 colonnes, 3 rangées)"
+                          >
+                            4 × 3
+                          </button>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
+                    <div className={`power-cards-grid-container ${powerCardGridMode === '4x3' ? 'grid-4-cols' : 'grid-3-cols'}`}>
                       {POWER_PARTICIPLES.map((card, cIdx) => (
                         <div key={cIdx} className="power-card-item">
                           <div className="power-card-top">
-                            <div className="flex items-center gap-2">
-                              <span className="power-card-icon">{card.icon}</span>
-                              <div>
-                                <span className="power-card-inf">{card.inf}</span>
-                                <span className="power-card-note">{card.note}</span>
+                            <div className="flex items-center gap-2 min-w-0">
+                              <span className="power-card-icon shrink-0">{card.icon}</span>
+                              <div className="min-w-0">
+                                <span className="power-card-inf truncate">{card.inf}</span>
+                                <span className="power-card-note truncate">{card.note}</span>
                               </div>
                             </div>
-                            <div className="power-card-pp-badge">
+                            <div className="power-card-pp-badge shrink-0">
                               {card.pp}
                             </div>
                           </div>

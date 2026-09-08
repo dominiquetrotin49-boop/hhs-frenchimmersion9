@@ -1768,16 +1768,49 @@
 }
 
 /* ⚡ POWER PARTICIPLES (STATION 2) */
+.power-cards-grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .power-cards-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .power-cards-grid-container,
+  .power-cards-grid-container.grid-3-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .power-cards-grid-container.grid-4-cols {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .power-cards-grid-container.grid-3-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
 .power-card-item {
   background: #ffffff;
   border: 1.5px solid #fed7aa;
-  border-radius: 1rem;
-  padding: 0.95rem;
-  box-shadow: 0 2px 8px -2px rgba(217, 119, 6, 0.08);
-  transition: all 0.2s ease;
+  border-radius: 0.85rem;
+  padding: 0.65rem 0.75rem;
+  box-shadow: 0 2px 6px -1px rgba(217, 119, 6, 0.06);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  min-height: 96px;
 }
 
 .power-card-item:hover {
@@ -1791,13 +1824,13 @@
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.65rem;
-  padding-bottom: 0.5rem;
+  margin-bottom: 0.45rem;
+  padding-bottom: 0.4rem;
   border-bottom: 1px dashed #fed7aa;
 }
 
 .power-card-icon {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
 }
 
 .power-card-inf {
@@ -1813,15 +1846,16 @@
   font-size: 0.68rem;
   color: #78350f;
   font-weight: 600;
+  line-height: 1.2;
 }
 
 .power-card-pp-badge {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 900;
   background: #fef3c7;
   color: #92400e;
-  padding: 0.25rem 0.65rem;
-  border-radius: 0.65rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 0.6rem;
   border: 1px solid #fde68a;
   box-shadow: 0 1px 3px rgba(217, 119, 6, 0.1);
 }
@@ -1831,7 +1865,7 @@
   color: #334155;
   font-style: italic;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   margin: 0;
 }
 
