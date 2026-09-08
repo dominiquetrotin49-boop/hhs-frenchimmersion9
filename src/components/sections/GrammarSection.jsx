@@ -848,6 +848,7 @@ function GrammarSection() {
   const [selectedAccordPronoun, setSelectedAccordPronoun] = useState('Elle');
   const [vandertrampGridMode, setVandertrampGridMode] = useState('6x3');
   const [powerCardGridMode, setPowerCardGridMode] = useState('3x4');
+  const [cameraGridMode, setCameraGridMode] = useState('2x2');
 
   // Arsenal du Scénariste (Conjugation Guide in Unit 1)
   const [verbSearchQuery, setVerbSearchQuery] = useState('');
@@ -2294,49 +2295,91 @@ function GrammarSection() {
                     </p>
                   </div>
 
-                  {/* 4 Cinematic Objective Cards */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
-                    <div className="film-objective-card">
-                      <div className="film-card-header">
-                        <span className="film-card-icon">🌤️</span>
-                        <h4 className="film-card-title">1. Météo, Climat & Décors</h4>
+                  {/* 4 Cinematic Objective Cards (2 x 2 / 4 x 1) */}
+                  <div className="mb-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
+                      <div className="flex items-center gap-2">
+                        <Film size={20} className="text-sky-600" />
+                        <h4 className="font-black text-slate-900 text-base sm:text-lg">
+                          Les 4 Plans de la Caméra (Missions de l'Imparfait)
+                        </h4>
                       </div>
-                      <p className="film-card-desc">Plante l'ambiance visuelle et sonore du lieu où se déroule l'histoire.</p>
-                      <div className="film-card-example">
-                        « Il <strong>faisait</strong> un froid glacial et le vent <strong>soufflait</strong> sur les toits de Montréal. »
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-extrabold text-sky-800 bg-sky-100 px-2.5 py-1 rounded-full border border-sky-200">
+                          Toile de Fond
+                        </span>
+                        <div className="inline-flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                          <button
+                            type="button"
+                            onClick={() => setCameraGridMode('2x2')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              cameraGridMode === '2x2' 
+                                ? 'bg-white text-sky-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille 2 × 2 (2 colonnes, 2 rangées)"
+                          >
+                            2 × 2
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setCameraGridMode('4x1')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              cameraGridMode === '4x1' 
+                                ? 'bg-white text-sky-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille panoramique 4 × 1 (4 colonnes, 1 rangée)"
+                          >
+                            4 × 1
+                          </button>
+                        </div>
                       </div>
                     </div>
 
-                    <div className="film-objective-card">
-                      <div className="film-card-header">
-                        <span className="film-card-icon">🕰️</span>
-                        <h4 className="film-card-title">2. Habitudes & Répétition</h4>
+                    <div className={`camera-cards-grid-container ${cameraGridMode === '4x1' ? 'grid-4-cols' : 'grid-2-cols'}`}>
+                      <div className="film-objective-card">
+                        <div className="film-card-header">
+                          <span className="film-card-icon">🌤️</span>
+                          <h4 className="film-card-title">1. Météo, Climat & Décors</h4>
+                        </div>
+                        <p className="film-card-desc">Plante l'ambiance visuelle et sonore du lieu où se déroule l'histoire.</p>
+                        <div className="film-card-example">
+                          « Il <strong>faisait</strong> un froid glacial et le vent <strong>soufflait</strong> sur les toits de Montréal. »
+                        </div>
                       </div>
-                      <p className="film-card-desc">Décrit les actions régulières ou les routines répétées dans le passé.</p>
-                      <div className="film-card-example">
-                        « Tous les matins, le jeune horloger <strong>nettoyait</strong> les rouages avec minutie. »
-                      </div>
-                    </div>
 
-                    <div className="film-objective-card">
-                      <div className="film-card-header">
-                        <span className="film-card-icon">💭</span>
-                        <h4 className="film-card-title">3. Sentiments & États d'Âme</h4>
+                      <div className="film-objective-card">
+                        <div className="film-card-header">
+                          <span className="film-card-icon">🕰️</span>
+                          <h4 className="film-card-title">2. Habitudes & Répétition</h4>
+                        </div>
+                        <p className="film-card-desc">Décrit les actions régulières ou les routines répétées dans le passé.</p>
+                        <div className="film-card-example">
+                          « Tous les matins, le jeune horloger <strong>nettoyait</strong> les rouages avec minutie. »
+                        </div>
                       </div>
-                      <p className="film-card-desc">Exprime ce que ressentaient ou pensaient les personnages.</p>
-                      <div className="film-card-example">
-                        « Julien <strong>avait</strong> peur de faire du bruit et <strong>se sentait</strong> anxieux. »
-                      </div>
-                    </div>
 
-                    <div className="film-objective-card">
-                      <div className="film-card-header">
-                        <span className="film-card-icon">⏳</span>
-                        <h4 className="film-card-title">4. Action Continue en Cours</h4>
+                      <div className="film-objective-card">
+                        <div className="film-card-header">
+                          <span className="film-card-icon">💭</span>
+                          <h4 className="film-card-title">3. Sentiments & États d'Âme</h4>
+                        </div>
+                        <p className="film-card-desc">Exprime ce que ressentaient ou pensaient les personnages.</p>
+                        <div className="film-card-example">
+                          « Julien <strong>avait</strong> peur de faire du bruit et <strong>se sentait</strong> anxieux. »
+                        </div>
                       </div>
-                      <p className="film-card-desc">Une action déjà en progression qui sert de toile de fond.</p>
-                      <div className="film-card-example">
-                        « Pendant que nous <strong>marchions</strong> silencieusement dans le long couloir sombre... »
+
+                      <div className="film-objective-card">
+                        <div className="film-card-header">
+                          <span className="film-card-icon">⏳</span>
+                          <h4 className="film-card-title">4. Action Continue en Cours</h4>
+                        </div>
+                        <p className="film-card-desc">Une action déjà en progression qui sert de toile de fond.</p>
+                        <div className="film-card-example">
+                          « Pendant que nous <strong>marchions</strong> silencieusement dans le long couloir sombre... »
+                        </div>
                       </div>
                     </div>
                   </div>
