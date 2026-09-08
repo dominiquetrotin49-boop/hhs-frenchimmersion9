@@ -6,7 +6,7 @@ const RENTREE_PROMPTS = [
     id: 1,
     title: "1. Votre routine matinale",
     level: "Niveau Intermédiaire-Bas",
-    prompt: "1. Décrivez votre routine du matin au présent. Qu'est-ce que vous faites en premier ? Que mangez-vous ?",
+    prompt: "Décrivez votre routine du matin au présent. Qu'est-ce que vous faites en premier ? Que mangez-vous ?",
     focus: "Le Présent — Routine quotidienne",
     minWords: 30
   },
@@ -14,7 +14,7 @@ const RENTREE_PROMPTS = [
     id: 2,
     title: "2. Vos loisirs préférés",
     level: "Niveau Intermédiaire-Bas",
-    prompt: "2. Parlez de vos loisirs préférés. Pourquoi aimez-vous ces activités et quand les pratiquez-vous ?",
+    prompt: "Parlez de vos loisirs préférés. Pourquoi aimez-vous ces activités et quand les pratiquez-vous ?",
     focus: "Le Présent — Loisirs et passions",
     minWords: 30
   },
@@ -22,7 +22,7 @@ const RENTREE_PROMPTS = [
     id: 3,
     title: "3. Votre meilleur(e) ami(e)",
     level: "Niveau Intermédiaire-Bas",
-    prompt: "3. Décrivez votre meilleur(e) ami(e). Comment est-il ou elle physiquement et mentalement ?",
+    prompt: "Décrivez votre meilleur(e) ami(e). Comment est-il ou elle physiquement et mentalement ?",
     focus: "Le Présent — Description physique et morale",
     minWords: 30
   },
@@ -30,7 +30,7 @@ const RENTREE_PROMPTS = [
     id: 4,
     title: "4. Votre maison de rêve",
     level: "Niveau Intermédiaire-Bas",
-    prompt: "4. Décrivez votre maison ou appartement de rêve au présent. Quels meubles ou pièces y a-t-il ?",
+    prompt: "Décrivez votre maison ou appartement de rêve au présent. Quels meubles ou pièces y a-t-il ?",
     focus: "Le Présent — Logement et mobilier",
     minWords: 30
   }
@@ -41,7 +41,7 @@ const UNIT1_PROMPTS = [
     id: 1,
     title: "1. L'Origine d'un Héros ou d'une Héroïne",
     level: "Niveau Intermédiaire",
-    prompt: "1. Racontez la jeunesse d'un héros ou d'une héroïne avant sa célébrité. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
+    prompt: "Racontez la jeunesse d'un héros ou d'une héroïne avant sa célébrité. Décrivez sa vie quotidienne (imparfait), puis l'événement soudain qui a tout changé (passé composé). Utilisez au moins 2 connecteurs logiques (ex. : D'abord, Soudain, C'est pourquoi).",
     focus: "Imparfait vs Passé Composé & Connecteurs",
     minWords: 45
   },
@@ -49,7 +49,7 @@ const UNIT1_PROMPTS = [
     id: 2,
     title: "2. Le Dilemme Moral de l'Anti-Héros",
     level: "Niveau Intermédiaire",
-    prompt: "2. Présentez un anti-héros confronté à un choix déchirant. Décrivez ses doutes et ses faiblesses (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et ses réactions avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
+    prompt: "Présentez un anti-héros confronté à un choix déchirant. Décrivez ses doutes et ses faiblesses (imparfait), les actions qu'il a accomplies (passé composé avec avoir/être), et ses réactions avec un verbe pronominal (ex. : se demander, se rendre compte, se préparer).",
     focus: "Passé Composé, Verbes Réfléchis & Nuance Morale",
     minWords: 45
   },
@@ -57,7 +57,7 @@ const UNIT1_PROMPTS = [
     id: 3,
     title: "3. La Mission Périlleuse : Récit d'une Épreuve",
     level: "Niveau Intermédiaire",
-    prompt: "3. Racontez une mission ou un sauvetage difficile. Décrivez l'atmosphère et le décor (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis la fin de l'épreuve avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
+    prompt: "Racontez une mission ou un sauvetage difficile. Décrivez l'atmosphère et le décor (imparfait), les péripéties et déplacements (passé composé avec être : aller, partir, arriver, etc.), puis la fin de l'épreuve avec un connecteur de conséquence ou conclusion (ex. : Par conséquent, Finalement).",
     focus: "Passé Composé avec Être (accords) & Récit d'aventure",
     minWords: 45
   },
@@ -65,7 +65,7 @@ const UNIT1_PROMPTS = [
     id: 4,
     title: "4. L'Affrontement ou la Réconciliation",
     level: "Niveau Intermédiaire",
-    prompt: "4. Racontez la confrontation décisive entre deux personnages rivaux. Expliquez l'origine de leur conflit (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques : s'affronter, se regarder, se comprendre), et le dénouement de leur face-à-face (passé composé).",
+    prompt: "Racontez la confrontation décisive entre deux personnages rivaux. Expliquez l'origine de leur conflit (imparfait), comment ils se sont affrontés ou se sont soutenus (verbes réciproques : s'affronter, se regarder, se comprendre), et le dénouement de leur face-à-face (passé composé).",
     focus: "Verbes Réciproques, Passé Composé & Connecteurs d'opposition",
     minWords: 45
   }
