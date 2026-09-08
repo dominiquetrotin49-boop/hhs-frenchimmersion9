@@ -846,6 +846,7 @@ function GrammarSection() {
 
   // Interactive Accord Mirror for ÊTRE (for Unit 1)
   const [selectedAccordPronoun, setSelectedAccordPronoun] = useState('Elle');
+  const [vandertrampGridMode, setVandertrampGridMode] = useState('6x3');
 
   // Arsenal du Scénariste (Conjugation Guide in Unit 1)
   const [verbSearchQuery, setVerbSearchQuery] = useState('');
@@ -2652,7 +2653,7 @@ function GrammarSection() {
                     )}
                   </div>
 
-                  {/* 17 DR & MRS VANDERTRAMP Verbs Grid */}
+                  {/* 17 DR & MRS VANDERTRAMP Verbs Grid (3 x 6 / 6 x 3) */}
                   <div className="mb-6">
                     <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 mb-3">
                       <div className="flex items-center gap-2">
@@ -2661,25 +2662,73 @@ function GrammarSection() {
                           La Boussole des 17 Verbes d'Action (DR & MRS VANDERTRAMP)
                         </h4>
                       </div>
-                      <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
-                        Auxiliaire ÊTRE
-                      </span>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full border border-emerald-200">
+                          Auxiliaire ÊTRE
+                        </span>
+                        <div className="inline-flex items-center bg-slate-100 p-0.5 rounded-lg border border-slate-200 text-xs">
+                          <button
+                            type="button"
+                            onClick={() => setVandertrampGridMode('6x3')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              vandertrampGridMode === '6x3' 
+                                ? 'bg-white text-emerald-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille panoramique 6 × 3"
+                          >
+                            6 × 3
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => setVandertrampGridMode('3x6')}
+                            className={`px-2 py-0.5 rounded-md font-bold transition-all ${
+                              vandertrampGridMode === '3x6' 
+                                ? 'bg-white text-emerald-900 shadow-xs' 
+                                : 'text-slate-500 hover:text-slate-800'
+                            }`}
+                            title="Grille compacte 3 × 6"
+                          >
+                            3 × 6
+                          </button>
+                        </div>
+                      </div>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+                    <div className={`vandertramp-grid-container ${vandertrampGridMode === '3x6' ? 'grid-3-cols' : 'grid-6-cols'}`}>
                       {VANDERTRAMP_HERO_VERBS.map((verbItem, vIdx) => (
                         <div key={vIdx} className="vandertramp-hero-card">
-                          <div className="flex items-center justify-between gap-2 mb-2">
-                            <div className="flex items-center gap-2">
-                              <span className="vandertramp-letter-chip">{verbItem.l}</span>
-                              <span className="vandertramp-verb-name">{verbItem.verb}</span>
+                          <div className="flex items-center justify-between gap-1.5 mb-1.5">
+                            <div className="flex items-center gap-1.5 min-w-0">
+                              <span className="vandertramp-letter-chip shrink-0">{verbItem.l}</span>
+                              <span className="vandertramp-verb-name truncate font-black text-slate-900">{verbItem.verb}</span>
                             </div>
-                            <span className="text-lg">{verbItem.icon}</span>
+                            <span className="text-sm shrink-0">{verbItem.icon}</span>
                           </div>
-                          <span className="vandertramp-meaning-label">{verbItem.meaning}</span>
-                          <p className="vandertramp-story-example">« {verbItem.ex} »</p>
+                          <span className="vandertramp-meaning-label text-[11px] font-bold text-emerald-700 block truncate mb-1">
+                            {verbItem.meaning}
+                          </span>
+                          <p className="vandertramp-story-example text-[11px] text-slate-600 italic leading-snug">
+                            « {verbItem.ex} »
+                          </p>
                         </div>
                       ))}
+
+                      {/* 18th Slot: Balanced Memory Summary Card */}
+                      <div className="vandertramp-hero-card vandertramp-summary-card flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center gap-1.5 mb-1.5">
+                            <span className="vandertramp-letter-chip bg-emerald-800 text-amber-300 shrink-0">★</span>
+                            <span className="vandertramp-verb-name font-black text-emerald-950 truncate">Règle Clé</span>
+                          </div>
+                          <span className="vandertramp-meaning-label text-[11px] font-black text-emerald-800 block truncate mb-1">
+                            Auxiliaire ÊTRE
+                          </span>
+                          <p className="vandertramp-story-example text-[11px] text-emerald-950 font-semibold leading-snug">
+                            Accord obligatoire avec le sujet (+e, +s, +es).
+                          </p>
+                        </div>
+                      </div>
                     </div>
                   </div>
 

@@ -1990,20 +1990,62 @@
   margin: 0;
 }
 
-/* VANDERTRAMP HERO CARDS */
+/* VANDERTRAMP HERO CARDS & GRID (3x6 and 6x3) */
+.vandertramp-grid-container {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 480px) {
+  .vandertramp-grid-container {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 768px) {
+  .vandertramp-grid-container,
+  .vandertramp-grid-container.grid-3-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .vandertramp-grid-container.grid-6-cols {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 0.65rem;
+  }
+  .vandertramp-grid-container.grid-3-cols {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+}
+
 .vandertramp-hero-card {
   background: #ffffff;
   border: 1.5px solid #d1fae5;
   border-radius: 0.85rem;
-  padding: 0.75rem 0.85rem;
+  padding: 0.65rem 0.75rem;
   box-shadow: 0 2px 6px -1px rgba(5, 150, 105, 0.04);
-  transition: all 0.2s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100px;
 }
 
 .vandertramp-hero-card:hover {
   transform: translateY(-2px);
-  border-color: #10b981;
-  box-shadow: 0 6px 12px -2px rgba(5, 150, 105, 0.1);
+  border-color: #059669;
+  box-shadow: 0 6px 14px -2px rgba(5, 150, 105, 0.12);
+}
+
+.vandertramp-hero-card.vandertramp-summary-card {
+  background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+  border-color: #34d399;
+  border-style: dashed;
 }
 
 .vandertramp-letter-chip {
@@ -2026,11 +2068,10 @@
 }
 
 .vandertramp-meaning-label {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 700;
   color: #059669;
   display: block;
-  margin-bottom: 0.35rem;
 }
 
 .vandertramp-story-example {
