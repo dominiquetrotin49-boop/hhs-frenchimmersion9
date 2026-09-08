@@ -2229,3 +2229,349 @@
   padding: 1.15rem;
 }
 
+/* ═══════════════════════════════════════════════════════════════════
+   ⚡ L'ARSENAL DU SCÉNARISTE : GUIDE DE CONJUGAISON (UNITÉ 1)
+   ═══════════════════════════════════════════════════════════════════ */
+
+.arsenal-container {
+  max-width: 100%;
+  border-radius: 1.25rem;
+}
+
+/* ── Arsenal Header Banner & Search / Filter Toolbar ── */
+.arsenal-header-banner {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
+}
+
+.arsenal-toolbar-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .arsenal-toolbar-grid {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.arsenal-search-box {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  border: 1.5px solid #cbd5e1;
+  border-radius: 0.85rem;
+  padding: 0.4rem 0.75rem;
+  flex: 1;
+  max-width: 480px;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.04);
+}
+
+.arsenal-search-box:focus-within {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15), 0 2px 6px rgba(99, 102, 241, 0.08);
+}
+
+.arsenal-search-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.arsenal-search-input::placeholder {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.arsenal-search-clear-btn {
+  background: #f1f5f9;
+  border: none;
+  border-radius: 9999px;
+  width: 1.35rem;
+  height: 1.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748b;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+
+.arsenal-search-clear-btn:hover {
+  background: #e2e8f0;
+  color: #0f172a;
+}
+
+.arsenal-pronoun-filter-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.arsenal-pronoun-chip {
+  padding: 0.35rem 0.75rem;
+  border-radius: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  border: 1.5px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.arsenal-pronoun-chip:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #1e293b;
+}
+
+.arsenal-pronoun-chip.active {
+  background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+  color: #ffffff;
+  border-color: #1e1b4b;
+  box-shadow: 0 3px 10px -1px rgba(30, 27, 75, 0.3);
+}
+
+.arsenal-search-alert {
+  background: #fef3c7;
+  border: 1px solid #fde68a;
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.95rem;
+}
+
+/* ── 5-Module Navigator Grid ── */
+.arsenal-modules-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 0.85rem;
+  margin-bottom: 1.75rem;
+}
+
+@media (min-width: 640px) {
+  .arsenal-modules-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .arsenal-modules-nav-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.arsenal-module-tab-card {
+  background: #ffffff;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 1.15rem;
+  padding: 1rem 1.1rem;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 155px;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.03);
+}
+
+.arsenal-module-tab-card:hover {
+  transform: translateY(-2px);
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px -2px rgba(15, 23, 42, 0.08);
+}
+
+.module-tab-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.65rem;
+}
+
+.module-tab-num {
+  font-size: 0.7rem;
+  font-weight: 900;
+  color: #94a3b8;
+  letter-spacing: 0.06em;
+}
+
+.module-tab-tag {
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.15rem 0.5rem;
+  border-radius: 9999px;
+  background: #f1f5f9;
+  color: #475569;
+}
+
+.module-tab-main {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  margin-bottom: 0.75rem;
+}
+
+.module-tab-icon {
+  font-size: 1.65rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.module-tab-title {
+  font-size: 0.88rem;
+  font-weight: 900;
+  color: #0f172a;
+  line-height: 1.25;
+}
+
+.module-tab-subtitle {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: #64748b;
+  margin-top: 0.25rem;
+  line-height: 1.3;
+}
+
+.module-tab-footer {
+  margin-top: auto;
+  padding-top: 0.65rem;
+  border-top: 1px solid #f1f5f9;
+  font-size: 0.72rem;
+}
+
+.module-status-active {
+  color: #0f172a;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 900;
+}
+
+.module-status-inactive {
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  transition: color 0.15s ease;
+}
+
+.arsenal-module-tab-card:hover .module-status-inactive {
+  color: #1e293b;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  display: inline-block;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.25);
+  animation: pulseDotAnim 1.8s infinite;
+}
+
+@keyframes pulseDotAnim {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.3);
+    opacity: 0.7;
+  }
+}
+
+/* Specific module accents */
+.arsenal-module-tab-card.module-sky {
+  border-top: 4px solid #0284c7;
+}
+.arsenal-module-tab-card.module-sky.active {
+  border-color: #0284c7;
+  background: linear-gradient(180deg, #f0f9ff 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px -4px rgba(2, 132, 199, 0.22);
+}
+
+.arsenal-module-tab-card.module-amber {
+  border-top: 4px solid #d97706;
+}
+.arsenal-module-tab-card.module-amber.active {
+  border-color: #d97706;
+  background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px -4px rgba(217, 119, 6, 0.22);
+}
+
+.arsenal-module-tab-card.module-emerald {
+  border-top: 4px solid #059669;
+}
+.arsenal-module-tab-card.module-emerald.active {
+  border-color: #059669;
+  background: linear-gradient(180deg, #ecfdf5 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px -4px rgba(5, 150, 105, 0.22);
+}
+
+.arsenal-module-tab-card.module-rose {
+  border-top: 4px solid #e11d48;
+}
+.arsenal-module-tab-card.module-rose.active {
+  border-color: #e11d48;
+  background: linear-gradient(180deg, #fff1f2 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px -4px rgba(225, 29, 72, 0.22);
+}
+
+.arsenal-module-tab-card.module-purple {
+  border-top: 4px solid #7c3aed;
+}
+.arsenal-module-tab-card.module-purple.active {
+  border-color: #7c3aed;
+  background: linear-gradient(180deg, #faf5ff 0%, #ffffff 100%);
+  box-shadow: 0 8px 24px -4px rgba(124, 58, 237, 0.22);
+}
+
+/* ── Content Wrapper & Panel ── */
+.arsenal-module-content-wrapper {
+  margin-top: 0.5rem;
+}
+
+.arsenal-panel {
+  animation: fadeInPanel 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInPanel {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Highlight cell when targeting a pronoun ── */
+.highlight-pronoun-cell {
+  background-color: #fef08a !important;
+  color: #854d0e !important;
+  font-weight: 900 !important;
+  border-left: 2px solid #eab308;
+  border-right: 2px solid #eab308;
+}
+
+

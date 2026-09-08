@@ -3,7 +3,8 @@ import { useParams } from 'react-router-dom';
 import { 
   BookOpen, Compass, Clock, Zap, BookOpenCheck, ChevronDown, ChevronUp, 
   CheckCircle2, HelpCircle, Layers, Sparkles, Shield, Flame, 
-  FileText, Lightbulb, AlertTriangle, PenTool, Bookmark, Film, ArrowRight, Eye, Award
+  FileText, Lightbulb, AlertTriangle, PenTool, Bookmark, Film, ArrowRight, Eye, Award,
+  Search, X, RotateCcw
 } from 'lucide-react';
 import './GrammarSection.css';
 import './VocabularySection.css';
@@ -53,6 +54,54 @@ const STUDIO_STATIONS = [
     title: "L'Architecte de l'Intrigue",
     subtitle: "Les Balises & Connecteurs : Rythme ton récit",
     accentColor: "rose"
+  }
+];
+
+const ARSENAL_MODULES = [
+  {
+    id: 'imparfait',
+    num: "01",
+    icon: "🕒",
+    tag: "Module 1 • Arrière-Plan",
+    title: "L'Armurerie de l'Imparfait",
+    subtitle: "Radicaux réguliers & 10 verbes fréquents",
+    accentColor: "sky"
+  },
+  {
+    id: 'pc_avoir',
+    num: "02",
+    icon: "⚡",
+    tag: "Module 2 • Coup d'Éclat",
+    title: "Le Coffre des Participes (AVOIR)",
+    subtitle: "Réguliers (-é, -i, -u) & 17 irréguliers par famille",
+    accentColor: "amber"
+  },
+  {
+    id: 'pc_etre',
+    num: "03",
+    icon: "🧭",
+    tag: "Module 3 • Déplacements",
+    title: "La Boussole ÊTRE & Accords",
+    subtitle: "Les 17 verbes DR & MRS VANDERTRAMP avec accords",
+    accentColor: "emerald"
+  },
+  {
+    id: 'pronominaux',
+    num: "04",
+    icon: "🪞",
+    tag: "Module 4 • Réflexion",
+    title: "Le Miroir Pronominal",
+    subtitle: "Verbes réfléchis avec auxiliaire ÊTRE",
+    accentColor: "rose"
+  },
+  {
+    id: 'comparaison',
+    num: "05",
+    icon: "⚖️",
+    tag: "Module 5 • Nuances",
+    title: "Le Comparateur de Nuances",
+    subtitle: "Double sens : Être, Avoir, Savoir, Pouvoir...",
+    accentColor: "purple"
   }
 ];
 
@@ -741,6 +790,12 @@ function GrammarSection() {
   // Interactive Accord Mirror for ÊTRE (for Unit 1)
   const [selectedAccordPronoun, setSelectedAccordPronoun] = useState('Elle');
 
+  // Arsenal du Scénariste (Conjugation Guide in Unit 1)
+  const [verbSearchQuery, setVerbSearchQuery] = useState('');
+  const [highlightPronounIdx, setHighlightPronounIdx] = useState(null);
+  const [activeArsenalModule, setActiveArsenalModule] = useState('imparfait');
+  const [selectedParticipleFamily, setSelectedParticipleFamily] = useState('all');
+
   // Accordion state: tracks which folder ID is currently open
   const [openFolderId, setOpenFolderId] = useState(isReprise ? 'prep_destination' : 'imparfait');
 
@@ -857,7 +912,7 @@ function GrammarSection() {
           <h3>
             {isReprise 
               ? "⚡ Guide de Conjugaison : Le Présent" 
-              : "⚡ Guide de Conjugaison : Les Essentiels"}
+              : "⚡ L'Arsenal de Conjugaison : Les Essentiels"}
           </h3>
         </div>
 
@@ -869,77 +924,28 @@ function GrammarSection() {
       {/* ═══════════════════════════════════════════════════════════════ */}
       {/* GUIDE DE CONJUGAISON — TABLEAUX RÉCAPITULATIFS                 */}
       {/* ═══════════════════════════════════════════════════════════════ */}
+      {/* GUIDE DE CONJUGAISON — TABLEAUX RÉCAPITULATIFS OU ARSENAL DU SCÉNARISTE */}
       {activeHeaderTab === 'conjugaison-irreguliers' && (
-        <div className="conjugation-guide-frame fade-in">
-          
-          {/* Header Banner */}
-          <div className="conjugation-guide-header">
-            <div>
-              <h3 className="conjugation-guide-title">
-                <Zap className="text-amber-500" size={26} />
-                {isReprise 
-                  ? "Tableaux Récapitulatifs de Conjugaison : Le Présent" 
-                  : "Tableaux Récapitulatifs de Conjugaison : Les Temps du Récit"}
-              </h3>
-              <p className="conjugation-guide-desc">
-                {isReprise 
-                  ? "Verbes réguliers en -ER, -IR, -RE et les 10 verbes essentiels de la langue française."
-                  : "Guide de référence et aide-mémoire complet : L'Imparfait, le Passé Composé (AVOIR & ÊTRE), les Verbes Pronominaux et la Synthèse Narrative."}
-              </p>
+        isReprise ? (
+          <div className="conjugation-guide-frame fade-in">
+            {/* Header Banner for Reprise */}
+            <div className="conjugation-guide-header">
+              <div>
+                <h3 className="conjugation-guide-title">
+                  <Zap className="text-amber-500" size={26} />
+                  Tableaux Récapitulatifs de Conjugaison : Le Présent
+                </h3>
+                <p className="conjugation-guide-desc">
+                  Verbes réguliers en -ER, -IR, -RE et les 10 verbes essentiels de la langue française.
+                </p>
+              </div>
+              <span className="text-xs font-black bg-indigo-50 text-indigo-700 px-3.5 py-1.5 rounded-full border border-indigo-200 shadow-xs flex items-center gap-1.5 self-start sm:self-auto">
+                <BookOpenCheck size={14} />
+                ⚡ Repères Fondamentaux
+              </span>
             </div>
-            <span className="text-xs font-black bg-indigo-50 text-indigo-700 px-3.5 py-1.5 rounded-full border border-indigo-200 shadow-xs flex items-center gap-1.5 self-start sm:self-auto">
-              <BookOpenCheck size={14} />
-              {isReprise ? "⚡ Repères Fondamentaux" : "📖 Répertoire du Récit"}
-            </span>
-          </div>
 
-          {/* Filter Pills Bar */}
-          {!isReprise ? (
-            <div className="conjugation-filter-bar">
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('all')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'all' ? 'active' : ''}`}
-              >
-                🌟 Tous les Tableaux
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('imparfait')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'imparfait' ? 'active' : ''}`}
-              >
-                🕒 1. L'Imparfait
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('pc_avoir')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'pc_avoir' ? 'active' : ''}`}
-              >
-                ⚡ 2. Passé Composé (AVOIR)
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('pc_etre')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'pc_etre' ? 'active' : ''}`}
-              >
-                🏔️ 3. Passé Composé (ÊTRE & 17 Verbes)
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('pronominaux')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'pronominaux' ? 'active' : ''}`}
-              >
-                🪞 4. Verbes Pronominaux
-              </button>
-              <button 
-                type="button" 
-                onClick={() => setConjugationFilter('comparaison')} 
-                className={`conjugation-filter-btn ${conjugationFilter === 'comparaison' ? 'active' : ''}`}
-              >
-                ⚖️ 5. Synthèse (Imparfait vs PC)
-              </button>
-            </div>
-          ) : (
+            {/* Filter Pills Bar for Reprise */}
             <div className="conjugation-filter-bar">
               <button 
                 type="button" 
@@ -953,7 +959,7 @@ function GrammarSection() {
                 onClick={() => setConjugationFilter('reguliers')} 
                 className={`conjugation-filter-btn ${conjugationFilter === 'reguliers' ? 'active' : ''}`}
               >
-                📖 Verbes Réguliers (-ER, -IR, -RE)
+                📘 Verbes Réguliers (-ER, -IR, -RE)
               </button>
               <button 
                 type="button" 
@@ -963,433 +969,9 @@ function GrammarSection() {
                 ⚡ 10 Verbes Essentiels
               </button>
             </div>
-          )}
 
-          {/* ══════ UNITE 1: LES TEMPS DU RÉCIT ══════ */}
-          {!isReprise && (
+            {/* Reprise Tables */}
             <div className="space-y-6">
-
-              {/* 1. L'IMPARFAIT */}
-              {(conjugationFilter === 'all' || conjugationFilter === 'imparfait') && (
-                <div className="conjugation-section-card accent-imparfait">
-                  <div className="conjugation-section-header">
-                    <h4 className="conjugation-section-title">
-                      <Clock size={18} className="text-sky-600" />
-                      1. L'Imparfait de l'Indicatif (Décor, Atmosphère & Habitudes)
-                    </h4>
-                    <p className="conjugation-section-subtitle">
-                      Temps de l'arrière-plan narratif. Il décrit les états continus, les portraits, la météo et les actions habituelles.
-                    </p>
-                  </div>
-
-                  <div className="conjugation-formula-pill imparfait">
-                    🔑 Formule : Radical de « Nous » au présent + Terminaisons (-ais, -ais, -ait, -ions, -iez, -aient)
-                  </div>
-
-                  {/* Tableau 1.1: Modèles Réguliers */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2">
-                    A. Modèles Réguliers (-ER, -IR, -RE)
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Modèle</th>
-                          <th>Je / J'</th>
-                          <th>Tu</th>
-                          <th>Il / Elle</th>
-                          <th>Nous</th>
-                          <th>Vous</th>
-                          <th>Ils / Elles</th>
-                          <th>Terminaisons</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.imparfait.models.map((v, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
-                            {v.conj.map((c, cIdx) => {
-                              const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
-                              let p = pronouns[cIdx];
-                              let space = true;
-                              if (cIdx === 0 && /^[aeiouyéèêâ]/i.test(c)) {
-                                p = "j'";
-                                space = false;
-                              }
-                              return (
-                                <td key={cIdx}>
-                                  <div className="conjugation-cell-flex">
-                                    <span className="conjugation-pronoun-tag">{p}</span>
-                                    {space && <span>&nbsp;</span>}
-                                    <span className="conjugation-verb-bold conjugation-ending-imparfait">{c}</span>
-                                  </div>
-                                </td>
-                              );
-                            })}
-                            <td className="text-xs italic text-sky-700 font-bold">{v.term}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Tableau 1.2: Auxiliaires et Verbes Essentiels */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2 mt-4">
-                    B. Auxiliaires & Verbes Fréquents du Récit à l'Imparfait
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Verbe</th>
-                          <th>Je / J'</th>
-                          <th>Tu</th>
-                          <th>Il / Elle</th>
-                          <th>Nous</th>
-                          <th>Vous</th>
-                          <th>Ils / Elles</th>
-                          <th>Radical & Particularité</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.imparfait.essentiels.map((v, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
-                            {v.conj.map((c, cIdx) => {
-                              const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
-                              let p = pronouns[cIdx];
-                              let space = true;
-                              if (cIdx === 0 && /^[aeiouyéèêâ]/i.test(c)) {
-                                p = "j'";
-                                space = false;
-                              }
-                              return (
-                                <td key={cIdx}>
-                                  <div className="conjugation-cell-flex">
-                                    <span className="conjugation-pronoun-tag">{p}</span>
-                                    {space && <span>&nbsp;</span>}
-                                    <span className="conjugation-verb-bold text-slate-900">{c}</span>
-                                  </div>
-                                </td>
-                              );
-                            })}
-                            <td className="text-xs text-slate-600 font-medium">
-                              <span className="font-bold text-sky-800">{v.stem}</span> — {v.note}
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="conjugation-rule-memo-box">
-                    <Lightbulb size={18} className="text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Règle d'or de l'Imparfait :</strong> Les terminaisons <em>-ais, -ais, -ait, -ions, -iez, -aient</em> sont rigoureusement identiques pour TOUS les verbes du français, sans exception. Seul le verbe <strong>Être</strong> a un radical irrégulier (<em>ét-</em>).
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 2. LE PASSÉ COMPOSÉ AVEC AVOIR */}
-              {(conjugationFilter === 'all' || conjugationFilter === 'pc_avoir') && (
-                <div className="conjugation-section-card accent-pc-avoir">
-                  <div className="conjugation-section-header">
-                    <h4 className="conjugation-section-title">
-                      <Zap size={18} className="text-amber-600" />
-                      2. Le Passé Composé avec AVOIR (~90 % des verbes)
-                    </h4>
-                    <p className="conjugation-section-subtitle">
-                      Temps du premier plan et de l'action délimitée. Il exprime les événements ponctuels, soudains ou achevés qui font basculer l'histoire.
-                    </p>
-                  </div>
-
-                  <div className="conjugation-formula-pill pc-avoir">
-                    🔑 Formule : Sujet + AVOIR au présent (ai, as, a, avons, avez, ont) + Participe Passé
-                  </div>
-
-                  {/* Tableau 2.1: Modèles Réguliers */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2">
-                    A. Modèles Réguliers (-ER $\rightarrow$ -é, -IR $\rightarrow$ -i, -RE $\rightarrow$ -u)
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Modèle</th>
-                          <th>Participe</th>
-                          <th>Je / J'</th>
-                          <th>Tu</th>
-                          <th>Il / Elle</th>
-                          <th>Nous</th>
-                          <th>Vous</th>
-                          <th>Ils / Elles</th>
-                          <th>Règle</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.pcAvoir.models.map((v, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
-                            <td className="font-extrabold text-amber-600">{v.pp}</td>
-                            {v.conj.map((c, cIdx) => (
-                              <td key={cIdx}>
-                                <span className="conjugation-verb-bold text-slate-900">{c}</span>
-                              </td>
-                            ))}
-                            <td className="text-xs italic text-amber-800 font-bold">{v.rule}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Tableau 2.2: Le Répertoire des Participes Passés Irréguliers du Récit */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2 mt-4">
-                    B. Le Répertoire des Participes Passés Irréguliers Essentiels (17 Verbes du Récit)
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Infinitif</th>
-                          <th>Participe Passé</th>
-                          <th>Exemple au Singulier</th>
-                          <th>Exemple au Pluriel</th>
-                          <th>Astuce de Mémorisation</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.pcAvoir.irreguliers.map((v, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
-                            <td>
-                              <span className="inline-block bg-amber-100 text-amber-950 font-black px-2.5 py-0.5 rounded-md border border-amber-200">
-                                {v.pp}
-                              </span>
-                            </td>
-                            <td className="font-semibold text-slate-800 italic">« {v.exSg} »</td>
-                            <td className="font-semibold text-slate-800 italic">« {v.exPl} »</td>
-                            <td className="text-xs text-slate-600 font-medium">{v.note}</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="conjugation-rule-memo-box">
-                    <Shield size={18} className="text-amber-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Règle d'or avec AVOIR :</strong> Le participe passé ne s'accorde <strong>JAMAIS</strong> avec le sujet ! On écrit : <em>« Elle a parlé »</em>, <em>« Elles ont fini »</em>, <em>« Nous avons vendu »</em>.
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 3. LE PASSÉ COMPOSÉ AVEC ÊTRE */}
-              {(conjugationFilter === 'all' || conjugationFilter === 'pc_etre') && (
-                <div className="conjugation-section-card accent-pc-etre">
-                  <div className="conjugation-section-header">
-                    <h4 className="conjugation-section-title">
-                      <Compass size={18} className="text-emerald-600" />
-                      3. Le Passé Composé avec ÊTRE (La Maison d'Être / DR & MRS VANDERTRAMP)
-                    </h4>
-                    <p className="conjugation-section-subtitle">
-                      Les 17 verbes de déplacement et d'état. L'accord en genre et en nombre avec le sujet est 100 % OBLIGATOIRE.
-                    </p>
-                  </div>
-
-                  <div className="conjugation-formula-pill pc-etre">
-                    🔑 Formule : Sujet + ÊTRE au présent (suis, es, est, sommes, êtes, sont) + Participe Passé ACCORDÉ (+e, +s, +es)
-                  </div>
-
-                  {/* Tableau 3.1: Démonstration d'Accord */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2">
-                    A. Démonstration du Mécanisme d'Accord en Genre et en Nombre
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Sujet</th>
-                          <th>Forme Accordée au Passé Composé</th>
-                          <th>Explication de la Règle d'Accord</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.pcEtre.accordsDemo.map((a, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{a.sujet}</td>
-                            <td className="font-extrabold text-emerald-800">{a.forme}</td>
-                            <td>
-                              <span className="conjugation-accord-chip">
-                                {a.tag}
-                              </span>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  {/* Tableau 3.2: Répertoire des 17 Verbes DR & MRS VANDERTRAMP */}
-                  <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-2 mt-4">
-                    B. Répertoire Exhaustif des 17 Verbes (DR & MRS VANDERTRAMP)
-                  </h5>
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Lettre</th>
-                          <th>Verbe (Infinitif)</th>
-                          <th>Participe (Masc. Sg.)</th>
-                          <th>Féminin (+e)</th>
-                          <th>Pluriel (+s / +es)</th>
-                          <th>Phrase Exemple dans le Récit</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.pcEtre.vandertramp.map((v, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell">
-                              <span className="font-black text-amber-500 bg-slate-900 text-white px-2 py-0.5 rounded text-xs">
-                                {v.l}
-                              </span>
-                            </td>
-                            <td className="font-bold text-slate-900">{v.inf}</td>
-                            <td className="font-extrabold text-emerald-700">{v.pp}</td>
-                            <td>
-                              <span className="font-bold text-rose-700">{v.fem}</span>
-                            </td>
-                            <td>
-                              <span className="font-bold text-indigo-700">{v.pl}</span>
-                            </td>
-                            <td className="text-xs italic text-slate-700">« {v.ex} »</td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="conjugation-rule-memo-box">
-                    <AlertTriangle size={18} className="text-rose-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Rappel capital avec ÊTRE :</strong> L'accord est <strong>obligatoire</strong> ! Cherchez toujours le sujet du verbe :
-                      masculin pluriel = <em>+s</em>, féminin singulier = <em>+e</em>, féminin pluriel = <em>+es</em>.
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 4. LES VERBES PRONOMINAUX */}
-              {(conjugationFilter === 'all' || conjugationFilter === 'pronominaux') && (
-                <div className="conjugation-section-card accent-pronominal">
-                  <div className="conjugation-section-header">
-                    <h4 className="conjugation-section-title">
-                      <Layers size={18} className="text-rose-600" />
-                      4. Les Verbes Pronominaux / Réfléchis au Passé Composé
-                    </h4>
-                    <p className="conjugation-section-subtitle">
-                      Verbes précédés d'un pronom réfléchi (se lever, se souvenir, se réveiller). Ils emploient SYSTÉMATIQUEMENT l'auxiliaire ÊTRE au passé composé.
-                    </p>
-                  </div>
-
-                  <div className="conjugation-formula-pill pronominal">
-                    🔑 Formule : Sujet + Pronom Réfléchi (me, te, se, nous, vous, se) + ÊTRE au présent + Participe Passé
-                  </div>
-
-                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                    {LE_PASSE_CONJ_DATA.pronominaux.map((pGroup, pIdx) => (
-                      <div key={pIdx} className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <h6 className="font-black text-rose-900 text-sm mb-3 flex items-center gap-1.5 border-b border-rose-200 pb-2">
-                          <span>🪞</span>
-                          {pGroup.inf}
-                        </h6>
-                        <ul className="space-y-1.5 text-xs">
-                          {pGroup.formes.map((row, rIdx) => (
-                            <li key={rIdx} className="flex items-center justify-between bg-white px-2.5 py-1.5 rounded-lg border border-slate-200/80">
-                              <span className="font-bold text-slate-500">{row.pr} :</span>
-                              <span className="font-extrabold text-slate-900">{row.v}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="conjugation-rule-memo-box">
-                    <Lightbulb size={18} className="text-amber-500 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Élision du pronom réfléchi :</strong> Devant une voyelle ou un « h » muet, <em>me, te, se</em> deviennent <em>m', t', s'</em> (Exemple : <em>« Je <strong>m'</strong>étais levé »</em>, <em>« Elle <strong>s'</strong>est souvenue »</em>).
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* 5. SYNTHÈSE NARRATIVE (IMPARFAIT VS PASSÉ COMPOSÉ) */}
-              {(conjugationFilter === 'all' || conjugationFilter === 'comparaison') && (
-                <div className="conjugation-section-card accent-comparaison">
-                  <div className="conjugation-section-header">
-                    <h4 className="conjugation-section-title">
-                      <BookOpen size={18} className="text-purple-600" />
-                      5. Synthèse Narrative : Imparfait vs Passé Composé (Verbes Clés)
-                    </h4>
-                    <p className="conjugation-section-subtitle">
-                      Le choix entre l'imparfait et le passé composé modifie profondément la signification du verbe dans votre texte narratif.
-                    </p>
-                  </div>
-
-                  <div className="conjugation-formula-pill comparaison">
-                    📖 Repère : L'Imparfait brosse le décor et l'état d'esprit — Le Passé Composé déclenche l'événement et la rupture.
-                  </div>
-
-                  <div className="conjugation-table-wrapper">
-                    <table className="conjugation-table">
-                      <thead>
-                        <tr>
-                          <th className="conjugation-sticky-cell">Verbe</th>
-                          <th>Forme & Nuance à l'Imparfait</th>
-                          <th>Forme & Nuance au Passé Composé</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {LE_PASSE_CONJ_DATA.comparaison.map((row, idx) => (
-                          <tr key={idx}>
-                            <td className="conjugation-sticky-cell font-black">{row.verb}</td>
-                            <td>
-                              <div className="text-xs">
-                                <span className="font-extrabold text-sky-700 block mb-0.5">« {row.imparfait} »</span>
-                                <span className="text-slate-600 font-medium italic">{row.sensImp}</span>
-                              </div>
-                            </td>
-                            <td>
-                              <div className="text-xs">
-                                <span className="font-extrabold text-amber-700 block mb-0.5">« {row.pc} »</span>
-                                <span className="text-slate-600 font-medium italic">{row.sensPc}</span>
-                              </div>
-                            </td>
-                          </tr>
-                        ))}
-                      </tbody>
-                    </table>
-                  </div>
-
-                  <div className="conjugation-rule-memo-box">
-                    <PenTool size={18} className="text-purple-600 shrink-0 mt-0.5" />
-                    <div>
-                      <strong>Conseil de Rédaction Grade 9 :</strong> Pour créer du suspense, enchaînez une longue description à l'imparfait (calme plat), puis tranchez net avec un passé composé introduit par <em>« Soudain »</em> ou <em>« Tout à coup »</em> !
-                    </div>
-                  </div>
-                </div>
-              )}
-
-            </div>
-          )}
-
-          {/* ══════ REPRISE: LE PRÉSENT ══════ */}
-          {isReprise && (
-            <div className="space-y-6">
-              
               {/* Verbes Réguliers au Présent */}
               {(conjugationFilter === 'all' || conjugationFilter === 'reguliers') && (
                 <div className="conjugation-section-card accent-present">
@@ -1420,7 +1002,7 @@ function GrammarSection() {
                       <tbody>
                         {REPRISE_CONJ_DATA.reguliers.map((v, idx) => (
                           <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
+                            <td className="conjugation-sticky-cell font-black">{v.inf}</td>
                             {v.conj.map((c, cIdx) => {
                               const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
                               let p = pronouns[cIdx];
@@ -1477,7 +1059,7 @@ function GrammarSection() {
                       <tbody>
                         {REPRISE_CONJ_DATA.essentiels.map((v, idx) => (
                           <tr key={idx}>
-                            <td className="conjugation-sticky-cell">{v.inf}</td>
+                            <td className="conjugation-sticky-cell font-black">{v.inf}</td>
                             {v.conj.map((c, cIdx) => {
                               const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
                               let p = pronouns[cIdx];
@@ -1503,11 +1085,738 @@ function GrammarSection() {
                   </div>
                 </div>
               )}
+            </div>
+          </div>
+        ) : (
+          /* Arsenal du Scénariste for Unité 1 */
+          <div className="arsenal-container fade-in">
+            {/* Header Banner & Utility Controls */}
+            <div className="arsenal-header-banner">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-amber-200/60">
+                <div>
+                  <div className="flex items-center gap-2 mb-1.5">
+                    <span className="text-xs font-black uppercase tracking-wider text-amber-800 bg-amber-100 px-3 py-0.5 rounded-full border border-amber-300">
+                      ⚡ Boîte à Outils du Récit
+                    </span>
+                    <span className="text-xs font-extrabold text-indigo-700 bg-indigo-50 px-3 py-0.5 rounded-full border border-indigo-200">
+                      Immersion 9e Année
+                    </span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+                    <span>L'Arsenal du Scénariste : Guide de Conjugaison</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 font-semibold mt-1">
+                    L'aide-mémoire complet des temps du récit : radicaux, modèles, coffre des 17 participes passés, accords d'ÊTRE et nuances de sens !
+                  </p>
+                </div>
+                <span className="text-xs font-black text-indigo-900 bg-indigo-100/80 px-3.5 py-1.5 rounded-xl border border-indigo-200 shadow-xs flex items-center gap-1.5 shrink-0">
+                  <Sparkles size={15} className="text-amber-500" />
+                  Répertoire & Formules
+                </span>
+              </div>
+
+              {/* Utility Toolbar: Live Verb Search & Target Pronoun Filter */}
+              <div className="arsenal-toolbar-grid">
+                {/* Search Bar */}
+                <div className="arsenal-search-box">
+                  <Search size={16} className="text-slate-400 shrink-0 ml-1" />
+                  <input
+                    type="text"
+                    value={verbSearchQuery}
+                    onChange={(e) => setVerbSearchQuery(e.target.value)}
+                    placeholder="Rechercher un verbe (ex: avoir, pouvoir, partir, descendre...)"
+                    className="arsenal-search-input"
+                  />
+                  {verbSearchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setVerbSearchQuery('')}
+                      className="arsenal-search-clear-btn"
+                      title="Effacer la recherche"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                </div>
+
+                {/* Pronoun Highlighter Chips */}
+                <div className="arsenal-pronoun-filter-row">
+                  <span className="text-[11px] font-black uppercase tracking-wider text-slate-500 shrink-0">
+                    Cibler un Pronom :
+                  </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      type="button"
+                      onClick={() => setHighlightPronounIdx(null)}
+                      className={`arsenal-pronoun-chip ${highlightPronounIdx === null ? 'active' : ''}`}
+                    >
+                      Tous
+                    </button>
+                    {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((pr, pIdx) => (
+                      <button
+                        key={pIdx}
+                        type="button"
+                        onClick={() => setHighlightPronounIdx(highlightPronounIdx === pIdx ? null : pIdx)}
+                        className={`arsenal-pronoun-chip ${highlightPronounIdx === pIdx ? 'active' : ''}`}
+                      >
+                        {pr}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              {verbSearchQuery && (
+                <div className="arsenal-search-alert mt-3 flex items-center justify-between">
+                  <span className="text-xs font-bold text-amber-900">
+                    🔎 Filtrage actif pour : <strong>« {verbSearchQuery} »</strong>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setVerbSearchQuery('')}
+                    className="text-xs font-extrabold text-amber-700 underline hover:text-amber-900"
+                  >
+                    Réinitialiser le filtre
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* 5-Module Navigator Grid */}
+            <div className="arsenal-modules-nav-grid">
+              {ARSENAL_MODULES.map((mod) => {
+                const isActive = activeArsenalModule === mod.id;
+                return (
+                  <button
+                    key={mod.id}
+                    type="button"
+                    onClick={() => setActiveArsenalModule(mod.id)}
+                    className={`arsenal-module-tab-card module-${mod.accentColor} ${isActive ? 'active' : ''}`}
+                  >
+                    <div className="module-tab-top">
+                      <span className="module-tab-num">{mod.num}</span>
+                      <span className="module-tab-tag">{mod.tag}</span>
+                    </div>
+                    <div className="module-tab-main">
+                      <span className="module-tab-icon">{mod.icon}</span>
+                      <div className="text-left">
+                        <h4 className="module-tab-title">{mod.title}</h4>
+                        <p className="module-tab-subtitle">{mod.subtitle}</p>
+                      </div>
+                    </div>
+                    <div className="module-tab-footer">
+                      {isActive ? (
+                        <span className="module-status-active">
+                          <span className="pulse-dot"></span> Module Actif
+                        </span>
+                      ) : (
+                        <span className="module-status-inactive">
+                          Consulter <ArrowRight size={13} className="inline ml-0.5" />
+                        </span>
+                      )}
+                    </div>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Module Content Panels */}
+            <div className="arsenal-module-content-wrapper">
+              
+              {/* ══════════════════════════════════════════════ */}
+              {/* MODULE 1: L'ARMURERIE DE L'IMPARFAIT           */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeArsenalModule === 'imparfait' && (
+                <div className="arsenal-panel fade-in">
+                  <div className="station-hero-banner bg-gradient-to-r from-sky-950 via-sky-900 to-indigo-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-sky-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-sky-500/20 border border-sky-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🕒
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-sky-400/20 text-sky-200 px-2.5 py-0.5 rounded-full border border-sky-400/30">
+                              Module 01 • L'Arrière-Plan Narratif
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">L'Armurerie de l'Imparfait</h3>
+                        </div>
+                      </div>
+                      <div className="bg-sky-950/60 border border-sky-500/30 rounded-xl px-3 py-1.5 text-xs text-sky-200 font-semibold">
+                        Décor & Continuité
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-sky-100/90 font-medium leading-relaxed">
+                      L'imparfait décrit les états continus, les portraits, la météo et les actions habituelles. Ses terminaisons sont universelles et invariables pour tous les verbes.
+                    </p>
+                  </div>
+
+                  {/* Formula Pill */}
+                  <div className="conjugation-formula-pill imparfait mb-5">
+                    🔑 Formule : Radical de « Nous » au présent + Terminaisons (-ais, -ais, -ait, -ions, -iez, -aient)
+                  </div>
+
+                  {/* Table 1.1: Modèles Réguliers */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>📘</span> A. Modèles Réguliers (-ER, -IR, -RE)
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Modèle</th>
+                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
+                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-indigo-800 text-amber-300 font-black' : ''}>
+                                {p}
+                              </th>
+                            ))}
+                            <th>Terminaisons</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.imparfait.models
+                            .filter(v => !verbSearchQuery || v.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((v, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-black">{v.inf}</td>
+                              {v.conj.map((c, cIdx) => {
+                                const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
+                                let p = pronouns[cIdx];
+                                let space = true;
+                                if (cIdx === 0 && /^[aeiouyéèêâ]/i.test(c)) {
+                                  p = "j'";
+                                  space = false;
+                                }
+                                const isHighlighted = highlightPronounIdx === cIdx;
+                                return (
+                                  <td key={cIdx} className={isHighlighted ? 'bg-sky-50 font-black' : ''}>
+                                    <div className="conjugation-cell-flex">
+                                      <span className="conjugation-pronoun-tag">{p}</span>
+                                      {space && <span>&nbsp;</span>}
+                                      <span className="conjugation-verb-bold text-sky-900">{c}</span>
+                                    </div>
+                                  </td>
+                                );
+                              })}
+                              <td className="text-xs italic text-sky-700 font-bold">{v.term}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Table 1.2: Auxiliaires et Verbes Essentiels */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>⚡</span> B. Auxiliaires & Verbes Fréquents du Récit à l'Imparfait
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Verbe</th>
+                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
+                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-indigo-800 text-amber-300 font-black' : ''}>
+                                {p}
+                              </th>
+                            ))}
+                            <th>Radical & Particularité</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.imparfait.essentiels
+                            .filter(v => !verbSearchQuery || v.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()) || v.stem.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((v, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-black">{v.inf}</td>
+                              {v.conj.map((c, cIdx) => {
+                                const pronouns = ["je", "tu", "il", "nous", "vous", "ils"];
+                                let p = pronouns[cIdx];
+                                let space = true;
+                                if (cIdx === 0 && /^[aeiouyéèêâ]/i.test(c)) {
+                                  p = "j'";
+                                  space = false;
+                                }
+                                const isHighlighted = highlightPronounIdx === cIdx;
+                                return (
+                                  <td key={cIdx} className={isHighlighted ? 'bg-sky-50 font-black' : ''}>
+                                    <div className="conjugation-cell-flex">
+                                      <span className="conjugation-pronoun-tag">{p}</span>
+                                      {space && <span>&nbsp;</span>}
+                                      <span className="conjugation-verb-bold text-slate-900">{c}</span>
+                                    </div>
+                                  </td>
+                                );
+                              })}
+                              <td className="text-xs text-slate-600 font-medium">
+                                <span className="font-bold text-sky-800 bg-sky-100 px-1.5 py-0.5 rounded mr-1">{v.stem}</span>
+                                <span>{v.note}</span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Golden Rule Callout */}
+                  <div className="narrative-callout callout-regle-or">
+                    <div className="callout-header">
+                      <Lightbulb size={18} className="text-amber-600" />
+                      <span className="callout-title">Règle d'or de l'Imparfait :</span>
+                    </div>
+                    <p className="callout-text">
+                      Les terminaisons <strong>-ais, -ais, -ait, -ions, -iez, -aient</strong> sont rigoureusement identiques pour TOUS les verbes du français, sans exception. Seul le verbe <strong>Être</strong> a un radical irrégulier (<em>ét-</em>).
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* MODULE 2: LE COFFRE DES PARTICIPES (AVOIR)    */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeArsenalModule === 'pc_avoir' && (
+                <div className="arsenal-panel fade-in">
+                  <div className="station-hero-banner bg-gradient-to-r from-amber-950 via-amber-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-amber-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center text-2xl shrink-0">
+                          ⚡
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-amber-400/20 text-amber-200 px-2.5 py-0.5 rounded-full border border-amber-400/30">
+                              Module 02 • Premier Plan & Événements
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">Le Coffre des Participes Passés (AVOIR)</h3>
+                        </div>
+                      </div>
+                      <div className="bg-amber-950/60 border border-amber-500/30 rounded-xl px-3 py-1.5 text-xs text-amber-200 font-semibold">
+                        ~90 % des Verbes Français
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-amber-100/90 font-medium leading-relaxed">
+                      Le passé composé fait progresser l'intrigue. Avec l'auxiliaire AVOIR, le participe passé ne s'accorde jamais avec le sujet.
+                    </p>
+                  </div>
+
+                  {/* Formula Pill */}
+                  <div className="conjugation-formula-pill pc-avoir mb-5">
+                    🔑 Formule : Sujet + AVOIR au présent (ai, as, a, avons, avez, ont) + Participe Passé
+                  </div>
+
+                  {/* Table 2.1: Modèles Réguliers */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>🎯</span> A. Modèles Réguliers (-ER ➔ -é, -IR ➔ -i, -RE ➔ -u)
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Modèle</th>
+                            <th>Participe</th>
+                            {["Je / J'", "Tu", "Il / Elle", "Nous", "Vous", "Ils / Elles"].map((p, pIdx) => (
+                              <th key={pIdx} className={highlightPronounIdx === pIdx ? 'bg-amber-800 text-amber-200 font-black' : ''}>
+                                {p}
+                              </th>
+                            ))}
+                            <th>Règle</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.pcAvoir.models
+                            .filter(v => !verbSearchQuery || v.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((v, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-black">{v.inf}</td>
+                              <td className="font-extrabold text-amber-700 bg-amber-50">{v.pp}</td>
+                              {v.conj.map((c, cIdx) => {
+                                const isHighlighted = highlightPronounIdx === cIdx;
+                                return (
+                                  <td key={cIdx} className={isHighlighted ? 'bg-amber-50 font-black' : ''}>
+                                    <span className="conjugation-verb-bold text-slate-900">{c}</span>
+                                  </td>
+                                );
+                              })}
+                              <td className="text-xs italic text-amber-800 font-bold">{v.rule}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Section 2.2: Le Répertoire des 17 Participes Passés Irréguliers */}
+                  <div className="bg-white p-4 sm:p-5 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-4">
+                      <div>
+                        <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 flex items-center gap-2">
+                          <Flame size={18} className="text-amber-500" />
+                          B. Répertoire des 17 Participes Passés Irréguliers (Classés par Famille)
+                        </h5>
+                        <p className="text-xs text-slate-500 mt-0.5">
+                          Filtrer par terminaison phonétique pour mémoriser les correspondances en un coup d'œil :
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Family Filter Buttons */}
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {[
+                        { id: 'all', label: '🌟 Tous les 17' },
+                        { id: 'u', label: '🟡 Famille en -u' },
+                        { id: 'is', label: '🔵 Famille en -is' },
+                        { id: 'it', label: '🟣 Famille en -it' },
+                        { id: 'special', label: '🟢 Spéciaux (-ert, été)' }
+                      ].map((fam) => (
+                        <button
+                          key={fam.id}
+                          type="button"
+                          onClick={() => setSelectedParticipleFamily(fam.id)}
+                          className={`px-3 py-1.5 rounded-lg text-xs font-bold border transition-all ${
+                            selectedParticipleFamily === fam.id
+                              ? 'bg-amber-500 text-slate-950 border-amber-600 shadow-xs font-black'
+                              : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+                          }`}
+                        >
+                          {fam.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Table View with Examples */}
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Infinitif</th>
+                            <th>Participe Passé</th>
+                            <th>Exemple au Singulier</th>
+                            <th>Exemple au Pluriel</th>
+                            <th>Astuce de Mémorisation</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.pcAvoir.irreguliers
+                            .filter(v => {
+                              const matchesSearch = !verbSearchQuery || 
+                                v.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()) || 
+                                v.pp.toLowerCase().includes(verbSearchQuery.trim().toLowerCase());
+                              if (!matchesSearch) return false;
+                              if (selectedParticipleFamily === 'all') return true;
+                              if (selectedParticipleFamily === 'u') return v.pp.endsWith('u') || v.pp === 'dû';
+                              if (selectedParticipleFamily === 'is') return v.pp.endsWith('is') || v.pp === 'mis';
+                              if (selectedParticipleFamily === 'it') return v.pp.endsWith('it') || v.pp === 'fait';
+                              if (selectedParticipleFamily === 'special') return v.inf === 'Être' || v.inf === 'Ouvrir';
+                              return true;
+                            })
+                            .map((v, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-black">{v.inf}</td>
+                              <td>
+                                <span className="inline-block bg-amber-100 text-amber-950 font-black px-2.5 py-0.5 rounded-md border border-amber-300 shadow-2xs">
+                                  {v.pp}
+                                </span>
+                              </td>
+                              <td className="font-semibold text-slate-800 italic">« {v.exSg} »</td>
+                              <td className="font-semibold text-slate-800 italic">« {v.exPl} »</td>
+                              <td className="text-xs text-slate-600 font-medium">{v.note}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Golden Rule Callout */}
+                  <div className="narrative-callout callout-regle-or">
+                    <div className="callout-header">
+                      <Shield size={18} className="text-amber-600" />
+                      <span className="callout-title">Règle d'or avec AVOIR :</span>
+                    </div>
+                    <p className="callout-text">
+                      Le participe passé ne s'accorde <strong>JAMAIS</strong> avec le sujet ! On écrit : <em>« Elle a parlé »</em>, <em>« Elles ont fini »</em>, <em>« Nous avons vendu »</em>.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* MODULE 3: LA BOUSSOLE ÊTRE & ACCORDS           */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeArsenalModule === 'pc_etre' && (
+                <div className="arsenal-panel fade-in">
+                  <div className="station-hero-banner bg-gradient-to-r from-emerald-950 via-teal-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-emerald-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🧭
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-emerald-400/20 text-emerald-200 px-2.5 py-0.5 rounded-full border border-emerald-400/30">
+                              Module 03 • Mouvements & Accords
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">La Boussole ÊTRE & Matrice des Accords</h3>
+                        </div>
+                      </div>
+                      <div className="bg-emerald-950/60 border border-emerald-500/30 rounded-xl px-3 py-1.5 text-xs text-emerald-200 font-semibold">
+                        Accord Obligatoire
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-emerald-100/90 font-medium leading-relaxed">
+                      Les 17 verbes de déplacement physique et de changement d'état ainsi que tous les verbes pronominaux s'accordent en genre et en nombre avec le sujet.
+                    </p>
+                  </div>
+
+                  {/* Formula Pill */}
+                  <div className="conjugation-formula-pill pc-etre mb-5">
+                    🔑 Formule : Sujet + ÊTRE au présent (suis, es, est, sommes, êtes, sont) + Participe Passé ACCORDÉ (+e, +s, +es)
+                  </div>
+
+                  {/* Table 3.1: Mécanisme d'Accord */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>🪞</span> A. Démonstration du Mécanisme d'Accord en Genre et en Nombre
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Sujet</th>
+                            <th>Forme Accordée au Passé Composé</th>
+                            <th>Explication de la Règle d'Accord</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.pcEtre.accordsDemo.map((a, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-bold">{a.sujet}</td>
+                              <td className="font-extrabold text-emerald-800 text-sm">{a.forme}</td>
+                              <td>
+                                <span className="conjugation-accord-chip">
+                                  {a.tag}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Table 3.2: 17 Verbes DR & MRS VANDERTRAMP */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <h5 className="font-bold text-xs uppercase tracking-wider text-slate-700 mb-3 flex items-center gap-2">
+                      <span>🏔️</span> B. Répertoire Exhaustif des 17 Verbes (DR & MRS VANDERTRAMP)
+                    </h5>
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Lettre</th>
+                            <th>Verbe (Infinitif)</th>
+                            <th>Participe (Masc. Sg.)</th>
+                            <th>Féminin (+e)</th>
+                            <th>Pluriel (+s / +es)</th>
+                            <th>Phrase Exemple dans le Récit</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.pcEtre.vandertramp
+                            .filter(v => !verbSearchQuery || v.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()) || v.pp.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((v, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell">
+                                <span className="font-black text-amber-400 bg-slate-900 text-white px-2 py-0.5 rounded text-xs shadow-2xs">
+                                  {v.l}
+                                </span>
+                              </td>
+                              <td className="font-bold text-slate-900">{v.inf}</td>
+                              <td className="font-extrabold text-emerald-700">{v.pp}</td>
+                              <td>
+                                <span className="font-bold text-rose-700">{v.fem}</span>
+                              </td>
+                              <td>
+                                <span className="font-bold text-indigo-700">{v.pl}</span>
+                              </td>
+                              <td className="text-xs italic text-slate-700">« {v.ex} »</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Alert Callout */}
+                  <div className="conjugation-rule-memo-box">
+                    <AlertTriangle size={18} className="text-rose-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong>Rappel capital avec ÊTRE :</strong> L'accord est <strong>obligatoire</strong> ! Cherchez toujours le sujet du verbe :
+                      masculin pluriel = <em>+s</em>, féminin singulier = <em>+e</em>, féminin pluriel = <em>+es</em>.
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* MODULE 4: LE MIROIR PRONOMINAL                 */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeArsenalModule === 'pronominaux' && (
+                <div className="arsenal-panel fade-in">
+                  <div className="station-hero-banner bg-gradient-to-r from-rose-950 via-pink-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-rose-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-rose-500/20 border border-rose-400/40 flex items-center justify-center text-2xl shrink-0">
+                          🪞
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-rose-400/20 text-rose-200 px-2.5 py-0.5 rounded-full border border-rose-400/30">
+                              Module 04 • Action sur Soi & Réciprocité
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">Le Miroir Pronominal : Verbes Réfléchis</h3>
+                        </div>
+                      </div>
+                      <div className="bg-rose-950/60 border border-rose-500/30 rounded-xl px-3 py-1.5 text-xs text-rose-200 font-semibold">
+                        Auxiliaire ÊTRE Systématique
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-rose-100/90 font-medium leading-relaxed">
+                      Verbes précédés d'un pronom réfléchi (se lever, se souvenir, se réveiller). Ils emploient systématiquement l'auxiliaire ÊTRE au passé composé.
+                    </p>
+                  </div>
+
+                  {/* Formula Pill */}
+                  <div className="conjugation-formula-pill pronominal mb-5">
+                    🔑 Formule : Sujet + Pronom Réfléchi (me, te, se, nous, vous, se) + ÊTRE au présent + Participe Passé
+                  </div>
+
+                  {/* 3 Verbes Modèles Cards */}
+                  <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mb-6">
+                    {LE_PASSE_CONJ_DATA.pronominaux
+                      .filter(pGroup => !verbSearchQuery || pGroup.inf.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                      .map((pGroup, pIdx) => (
+                      <div key={pIdx} className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs">
+                        <h6 className="font-black text-rose-900 text-sm mb-3 flex items-center gap-1.5 border-b border-rose-200 pb-2">
+                          <span>🪞</span>
+                          {pGroup.inf}
+                        </h6>
+                        <ul className="space-y-1.5 text-xs">
+                          {pGroup.formes.map((row, rIdx) => (
+                            <li key={rIdx} className="flex items-center justify-between bg-slate-50 px-2.5 py-1.5 rounded-lg border border-slate-200/80">
+                              <span className="font-bold text-slate-500">{row.pr} :</span>
+                              <span className="font-extrabold text-slate-900">{row.v}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Elision Callout */}
+                  <div className="narrative-callout callout-astuce">
+                    <div className="callout-header">
+                      <Lightbulb size={18} className="text-amber-500" />
+                      <span className="callout-title">Élision du pronom réfléchi :</span>
+                    </div>
+                    <p className="callout-text">
+                      Devant une voyelle ou un « h » muet, <em>me, te, se</em> deviennent <em>m', t', s'</em> (Exemple : <em>« Je <strong>m'</strong>étais levé »</em>, <em>« Elle <strong>s'</strong>est souvenue »</em>).
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* ══════════════════════════════════════════════ */}
+              {/* MODULE 5: LE COMPARATEUR DE NUANCES           */}
+              {/* ══════════════════════════════════════════════ */}
+              {activeArsenalModule === 'comparaison' && (
+                <div className="arsenal-panel fade-in">
+                  <div className="station-hero-banner bg-gradient-to-r from-purple-950 via-indigo-900 to-slate-950 text-white p-5 rounded-2xl mb-6 shadow-md border border-purple-700/50">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-2xl shrink-0">
+                          ⚖️
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="text-[11px] font-black uppercase tracking-wider bg-purple-400/20 text-purple-200 px-2.5 py-0.5 rounded-full border border-purple-400/30">
+                              Module 05 • Nuances & Sens Narratif
+                            </span>
+                          </div>
+                          <h3 className="text-xl sm:text-2xl font-black mt-1">Le Comparateur de Nuances</h3>
+                        </div>
+                      </div>
+                      <div className="bg-purple-950/60 border border-purple-500/30 rounded-xl px-3 py-1.5 text-xs text-purple-200 font-semibold">
+                        Décor vs Événement
+                      </div>
+                    </div>
+                    <p className="mt-3 text-xs sm:text-sm text-purple-100/90 font-medium leading-relaxed">
+                      Le choix entre l'imparfait et le passé composé modifie profondément la signification du verbe dans votre texte narratif.
+                    </p>
+                  </div>
+
+                  {/* Formula Pill */}
+                  <div className="conjugation-formula-pill comparaison mb-5">
+                    📖 Repère : L'Imparfait brosse le décor et l'état d'esprit — Le Passé Composé déclenche l'événement et la rupture.
+                  </div>
+
+                  {/* Comparison Cards / Modern Table */}
+                  <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-xs mb-6">
+                    <div className="conjugation-table-wrapper">
+                      <table className="conjugation-table">
+                        <thead>
+                          <tr>
+                            <th className="conjugation-sticky-cell">Verbe</th>
+                            <th>Forme & Nuance à l'Imparfait</th>
+                            <th>Forme & Nuance au Passé Composé</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {LE_PASSE_CONJ_DATA.comparaison
+                            .filter(row => !verbSearchQuery || row.verb.toLowerCase().includes(verbSearchQuery.trim().toLowerCase()))
+                            .map((row, idx) => (
+                            <tr key={idx}>
+                              <td className="conjugation-sticky-cell font-black text-slate-900">{row.verb}</td>
+                              <td>
+                                <div className="text-xs">
+                                  <span className="font-extrabold text-sky-700 block mb-0.5">« {row.imparfait} »</span>
+                                  <span className="text-slate-600 font-medium italic">{row.sensImp}</span>
+                                </div>
+                              </td>
+                              <td>
+                                <div className="text-xs">
+                                  <span className="font-extrabold text-amber-700 block mb-0.5">« {row.pc} »</span>
+                                  <span className="text-slate-600 font-medium italic">{row.sensPc}</span>
+                                </div>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  {/* Advice Callout */}
+                  <div className="conjugation-rule-memo-box">
+                    <PenTool size={18} className="text-purple-600 shrink-0 mt-0.5" />
+                    <div>
+                      <strong>Conseil de Rédaction Grade 9 :</strong> Pour créer du suspense, enchaînez une longue description à l'imparfait (calme plat), puis tranchez net avec un passé composé introduit par <em>« Soudain »</em> ou <em>« Tout à coup »</em> !
+                    </div>
+                  </div>
+                </div>
+              )}
 
             </div>
-          )}
-
-        </div>
+          </div>
+        )
       )}
 
           {/* Frame housing the Interactive Dossiers or Studio de Narration */}
