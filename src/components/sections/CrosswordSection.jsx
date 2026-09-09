@@ -64,17 +64,17 @@ const RE_PUZZLE = {
 const AUX_PUZZLE = {
   title: "Mots Croisés: Être & Avoir",
   description: "Remplissez la grille avec les conjugaisons correctes de Être et Avoir.",
-  numRows: 9,
-  numCols: 6,
+  numRows: 8,
+  numCols: 8,
   puzzleData: [
-    { id: 1, word: "SOMMES", r: 2, c: 0, dir: "across", clue: "Nous + Être" },
-    { id: 2, word: "ÊTES",   r: 0, c: 4, dir: "down",   clue: "Vous + Être" },
-    { id: 3, word: "AVONS",  r: 5, c: 0, dir: "across", clue: "Nous + Avoir" },
-    { id: 4, word: "AS",     r: 8, c: 3, dir: "across", clue: "Tu + Avoir" },
-    { id: 5, word: "ES",     r: 1, c: 0, dir: "down",   clue: "Tu + Être" },
-    { id: 6, word: "ONT",    r: 5, c: 2, dir: "down",   clue: "Ils/Elles + Avoir" },
-    { id: 7, word: "SUIS",   r: 5, c: 4, dir: "down",   clue: "Je + Être" },
-    { id: 8, word: "EST",    r: 7, c: 0, dir: "across", clue: "Il/Elle + Être" }
+    { id: 1, word: "AS",     r: 0, c: 6, dir: "across", clue: "Tu + Avoir" },
+    { id: 2, word: "SUIS",   r: 0, c: 7, dir: "down",   clue: "Je + Être" },
+    { id: 3, word: "AVONS",  r: 1, c: 3, dir: "down",   clue: "Nous + Avoir" },
+    { id: 4, word: "SOMMES", r: 3, c: 2, dir: "across", clue: "Nous + Être" },
+    { id: 5, word: "ES",     r: 3, c: 6, dir: "down",   clue: "Tu + Être" },
+    { id: 6, word: "ÊTES",   r: 5, c: 0, dir: "across", clue: "Vous + Être" },
+    { id: 7, word: "EST",    r: 5, c: 2, dir: "down",   clue: "Il/Elle + Être" },
+    { id: 8, word: "ONT",    r: 7, c: 0, dir: "across", clue: "Ils/Elles + Avoir" }
   ]
 };
 
@@ -98,30 +98,30 @@ const IRR_PUZZLE_1 = {
 const IRR_PUZZLE_2 = {
   title: "Mots Croisés: Verbes « Botte »",
   description: "Conjugaisons des verbes en -ER/-IR à changement de radical (Venir, Prendre...).",
-  numRows: 14,
-  numCols: 14,
+  numRows: 12,
+  numCols: 10,
   puzzleData: [
-    { id: 1, word: "VIENNENT", r: 2, c: 1, dir: "across", clue: "Ils + Venir" },
-    { id: 2, word: "VENONS", r: 2, c: 1, dir: "down", clue: "Nous + Venir" },
-    { id: 3, word: "PRENNENT", r: 5, c: 3, dir: "across", clue: "Ils + Prendre" },
-    { id: 4, word: "PRENONS", r: 4, c: 5, dir: "down", clue: "Nous + Prendre" },
-    { id: 5, word: "ACHETENT", r: 8, c: 0, dir: "across", clue: "Ils + Acheter" },
-    { id: 6, word: "ACHETONS", r: 6, c: 8, dir: "down", clue: "Nous + Acheter" }
+    { id: 1, word: "ACHETONS", r: 0, c: 4, dir: "down",   clue: "Nous + Acheter" },
+    { id: 2, word: "ACHÈTENT", r: 2, c: 2, dir: "across", clue: "Ils + Acheter" },
+    { id: 3, word: "VIENNENT", r: 4, c: 2, dir: "down",   clue: "Ils + Venir" },
+    { id: 4, word: "VENONS",   r: 4, c: 6, dir: "down",   clue: "Nous + Venir" },
+    { id: 5, word: "PRENNENT", r: 6, c: 0, dir: "across", clue: "Ils + Prendre" },
+    { id: 6, word: "PRENONS",  r: 9, c: 0, dir: "across", clue: "Nous + Prendre" }
   ]
 };
 
 const IRR_PUZZLE_3 = {
   title: "Mots Croisés: Autres Irréguliers",
   description: "Conjugaisons des verbes Dire, Lire, Écrire, Boire, Mettre...",
-  numRows: 14,
-  numCols: 14,
+  numRows: 11,
+  numCols: 9,
   puzzleData: [
-    { id: 1, word: "DISENT", r: 2, c: 2, dir: "across", clue: "Ils + Dire" },
-    { id: 2, word: "DISONS", r: 1, c: 4, dir: "down", clue: "Nous + Dire" },
-    { id: 3, word: "LISENT", r: 5, c: 1, dir: "across", clue: "Ils + Lire" },
-    { id: 4, word: "ECRIVONS", r: 4, c: 7, dir: "down", clue: "Nous + Écrire" },
-    { id: 5, word: "BOIVENT", r: 8, c: 3, dir: "across", clue: "Ils + Boire" },
-    { id: 6, word: "METTONS", r: 7, c: 9, dir: "down", clue: "Nous + Mettre" }
+    { id: 1, word: "LISENT",   r: 0,  c: 8, dir: "down",   clue: "Ils + Lire" },
+    { id: 2, word: "BOIVENT",  r: 1,  c: 6, dir: "down",   clue: "Ils + Boire" },
+    { id: 3, word: "METTONS",  r: 2,  c: 2, dir: "across", clue: "Nous + Mettre" },
+    { id: 4, word: "DISONS",   r: 5,  c: 3, dir: "down",   clue: "Nous + Dire" },
+    { id: 5, word: "ÉCRIVONS", r: 6,  c: 0, dir: "across", clue: "Nous + Écrire" },
+    { id: 6, word: "DISENT",   r: 10, c: 1, dir: "across", clue: "Ils + Dire" }
   ]
 };
 
