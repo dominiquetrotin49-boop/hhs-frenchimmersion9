@@ -2512,31 +2512,75 @@ function GrammarSection() {
                     <span className="text-xs font-black uppercase tracking-wider text-amber-800 block mb-2">
                       🔑 La Formule Essentielle du Passé Composé :
                     </span>
-                    <div className="bg-slate-900 text-white p-3.5 rounded-xl flex flex-wrap items-center justify-center gap-2 text-center text-xs sm:text-sm font-bold shadow-inner">
-                      <span className="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-slate-200">[ Sujet ]</span>
-                      <span className="text-amber-400 text-base font-black">+</span>
-                      <span className="bg-amber-500 text-slate-950 px-3 py-1.5 rounded-lg font-black border border-amber-400">
-                        AVOIR au présent <span className="text-[11px] font-normal block text-slate-900">(ai, as, a, avons, avez, ont)</span>
+                    <div className="bg-slate-900 text-white p-4 rounded-xl flex flex-wrap items-center justify-center gap-2.5 sm:gap-4 text-center text-xs sm:text-sm font-bold shadow-inner">
+                      <span className="bg-slate-800 px-3.5 py-2 rounded-lg border border-slate-700 text-slate-200 shadow-xs">
+                        [ Sujet ]
                       </span>
-                      <span className="text-amber-400 text-base font-black">+</span>
-                      <span className="bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700 text-emerald-400">[ Participe Passé ]</span>
+                      {" "}
+                      <span className="text-amber-400 text-lg font-black px-1.5" aria-hidden="true">
+                        +
+                      </span>
+                      {" "}
+                      <span className="bg-amber-500 text-slate-950 px-3.5 py-2 rounded-lg font-black border border-amber-400 shadow-xs">
+                        AVOIR au présent{" "}
+                        <span className="text-[11px] font-semibold block text-slate-900 mt-0.5">
+                          (ai, as, a, avons, avez, ont)
+                        </span>
+                      </span>
+                      {" "}
+                      <span className="text-amber-400 text-lg font-black px-1.5" aria-hidden="true">
+                        +
+                      </span>
+                      {" "}
+                      <span className="bg-slate-800 px-3.5 py-2 rounded-lg border border-slate-700 text-emerald-400 shadow-xs">
+                        [ Participe Passé ]
+                      </span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mt-3">
-                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
-                        <span className="text-xs font-black text-slate-700 block">Verbes en -ER</span>
-                        <span className="text-sm font-black text-amber-700">➔ -é</span>
-                        <span className="text-[11px] text-slate-500 block italic">parler ➔ parlé</span>
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-3.5">
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 shadow-xs text-center flex flex-col items-center justify-between">
+                        <span className="text-xs font-black text-slate-700 uppercase tracking-wide block mb-1">
+                          Verbes en -ER
+                        </span>
+                        <div className="my-1.5">
+                          <span className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-800 font-black text-sm rounded-lg border border-amber-200">
+                            <span>➔</span>
+                            <span>-é</span>
+                          </span>
+                        </div>
+                        <span className="text-xs text-slate-600 block italic mt-1 font-medium">
+                          ex. : parler <span className="text-amber-600 font-bold mx-1">➔</span> parlé
+                        </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
-                        <span className="text-xs font-black text-slate-700 block">Verbes en -IR</span>
-                        <span className="text-sm font-black text-amber-700">➔ -i</span>
-                        <span className="text-[11px] text-slate-500 block italic">finir ➔ fini</span>
+
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 shadow-xs text-center flex flex-col items-center justify-between">
+                        <span className="text-xs font-black text-slate-700 uppercase tracking-wide block mb-1">
+                          Verbes en -IR
+                        </span>
+                        <div className="my-1.5">
+                          <span className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-800 font-black text-sm rounded-lg border border-amber-200">
+                            <span>➔</span>
+                            <span>-i</span>
+                          </span>
+                        </div>
+                        <span className="text-xs text-slate-600 block italic mt-1 font-medium">
+                          ex. : finir <span className="text-amber-600 font-bold mx-1">➔</span> fini
+                        </span>
                       </div>
-                      <div className="p-2.5 rounded-lg bg-white border border-amber-200 text-center">
-                        <span className="text-xs font-black text-slate-700 block">Verbes en -RE</span>
-                        <span className="text-sm font-black text-amber-700">➔ -u</span>
-                        <span className="text-[11px] text-slate-500 block italic">vendre ➔ vendu</span>
+
+                      <div className="p-3 rounded-xl bg-white border border-amber-200 shadow-xs text-center flex flex-col items-center justify-between">
+                        <span className="text-xs font-black text-slate-700 uppercase tracking-wide block mb-1">
+                          Verbes en -RE
+                        </span>
+                        <div className="my-1.5">
+                          <span className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 text-amber-800 font-black text-sm rounded-lg border border-amber-200">
+                            <span>➔</span>
+                            <span>-u</span>
+                          </span>
+                        </div>
+                        <span className="text-xs text-slate-600 block italic mt-1 font-medium">
+                          ex. : vendre <span className="text-amber-600 font-bold mx-1">➔</span> vendu
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -2697,16 +2741,20 @@ function GrammarSection() {
                     {/* Live Mirror Result Box */}
                     {selectedAccordPronoun && (
                       <div className="live-mirror-display">
-                        <div className="live-mirror-formula">
+                        <div className="live-mirror-formula flex flex-wrap items-center justify-center gap-2 sm:gap-3">
                           <span className="mirror-avatar">{ACCORD_MIRROR_DATA[selectedAccordPronoun].avatar}</span>
-                          <span className="mirror-subject">{selectedAccordPronoun}</span>
-                          <span className="mirror-plus">+</span>
-                          <span className="mirror-aux">{ACCORD_MIRROR_DATA[selectedAccordPronoun].auxiliary}</span>
-                          <span className="mirror-plus">+</span>
-                          <span className="mirror-verb-block">
+                          <span className="mirror-subject px-3 py-1">{selectedAccordPronoun}</span>
+                          {" "}
+                          <span className="mirror-plus px-1.5 font-black text-emerald-400">&nbsp;+&nbsp;</span>
+                          {" "}
+                          <span className="mirror-aux px-3 py-1">{ACCORD_MIRROR_DATA[selectedAccordPronoun].auxiliary}</span>
+                          {" "}
+                          <span className="mirror-plus px-1.5 font-black text-emerald-400">&nbsp;+&nbsp;</span>
+                          {" "}
+                          <span className="mirror-verb-block px-3 py-1">
                             {ACCORD_MIRROR_DATA[selectedAccordPronoun].stem}
                             {ACCORD_MIRROR_DATA[selectedAccordPronoun].ending ? (
-                              <span className="mirror-ending-badge">
+                              <span className="mirror-ending-badge ml-1.5">
                                 {ACCORD_MIRROR_DATA[selectedAccordPronoun].ending}
                               </span>
                             ) : null}
