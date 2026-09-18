@@ -1,11 +1,17 @@
 import React, { useState } from 'react';
-import { Gamepad2, ArrowLeft, Compass, Sword, Radio, BookOpen } from 'lucide-react';
+import { Gamepad2, ArrowLeft, Compass, Sword, Radio, BookOpen, Shield, Trophy, Clock, Flag, Sparkles, Lock } from 'lucide-react';
 import Francotopia from '../games/Francotopia';
 import MineurFou from '../games/MineurFou';
 import SpeedRunnerPrepositions from '../games/SpeedRunnerPrepositions';
 import BossBattlePresent from '../games/BossBattlePresent';
 import TowerDefenseVocab from '../games/TowerDefenseVocab';
 import StoryRPGFirstDay from '../games/StoryRPGFirstDay';
+import HeroEditorChallenge from '../games/HeroEditorChallenge';
+import HeroScoopRace from '../games/HeroScoopRace';
+import TourDesOmbres from '../games/TourDesOmbres';
+import HeroLadder from '../games/HeroLadder';
+import ChateauEvasion from '../games/ChateauEvasion';
+import DonjonDesHeros from '../games/DonjonDesHeros';
 
 // ── Inline styles injected once ──────────────────────────────────────────────
 const JEUX_STYLES = `
@@ -122,6 +128,30 @@ export default function JeuxSection({ chapterId, vocabulary }) {
 
         {activeGame === 'storyrpg' && (
           <StoryRPGFirstDay />
+        )}
+
+        {activeGame === 'hero-chrono' && (
+          <HeroEditorChallenge onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'hero-race' && (
+          <HeroScoopRace onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'tour-ombres' && (
+          <TourDesOmbres onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'hero-ladder' && (
+          <HeroLadder onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'chateau-evasion' && (
+          <ChateauEvasion onBack={() => setActiveGame(null)} />
+        )}
+
+        {activeGame === 'donjon-heros' && (
+          <DonjonDesHeros onBack={() => setActiveGame(null)} />
         )}
       </div>
     );
@@ -282,6 +312,120 @@ export default function JeuxSection({ chapterId, vocabulary }) {
                   {t}
                 </span>
               ))}
+            </div>
+          </div>
+
+          {/* 1. Vocabulaire : Hero Editor Challenge (Chrono) */}
+          <div className="jeux-card jeux-card-rose" onClick={() => setActiveGame('hero-chrono')}>
+            <div className="jeux-card-icon">⚡</div>
+            <div className="jeux-card-badge jeux-card-badge-rose">
+              <Clock size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#be123c' }}>Le Défi du Héros (Chrono)</h3>
+              <p className="jeux-card-desc">
+                Défi chrono de 60 secondes sur le lexique des héros et anti-héros.<br />
+                <span className="jeux-card-tagline" style={{ color: '#e11d48' }}>Répondez à un maximum de définitions avant la fin du temps !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: '#ffe4e6', color: '#be123c' }}>Vocabulaire Héros</span>
+              <span className="jeux-tag" style={{ background: '#ffe4e6', color: '#be123c' }}>Chrono Rapide</span>
+            </div>
+          </div>
+
+          {/* 2. Vocabulaire : Hero Scoop Race (Course) */}
+          <div className="jeux-card jeux-card-cyan" onClick={() => setActiveGame('hero-race')}>
+            <div className="jeux-card-icon">🏇</div>
+            <div className="jeux-card-badge jeux-card-badge-cyan">
+              <Flag size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#0369a1' }}>La Course des Légendes</h3>
+              <p className="jeux-card-desc">
+                Course héroïque en duel direct contre l'anti-héros.<br />
+                <span className="jeux-card-tagline" style={{ color: '#0284c7' }}>Complétez les phrases de vocabulaire pour franchir la ligne d'arrivée !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: '#e0f2fe', color: '#0369a1' }}>Vocabulaire Héros</span>
+              <span className="jeux-tag" style={{ background: '#e0f2fe', color: '#0369a1' }}>Course Duel</span>
+            </div>
+          </div>
+
+          {/* 3. Imparfait 1 : Tour des Ombres (Platformer DontLookDown) */}
+          <div className="jeux-card jeux-card-indigo" onClick={() => setActiveGame('tour-ombres')}>
+            <div className="jeux-card-icon">🗼</div>
+            <div className="jeux-card-badge jeux-card-badge-indigo">
+              <Shield size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#4338ca' }}>La Tour des Ombres (Imparfait)</h3>
+              <p className="jeux-card-desc">
+                Jeu de plateforme et d'escalade : grimpez au sommet de la tour.<br />
+                <span className="jeux-card-tagline" style={{ color: '#4f46e5' }}>Conjuguez à l'imparfait pour ouvrir les 4 portes magiques !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: '#e0e7ff', color: '#4338ca' }}>Imparfait</span>
+              <span className="jeux-tag" style={{ background: '#e0e7ff', color: '#4338ca' }}>Plateforme 2D</span>
+            </div>
+          </div>
+
+          {/* 4. Imparfait 2 : Hero Ladder (JournalistLadder) */}
+          <div className="jeux-card jeux-card-emerald" onClick={() => setActiveGame('hero-ladder')}>
+            <div className="jeux-card-icon">🧗‍♂️</div>
+            <div className="jeux-card-badge jeux-card-badge-emerald">
+              <Trophy size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#047857' }}>L'Ascension de l'Imparfait</h3>
+              <p className="jeux-card-desc">
+                Gravissez les 10 échelons d'Écuyer jusqu'à Maître de l'Imparfait.<br />
+                <span className="jeux-card-tagline" style={{ color: '#059669' }}>Règles, valeurs et radicaux irréguliers avec joker 50/50 !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: '#d1fae5', color: '#047857' }}>Imparfait</span>
+              <span className="jeux-tag" style={{ background: '#d1fae5', color: '#047857' }}>Progression 10 Niveaux</span>
+            </div>
+          </div>
+
+          {/* 5. Passé Composé : Château Évasion (Escape Game) */}
+          <div className="jeux-card jeux-card-gold" onClick={() => setActiveGame('chateau-evasion')}>
+            <div className="jeux-card-icon">🔐</div>
+            <div className="jeux-card-badge jeux-card-badge-gold">
+              <Lock size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#92400e' }}>L'Évasion du Château (Passé Composé)</h3>
+              <p className="jeux-card-desc">
+                Escape room en 3 salles mystiques pour libérer le héros captif.<br />
+                <span className="jeux-card-tagline" style={{ color: '#d4a01a' }}>Choix avoir/être, accords du participe et verbes pronominaux !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.12)', color: '#92400e' }}>Passé Composé</span>
+              <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.12)', color: '#92400e' }}>Escape Room</span>
+            </div>
+          </div>
+
+          {/* 6. Passé Composé vs Imparfait : Donjon des Héros (Three.js 3D) */}
+          <div className="jeux-card jeux-card-purple" onClick={() => setActiveGame('donjon-heros')}>
+            <div className="jeux-card-icon">🏰</div>
+            <div className="jeux-card-badge jeux-card-badge-purple">
+              <Sparkles size={24} />
+            </div>
+            <div>
+              <h3 className="jeux-card-title" style={{ color: '#4c1d95' }}>Le Donjon du Passé (PC vs Imparfait)</h3>
+              <p className="jeux-card-desc">
+                Escape room 3D immersive dans une crypte médiévale aux torches vacillantes.<br />
+                <span className="jeux-card-tagline" style={{ color: '#7c3aed' }}>Distinguez l'imparfait et le passé composé pour briser les runes !</span>
+              </p>
+            </div>
+            <div className="jeux-tags">
+              <span className="jeux-tag" style={{ background: 'rgba(124,58,237,.12)', color: '#6d28d9' }}>PC vs Imparfait</span>
+              <span className="jeux-tag" style={{ background: 'rgba(124,58,237,.12)', color: '#6d28d9' }}>3D Three.js</span>
             </div>
           </div>
         </div>

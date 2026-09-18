@@ -450,3 +450,149 @@ export const REPRISE_VOCAB = [
   { term: "Devant le collège", definition: "Préposition de position spatiale", english: "In front of high school", audioUrl: "/audio/unite-reprise/devant_le_college.wav" },
   { term: "Entre deux cours", definition: "Préposition d'intervalle", english: "Between two classes", audioUrl: "/audio/unite-reprise/entre_deux_cours.wav" }
 ];
+
+// ─────────────────────────────────────────────────────────────────────────────
+// UNIT 1 — Héros & Anti-Héros Vocabulary (Grade 9)
+// ─────────────────────────────────────────────────────────────────────────────
+export const HERO_VOCAB = [
+  {
+    id: 301,
+    word: "Héros",
+    definition: "Un personnage courageux et admirable qui accomplit des exploits extraordinaires pour protéger les autres.",
+    sentence: "Dans ce récit d'aventure, le jeune chevalier est célébré comme un véritable _____.",
+    wrongOptions: ["Anti-héros", "Traître", "Lâche"]
+  },
+  {
+    id: 302,
+    word: "Héroïne",
+    definition: "Une femme d'un courage remarquable qui agit pour le bien commun et incarne des valeurs exemplaires.",
+    sentence: "Jeanne d'Arc est une _____ historique qui a guidé son peuple avec détermination.",
+    wrongOptions: ["Ennemie", "Fugitive", "Rivale"]
+  },
+  {
+    id: 303,
+    word: "Anti-héros",
+    definition: "Un protagoniste complexe et imparfait qui ne possède pas les vertus morales traditionnelles du héros.",
+    sentence: "Ce détective cynique et solitaire est l'exemple parfait d'un _____ moderne.",
+    wrongOptions: ["Champion", "Sauveur", "Souverain"]
+  },
+  {
+    id: 304,
+    word: "Héroïsme",
+    definition: "La grandeur d'âme et le courage exceptionnel manifestés face au danger ou à l'adversité.",
+    sentence: "L'_____ des pompiers a permis de sauver tous les habitants de l'immeuble.",
+    wrongOptions: ["Lâcheté", "Égoïsme", "Trahison"]
+  },
+  {
+    id: 305,
+    word: "Bravoure",
+    definition: "Une force morale permettant d'affronter les périls sans faiblir.",
+    sentence: "Les guerriers ont fait preuve d'une grande _____ lors de la bataille décisive.",
+    wrongOptions: ["Timidité", "Panique", "Rancune"]
+  },
+  {
+    id: 306,
+    word: "Lâcheté",
+    definition: "Un manque honteux de courage face aux difficultés ou au danger.",
+    sentence: "Abandonner ses compagnons en plein combat est un acte impardonnable de _____.",
+    wrongOptions: ["Loyauté", "Audace", "Noblesse"]
+  },
+  {
+    id: 307,
+    word: "Trahison",
+    definition: "L'acte déloyal d'un individu qui viole un serment ou trompe la confiance de ses alliés.",
+    sentence: "La _____ de son conseiller le plus proche a précipité la chute du roi.",
+    wrongOptions: ["Fidélité", "Dévouement", "Loyauté"]
+  },
+  {
+    id: 308,
+    word: "Sacrifice",
+    definition: "Le renoncement volontaire à sa vie, sa sécurité ou son intérêt personnel au profit des autres.",
+    sentence: "Le _____ du capitaine a permis à tout son équipage de s'échapper sain et sauf.",
+    wrongOptions: ["Triomphe", "Vengeance", "Ambition"]
+  },
+  {
+    id: 309,
+    word: "Dilemme moral",
+    definition: "Une situation pénible exigeant un choix difficile entre deux devoirs ou principes opposés.",
+    sentence: "Choisir entre sauver son ami ou protéger la ville entière représentait un atroce _____.",
+    wrongOptions: ["Accord parfait", "Simple entraînement", "Succès facile"]
+  },
+  {
+    id: 310,
+    word: "Motivations",
+    definition: "L'ensemble des motifs secrets ou conscients qui poussent un personnage à agir.",
+    sentence: "Pour comprendre l'anti-héros, il faut analyser ses profondes _____ intérieures.",
+    wrongOptions: ["Décorations", "Armures", "Récompenses"]
+  },
+  {
+    id: 311,
+    word: "Faiblesses",
+    definition: "Les défauts moraux ou vulnérabilités qui rendent un protagoniste vulnérable et humain.",
+    sentence: "Même les plus grands héros possèdent des _____ cachées qui peuvent causer leur perte.",
+    wrongOptions: ["Armures", "Victoires", "Pouvoirs"]
+  },
+  {
+    id: 312,
+    word: "Trait de caractère",
+    definition: "Une particularité psychologique durable qui distingue la personnalité d'un individu.",
+    sentence: "L'entêtement est un _____ qui pousse souvent ce personnage à refuser toute aide.",
+    wrongOptions: ["Costume", "Talisman", "Arme magique"]
+  },
+  {
+    id: 313,
+    word: "Vaillant",
+    definition: "Qui fait preuve d'ardeur, de détermination intrépide et de bravoure au combat.",
+    sentence: "Le _____ chevalier s'est élancé dans le donjon sans la moindre hésitation.",
+    wrongOptions: ["Craintif", "Incertain", "Paresseux"]
+  },
+  {
+    id: 314,
+    word: "Redoutable",
+    definition: "Qui inspire une grande crainte et le respect en raison de sa force ou de son intelligence.",
+    sentence: "L'adversaire était un stratège _____, capable de déjouer tous les pièges.",
+    wrongOptions: ["Inoffensif", "Vulnérable", "Négligeable"]
+  },
+  {
+    id: 315,
+    word: "Se sacrifier",
+    definition: "Accepter délibérément de risquer ou perdre sa vie pour une noble cause.",
+    sentence: "Elle a décidé de _____ afin que ses compagnons puissent franchir le portail.",
+    wrongOptions: ["S'enfuir", "Capituler", "Se venger"]
+  },
+  {
+    id: 316,
+    word: "Surmonter",
+    definition: "Triompher d'un obstacle, vaincre une épreuve ou dominer ses propres angoisses.",
+    sentence: "Le héros doit d'abord _____ ses propres doutes avant d'affronter l'ennemi.",
+    wrongOptions: ["Ignorer", "Aggraver", "Fuir devant"]
+  },
+  {
+    id: 317,
+    word: "Triompher",
+    definition: "Remporter une victoire totale et glorieuse sur l'adversité ou les antagonistes.",
+    sentence: "Grâce à leur solidarité inébranlable, ils ont fini par _____ des forces obscures.",
+    wrongOptions: ["Échouer", "Périr", "Abandonner"]
+  },
+  {
+    id: 318,
+    word: "Rédemption",
+    definition: "La réhabilitation morale acquise en rachetant ses erreurs par des actes de dévouement.",
+    sentence: "Après avoir causé tant de mal, l'anti-héros espère enfin trouver la _____.",
+    wrongOptions: ["Condamnation", "Cruauté", "Vengeance"]
+  },
+  {
+    id: 319,
+    word: "Exploit",
+    definition: "Une action prodigieuse et mémorable témoignant d'une habileté hors du commun.",
+    sentence: "Gravir le pic maudit sans équipement constitue un véritable _____.",
+    wrongOptions: ["Échec", "Illusion", "Piège"]
+  },
+  {
+    id: 320,
+    word: "Vengeance",
+    definition: "Le désir passionné de faire souffrir autrui en représailles d'une injure subie.",
+    sentence: "Consumé par la _____, l'anti-héros risquait de devenir pire que son ennemi.",
+    wrongOptions: ["Pardon", "Sagesse", "Compassion"]
+  }
+];
