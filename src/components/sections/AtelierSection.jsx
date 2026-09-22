@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import MystereAuPasse from '../games/MystereAuPasse';
+import SauvetageEnImage from '../games/SauvetageEnImage';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
@@ -38,9 +39,17 @@ export default function AtelierSection({ chapterId, vocabulary }) {
       ]
     : [
         {
+          id: 'sauvetage',
+          title: 'Sauvetage en Image',
+          subtitle: 'Spider-Man & Superman • Récit d\'action UDL',
+          icon: '🦸‍♂️',
+          color: '#e11d48',
+          badgeBg: 'rgba(225, 29, 72, 0.12)'
+        },
+        {
           id: 'mystere',
           title: 'Mystère au Passé',
-          subtitle: 'Activité d\'écriture guidée (Tier 1 UDL)',
+          subtitle: 'Récit d\'événement inattendu (Tier 1 UDL)',
           icon: '✍️',
           color: '#0284c7',
           badgeBg: 'rgba(2, 132, 199, 0.12)'
@@ -66,12 +75,12 @@ export default function AtelierSection({ chapterId, vocabulary }) {
           title: 'Salle d\'Arcade & Quêtes',
           subtitle: 'Château Évasion, Donjon, Tour des Ombres...',
           icon: '🎮',
-          color: '#e11d48',
-          badgeBg: 'rgba(225, 29, 72, 0.12)'
+          color: '#d97706',
+          badgeBg: 'rgba(217, 119, 6, 0.12)'
         }
       ];
 
-  const [activeTab, setActiveTab] = useState(isReprise ? 'recits' : 'mystere');
+  const [activeTab, setActiveTab] = useState(isReprise ? 'recits' : 'sauvetage');
 
   return (
     <div className="atelier-container fade-in">
@@ -111,6 +120,10 @@ export default function AtelierSection({ chapterId, vocabulary }) {
 
       {/* Active Tab View */}
       <div className="atelier-subpanel-card animate-fade-in">
+        {activeTab === 'sauvetage' && (
+          <SauvetageEnImage />
+        )}
+
         {activeTab === 'mystere' && (
           <MystereAuPasse />
         )}
