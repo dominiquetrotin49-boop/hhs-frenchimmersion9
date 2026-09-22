@@ -10,6 +10,7 @@ import './GrammarSection.css';
 import './VocabularySection.css';
 import StationPracticeWidget from './StationPracticeWidget';
 import { STATION_PRACTICE_DATA } from '../../data/unit1StationPractice';
+import { REPRISE_STATION_PRACTICE_DATA } from '../../data/unitRepriseStationPractice';
 
 const STUDIO_STATIONS = [
   {
@@ -2020,6 +2021,11 @@ function GrammarSection() {
                             <span className="dossier-pill-badge">
                               {folder.badge}
                             </span>
+                            {REPRISE_STATION_PRACTICE_DATA[folder.id] && (
+                              <span className="inline-flex items-center gap-1 text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                                ✏️ Exercice inclus
+                              </span>
+                            )}
                           </div>
                           <h4 className="font-extrabold text-base sm:text-lg text-slate-900 m-0 mt-1 tracking-tight">
                             {folder.title}
@@ -2185,6 +2191,11 @@ function GrammarSection() {
                               </div>
                             )}
                           </div>
+                        )}
+
+                        {/* Immediate Practice Exercise for this Dossier */}
+                        {REPRISE_STATION_PRACTICE_DATA[folder.id] && (
+                          <StationPracticeWidget practice={REPRISE_STATION_PRACTICE_DATA[folder.id]} />
                         )}
 
                       </div>

@@ -1,51 +1,81 @@
 import React, { useState } from 'react';
 import MystereAuPasse from '../games/MystereAuPasse';
 import WritingPrompt from '../games/WritingPrompt';
+import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
 import JeuxSection from './JeuxSection';
 import './AtelierSection.css';
 
-const TABS = [
-  {
-    id: 'mystere',
-    title: 'Mystère au Passé',
-    subtitle: 'Activité d\'écriture guidée (Tier 1 UDL)',
-    icon: '✍️',
-    color: '#0284c7',
-    badgeBg: 'rgba(2, 132, 199, 0.12)'
-  },
-  {
-    id: 'recits',
-    title: 'Récits Héroïques',
-    subtitle: '4 sujets de rédaction avec IA Feedback',
-    icon: '📝',
-    color: '#0891b2',
-    badgeBg: 'rgba(8, 145, 178, 0.12)'
-  },
-  {
-    id: 'mots_croises',
-    title: 'Mots Croisés',
-    subtitle: '5 grilles interactives (Héros & Anti-héros)',
-    icon: '🧩',
-    color: '#7c3aed',
-    badgeBg: 'rgba(124, 58, 237, 0.12)'
-  },
-  {
-    id: 'jeux',
-    title: 'Salle d\'Arcade & Quêtes',
-    subtitle: 'Château Évasion, Donjon, Tour des Ombres...',
-    icon: '🎮',
-    color: '#e11d48',
-    badgeBg: 'rgba(225, 29, 72, 0.12)'
-  }
-];
-
 export default function AtelierSection({ chapterId, vocabulary }) {
-  const [activeTab, setActiveTab] = useState('mystere');
+  const isReprise = !chapterId || chapterId === 'unite-reprise';
+
+  const TABS = isReprise
+    ? [
+        {
+          id: 'recits',
+          title: 'Atelier d\'Écriture',
+          subtitle: '4 sujets de rédaction au présent avec IA Feedback',
+          icon: '📝',
+          color: '#0284c7',
+          badgeBg: 'rgba(2, 132, 199, 0.12)'
+        },
+        {
+          id: 'mots_croises',
+          title: 'Mots Croisés',
+          subtitle: '7 grilles interactives (Verbes, Prépositions & Clés)',
+          icon: '🧩',
+          color: '#d97706',
+          badgeBg: 'rgba(217, 119, 6, 0.12)'
+        },
+        {
+          id: 'jeux',
+          title: 'Salle d\'Arcade & Quêtes',
+          subtitle: 'Speed-Runner, Boss Battle, Tour Défense, RPG...',
+          icon: '🎮',
+          color: '#e11d48',
+          badgeBg: 'rgba(225, 29, 72, 0.12)'
+        }
+      ]
+    : [
+        {
+          id: 'mystere',
+          title: 'Mystère au Passé',
+          subtitle: 'Activité d\'écriture guidée (Tier 1 UDL)',
+          icon: '✍️',
+          color: '#0284c7',
+          badgeBg: 'rgba(2, 132, 199, 0.12)'
+        },
+        {
+          id: 'recits',
+          title: 'Récits Héroïques',
+          subtitle: '4 sujets de rédaction avec IA Feedback',
+          icon: '📝',
+          color: '#0891b2',
+          badgeBg: 'rgba(8, 145, 178, 0.12)'
+        },
+        {
+          id: 'mots_croises',
+          title: 'Mots Croisés',
+          subtitle: '5 grilles interactives (Héros & Anti-héros)',
+          icon: '🧩',
+          color: '#7c3aed',
+          badgeBg: 'rgba(124, 58, 237, 0.12)'
+        },
+        {
+          id: 'jeux',
+          title: 'Salle d\'Arcade & Quêtes',
+          subtitle: 'Château Évasion, Donjon, Tour des Ombres...',
+          icon: '🎮',
+          color: '#e11d48',
+          badgeBg: 'rgba(225, 29, 72, 0.12)'
+        }
+      ];
+
+  const [activeTab, setActiveTab] = useState(isReprise ? 'recits' : 'mystere');
 
   return (
     <div className="atelier-container fade-in">
-      {/* 4-Tab Selector */}
+      {/* Tab Selector */}
       <div className="atelier-nav-bar">
         {TABS.map(tab => {
           const isActive = activeTab === tab.id;
@@ -86,15 +116,15 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         )}
 
         {activeTab === 'recits' && (
-          <WritingPrompt chapterId={chapterId} unitId="1" />
+          <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : '1'} />
         )}
 
         {activeTab === 'mots_croises' && (
-          <HeroCrosswordSection />
+          isReprise ? <CrosswordSection /> : <HeroCrosswordSection />
         )}
 
         {activeTab === 'jeux' && (
-          <JeuxSection chapterId={chapterId || 'unite-1'} vocabulary={vocabulary} />
+          <JeuxSection chapterId={chapterId || (isReprise ? 'unite-reprise' : 'unite-1')} vocabulary={vocabulary} />
         )}
       </div>
     </div>

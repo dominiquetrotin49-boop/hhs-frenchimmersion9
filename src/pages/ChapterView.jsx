@@ -8,13 +8,14 @@ import GameSection from '../components/sections/GameSection';
 import JeuxSection from '../components/sections/JeuxSection';
 import AtelierSection from '../components/sections/AtelierSection';
 import UnitAvatarSpeaker from '../components/UnitAvatarSpeaker';
+import { UNIT_DOSSIER_CONFIG } from '../data/unitMetadata';
 import { BookOpenCheck, Languages, Gamepad2, PenTool, Lock, Volume2, VolumeX } from 'lucide-react';
 
 function ChapterView() {
   const { chapterId, section } = useParams();
   const navigate = useNavigate();
   const chapter = chapters.find(c => c.id === chapterId);
-  const rawSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : 'vocabulaire');
+  const rawSection = section || (chapter?.isStoryUnit ? 'chapitre-1' : null);
   const activeSection = (rawSection === 'pratique' || rawSection === 'prononciation' || rawSection === 'orthographe') ? 'vocabulaire' : rawSection;
 
   
@@ -187,16 +188,31 @@ function ChapterView() {
       );
     }
 
-    // For Unité 1 Option 2 Hub:
-    if (chapter.id === 'unite-1') {
-      if (activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux') {
-        return <AtelierSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
-      }
-      if (activeSection === 'grammaire' || activeSection === 'studio') {
-        return <GrammarSection data={chapter.grammar} />;
-      }
+    // When no dossier is clicked yet, show only the 3 Dossiers at the top!
+    if (!activeSection) {
+      return (
+        <div className="hub-welcome-prompt text-center py-8 px-4 rounded-2xl bg-white/40 border border-white/60 backdrop-blur-md shadow-xs animate-fade-in">
+          <p className="text-base sm:text-lg font-extrabold text-slate-800 m-0">
+            👆 Sélectionnez un des 3 dossiers ci-dessus pour explorer le contenu de l'unité.
+          </p>
+          <p className="text-xs sm:text-sm text-slate-600 font-medium mt-1 mb-0">
+            Dossier 01 (Lexique &amp; Écoute) • Dossier 02 (Studio &amp; Règles) • Dossier 03 (Atelier &amp; Jeux)
+          </p>
+        </div>
+      );
+    }
+
+    // Universal 3-Dossier Hub Routing (Unité Reprise, Unité 1, 2, 3, 4)
+    if (activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux') {
+      return <AtelierSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
+    }
+    if (activeSection === 'grammaire' || activeSection === 'studio') {
+      return <GrammarSection data={chapter.grammar} />;
+    }
+    if (activeSection === 'vocabulaire') {
       return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
     }
+    return null;
 
     switch(activeSection) {
       case 'vocabulaire':
@@ -248,98 +264,70 @@ function ChapterView() {
             );
           })}
         </div>
-      ) : chapter.id === 'unite-1' ? (
-        /* ── OPTION 2 HUB : LES 3 DOSSIERS D'UNITÉ 1 ── */
+      ) : (
+        /* ── HUB MODULAIRE : LES 3 GRANDS DOSSIERS DE L'UNITÉ ── */
         <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
-          {/* Dossier 1: Le Lexique du Héros */}
+          {/* Dossier 1: Vocabulaire & Écoute */}
           <NavLink 
             to={`/chapter/${chapter.id}/vocabulaire`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'vocabulaire' ? 'active' : ''}`}
+            className={`section-card ${activeSection === 'vocabulaire' ? 'active' : ''}`}
           >
             <div className="tab-icon-badge vocab-badge">
               <Languages size={28} />
             </div>
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-600 block mb-0.5">Dossier 01</span>
-              <h3 className="text-base sm:text-lg">Le Lexique du Héros</h3>
-              <p className="text-xs text-slate-500 font-medium">Écoute • Dictée • Cartes 3D</p>
+              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-600 block mb-0.5">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.tag || 'Dossier 01'}
+              </span>
+              <h3 className="text-base sm:text-lg">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.title || 'Le Lexique'}
+              </h3>
+              <p className="text-xs text-slate-500 font-medium">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.subtitle || 'Écoute • Dictée • Cartes 3D'}
+              </p>
             </div>
           </NavLink>
 
-          {/* Dossier 2: Le Studio de Narration */}
+          {/* Dossier 2: Grammaire & Règles */}
           <NavLink 
             to={`/chapter/${chapter.id}/grammaire`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'grammaire' || activeSection === 'studio' ? 'active' : ''}`}
+            className={`section-card ${activeSection === 'grammaire' || activeSection === 'studio' ? 'active' : ''}`}
           >
             <div className="tab-icon-badge grammar-badge">
               <BookOpenCheck size={28} />
             </div>
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 block mb-0.5">Dossier 02</span>
-              <h3 className="text-base sm:text-lg">Le Studio de Narration</h3>
-              <p className="text-xs text-slate-500 font-medium">5 Stations • Règles • Exercices</p>
+              <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 block mb-0.5">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.tag || 'Dossier 02'}
+              </span>
+              <h3 className="text-base sm:text-lg">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.title || 'Le Studio & Règles'}
+              </h3>
+              <p className="text-xs text-slate-500 font-medium">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.subtitle || 'Règles • Conjugaison • Exercices'}
+              </p>
             </div>
           </NavLink>
 
           {/* Dossier 3: L'Atelier Créatif & Jeux */}
           <NavLink 
             to={`/chapter/${chapter.id}/atelier`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux' ? 'active' : ''}`}
+            className={`section-card ${activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux' ? 'active' : ''}`}
           >
             <div className="tab-icon-badge practice-badge" style={{ background: 'rgba(124,58,237,0.15)', color: '#7c3aed' }}>
               <PenTool size={28} />
             </div>
             <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-violet-600 block mb-0.5">Dossier 03</span>
-              <h3 className="text-base sm:text-lg">L'Atelier Créatif &amp; Jeux</h3>
-              <p className="text-xs text-slate-500 font-medium">Mystère au Passé • Mots Croisés • Jeux</p>
+              <span className="text-[10px] font-black uppercase tracking-wider text-violet-600 block mb-0.5">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.tag || 'Dossier 03'}
+              </span>
+              <h3 className="text-base sm:text-lg">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.title || 'L\'Atelier Créatif & Jeux'}
+              </h3>
+              <p className="text-xs text-slate-500 font-medium">
+                {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.subtitle || 'Écriture • Mots Croisés • Jeux'}
+              </p>
             </div>
-          </NavLink>
-        </div>
-      ) : (
-        <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          {/* Tab 1: Vocabulaire & Écoute */}
-          <NavLink 
-            to={`/chapter/${chapter.id}/vocabulaire`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'vocabulaire' ? 'active' : ''}`}
-          >
-            <div className="tab-icon-badge vocab-badge">
-              <Languages size={28} />
-            </div>
-            <h3>Vocabulaire &amp; Écoute</h3>
-          </NavLink>
-
-          {/* Tab 2: Grammaire & Règles */}
-          <NavLink 
-            to={`/chapter/${chapter.id}/grammaire`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'grammaire' ? 'active' : ''}`}
-          >
-            <div className="tab-icon-badge grammar-badge">
-              <BookOpenCheck size={28} />
-            </div>
-            <h3>Grammaire &amp; Règles</h3>
-          </NavLink>
-
-          {/* Tab 3: Entraînement & Exercices */}
-          <NavLink 
-            to={`/chapter/${chapter.id}/exercices`} 
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'exercices' ? 'active' : ''}`}
-          >
-            <div className="tab-icon-badge practice-badge">
-              <PenTool size={28} />
-            </div>
-            <h3>Entraînement &amp; Exercices</h3>
-          </NavLink>
-
-          {/* Tab 4: Jeux & Défis */}
-          <NavLink
-            to={`/chapter/${chapter.id}/jeux`}
-            className={({ isActive }) => `section-card ${isActive || activeSection === 'jeux' ? 'active' : ''}`}
-          >
-            <div className="tab-icon-badge game-badge" style={{ background: 'rgba(124,58,237,0.18)', color: '#7c3aed' }}>
-              <Gamepad2 size={28} />
-            </div>
-            <h3>Jeux &amp; Défis</h3>
           </NavLink>
         </div>
       )}
