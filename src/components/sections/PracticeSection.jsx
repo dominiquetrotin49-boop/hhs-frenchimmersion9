@@ -5,6 +5,7 @@ import './PracticeSection.css';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
+import MystereAuPasse from '../games/MystereAuPasse';
 
 
 
@@ -209,6 +210,11 @@ const UNIT1_ACTIVITIES = [
     id: "writing_prompt",
     title: "Activité 6 : Travail d'écriture",
     description: "Rédigez un court récit au passé en appliquant les notions de l'unité 1."
+  },
+  {
+    id: "mystere_au_passe",
+    title: "Activité 7 : Mystère au Passé ✍️",
+    isMystereActivity: true
   }
 ];
 
@@ -332,6 +338,11 @@ export default function PracticeSection() {
         <div className="activity-main-card" style={{ background: 'transparent', border: 'none', padding: 0, boxShadow: 'none' }}>
           <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : '1'} />
         </div>
+
+      ) : activeActivityId === 'mystere_au_passe' ? (
+        <div style={{ width: '100%' }}>
+          <MystereAuPasse />
+        </div>
       ) : (
         <div className="activity-main-card">
           <div className="activity-card-header">
@@ -425,7 +436,7 @@ export default function PracticeSection() {
         </div>
       )}
 
-      {activeActivityId !== 'writing_prompt' && activeActivityId !== 'mots_croises' && (
+      {activeActivityId !== 'writing_prompt' && activeActivityId !== 'mots_croises' && activeActivityId !== 'mystere_au_passe' && (
         <div className="accent-toolbar-floating">
           <span className="accent-toolbar-label">Accents :</span>
           <div className="accent-buttons-grid">
