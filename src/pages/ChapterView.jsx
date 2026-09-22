@@ -6,6 +6,7 @@ import VocabularySection from '../components/sections/VocabularySection';
 import PracticeSection from '../components/sections/PracticeSection';
 import GameSection from '../components/sections/GameSection';
 import JeuxSection from '../components/sections/JeuxSection';
+import AtelierSection from '../components/sections/AtelierSection';
 import UnitAvatarSpeaker from '../components/UnitAvatarSpeaker';
 import { BookOpenCheck, Languages, Gamepad2, PenTool, Lock, Volume2, VolumeX } from 'lucide-react';
 
@@ -186,6 +187,17 @@ function ChapterView() {
       );
     }
 
+    // For Unité 1 Option 2 Hub:
+    if (chapter.id === 'unite-1') {
+      if (activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux') {
+        return <AtelierSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
+      }
+      if (activeSection === 'grammaire' || activeSection === 'studio') {
+        return <GrammarSection data={chapter.grammar} />;
+      }
+      return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;
+    }
+
     switch(activeSection) {
       case 'vocabulaire':
       case 'pratique':
@@ -235,6 +247,54 @@ function ChapterView() {
               </NavLink>
             );
           })}
+        </div>
+      ) : chapter.id === 'unite-1' ? (
+        /* ── OPTION 2 HUB : LES 3 DOSSIERS D'UNITÉ 1 ── */
+        <div className="section-navigation grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+          {/* Dossier 1: Le Lexique du Héros */}
+          <NavLink 
+            to={`/chapter/${chapter.id}/vocabulaire`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'vocabulaire' ? 'active' : ''}`}
+          >
+            <div className="tab-icon-badge vocab-badge">
+              <Languages size={28} />
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-600 block mb-0.5">Dossier 01</span>
+              <h3 className="text-base sm:text-lg">Le Lexique du Héros</h3>
+              <p className="text-xs text-slate-500 font-medium">Écoute • Dictée • Cartes 3D</p>
+            </div>
+          </NavLink>
+
+          {/* Dossier 2: Le Studio de Narration */}
+          <NavLink 
+            to={`/chapter/${chapter.id}/grammaire`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'grammaire' || activeSection === 'studio' ? 'active' : ''}`}
+          >
+            <div className="tab-icon-badge grammar-badge">
+              <BookOpenCheck size={28} />
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 block mb-0.5">Dossier 02</span>
+              <h3 className="text-base sm:text-lg">Le Studio de Narration</h3>
+              <p className="text-xs text-slate-500 font-medium">5 Stations • Règles • Exercices</p>
+            </div>
+          </NavLink>
+
+          {/* Dossier 3: L'Atelier Créatif & Jeux */}
+          <NavLink 
+            to={`/chapter/${chapter.id}/atelier`} 
+            className={({ isActive }) => `section-card ${isActive || activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux' ? 'active' : ''}`}
+          >
+            <div className="tab-icon-badge practice-badge" style={{ background: 'rgba(124,58,237,0.15)', color: '#7c3aed' }}>
+              <PenTool size={28} />
+            </div>
+            <div>
+              <span className="text-[10px] font-black uppercase tracking-wider text-violet-600 block mb-0.5">Dossier 03</span>
+              <h3 className="text-base sm:text-lg">L'Atelier Créatif &amp; Jeux</h3>
+              <p className="text-xs text-slate-500 font-medium">Mystère au Passé • Mots Croisés • Jeux</p>
+            </div>
+          </NavLink>
         </div>
       ) : (
         <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">

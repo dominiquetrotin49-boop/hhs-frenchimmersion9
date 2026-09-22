@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import './GrammarSection.css';
 import './VocabularySection.css';
+import StationPracticeWidget from './StationPracticeWidget';
+import { STATION_PRACTICE_DATA } from '../../data/unit1StationPractice';
 
 const STUDIO_STATIONS = [
   {
@@ -2244,6 +2246,9 @@ function GrammarSection() {
                       <div className="text-left">
                         <h4 className="station-tab-title">{station.title}</h4>
                         <p className="station-tab-subtitle">{station.subtitle}</p>
+                        <span className="inline-flex items-center gap-1 mt-1 text-[10px] font-black text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                          ✏️ Exercice inclus
+                        </span>
                       </div>
                     </div>
                     <div className="station-tab-footer">
@@ -2474,6 +2479,9 @@ function GrammarSection() {
 
                   {/* Trivia Challenge */}
                   {renderTriviaChallenge('imparfait')}
+
+                  {/* Immediate Practice Exercise (Integrated Drill) */}
+                  <StationPracticeWidget practice={STATION_PRACTICE_DATA.imparfait} />
                 </div>
               )}
 
@@ -2663,6 +2671,9 @@ function GrammarSection() {
 
                   {/* Trivia Challenge */}
                   {renderTriviaChallenge('pc_avoir')}
+
+                  {/* Immediate Practice Exercise (Integrated Drill) */}
+                  <StationPracticeWidget practice={STATION_PRACTICE_DATA.pc_avoir} />
                 </div>
               )}
 
@@ -2865,6 +2876,9 @@ function GrammarSection() {
 
                   {/* Trivia Challenge */}
                   {renderTriviaChallenge('pc_etre')}
+
+                  {/* Immediate Practice Exercise (Integrated Drill) */}
+                  <StationPracticeWidget practice={STATION_PRACTICE_DATA.pc_etre} />
                 </div>
               )}
 
@@ -3048,6 +3062,9 @@ function GrammarSection() {
 
                   {/* Trivia Challenge */}
                   {renderTriviaChallenge('combinaison')}
+
+                  {/* Immediate Practice Exercise (Integrated Drill) */}
+                  <StationPracticeWidget practice={STATION_PRACTICE_DATA.combinaison} />
                 </div>
               )}
 
@@ -3137,6 +3154,9 @@ function GrammarSection() {
 
                   {/* Trivia Challenge */}
                   {renderTriviaChallenge('connecteurs')}
+
+                  {/* Immediate Practice Exercise (Integrated Drill) */}
+                  <StationPracticeWidget practice={STATION_PRACTICE_DATA.connecteurs} />
                 </div>
               )}
 
