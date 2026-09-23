@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MystereAuPasse from '../games/MystereAuPasse';
 import SauvetageEnImage from '../games/SauvetageEnImage';
+import AtelierEcritureReprise from '../games/AtelierEcritureReprise';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
@@ -13,12 +14,20 @@ export default function AtelierSection({ chapterId, vocabulary }) {
   const TABS = isReprise
     ? [
         {
-          id: 'recits',
-          title: 'Atelier d\'Écriture',
-          subtitle: '4 sujets de rédaction au présent avec IA Feedback',
-          icon: '📝',
+          id: 'atelier_ecriture',
+          title: 'Atelier d\'Écriture Guidée',
+          subtitle: 'Verbes au Présent & Prépositions • Boîte à Outils',
+          icon: '✍️',
           color: '#0284c7',
           badgeBg: 'rgba(2, 132, 199, 0.12)'
+        },
+        {
+          id: 'recits',
+          title: 'Récits Libres',
+          subtitle: '4 sujets de rédaction au présent avec IA Feedback',
+          icon: '📝',
+          color: '#0891b2',
+          badgeBg: 'rgba(8, 145, 178, 0.12)'
         },
         {
           id: 'mots_croises',
@@ -80,7 +89,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         }
       ];
 
-  const [activeTab, setActiveTab] = useState(isReprise ? 'recits' : 'sauvetage');
+  const [activeTab, setActiveTab] = useState(isReprise ? 'atelier_ecriture' : 'sauvetage');
 
   return (
     <div className="atelier-container fade-in">
@@ -120,6 +129,10 @@ export default function AtelierSection({ chapterId, vocabulary }) {
 
       {/* Active Tab View */}
       <div className="atelier-subpanel-card animate-fade-in">
+        {activeTab === 'atelier_ecriture' && (
+          <AtelierEcritureReprise />
+        )}
+
         {activeTab === 'sauvetage' && (
           <SauvetageEnImage />
         )}
