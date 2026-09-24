@@ -50,7 +50,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         {
           id: 'sauvetage',
           title: 'Sauvetage en Image',
-          subtitle: 'Spider-Man & Superman • Récit d\'action UDL',
+          subtitle: 'Spider-Man & Superman • Récit d\'action guidé',
           icon: '🦸‍♂️',
           color: '#e11d48',
           badgeBg: 'rgba(225, 29, 72, 0.12)'
@@ -58,7 +58,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         {
           id: 'mystere',
           title: 'Mystère au Passé',
-          subtitle: 'Récit d\'événement inattendu (Tier 1 UDL)',
+          subtitle: 'Récit d\'événement inattendu guidé',
           icon: '✍️',
           color: '#0284c7',
           badgeBg: 'rgba(2, 132, 199, 0.12)'
