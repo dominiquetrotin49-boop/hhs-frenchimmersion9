@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import { analyzeFrenchText } from '../../utils/frenchTextAnalyzer';
 import { BookOpen, RefreshCw, Send, CheckCircle2, AlertTriangle, HelpCircle } from 'lucide-react';
 
 const RENTREE_PROMPTS = [
@@ -251,6 +252,155 @@ const STYLE_BLOCK = `
   }
 `;
 
+
+const localAnalyzeText = (inputText, promptText = "", unitId = "1") => {
+  const result = analyzeFrenchText(inputText, {
+    unitId: String(unitId || "1"),
+    mode: "writing",
+    minWords: 5,
+    checkLength: false
+  });
+
+  const corrections = [
+    ...(result.verbAgreements || []).map(v => ({
+      category: 'Conjugaison',
+      originalSegment: v.error,
+      suggestedCorrection: v.correction,
+      ruleExplanation: v.explanation
+    })),
+    ...(result.adjectiveAgreements || []).map(a => ({
+      category: 'Accords & Genre',
+      originalSegment: a.error,
+      suggestedCorrection: a.correction,
+      ruleExplanation: a.explanation
+    })),
+    ...(result.nounGenders || []).map(n => ({
+      category: 'Accords & Genre',
+      originalSegment: n.error,
+      suggestedCorrection: n.correction,
+      ruleExplanation: n.explanation
+    })),
+    ...(result.spellingErrors || []).map(s => ({
+      category: 'Orthographe',
+      originalSegment: s.error,
+      suggestedCorrection: s.correction,
+      ruleExplanation: s.explanation
+    })),
+    ...(result.wordChoices || []).map(w => ({
+      category: 'Vocabulaire',
+      originalSegment: w.error,
+      suggestedCorrection: w.correction,
+      ruleExplanation: w.explanation
+    }))
+  ];
+
+  const isValid = corrections.length === 0;
+
+  return {
+    isValid,
+    source: 'local',
+    generalFeedback: isValid
+      ? "Analyse locale de base : aucune erreur fréquente détectée parmi les règles courantes (accords et orthographe élémentaires). Pour vérifier la richesse du style et les structures avancées, demandez une confirmation à votre enseignant(e)."
+      : result.generalFeedback || "Plusieurs erreurs ont été identifiées. Consultez les corrections ci-dessous pour améliorer votre texte.",
+    strengths: isValid ? ["Bonne maîtrise des règles élémentaires observées."] : [],
+    corrections,
+    pedagogicalAdvice: isValid
+      ? "Pour progresser en immersion 9e, veillez à bien conjuguer vos verbes au présent et au passé composé, et pensez aux accords en genre et en nombre."
+      : "Prenez le temps de bien repérer le sujet de chaque verbe et le genre des noms pour assurer les accords.",
+    verbAgreements: result.verbAgreements || [],
+    adjectiveAgreements: result.adjectiveAgreements || [],
+    nounGenders: result.nounGenders || [],
+    spellingErrors: result.spellingErrors || [],
+    wordChoices: result.wordChoices || []
+  };
+};
+
+async function analyzeWithClientGemini(studentText, promptSubject, promptInstructions, targetVocab = []) {
+  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  if (!apiKey) throw new Error("Clé API non disponible côté client.");
+
+  const systemInstruction = `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
+Ton rôle est d'analyser le travail de rédaction d'un élève avec clarté et précision, SANS JAMAIS ATTRIBUER DE NOTE CHIFFRÉE.
+
+Critères d'évaluation Grade 9 Immersion :
+1. Points forts (vocabulaire thématique, phrases complètes, connecteurs de base).
+2. Orthographe & Typographie (accents é, è, ê, à, â, ç, apostrophes et élisions j', l', d', qu', c').
+3. Conjugaison & Temps verbaux (présent de l'indicatif, verbes pronominaux, passé composé avec avoir/être, imparfait de description).
+4. Accords essentiels (accords sujet-verbe, accords adjectifs masculin/féminin et singulier/pluriel, accords des noms).
+5. Syntaxe & Anglicismes (faux-amis courants, prépositions simples).
+
+Consignes impératives pour les corrections :
+- Si le texte de l'élève contient des fautes réelles, tu DOIS les répertorier dans "corrections".
+- Ne dis JAMAIS qu'un texte est sans faute s'il comporte des erreurs évidentes.
+- Si et seulement si le texte ne comporte absolument aucune erreur, renvoie une liste "corrections" vide [] et "isValid": true.
+- Si le texte a au moins une erreur, "isValid" DOIT être false.
+
+Réponds STRICTEMENT sous forme d'un objet JSON valide respectant ce format :
+{
+  "isValid": boolean,
+  "generalFeedback": "string",
+  "strengths": ["string"],
+  "corrections": [
+    {
+      "category": "Conjugaison" | "Orthographe" | "Syntaxe & Anglicismes" | "Accords & Genre" | "Vocabulaire",
+      "originalSegment": "extrait exact contenant la faute",
+      "suggestedCorrection": "version corrigée",
+      "ruleExplanation": "explication claire et pédagogique de la règle"
+    }
+  ],
+  "pedagogicalAdvice": "string"
+}`;
+
+  const userPrompt = `Sujet : "${promptSubject}"
+Consignes : "${promptInstructions}"
+Vocabulaire cible suggéré : ${targetVocab.length > 0 ? targetVocab.join(', ') : 'Aucun'}
+
+Texte de l'élève à analyser :
+"""
+${studentText}
+"""`;
+
+  const models = ['gemini-3.6-flash', 'gemini-3.5-flash-lite'];
+  for (const model of models) {
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: userPrompt }] }],
+          systemInstruction: { parts: [{ text: systemInstruction }] },
+          generationConfig: {
+            temperature: 0.1,
+            responseMimeType: 'application/json'
+          }
+        })
+      });
+
+      const data = await response.json();
+      if (!response.ok || !data.candidates || !data.candidates[0].content) {
+        throw new Error(data.error?.message || `Erreur Gemini ${model}`);
+      }
+
+      const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
+      const corrections = Array.isArray(parsed.corrections) ? parsed.corrections : [];
+      const isValid = (typeof parsed.isValid === 'boolean') ? parsed.isValid : (corrections.length === 0);
+
+      return {
+        isValid,
+        generalFeedback: parsed.generalFeedback || (isValid ? "Excellent travail ! Votre texte est bien rédigé." : "Plusieurs erreurs ont été détectées."),
+        strengths: parsed.strengths || [],
+        corrections,
+        pedagogicalAdvice: parsed.pedagogicalAdvice || "Relisez vos phrases en vérifiant les accords.",
+        source: 'ai'
+      };
+    } catch (e) {
+      console.warn(`Fallback client Gemini (${model}):`, e.message);
+    }
+  }
+  throw new Error("Tous les modèles Gemini ont échoué.");
+}
+
 export default function WritingPrompt({ onBack, unitId, chapterId }) {
   const path = typeof window !== "undefined" ? window.location.pathname : "";
   const isUnit1 = unitId === "1" || (chapterId && chapterId.includes("unite-1")) || path.includes("unite-1");
@@ -275,28 +425,75 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
   
   const handleSubmit = async () => {
-    if (!text.trim()) return;
+    if (!text.trim() || loading) return;
     setLoading(true);
     setError(null);
+    setFeedback(null);
+
+    const promptTitle = activePrompt?.title || "Sujet de rédaction";
+    const promptInstructions = activePrompt?.prompt || "";
+    const targetVocab = activePrompt?.vocab || [];
+
     try {
-      const res = await fetch("/api/ai-feedback", {
+      const res = await fetch("/api/writing-feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          prompt: activePrompt.prompt,
-          text: text,
-          focus: activePrompt.focus
+          studentText: text.trim(),
+          text: text.trim(),
+          promptSubject: promptTitle,
+          promptInstructions: promptInstructions,
+          prompt: promptInstructions,
+          targetVocab: targetVocab,
+          unitTheme: `French Immersion 9 - ${activePrompt?.focus || 'Rédaction'}`
         })
       });
-      if (!res.ok) throw new Error("Erreur");
-      const data = await res.json();
+
+      const textRes = await res.text();
+
+      // If we receive an HTML page (such as Vite SPA fallback in local dev), try client Gemini then local
+      if (textRes.trim().startsWith("<!DOCTYPE") || textRes.trim().startsWith("<html")) {
+        try {
+          if (import.meta.env.VITE_GEMINI_API_KEY) {
+            const clientFeedback = await analyzeWithClientGemini(text.trim(), promptTitle, promptInstructions, targetVocab);
+            setFeedback(clientFeedback);
+            return;
+          }
+        } catch (cErr) {
+          console.warn("Client Gemini direct call error:", cErr);
+        }
+        const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
+        setFeedback(localFeedback);
+        return;
+      }
+
+      let data;
+      try {
+        data = JSON.parse(textRes);
+      } catch (parseErr) {
+        const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
+        setFeedback(localFeedback);
+        return;
+      }
+
+      if (!res.ok) {
+        throw new Error(data.error || "Une erreur s'est produite lors de l'analyse.");
+      }
+
       setFeedback(data);
     } catch (err) {
-      setFeedback({
-        score: "Bien reçu !",
-        pointsForts: ["Effort de rédaction complet", "Phrases bien structurées"],
-        ameliorations: ["Relisez attentivement la conjugaison et l'accord des adjectifs."]
-      });
+      console.error("API error:", err);
+      try {
+        if (import.meta.env.VITE_GEMINI_API_KEY) {
+          const clientFeedback = await analyzeWithClientGemini(text.trim(), promptTitle, promptInstructions, targetVocab);
+          setFeedback(clientFeedback);
+          return;
+        }
+      } catch (cErr) {
+        console.warn("Client Gemini fallback error:", cErr);
+      }
+      const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
+      setFeedback(localFeedback);
     } finally {
       setLoading(false);
     }
@@ -473,11 +670,22 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
         <div className="lg:col-span-6 wp-panel flex flex-col justify-between">
           <div className="h-full flex flex-col justify-between">
             <div>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="w-2.5 h-2.5 rounded-full bg-purple-400 animate-pulse" />
-                <h3 className="text-xs font-black uppercase tracking-widest text-purple-400">
-                  Rapport de Correction Pédagogique
-                </h3>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center gap-2">
+                  <span className={`w-2.5 h-2.5 rounded-full ${feedback?.source === 'local' ? 'bg-amber-400' : 'bg-purple-400'} animate-pulse`} />
+                  <h3 className="text-xs font-black uppercase tracking-widest text-purple-400">
+                    Rapport de Correction Pédagogique
+                  </h3>
+                </div>
+                {feedback && (
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                    feedback.source === 'ai' 
+                      ? 'border-emerald-500/30 bg-emerald-950/40 text-emerald-300' 
+                      : 'border-amber-500/30 bg-amber-950/40 text-amber-300'
+                  }`}>
+                    {feedback.source === 'ai' ? '✨ Analyse IA Immersion 9e' : '⚡ Vérification de base'}
+                  </span>
+                )}
               </div>
 
               {/* Error banner */}
@@ -520,16 +728,85 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Perfect work check */}
                   {feedback.isValid && (
                     <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 text-emerald-100 flex items-center gap-2">
-                      <CheckCircle2 className="text-emerald-400" size={20} />
+                      <CheckCircle2 className="text-emerald-400 flex-shrink-0" size={20} />
                       <div>
-                        <span className="text-xs font-black uppercase text-emerald-400 tracking-wider block mb-0.5">Zéro faute !</span>
-                        <p className="text-xs font-medium">Excellent travail ! Votre orthographe et accords de verbes/adjectifs sont corrects.</p>
+                        <span className="text-xs font-black uppercase text-emerald-400 tracking-wider block mb-0.5">
+                          {feedback.source === 'ai' ? "Zéro faute !" : "Aucune erreur fréquente détectée"}
+                        </span>
+                        <p className="text-xs font-medium text-slate-300">
+                          {feedback.source === 'ai'
+                            ? "Excellent travail ! Votre orthographe, vos accords et votre syntaxe sont soignés."
+                            : "Aucune erreur élémentaire détectée par le vérificateur automatique. Faites relire votre paragraphe par votre enseignant(e) pour valider les tournures avancées."}
+                        </p>
                       </div>
                     </div>
                   )}
 
+                  {/* Strengths */}
+                  {feedback.strengths && feedback.strengths.length > 0 && (
+                    <div className="p-3.5 rounded-xl border border-emerald-500/25 bg-emerald-950/20 space-y-2">
+                      <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
+                        <CheckCircle2 size={13} className="text-emerald-400" />
+                        Points forts observés
+                      </span>
+                      <ul className="space-y-1.5 pl-1">
+                        {feedback.strengths.map((str, idx) => (
+                          <li key={idx} className="text-xs text-emerald-100 flex items-start gap-2">
+                            <span className="text-emerald-400 font-bold">•</span>
+                            <span>{str}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+
+                  {/* Detailed Corrections */}
+                  {feedback.corrections && feedback.corrections.length > 0 && (
+                    <div className="space-y-2.5">
+                      <span className="text-[10px] font-black text-red-400 uppercase tracking-widest block">
+                        Corrections détaillées ({feedback.corrections.length})
+                      </span>
+                      {feedback.corrections.map((corr, idx) => {
+                        const catColor = corr.category === 'Conjugaison'
+                          ? 'border-red-500/30 bg-red-950/30 text-red-300'
+                          : corr.category === 'Accords & Genre'
+                          ? 'border-orange-500/30 bg-orange-950/30 text-orange-300'
+                          : corr.category === 'Orthographe'
+                          ? 'border-blue-500/30 bg-blue-950/30 text-blue-300'
+                          : 'border-purple-500/30 bg-purple-950/30 text-purple-300';
+
+                        return (
+                          <div key={idx} className="p-3 rounded-lg border border-slate-800 bg-slate-900/60 text-xs space-y-1.5">
+                            <div className="flex justify-between items-center flex-wrap gap-1">
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider border ${catColor}`}>
+                                {corr.category}
+                              </span>
+                              <div className="flex items-center gap-2">
+                                <span className="line-through text-slate-400 font-medium">« {corr.originalSegment} »</span>
+                                <span className="text-emerald-400 font-bold">➔ « {corr.suggestedCorrection} »</span>
+                              </div>
+                            </div>
+                            <p className="text-slate-300 leading-relaxed font-normal">{corr.ruleExplanation}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+
+                  {/* Pedagogical Advice */}
+                  {feedback.pedagogicalAdvice && (
+                    <div className="p-3 rounded-xl border border-purple-500/25 bg-purple-950/20">
+                      <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest block mb-1">
+                        💡 Conseil pour progresser
+                      </span>
+                      <p className="text-xs text-purple-100 leading-relaxed">
+                        {feedback.pedagogicalAdvice}
+                      </p>
+                    </div>
+                  )}
+
                   {/* Verbs feedback */}
-                  {feedback.verbAgreements && feedback.verbAgreements.length > 0 && (
+                  {(!feedback.corrections || feedback.corrections.length === 0) && feedback.verbAgreements && feedback.verbAgreements.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[10px] font-black text-red-400 uppercase tracking-widest block">Accords de verbes (présent)</span>
                       {feedback.verbAgreements.map((err, idx) => (
@@ -546,7 +823,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   )}
 
                   {/* Adjectives feedback */}
-                  {feedback.adjectiveAgreements && feedback.adjectiveAgreements.length > 0 && (
+                  {(!feedback.corrections || feedback.corrections.length === 0) && feedback.adjectiveAgreements && feedback.adjectiveAgreements.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[10px] font-black text-orange-400 uppercase tracking-widest block">Accord des adjectifs</span>
                       {feedback.adjectiveAgreements.map((err, idx) => (
@@ -563,7 +840,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   )}
 
                   {/* Noun Genders feedback */}
-                  {feedback.nounGenders && feedback.nounGenders.length > 0 && (
+                  {(!feedback.corrections || feedback.corrections.length === 0) && feedback.nounGenders && feedback.nounGenders.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Genre des noms & articles</span>
                       {feedback.nounGenders.map((err, idx) => (
@@ -579,7 +856,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   )}
 
                   {/* Spelling feedback */}
-                  {feedback.spellingErrors && feedback.spellingErrors.length > 0 && (
+                  {(!feedback.corrections || feedback.corrections.length === 0) && feedback.spellingErrors && feedback.spellingErrors.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block">Orthographe</span>
                       {feedback.spellingErrors.map((err, idx) => (
@@ -595,7 +872,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   )}
 
                   {/* Word Choices & Prepositions feedback */}
-                  {feedback.wordChoices && feedback.wordChoices.length > 0 && (
+                  {(!feedback.corrections || feedback.corrections.length === 0) && feedback.wordChoices && feedback.wordChoices.length > 0 && (
                     <div className="space-y-2">
                       <span className="text-[10px] font-black text-purple-400 uppercase tracking-widest block">Vocabulaire & Prépositions</span>
                       {feedback.wordChoices.map((err, idx) => (
