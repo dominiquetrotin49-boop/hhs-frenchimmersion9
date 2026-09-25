@@ -84,6 +84,7 @@ const WRITING_PROMPTS = PROMPTS;
 
 const LOWER_ACCENTS = ["é", "è", "ê", "ë", "à", "â", "ù", "û", "î", "ï", "ô", "ç", "œ"];
 const UPPER_ACCENTS = ["É", "È", "Ê", "Ë", "À", "Â", "Ù", "Û", "Î", "Ï", "Ô", "Ç", "Œ"];
+const MAX_CHARS = 2500;
 
 
 const STYLE_BLOCK = `
@@ -507,13 +508,18 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
   };
 
   const handleTextChange = (e) => {
-    setText(e.target.value);
+    const val = e.target.value;
+    if (val.length > MAX_CHARS) {
+      setText(val.slice(0, MAX_CHARS));
+    } else {
+      setText(val);
+    }
     if (feedback) setFeedback(null);
     if (error) setError(null);
   };
 
   const insertAccent = (char) => {
-    setText(prev => prev + char);
+    setText(prev => (prev + char).slice(0, MAX_CHARS));
   };
 
   const handleAccentClick = (char) => {
@@ -526,6 +532,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     const end = el.selectionEnd || 0;
     const currentVal = text;
     const newVal = currentVal.slice(0, start) + char + currentVal.slice(end);
+    if (newVal.length > MAX_CHARS) return;
     setText(newVal);
     setTimeout(() => {
       el.focus();
@@ -642,7 +649,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                 spellCheck="false"
               />
               <div className="absolute right-3 bottom-3 text-xs text-slate-500 font-mono">
-                {text.length} / 150 caract.
+                {text.length} / {MAX_CHARS} caract.
               </div>
             </div>
           </div>
