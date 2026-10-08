@@ -65,7 +65,8 @@ function Sidebar() {
           const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
           const isFullyBlocked = isProduction && (
             chapter.id !== 'unite-reprise' && 
-            chapter.id !== 'unite-1'
+            chapter.id !== 'unite-1' && 
+            chapter.id !== 'unite-2'
           );
 
           return (

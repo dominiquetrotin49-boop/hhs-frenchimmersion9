@@ -49,8 +49,8 @@ function ChapterView() {
 
   const isProduction = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   const isBlocked = isProduction && (
-    (chapterId !== 'unite-reprise' && chapterId !== 'unite-1' && chapterId !== 'horloge-boreale') ||
-    (chapterId === 'horloge-boreale' && activeSection !== 'chapitre-1')
+    (chapterId !== 'unite-reprise' && chapterId !== 'unite-1' && chapterId !== 'unite-2' && chapterId !== 'horloge-boreale') ||
+    (chapterId === 'horloge-boreale' && activeSection !== 'chapitre-1' && activeSection !== 'chapitre-2')
   );
 
   if (isBlocked) {

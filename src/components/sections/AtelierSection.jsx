@@ -10,6 +10,7 @@ import './AtelierSection.css';
 
 export default function AtelierSection({ chapterId, vocabulary }) {
   const isReprise = !chapterId || chapterId === 'unite-reprise';
+  const isUnit2 = chapterId === 'unite-2';
 
   const TABS = isReprise
     ? [
@@ -44,6 +45,33 @@ export default function AtelierSection({ chapterId, vocabulary }) {
           icon: '🎮',
           color: '#e11d48',
           badgeBg: 'rgba(225, 29, 72, 0.12)'
+        }
+      ]
+    : isUnit2
+    ? [
+        {
+          id: 'jeux',
+          title: 'The Citadel — Exploration',
+          subtitle: 'Mode Exploration • Énigmes & Donjon',
+          icon: '🏰',
+          color: '#d4af37',
+          badgeBg: 'rgba(212, 175, 55, 0.15)'
+        },
+        {
+          id: 'recits',
+          title: 'Atelier d\'Écriture',
+          subtitle: 'Sujets de rédaction sur le bien-être & santé mentale',
+          icon: '📝',
+          color: '#0891b2',
+          badgeBg: 'rgba(8, 145, 178, 0.12)'
+        },
+        {
+          id: 'mots_croises',
+          title: 'Mots Croisés',
+          subtitle: 'Grilles interactives de révision',
+          icon: '🧩',
+          color: '#7c3aed',
+          badgeBg: 'rgba(124, 58, 237, 0.12)'
         }
       ]
     : [
@@ -89,7 +117,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         }
       ];
 
-  const [activeTab, setActiveTab] = useState(isReprise ? 'atelier_ecriture' : 'sauvetage');
+  const [activeTab, setActiveTab] = useState(isReprise ? 'atelier_ecriture' : isUnit2 ? 'jeux' : 'sauvetage');
 
   return (
     <div className="atelier-container fade-in">
@@ -142,7 +170,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         )}
 
         {activeTab === 'recits' && (
-          <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : '1'} />
+          <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : chapterId || '1'} />
         )}
 
         {activeTab === 'mots_croises' && (

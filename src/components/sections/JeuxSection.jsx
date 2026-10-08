@@ -12,6 +12,7 @@ import TourDesOmbres from '../games/TourDesOmbres';
 import HeroLadder from '../games/HeroLadder';
 import ChateauEvasion from '../games/ChateauEvasion';
 import DonjonDesHeros from '../games/DonjonDesHeros';
+import CitadelleBienEtre from '../games/CitadelleBienEtre';
 
 // ── Inline styles injected once ──────────────────────────────────────────────
 const JEUX_STYLES = `
@@ -153,6 +154,10 @@ export default function JeuxSection({ chapterId, vocabulary }) {
         {activeGame === 'donjon-heros' && (
           <DonjonDesHeros onBack={() => setActiveGame(null)} />
         )}
+
+        {activeGame === 'citadelle' && (
+          <CitadelleBienEtre onBack={() => setActiveGame(null)} />
+        )}
       </div>
     );
   }
@@ -246,6 +251,49 @@ export default function JeuxSection({ chapterId, vocabulary }) {
               <div className="jeux-tags">
                 <span className="jeux-tag" style={{ background: '#d1fae5', color: '#047857' }}>Communication</span>
                 <span className="jeux-tag" style={{ background: '#d1fae5', color: '#047857' }}>Récit RPG</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const isUnit2 = chapterId === 'unite-2';
+
+  // ── Game Selection Menu for Unité 2 (Santé Mentale et Bien-Être) ───────────
+  if (isUnit2) {
+    return (
+      <div className="section-container glass-container fade-in">
+        <div className="jeux-menu">
+          <div style={{ textAlign: 'center' }}>
+            <h2 className="jeux-title">
+              <Gamepad2 size={30} style={{ color: '#d4af37' }} />
+              Jeux &amp; Quêtes Interactives — Unité 2
+            </h2>
+            <p className="jeux-subtitle">
+              Explorez le bien-être, la santé mentale et débloquez les mystères de la forteresse.
+            </p>
+          </div>
+
+          <div className="jeux-cards">
+            {/* The Citadel */}
+            <div className="jeux-card jeux-card-gold" onClick={() => setActiveGame('citadelle')}>
+              <div className="jeux-card-icon">🏰</div>
+              <div className="jeux-card-badge jeux-card-badge-gold">
+                <Compass size={24} />
+              </div>
+              <div>
+                <h3 className="jeux-card-title" style={{ color: '#b45309' }}>The Citadel — Mode Exploration</h3>
+                <p className="jeux-card-desc">
+                  Explorez la forteresse médiévale à la lueur de la torche, résolvez les énigmes des gardiens et atteignez le Donjon !<br />
+                  <span className="jeux-card-tagline" style={{ color: '#d97706' }}>Déplacement WASD / Flèches • Énigmes &amp; Portails Runiques</span>
+                </p>
+              </div>
+              <div className="jeux-tags">
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Exploration 2D</span>
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Énigmes</span>
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Labyrinthe</span>
               </div>
             </div>
           </div>
