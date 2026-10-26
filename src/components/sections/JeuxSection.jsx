@@ -286,14 +286,14 @@ export default function JeuxSection({ chapterId, vocabulary }) {
               <div>
                 <h3 className="jeux-card-title" style={{ color: '#b45309' }}>The Citadel — Mode Exploration</h3>
                 <p className="jeux-card-desc">
-                  Explorez la forteresse médiévale à la lueur de la torche, résolvez les énigmes des gardiens et atteignez le Donjon !<br />
-                  <span className="jeux-card-tagline" style={{ color: '#d97706' }}>Déplacement WASD / Flèches • Énigmes &amp; Portails Runiques</span>
+                  Explorez les 6 salles en argile de la Citadelle du Bien-Être, résolvez les 12 épreuves des gardiens et débloquez les portails !<br />
+                  <span className="jeux-card-tagline" style={{ color: '#d97706' }}>Clavier WASD / Flèches ou Clic • Impératif &amp; Il faut que + Subjonctif</span>
                 </p>
               </div>
               <div className="jeux-tags">
-                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Exploration 2D</span>
-                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Énigmes</span>
-                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Labyrinthe</span>
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Labyrinthe Claymation</span>
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>Impératif &amp; Subjonctif</span>
+                <span className="jeux-tag" style={{ background: 'rgba(212,160,26,.15)', color: '#92400e' }}>8 Verbes Clés</span>
               </div>
             </div>
           </div>
