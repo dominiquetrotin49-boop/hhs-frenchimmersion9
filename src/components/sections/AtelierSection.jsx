@@ -6,6 +6,7 @@ import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
 import Unit2CrosswordSection from './Unit2CrosswordSection';
+import Unit2FillInBlanksSection from './Unit2FillInBlanksSection';
 import JeuxSection from './JeuxSection';
 import './AtelierSection.css';
 
@@ -57,6 +58,14 @@ export default function AtelierSection({ chapterId, vocabulary }) {
           icon: '🏰',
           color: '#d4af37',
           badgeBg: 'rgba(212, 175, 55, 0.15)'
+        },
+        {
+          id: 'textes_trous',
+          title: 'Textes à Trous (3 Activités)',
+          subtitle: 'Vocabulaire, Impératif & Subjonctif',
+          icon: '✏️',
+          color: '#059669',
+          badgeBg: 'rgba(5, 150, 105, 0.12)'
         },
         {
           id: 'recits',
@@ -168,6 +177,10 @@ export default function AtelierSection({ chapterId, vocabulary }) {
 
         {activeTab === 'mystere' && (
           <MystereAuPasse />
+        )}
+
+        {activeTab === 'textes_trous' && (
+          <Unit2FillInBlanksSection />
         )}
 
         {activeTab === 'recits' && (
