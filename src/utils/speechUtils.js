@@ -37,8 +37,15 @@ export const speakFrench = (text, options = {}) => {
 const playSpeechSynthesisFallback = (text, options = {}) => {
   if (!('speechSynthesis' in window) || !text) return;
 
+  // Clean text for natural French speech synthesis
+  const cleanedText = text
+    .replace(/\(e\)/gi, 'e')
+    .replace(/\s*\((f\.|m\.|f|m|\+[^)]*|APS)\)/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
   window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
+  const utterance = new SpeechSynthesisUtterance(cleanedText || text);
   const preferredLang = options.lang || localStorage.getItem('fi9_voice_lang') || 'fr-CA';
   const preferredRate = parseFloat(options.rate || localStorage.getItem('fi9_voice_rate') || '0.9');
 

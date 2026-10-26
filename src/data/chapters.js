@@ -105,10 +105,65 @@ export const chapters = [
       }
     ],
     vocabulary: [
-      { term: "La santé mentale", definition: "L'état de bien-être émotionnel, psychologique et social.", english: "Mental health" },
-      { term: "L'empathie", definition: "La capacité de comprendre et partager les sentiments d'autrui.", english: "Empathy" },
-      { term: "La gestion du stress", definition: "L'ensemble des techniques pour canaliser les tensions.", english: "Stress management" },
-      { term: "L'équilibre de vie", definition: "La répartition harmonieuse entre les études, la santé et le loisir.", english: "Life balance" }
+      // 1. Les Émotions et le Bien-Être (Emotions & Well-being)
+      { term: "Le bien-être", definition: "A state of physical and mental calm.", english: "Well-being" },
+      { term: "La santé mentale", definition: "Mental health.", english: "Mental health" },
+      { term: "L'anxiété (f.)", definition: "A state of worry or tension.", english: "Anxiety" },
+      { term: "Le stress", definition: "A physical/emotional response to pressure.", english: "Stress" },
+      { term: "Le soulagement", definition: "The disappearance of tension or pain.", english: "Relief" },
+      { term: "La détresse", definition: "Distress or significant suffering.", english: "Distress" },
+      { term: "L'espoir (m.)", definition: "Hope.", english: "Hope" },
+      { term: "L'équilibre (m.)", definition: "Balance, referring to the integration of mental and physical health.", english: "Balance" },
+      { term: "L'humeur (f.)", definition: "Mood.", english: "Mood" },
+      { term: "La confiance en soi", definition: "Self-confidence.", english: "Self-confidence" },
+      { term: "Épanoui(e)", definition: "Fulfilled or thriving.", english: "Fulfilled / Thriving" },
+
+      // 2. Les Facteurs de Stress (Stressors)
+      { term: "La pression scolaire", definition: "School-related pressure.", english: "School pressure" },
+      { term: "La pression sociale", definition: "Social pressure from peers.", english: "Social pressure" },
+      { term: "La pression familiale", definition: "Family pressure.", english: "Family pressure" },
+      { term: "La stigmatisation", definition: "Negative judgment or discredit toward someone's situation.", english: "Stigmatization / Stigma" },
+      { term: "Un mythe", definition: "A myth or false belief regarding mental health.", english: "A myth" },
+      { term: "L'inquiétude (f.)", definition: "Worry or concern.", english: "Worry / Concern" },
+      { term: "Une menace", definition: "A threat (as a source of stress).", english: "A threat" },
+      { term: "La fatigue", definition: "Tiredness/exhaustion.", english: "Fatigue / Exhaustion" },
+      { term: "Le jugement", definition: "Judgment, often linked to stigma.", english: "Judgment" },
+
+      // 3. Les Stratégies d'Adaptation (Coping Strategies)
+      { term: "Une stratégie d'adaptation", definition: "A method for facing difficult situations.", english: "Coping strategy" },
+      { term: "La méditation / Le mindfulness", definition: "Mindfulness practices.", english: "Meditation / Mindfulness" },
+      { term: "L'exercice physique (m.)", definition: "Physical exercise.", english: "Physical exercise" },
+      { term: "La nutrition", definition: "Healthy eating habits.", english: "Nutrition" },
+      { term: "Le sommeil", definition: "Sleep/Rest.", english: "Sleep / Rest" },
+      { term: "La communication ouverte", definition: "Open communication.", english: "Open communication" },
+      { term: "Une technique de relaxation", definition: "A relaxation technique.", english: "Relaxation technique" },
+      { term: "Le repos", definition: "Rest.", english: "Rest" },
+      { term: "La respiration profonde", definition: "Deep breathing (for relaxation).", english: "Deep breathing" },
+      { term: "Se confier", definition: "To confide in someone/open up.", english: "To confide in someone / open up" },
+      { term: "Gérer", definition: "To manage (e.g., managing anxiety or time).", english: "To manage" },
+
+      // 4. Donner des Conseils et Exprimer l'Obligation (Giving Advice)
+      { term: "L'impératif", definition: "Verb mode used for orders or advice (e.g., Fais, Prends).", english: "The imperative mood" },
+      { term: "Il faut que (+ subjonctif)", definition: "\"It is necessary that...\".", english: "\"It is necessary that...\"" },
+      { term: "Devoir", definition: "\"To have to\" or \"must\".", english: "To have to / must" },
+      { term: "Pouvoir", definition: "\"To be able to\" or \"can\".", english: "To be able to / can" },
+      { term: "Prendre une pause", definition: "To take a break.", english: "To take a break" },
+      { term: "Demander de l'aide", definition: "To ask for help.", english: "To ask for help" },
+      { term: "Interdire / Une interdiction", definition: "To forbid / A prohibition.", english: "To forbid / A prohibition" },
+      { term: "Rédiger", definition: "To write or draft (useful for the script/guide).", english: "To write / draft" },
+      { term: "S'exprimer", definition: "To express oneself.", english: "To express oneself" },
+      { term: "Encourager", definition: "To encourage, maintaining a positive tone.", english: "To encourage" },
+
+      // 5. Ressources et Soutien (Resources & Support)
+      { term: "Les ressources (f.)", definition: "Available sources of help.", english: "Resources" },
+      { term: "Le soutien", definition: "Moral or practical help.", english: "Support" },
+      { term: "Un thérapeute / Un conseiller", definition: "A mental health professional or counselor.", english: "A therapist / counselor" },
+      { term: "Une campagne de sensibilisation", definition: "An awareness campaign.", english: "Awareness campaign" },
+      { term: "Une annonce de service public (APS)", definition: "A Public Service Announcement (PSA).", english: "Public Service Announcement (PSA)" },
+      { term: "Un binôme", definition: "A partner (for team collaboration).", english: "A partner" },
+      { term: "Un pair", definition: "A peer.", english: "A peer" },
+      { term: "Un dépliant", definition: "A brochure or flyer (for the final guide).", english: "A brochure / flyer" },
+      { term: "La crédibilité", definition: "Credibility (when evaluating sources).", english: "Credibility" }
     ],
     practice: []
   },

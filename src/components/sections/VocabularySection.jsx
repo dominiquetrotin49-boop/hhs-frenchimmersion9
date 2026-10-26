@@ -101,20 +101,28 @@ function VocabularySection({ data, chapterId }) {
   const verifySpelling = (index, inputVal, targetTerm) => {
     const inputClean = (inputVal || '').trim().toLowerCase();
     const targetClean = (targetTerm || '').trim().toLowerCase();
+    const targetSimplified = targetClean
+      .replace(/\(e\)/g, 'e')
+      .replace(/\s*\([^)]*\)/g, '')
+      .replace(/\s+/g, ' ')
+      .trim();
 
     if (!inputClean) {
       setSpellingStatus(prev => ({ ...prev, [index]: null }));
       return;
     }
 
-    // 1. Exact match (case-insensitive - ignores capitals at the beginning)
-    if (inputClean === targetClean) {
+    // 1. Exact match (case-insensitive, with or without grammatical tags)
+    if (inputClean === targetClean || inputClean === targetSimplified) {
       setSpellingStatus(prev => ({ ...prev, [index]: 'correct' }));
       return;
     }
 
     // 2. Check if equal when ignoring accents
-    if (stripAccents(inputClean) === stripAccents(targetClean)) {
+    if (
+      stripAccents(inputClean) === stripAccents(targetClean) ||
+      stripAccents(inputClean) === stripAccents(targetSimplified)
+    ) {
       setSpellingStatus(prev => ({ ...prev, [index]: 'accent-error' }));
       return;
     }
@@ -156,14 +164,14 @@ function VocabularySection({ data, chapterId }) {
           <h3>Dictée &amp; Orthographe</h3>
         </div>
 
-        {/* Tab 3: Cartes Mémoire 3D & Quiz */}
+        {/* Tab 3: Cartes mémoire & Quiz */}
         <div 
           onClick={() => setActiveHeaderTab('flashcard_practice')}
           className={`section-card cursor-pointer ${activeHeaderTab === 'flashcard_practice' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
           <div className="tab-icon-badge game-badge" style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#0891b2' }}><Sparkles size={28} /></div>
-          <h3>Cartes Mémoire 3D &amp; Quiz</h3>
+          <h3>Cartes mémoire &amp; Quiz</h3>
         </div>
 
       </div>
@@ -176,7 +184,17 @@ function VocabularySection({ data, chapterId }) {
           <div className="flex items-center justify-between mb-4 border-b border-cyan-100 pb-3">
             <h3 className="font-black text-slate-900 text-base flex items-center gap-2">
               <Volume2 size={20} className="text-cyan-600" />
-              Activité de Prononciation du Vocabulaire ({chapterId === 'unite-reprise' ? 'Reprise' : 'Unité 1'})
+              Activité de Prononciation du Vocabulaire ({
+                chapterId === 'unite-reprise' 
+                  ? 'Reprise' 
+                  : chapterId === 'unite-2' 
+                  ? 'Unité 2' 
+                  : chapterId === 'unite-3' 
+                  ? 'Unité 3' 
+                  : chapterId === 'unite-4' 
+                  ? 'Unité 4' 
+                  : 'Unité 1'
+              })
             </h3>
             <span className="text-xs bg-cyan-100 text-cyan-950 font-bold px-3 py-1 rounded-full border border-cyan-300">
               Voix Authentiques & Synthèse Vocale
@@ -378,7 +396,7 @@ function VocabularySection({ data, chapterId }) {
         </div>
       )}
 
-      {/* Frame 3: Cartes Mémoire 3D & Quiz */}
+      {/* Frame 3: Cartes mémoire & Quiz */}
       {activeHeaderTab === 'flashcard_practice' && (
         <GameSection chapterId={chapterId} vocabulary={data} initialMode="menu" />
       )}

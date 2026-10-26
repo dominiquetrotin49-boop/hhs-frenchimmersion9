@@ -356,9 +356,9 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
               <div className="game-icon-container" style={{ background: 'rgba(6, 182, 212, 0.1)', color: '#06b6d4' }}>
                 <Sparkles size={32} />
               </div>
-              <h4>Cartes 3D : Vocabulaire</h4>
+              <h4>Cartes Mémoires</h4>
               <p>Révisez le vocabulaire de l'unité avec des cartes mémoires interactives en trois dimensions.</p>
-              <button className="play-btn bg-cyan-600 hover:bg-cyan-700">Lancer les Cartes 3D</button>
+              <button className="play-btn bg-cyan-600 hover:bg-cyan-700">Lancer les Cartes Mémoires</button>
             </div>
 
             <div className="game-card" onClick={() => setMode('quiz')}>
