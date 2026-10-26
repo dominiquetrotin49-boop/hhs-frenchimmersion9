@@ -1196,6 +1196,7 @@ export default function CitadelleBienEtre({ onBack }) {
   const [bannerMsg, setBannerMsg] = useState('Approchez de l’Autel doré (ou cliquez dessus) pour relever le défi de la salle !');
   const [victory, setVictory] = useState(false);
   const [nearAltar, setNearAltar] = useState(false);
+  const [studentName, setStudentName] = useState('');
 
   const playerRef = useRef({
     x: ROOMS.foret.spawn.x,
@@ -1574,7 +1575,7 @@ export default function CitadelleBienEtre({ onBack }) {
       setActiveModal(null);
       setBannerMsg(`🎉 Épreuve réussie dans « ${room.name} » ! Les portails de sortie sont maintenant ouverts.`);
 
-      if (ROOM_ORDER.every((rid) => updated[rid])) {
+      if (activeModal.roomId === 'donjon' || ROOM_ORDER.every((rid) => updated[rid])) {
         setVictory(true);
       }
     }
@@ -1650,7 +1651,7 @@ export default function CitadelleBienEtre({ onBack }) {
           </p>
         </div>
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexWrap: 'wrap' }}>
           <div style={{
             background: 'rgba(16, 185, 129, 0.18)',
             border: '1.5px solid #34d399',
@@ -1662,6 +1663,23 @@ export default function CitadelleBienEtre({ onBack }) {
           }}>
             ✨ Salles libérées : {solvedCount} / {ROOM_ORDER.length}
           </div>
+          {solvedRooms.donjon && (
+            <button
+              onClick={() => setVictory(true)}
+              style={{
+                background: 'linear-gradient(135deg, #f59e0b, #d97706)',
+                color: '#ffffff',
+                border: 'none',
+                borderRadius: '0.6rem',
+                padding: '0.4rem 0.8rem',
+                cursor: 'pointer',
+                fontWeight: 800,
+                fontSize: '0.82rem',
+              }}
+            >
+              🏆 Certificat
+            </button>
+          )}
           <button
             onClick={resetGame}
             style={{
@@ -1964,6 +1982,8 @@ export default function CitadelleBienEtre({ onBack }) {
                       >
                         {activeModal.qIdx + 1 < modalRoom.questions.length
                           ? 'Question suivante (2/2) →'
+                          : activeModal.roomId === 'donjon'
+                          ? '🏆 Obtenir mon Certificat de Réussite ✨'
                           : 'Déverrouiller les portails de la salle ✨'}
                       </button>
                     )}
@@ -1974,48 +1994,172 @@ export default function CitadelleBienEtre({ onBack }) {
           );
         })()}
 
-        {/* ── VICTORY MODAL OVERLAY ── */}
+        {/* ── OFFICIAL CERTIFICATE OF COMPLETION OVERLAY (SALLE 6 COMPLETED) ── */}
         {victory && (
           <div style={{
             position: 'absolute',
             inset: 0,
-            background: 'rgba(15, 23, 42, 0.92)',
+            background: 'rgba(15, 23, 42, 0.94)',
+            backdropFilter: 'blur(6px)',
             borderRadius: '1rem',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '1.5rem',
-            zIndex: 25,
+            padding: '1rem',
+            zIndex: 30,
+            overflowY: 'auto',
           }}>
             <div style={{
-              background: '#ffffff',
-              color: '#0f172a',
-              borderRadius: '1.25rem',
-              padding: '2rem',
-              maxWidth: '540px',
+              background: 'linear-gradient(180deg, #fffbeb 0%, #fef3c7 100%)',
+              color: '#1e293b',
+              borderRadius: '1.1rem',
+              padding: '1.4rem 1.75rem',
+              maxWidth: '670px',
+              width: '100%',
               textAlign: 'center',
-              border: '4px solid #fbbf24',
-              boxShadow: '0 25px 60px rgba(0,0,0,0.6)',
+              border: '5px double #b45309',
+              boxShadow: '0 25px 60px rgba(0,0,0,0.7), inset 0 0 0 2px #fde68a',
+              position: 'relative',
             }}>
-              <div style={{ fontSize: '3.5rem', marginBottom: '0.5rem' }}>🏆🛡️✨</div>
-              <h3 style={{ margin: '0 0 0.5rem', fontSize: '1.6rem', fontWeight: 900, color: '#92400e' }}>
-                Triomphe à la Citadelle du Bien-Être !
+              {/* Top Royal Seal & Header */}
+              <div style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: '#78350f',
+                color: '#fef08a',
+                padding: '0.3rem 1rem',
+                borderRadius: '999px',
+                fontSize: '0.74rem',
+                fontWeight: 900,
+                letterSpacing: '0.08em',
+                textTransform: 'uppercase',
+                marginBottom: '0.55rem',
+              }}>
+                🏰 Français Immersion 9e • Unité 2 : Santé Mentale &amp; Bien-Être
+              </div>
+
+              <h3 style={{
+                margin: '0 0 0.25rem',
+                fontSize: '1.65rem',
+                fontWeight: 900,
+                color: '#78350f',
+                fontFamily: 'Georgia, serif',
+                letterSpacing: '0.02em',
+              }}>
+                📜 CERTIFICAT DE RÉUSSITE
               </h3>
-              <p style={{ fontSize: '0.98rem', color: '#334155', lineHeight: 1.55, marginBottom: '1.25rem' }}>
-                Félicitations ! Tu as exploré les 6 salles en argile de la Citadelle et maîtrisé{' '}
-                <strong>l’impératif (affirmatif et négatif)</strong> ainsi que{' '}
-                <strong>les structures d’obligation (Il faut que + subjonctif)</strong> avec les 8 verbes essentiels de l’Unité 2 !
+
+              <p style={{ margin: '0 0 0.65rem', fontSize: '0.86rem', color: '#92400e', fontWeight: 700 }}>
+                Ce certificat atteste que l’élève :
               </p>
-              <div style={{ display: 'flex', gap: '0.75rem', justifyContent: 'center' }}>
+
+              {/* Student Name Input / Display */}
+              <div style={{ margin: '0 auto 0.75rem', maxWidth: '420px' }}>
+                <input
+                  type="text"
+                  value={studentName}
+                  onChange={(e) => setStudentName(e.target.value)}
+                  placeholder="✍️ Entrez votre Prénom et Nom ici..."
+                  style={{
+                    width: '100%',
+                    textAlign: 'center',
+                    fontSize: '1.15rem',
+                    fontWeight: 900,
+                    color: '#0f172a',
+                    background: '#ffffff',
+                    border: '2px solid #d97706',
+                    borderRadius: '0.6rem',
+                    padding: '0.45rem 0.85rem',
+                    fontFamily: 'Georgia, serif',
+                    boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.06)',
+                  }}
+                />
+              </div>
+
+              <p style={{ fontSize: '0.9rem', color: '#334155', lineHeight: 1.5, margin: '0 0 0.8rem' }}>
+                a complété avec succès la quête <strong>« The Citadel — Mode Exploration »</strong> jusqu’à la{' '}
+                <strong>Salle 6 (Le Donjon de la Sérénité)</strong> et a démontré sa maîtrise des compétences suivantes :
+              </p>
+
+              {/* Mastered Skills Badges */}
+              <div style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gap: '0.45rem',
+                textAlign: 'left',
+                background: 'rgba(255, 255, 255, 0.78)',
+                border: '1.5px solid #f59e0b',
+                borderRadius: '0.75rem',
+                padding: '0.65rem 0.85rem',
+                marginBottom: '0.85rem',
+                fontSize: '0.8rem',
+                fontWeight: 700,
+                color: '#1e293b',
+              }}>
+                <div>✅ <strong>L’Impératif :</strong> affirmatif, négatif &amp; pronominal</div>
+                <div>✅ <strong>L’Obligation :</strong> <em>Il faut que</em> + subjonctif présent</div>
+                <div>✅ <strong>Les 8 verbes clés :</strong> <em>gérer, s’exprimer, prendre, se confier, faire, dormir, comprendre, demander</em></div>
+                <div>✅ <strong>Lexique Unité 2 :</strong> santé mentale, bien-être &amp; résilience</div>
+              </div>
+
+              {/* Footer Signatures, Date & Golden Wax Seal */}
+              <div style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                borderTop: '1.5px solid rgba(180, 83, 9, 0.25)',
+                paddingTop: '0.65rem',
+                marginBottom: '0.85rem',
+                fontSize: '0.78rem',
+                color: '#78350f',
+                fontWeight: 800,
+              }}>
+                <div style={{ textAlign: 'left' }}>
+                  <div>📅 Date : {new Date().toLocaleDateString('fr-CA', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
+                  <div>🔑 Code : CITADELLE-U2-SALLE6-OK</div>
+                </div>
+
+                <div style={{
+                  background: 'linear-gradient(135deg, #f59e0b, #b45309)',
+                  color: '#ffffff',
+                  padding: '0.35rem 0.85rem',
+                  borderRadius: '999px',
+                  fontWeight: 900,
+                  fontSize: '0.8rem',
+                  boxShadow: '0 4px 10px rgba(180, 83, 9, 0.35)',
+                }}>
+                  🏅 Chevalier du Bien-Être (6/6)
+                </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div style={{ display: 'flex', gap: '0.6rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+                <button
+                  onClick={() => window.print()}
+                  style={{
+                    background: 'linear-gradient(135deg, #059669, #047857)',
+                    color: '#ffffff',
+                    border: 'none',
+                    borderRadius: '0.65rem',
+                    padding: '0.55rem 1.15rem',
+                    fontWeight: 800,
+                    fontSize: '0.85rem',
+                    cursor: 'pointer',
+                  }}
+                >
+                  🖨️ Imprimer / Sauvegarder PDF
+                </button>
                 <button
                   onClick={resetGame}
                   style={{
                     background: 'linear-gradient(135deg, #f59e0b, #d97706)',
                     color: '#ffffff',
                     border: 'none',
-                    borderRadius: '0.75rem',
-                    padding: '0.7rem 1.4rem',
+                    borderRadius: '0.65rem',
+                    padding: '0.55rem 1.15rem',
                     fontWeight: 800,
+                    fontSize: '0.85rem',
                     cursor: 'pointer',
                   }}
                 >
@@ -2028,9 +2172,10 @@ export default function CitadelleBienEtre({ onBack }) {
                       background: '#0f172a',
                       color: '#ffffff',
                       border: 'none',
-                      borderRadius: '0.75rem',
-                      padding: '0.7rem 1.4rem',
+                      borderRadius: '0.65rem',
+                      padding: '0.55rem 1.15rem',
                       fontWeight: 800,
+                      fontSize: '0.85rem',
                       cursor: 'pointer',
                     }}
                   >
