@@ -5,6 +5,7 @@ import AtelierEcritureReprise from '../games/AtelierEcritureReprise';
 import WritingPrompt from '../games/WritingPrompt';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
+import Unit2CrosswordSection from './Unit2CrosswordSection';
 import JeuxSection from './JeuxSection';
 import './AtelierSection.css';
 
@@ -60,7 +61,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         {
           id: 'recits',
           title: 'Atelier d\'Écriture',
-          subtitle: 'Sujets de rédaction sur le bien-être & santé mentale',
+          subtitle: '3 sujets : Impératif, Subjonctif & Bien-être',
           icon: '📝',
           color: '#0891b2',
           badgeBg: 'rgba(8, 145, 178, 0.12)'
@@ -68,7 +69,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         {
           id: 'mots_croises',
           title: 'Mots Croisés',
-          subtitle: 'Grilles interactives de révision',
+          subtitle: '4 grilles : Impératif & Subjonctif',
           icon: '🧩',
           color: '#7c3aed',
           badgeBg: 'rgba(124, 58, 237, 0.12)'
@@ -174,7 +175,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         )}
 
         {activeTab === 'mots_croises' && (
-          isReprise ? <CrosswordSection /> : <HeroCrosswordSection />
+          isReprise ? <CrosswordSection /> : isUnit2 ? <Unit2CrosswordSection /> : <HeroCrosswordSection />
         )}
 
         {activeTab === 'jeux' && (

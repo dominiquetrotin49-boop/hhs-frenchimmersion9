@@ -72,6 +72,36 @@ const UNIT1_PROMPTS = [
   }
 ];
 
+const UNIT2_PROMPTS = [
+  {
+    id: 1,
+    title: "1. Une lettre pour un(e) ami(e) stressé(e)",
+    level: "Niveau Intermédiaire",
+    prompt: "Ton meilleur ami (ou ta meilleure amie) vit beaucoup de pression scolaire et son anxiété augmente. Écris-lui une lettre bienveillante avec des conseils à l'impératif. Utilise au moins 3 conseils affirmatifs (ex. : Prends une pause, Dors huit heures, Confie-toi à un conseiller) et au moins 2 conseils négatifs (ex. : Ne gère pas ton stress tout(e) seul(e), Ne fais pas semblant d'aller bien). Utilise au moins 4 des verbes suivants : gérer, s'exprimer, prendre, se confier, faire, dormir, comprendre, demander.",
+    focus: "L'impératif affirmatif et négatif (tu) • Vocabulaire du bien-être",
+    vocab: ["le stress", "l'anxiété", "la pression scolaire", "le soutien", "le soulagement", "l'équilibre", "la fatigue", "se confier", "gérer"],
+    minWords: 50
+  },
+  {
+    id: 2,
+    title: "2. Mon guide de survie pour la santé mentale",
+    level: "Niveau Intermédiaire",
+    prompt: "Tu rédiges un petit guide pour les élèves de 9e année qui veulent préserver leur santé mentale. Écris au moins 5 recommandations avec les structures d'obligation suivies du subjonctif présent (ex. : Il faut que tu prennes une pause, Il est essentiel que nous fassions de l'exercice, Il est indispensable que les jeunes dorment assez, Il est impératif qu'on comprenne la détresse des autres). Utilise au moins 4 des verbes suivants : gérer, s'exprimer, prendre, se confier, faire, dormir, comprendre, demander. Termine par une phrase d'encouragement à l'impératif.",
+    focus: "Il faut que + subjonctif présent • Structures d'obligation",
+    vocab: ["le bien-être", "la santé mentale", "une stratégie d'adaptation", "la respiration profonde", "le sommeil", "le repos", "l'équilibre", "les ressources", "demander de l'aide"],
+    minWords: 55
+  },
+  {
+    id: 3,
+    title: "3. Une annonce de service public contre la stigmatisation",
+    level: "Niveau Intermédiaire-Avancé",
+    prompt: "Ton école lance une campagne de sensibilisation sur la santé mentale. Rédige le texte d'une annonce de service public (APS) d'environ 8 à 10 phrases. Brise au moins un mythe (ex. : « Demander de l'aide, c'est un signe de faiblesse »), explique pourquoi la stigmatisation et le jugement font du mal, puis donne des conseils. Ton texte doit contenir au moins 3 phrases à l'impératif (affirmatif ou négatif) ET au moins 3 phrases avec « Il faut que… » ou « Il est essentiel / nécessaire / indispensable / impératif que… » + subjonctif. Mentionne au moins 2 ressources de soutien (un thérapeute, un conseiller, un pair, un parent…).",
+    focus: "Impératif + subjonctif • Campagne de sensibilisation",
+    vocab: ["la stigmatisation", "un mythe", "le jugement", "une campagne de sensibilisation", "les ressources", "le soutien", "un thérapeute", "un conseiller", "un pair", "la crédibilité"],
+    minWords: 70
+  }
+];
+
 function getActivePrompts() {
   if (typeof window !== "undefined" && (window.location.pathname.includes("unite-1") || window.location.pathname.includes("unite1"))) {
     return UNIT1_PROMPTS;
@@ -405,7 +435,8 @@ ${studentText}
 export default function WritingPrompt({ onBack, unitId, chapterId }) {
   const path = typeof window !== "undefined" ? window.location.pathname : "";
   const isUnit1 = unitId === "1" || (chapterId && chapterId.includes("unite-1")) || path.includes("unite-1");
-  const promptsList = isUnit1 ? UNIT1_PROMPTS : RENTREE_PROMPTS;
+  const isUnit2 = !isUnit1 && (unitId === "unite-2" || chapterId === "unite-2" || path.includes("unite-2"));
+  const promptsList = isUnit2 ? UNIT2_PROMPTS : isUnit1 ? UNIT1_PROMPTS : RENTREE_PROMPTS;
 
   const [promptIdx, setPromptIdx] = useState(0);
   const [text, setText] = useState("");
@@ -540,11 +571,15 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     }, 0);
   };
 
-  const titleHeader = isUnit1 
+  const titleHeader = isUnit2
+    ? "Atelier d'Écriture : Santé Mentale & Bien-Être 📝"
+    : isUnit1 
     ? "Atelier d'Écriture : Récits et Portraits Héroïques 📝"
     : "Atelier d'Écriture : Le Présent 📝";
 
-  const subtitleHeader = isUnit1
+  const subtitleHeader = isUnit2
+    ? "Rédige des conseils à l'impératif et des recommandations avec « Il faut que » + subjonctif, en réutilisant le vocabulaire du bien-être."
+    : isUnit1
     ? "Rédigez vos récits au passé (imparfait / passé composé), intégrez les verbes pronominaux et structurez votre texte avec des connecteurs logiques."
     : "Entraînez-vous à rédiger au présent et recevez des corrections grammaticales immédiates.";
 
@@ -589,6 +624,20 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
               <p className="text-sm text-slate-350 leading-relaxed font-medium">
                 {activePrompt.prompt}
               </p>
+              {activePrompt.vocab && activePrompt.vocab.length > 0 && (
+                <div style={{ marginTop: '0.9rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(148,163,184,0.3)' }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#fcd34d', marginBottom: '0.4rem' }}>
+                    🎯 À réutiliser : {activePrompt.focus} • min. {activePrompt.minWords} mots
+                  </div>
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
+                    {activePrompt.vocab.map((w) => (
+                      <span key={w} style={{ background: '#e0f2fe', color: '#0c4a6e', border: '1px solid #7dd3fc', borderRadius: '999px', padding: '0.15rem 0.65rem', fontSize: '0.78rem', fontWeight: 700 }}>
+                        {w}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Accent Bar */}

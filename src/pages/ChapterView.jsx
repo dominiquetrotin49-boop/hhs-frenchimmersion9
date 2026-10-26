@@ -207,7 +207,7 @@ function ChapterView() {
       return <AtelierSection chapterId={chapter.id} vocabulary={chapter.vocabulary} />;
     }
     if (activeSection === 'grammaire' || activeSection === 'studio') {
-      return <GrammarSection data={chapter.grammar} />;
+      return <GrammarSection data={chapter.grammar} chapterId={chapter.id} />;
     }
     if (activeSection === 'vocabulaire') {
       return <VocabularySection data={chapter.vocabulary} chapterId={chapter.id} />;

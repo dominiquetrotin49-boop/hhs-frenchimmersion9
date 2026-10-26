@@ -1,0 +1,221 @@
+/* ═══════════════════════════════════════════════════════════
+   UNITÉ 2 — DOSSIER 2 : Impératif & Structures d'obligation
+   Fond blanc opaque, texte contrasté, grandes zones cliquables
+   ═══════════════════════════════════════════════════════════ */
+
+.u2g {
+  --u2-ink: #0f172a;
+  --u2-text: #334155;
+  --u2-muted: #64748b;
+  --u2-line: #cbd5e1;
+  --u2-soft: #f1f5f9;
+  --u2-accent: #0e7490;
+  --u2-accent-dark: #164e63;
+  --u2-accent-soft: #ecfeff;
+  --u2-ok: #047857;
+  --u2-ok-soft: #d1fae5;
+  --u2-bad: #be123c;
+  --u2-bad-soft: #ffe4e6;
+  background: #ffffff;
+  border: 2px solid var(--u2-line);
+  border-radius: 1.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px -10px rgba(15, 23, 42, 0.25);
+  color: var(--u2-text);
+  text-align: left;
+  font-size: 1rem;
+  line-height: 1.55;
+}
+.u2g.theme-indigo {
+  --u2-accent: #4338ca;
+  --u2-accent-dark: #312e81;
+  --u2-accent-soft: #eef2ff;
+}
+.u2g * { box-sizing: border-box; }
+.u2g h2, .u2g h3, .u2g h4, .u2g p { margin: 0; }
+
+/* ── Hero ── */
+.u2g-hero {
+  background: linear-gradient(135deg, var(--u2-accent-dark), var(--u2-accent));
+  color: #fff;
+  border-radius: 1.1rem;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+.u2g-hero .eyebrow {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  border-radius: 999px;
+  padding: 0.2rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+.u2g-hero h2 { font-size: 1.6rem; font-weight: 900; color: #fff; line-height: 1.2; }
+.u2g-hero p { margin-top: 0.5rem; color: #e0f2fe; font-weight: 500; max-width: 46rem; }
+
+/* ── Mini sommaire ── */
+.u2g-toc {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+.u2g-toc a {
+  background: var(--u2-accent-soft);
+  color: var(--u2-accent-dark);
+  border: 1.5px solid var(--u2-accent);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+  font-weight: 800; font-size: 0.85rem;
+  text-decoration: none;
+}
+.u2g-toc a:hover { background: var(--u2-accent); color: #fff; }
+
+/* ── Section blocks ── */
+.u2g-block { margin-bottom: 2rem; scroll-margin-top: 1rem; }
+.u2g-block-title {
+  display: flex; align-items: center; gap: 0.7rem;
+  font-size: 1.2rem; font-weight: 900; color: var(--u2-ink);
+  padding-bottom: 0.6rem; margin-bottom: 1rem;
+  border-bottom: 3px solid var(--u2-accent);
+}
+.u2g-step {
+  width: 2rem; height: 2rem; border-radius: 50%;
+  background: var(--u2-accent); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 0.95rem; flex-shrink: 0;
+}
+.u2g-lead { color: var(--u2-text); margin-bottom: 1rem; font-weight: 500; }
+
+/* ── Rule cards ── */
+.u2g-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+.u2g-rule {
+  background: #f8fafc;
+  border: 1.5px solid var(--u2-line);
+  border-left: 6px solid var(--u2-accent);
+  border-radius: 0.9rem;
+  padding: 1rem 1.1rem;
+}
+.u2g-rule h4 { font-size: 1rem; font-weight: 900; color: var(--u2-ink); margin-bottom: 0.35rem; }
+.u2g-rule p { font-size: 0.92rem; }
+.u2g-ex {
+  margin-top: 0.6rem; padding: 0.55rem 0.75rem;
+  background: #fff; border: 1.5px dashed var(--u2-accent);
+  border-radius: 0.6rem; font-weight: 700; color: var(--u2-ink); font-size: 0.9rem;
+}
+.u2g .ok { color: var(--u2-ok); font-weight: 800; }
+.u2g .bad { color: var(--u2-bad); font-weight: 800; }
+
+/* ── Table récapitulatif ── */
+.u2g-table-wrap { overflow-x: auto; border: 2px solid var(--u2-line); border-radius: 0.9rem; }
+.u2g-table { width: 100%; border-collapse: collapse; background: #fff; min-width: 560px; }
+.u2g-table th {
+  background: var(--u2-accent-dark); color: #fff;
+  text-align: left; padding: 0.7rem 0.9rem; font-size: 0.85rem; font-weight: 800;
+}
+.u2g-table td { padding: 0.65rem 0.9rem; border-top: 1px solid #e2e8f0; font-size: 0.95rem; color: var(--u2-ink); }
+.u2g-table tr:nth-child(even) td { background: #f8fafc; }
+.u2g-table td.verb { font-weight: 900; color: var(--u2-accent-dark); }
+.u2g-table td.neg { color: var(--u2-bad); font-weight: 600; }
+.u2g-table td.aff { color: var(--u2-ok); font-weight: 800; }
+
+/* ── Toggle ── */
+.u2g-toggle { display: inline-flex; background: var(--u2-soft); border: 2px solid var(--u2-line); border-radius: 999px; padding: 0.2rem; margin-bottom: 0.9rem; }
+.u2g-toggle button {
+  border: 0; background: transparent; cursor: pointer;
+  padding: 0.45rem 1.1rem; border-radius: 999px;
+  font-weight: 800; font-size: 0.85rem; color: var(--u2-text);
+}
+.u2g-toggle button.active { background: var(--u2-accent); color: #fff; }
+
+/* ── Verb chips ── */
+.u2g-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.6rem; margin-bottom: 1rem; }
+.u2g-chip {
+  text-align: left; cursor: pointer;
+  background: #fff; border: 2px solid var(--u2-line); border-radius: 0.8rem;
+  padding: 0.65rem 0.85rem; color: var(--u2-ink);
+  transition: border-color .15s, transform .15s;
+}
+.u2g-chip:hover { border-color: var(--u2-accent); transform: translateY(-2px); }
+.u2g-chip .v { display: block; font-weight: 900; font-size: 1rem; }
+.u2g-chip .t { display: block; font-size: 0.75rem; color: var(--u2-muted); font-weight: 600; }
+.u2g-chip.active { background: var(--u2-accent); border-color: var(--u2-accent); color: #fff; }
+.u2g-chip.active .t { color: #e0e7ff; }
+
+/* ── Detail card ── */
+.u2g-detail {
+  background: var(--u2-accent-soft);
+  border: 2px solid var(--u2-accent);
+  border-radius: 1rem; padding: 1.25rem;
+}
+.u2g-detail-head { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.75rem; align-items: flex-start; margin-bottom: 1rem; }
+.u2g-detail-head h3 { font-size: 1.6rem; font-weight: 900; color: var(--u2-accent-dark); }
+.u2g-badge {
+  display: inline-block; background: #fff; border: 1.5px solid var(--u2-accent);
+  color: var(--u2-accent-dark); border-radius: 999px;
+  padding: 0.15rem 0.7rem; font-size: 0.78rem; font-weight: 800; margin-left: 0.5rem; vertical-align: middle;
+}
+.u2g-tip {
+  background: #fef3c7; border: 1.5px solid #f59e0b; color: #78350f;
+  border-radius: 0.7rem; padding: 0.7rem 0.9rem; font-weight: 600; font-size: 0.92rem; margin-bottom: 1rem;
+}
+.u2g-listen {
+  display: inline-flex; align-items: center; gap: 0.4rem; cursor: pointer;
+  background: var(--u2-accent); color: #fff; border: 0; border-radius: 0.7rem;
+  padding: 0.5rem 0.95rem; font-weight: 800; font-size: 0.85rem;
+}
+.u2g-listen:hover { background: var(--u2-accent-dark); }
+
+.u2g-forms { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 0.75rem; margin-bottom: 1rem; }
+.u2g-form { background: #fff; border: 1.5px solid var(--u2-line); border-radius: 0.8rem; padding: 0.8rem 1rem; }
+.u2g-form .who { font-size: 0.75rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; color: var(--u2-muted); margin-bottom: 0.4rem; }
+.u2g-form .row { display: flex; justify-content: space-between; gap: 0.5rem; padding: 0.25rem 0; font-size: 1rem; }
+.u2g-form .row span:first-child { font-size: 0.8rem; color: var(--u2-muted); font-weight: 700; align-self: center; }
+.u2g-form .aff { color: var(--u2-ok); font-weight: 900; }
+.u2g-form .neg { color: var(--u2-bad); font-weight: 900; }
+
+.u2g-conj { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.6rem; margin-bottom: 1rem; }
+.u2g-conj > div { background: #fff; border: 1.5px solid var(--u2-line); border-radius: 0.8rem; padding: 0.7rem; text-align: center; }
+.u2g-conj .pr { font-size: 0.78rem; color: var(--u2-muted); font-weight: 700; }
+.u2g-conj .fm { font-size: 1.2rem; font-weight: 900; color: var(--u2-accent-dark); margin: 0.15rem 0; }
+.u2g-conj .en { font-size: 0.72rem; font-weight: 900; color: #b45309; }
+
+.u2g-examples { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.75rem; }
+.u2g-example { border-radius: 0.8rem; padding: 0.85rem 1rem; font-weight: 600; color: var(--u2-ink); }
+.u2g-example .lbl { display: block; font-size: 0.72rem; font-weight: 900; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.3rem; }
+.u2g-example.pos { background: var(--u2-ok-soft); border: 1.5px solid var(--u2-ok); }
+.u2g-example.pos .lbl { color: var(--u2-ok); }
+.u2g-example.neg { background: var(--u2-bad-soft); border: 1.5px solid var(--u2-bad); }
+.u2g-example.neg .lbl { color: var(--u2-bad); }
+.u2g-example.info { background: #fff; border: 1.5px solid var(--u2-accent); }
+.u2g-example.info .lbl { color: var(--u2-accent); }
+
+/* ── Structures d'obligation ── */
+.u2g-formula {
+  background: var(--u2-ink); color: #fff; border-radius: 0.9rem;
+  padding: 1rem 1.2rem; margin-top: 1rem; font-weight: 700;
+}
+.u2g-formula .k { color: #fcd34d; } .u2g-formula .s { color: #67e8f9; }
+.u2g-formula small { display: block; color: #cbd5e1; font-weight: 600; margin-top: 0.3rem; }
+
+/* ── Quiz ── */
+.u2g-q { background: #f8fafc; border: 1.5px solid var(--u2-line); border-radius: 0.9rem; padding: 1rem; margin-bottom: 0.9rem; }
+.u2g-q > p { font-weight: 800; color: var(--u2-ink); margin-bottom: 0.7rem; }
+.u2g-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.55rem; }
+.u2g-opt {
+  background: #fff; border: 2px solid var(--u2-line); border-radius: 0.7rem;
+  padding: 0.65rem 0.9rem; font-weight: 800; color: var(--u2-ink); cursor: pointer; text-align: left; font-size: 0.95rem;
+}
+.u2g-opt:hover:not(:disabled) { border-color: var(--u2-accent); background: var(--u2-accent-soft); }
+.u2g-opt.right { background: var(--u2-ok); border-color: var(--u2-ok); color: #fff; }
+.u2g-opt.wrong { background: var(--u2-bad); border-color: var(--u2-bad); color: #fff; }
+.u2g-opt:disabled { cursor: default; }
+.u2g-fb { margin-top: 0.7rem; padding: 0.7rem 0.9rem; border-radius: 0.7rem; font-weight: 700; font-size: 0.92rem; }
+.u2g-fb.right { background: var(--u2-ok-soft); color: #064e3b; border: 1.5px solid var(--u2-ok); }
+.u2g-fb.wrong { background: var(--u2-bad-soft); color: #881337; border: 1.5px solid var(--u2-bad); }
+
+@media (max-width: 600px) {
+  .u2g { padding: 1rem; }
+  .u2g-hero h2 { font-size: 1.3rem; }
+}

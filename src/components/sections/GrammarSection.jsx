@@ -4,11 +4,13 @@ import {
   BookOpen, Compass, Clock, Zap, BookOpenCheck, ChevronDown, ChevronUp, 
   CheckCircle2, HelpCircle, Layers, Sparkles, Shield, Flame, 
   FileText, Lightbulb, AlertTriangle, PenTool, Bookmark, Film, ArrowRight, Eye, Award,
-  Search, X, RotateCcw
+  Search, X, RotateCcw, Megaphone
 } from 'lucide-react';
 import './GrammarSection.css';
 import './VocabularySection.css';
 import StationPracticeWidget from './StationPracticeWidget';
+import ImperatifSection from './ImperatifSection';
+import ObligationSubjonctifSection from './ObligationSubjonctifSection';
 import { STATION_PRACTICE_DATA } from '../../data/unit1StationPractice';
 import { REPRISE_STATION_PRACTICE_DATA } from '../../data/unitRepriseStationPractice';
 
@@ -833,9 +835,11 @@ function formatConjugatedVerb(pronounIdx, verbData) {
   };
 }
 
-function GrammarSection() {
-  const { chapterId } = useParams();
+function GrammarSection({ data, chapterId: propChapterId }) {
+  const { chapterId: routeChapterId } = useParams();
+  const chapterId = propChapterId || routeChapterId;
   const isReprise = chapterId === 'unite-reprise';
+  const isUnit2 = chapterId === 'unite-2';
   const currentDossiers = isReprise ? REPRISE_GRAMMAR_DOSSIERS : LE_PASSE_GRAMMAR_DOSSIERS;
 
   // Secondary header tab state (defaulting to 'dossiers' so content is immediately visible)
@@ -943,7 +947,7 @@ function GrammarSection() {
       {/* Secondary Header Tab Bar */}
       <div className="section-navigation grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         
-        {/* Header Tab 1: Dossiers d'Atelier */}
+        {/* Header Tab 1: Dossiers d'Atelier / L'Impératif */}
         <div 
           onClick={() => setActiveHeaderTab(activeHeaderTab === 'dossiers' ? null : 'dossiers')}
           className={`section-card cursor-pointer ${
@@ -952,16 +956,18 @@ function GrammarSection() {
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
           <div className="tab-icon-badge grammar-badge">
-            {isReprise ? <Compass size={28} className="text-white" /> : <BookOpen size={28} className="text-white" />}
+            {isReprise ? <Compass size={28} className="text-white" /> : isUnit2 ? <Megaphone size={28} className="text-white" /> : <BookOpen size={28} className="text-white" />}
           </div>
           <h3>
             {isReprise 
               ? "🧭 L'Atelier des Fondations : Verbes & Prépositions" 
+              : isUnit2
+              ? "📢 L'Impératif (Affirmatif et Négatif)"
               : "📖 L'Atelier du Récit : Passé & Narration"}
           </h3>
         </div>
 
-        {/* Header Tab 2: Guide de Conjugaison */}
+        {/* Header Tab 2: Guide de Conjugaison / Les Structures d'Obligation */}
         <div 
           onClick={() => setActiveHeaderTab(activeHeaderTab === 'conjugaison-irreguliers' ? null : 'conjugaison-irreguliers')}
           className={`section-card cursor-pointer ${
@@ -975,6 +981,8 @@ function GrammarSection() {
           <h3>
             {isReprise 
               ? "⚡ Guide de Conjugaison : Le Présent" 
+              : isUnit2
+              ? "⚡ Les Structures d'Obligation (Il faut que + Subjonctif)"
               : "⚡ L'Arsenal de Conjugaison : Les Essentiels"}
           </h3>
         </div>
@@ -1150,6 +1158,8 @@ function GrammarSection() {
               )}
             </div>
           </div>
+        ) : isUnit2 ? (
+          <ObligationSubjonctifSection />
         ) : (
           /* Arsenal du Scénariste for Unité 1 */
           <div className="arsenal-container fade-in">
@@ -2206,6 +2216,8 @@ function GrammarSection() {
               })}
             </div>
           </div>
+        ) : isUnit2 ? (
+          <ImperatifSection />
         ) : (
           /* Studio de Narration for Unité 1 */
           <div className="studio-narratif-container fade-in">
