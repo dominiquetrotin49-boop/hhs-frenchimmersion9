@@ -4,7 +4,7 @@ import HeroCrossword from '../games/HeroCrossword';
 import { HERO_CROSSWORDS } from '../../data/heroCrosswordsData';
 import './HeroCrosswordSection.css';
 
-export default function HeroCrosswordSection() {
+export default function HeroCrosswordSection({ chapterId }) {
   const [activeGameId, setActiveGameId] = useState(null);
 
   if (activeGameId) {
@@ -22,22 +22,29 @@ export default function HeroCrosswordSection() {
     }
   }
 
+  const unitLabel =
+    chapterId === 'unite-3'
+      ? 'Unité 3'
+      : chapterId === 'unite-4'
+      ? 'Unité 4'
+      : 'Unité 1';
+
   return (
     <div className="hero-hub">
-      {/* ── Header ── */}
+      {/* ── Header (Aligned with Reprise) ── */}
       <div className="hero-hub-header">
         <h2>
-          <span>🛡️</span> Mots Croisés : L'Épreuve des Héros (5 Grilles)
+          <span>🧩</span> Mots Croisés — {unitLabel} ({HERO_CROSSWORDS.length} grilles)
         </h2>
         <p>
-          Affrontez les énigmes de conjugaison d'Unité 1 : Imparfait et Passé Composé en contexte héroïque et anti-héroïque.
+          Choisis une grille thématique pour réviser l'imparfait, le passé composé et le vocabulaire en contexte.
         </p>
         <div className="hero-hub-badge-pill">
           <span>⚡</span> Règle spéciale : Écrivez les verbes composés sans espace (ex : <code>ASAUVÉ</code>, <code>ESTNÉ</code>)
         </div>
       </div>
 
-      {/* ── 5 Comic Strip Cards ── */}
+      {/* ── Puzzle Cards Grid (Aligned with Reprise) ── */}
       <div className="hero-cards-grid">
         {HERO_CROSSWORDS.map((item, idx) => (
           <div
@@ -57,7 +64,7 @@ export default function HeroCrosswordSection() {
                 className="hero-card-badge-icon"
                 style={{ background: item.bg, color: item.color }}
               >
-                <span style={{ fontSize: '1.75rem', lineHeight: 1 }}>{item.emoji}</span>
+                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{item.emoji}</span>
               </div>
 
               <div className="hero-card-content">
@@ -75,7 +82,7 @@ export default function HeroCrosswordSection() {
             {/* Footer */}
             <div className="hero-card-footer">
               <span className="hero-card-words-count">
-                {item.puzzle.puzzleData.length} mots • Grille {idx + 1}/5
+                {item.puzzle.puzzleData.length} mots • Grille {idx + 1}/{HERO_CROSSWORDS.length}
               </span>
               <button
                 className="hero-card-play-btn"
@@ -85,7 +92,7 @@ export default function HeroCrosswordSection() {
                   setActiveGameId(item.id);
                 }}
               >
-                Relever le Défi →
+                Jouer →
               </button>
             </div>
           </div>

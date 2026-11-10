@@ -147,31 +147,31 @@ function VocabularySection({ data, chapterId }) {
         {/* Tab 1: Prononciation & Audio */}
         <div 
           onClick={() => setActiveHeaderTab('prononciation')}
-          className={`section-card cursor-pointer ${activeHeaderTab === 'prononciation' ? 'active' : ''}`}
+          className={`section-card cursor-pointer hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeHeaderTab === 'prononciation' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
-          <div className="tab-icon-badge vocab-badge"><Volume2 size={28} /></div>
-          <h3>Prononciation &amp; Audio</h3>
+          <div className="tab-icon-badge vocab-badge bg-indigo-50 text-indigo-600 p-3 rounded-2xl"><Volume2 size={26} /></div>
+          <h3 className="font-bold tracking-tight text-slate-900">Prononciation &amp; Audio</h3>
         </div>
 
         {/* Tab 2: Dictée & Orthographe */}
         <div 
           onClick={() => setActiveHeaderTab('orthographe')}
-          className={`section-card cursor-pointer ${activeHeaderTab === 'orthographe' ? 'active' : ''}`}
+          className={`section-card cursor-pointer hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeHeaderTab === 'orthographe' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
-          <div className="tab-icon-badge practice-badge"><SpellCheck size={28} /></div>
-          <h3>Dictée &amp; Orthographe</h3>
+          <div className="tab-icon-badge practice-badge bg-indigo-50 text-indigo-600 p-3 rounded-2xl"><SpellCheck size={26} /></div>
+          <h3 className="font-bold tracking-tight text-slate-900">Dictée &amp; Orthographe</h3>
         </div>
 
         {/* Tab 3: Cartes mémoire & Quiz */}
         <div 
           onClick={() => setActiveHeaderTab('flashcard_practice')}
-          className={`section-card cursor-pointer ${activeHeaderTab === 'flashcard_practice' ? 'active' : ''}`}
+          className={`section-card cursor-pointer hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeHeaderTab === 'flashcard_practice' ? 'active' : ''}`}
           style={{ paddingTop: '1.12rem', paddingBottom: '1.12rem' }}
         >
-          <div className="tab-icon-badge game-badge" style={{ background: 'rgba(6, 182, 212, 0.15)', color: '#0891b2' }}><Sparkles size={28} /></div>
-          <h3>Cartes mémoire &amp; Quiz</h3>
+          <div className="tab-icon-badge game-badge bg-indigo-50 text-indigo-600 p-3 rounded-2xl"><Sparkles size={26} /></div>
+          <h3 className="font-bold tracking-tight text-slate-900">Cartes mémoire &amp; Quiz</h3>
         </div>
 
       </div>
@@ -181,9 +181,9 @@ function VocabularySection({ data, chapterId }) {
       {activeHeaderTab === 'prononciation' && (
         <div className="section-container glass-container fade-in">
           
-          <div className="flex items-center justify-between mb-4 border-b border-cyan-100 pb-3">
-            <h3 className="font-black text-slate-900 text-base flex items-center gap-2">
-              <Volume2 size={20} className="text-cyan-600" />
+          <div className="flex items-center justify-between mb-6 border-b border-slate-200 pb-4 flex-wrap gap-2">
+            <h3 className="font-bold tracking-tight text-slate-900 text-lg flex items-center gap-2.5">
+              <Volume2 size={20} className="text-indigo-600" />
               Activité de Prononciation du Vocabulaire ({
                 chapterId === 'unite-reprise' 
                   ? 'Reprise' 
@@ -196,8 +196,8 @@ function VocabularySection({ data, chapterId }) {
                   : 'Unité 1'
               })
             </h3>
-            <span className="text-xs bg-cyan-100 text-cyan-950 font-bold px-3 py-1 rounded-full border border-cyan-300">
-              Voix Authentiques & Synthèse Vocale
+            <span className="text-xs bg-indigo-50 text-indigo-700 font-bold px-3.5 py-1.5 rounded-full border border-indigo-200">
+              Voix Authentiques &amp; Synthèse Vocale
             </span>
           </div>
 
@@ -206,14 +206,14 @@ function VocabularySection({ data, chapterId }) {
               <div key={index} className="vocab-card">
                 <div>
                   <div className="vocab-term">{item.term}</div>
-                  <div className="vocab-def">{item.definition}</div>
+                  <div className="vocab-def leading-relaxed">{item.definition}</div>
                   {item.english && (
-                    <div className="english-sub-badge text-cyan-900 bg-white/90 py-1.5 px-3 rounded-full inline-block mt-2.5 text-xs font-bold border border-cyan-200 shadow-sm">
-                      Anglais: {item.english}
+                    <div className="english-sub-badge text-indigo-700 bg-indigo-50 py-1 px-3 rounded-full inline-block mt-3 text-xs font-semibold border border-indigo-200">
+                      Anglais : {item.english}
                     </div>
                   )}
                 </div>
-                <div style={{ marginTop: '1rem' }}>
+                <div style={{ marginTop: '1.15rem' }}>
                   <button 
                     type="button"
                     onClick={() => speakFrench(item.term, { audioUrl: item.audioUrl })} 
@@ -229,12 +229,12 @@ function VocabularySection({ data, chapterId }) {
 
           {/* New Section: Questions de Clarification */}
           <div className="clarification-section mt-8 pt-8 border-t border-slate-200">
-            <div className="flex items-center justify-between mb-4 border-b border-cyan-100 pb-3">
-              <h4 className="font-black text-slate-900 text-base flex items-center gap-2">
-                <Sparkles className="text-cyan-600" size={18} />
-                🙋‍♀️ Questions de Clarification & Outils de Communication
+            <div className="flex items-center justify-between mb-4 border-b border-slate-200 pb-3 flex-wrap gap-2">
+              <h4 className="font-bold tracking-tight text-slate-900 text-base flex items-center gap-2">
+                <Sparkles className="text-indigo-600" size={18} />
+                🙋‍♀️ Questions de Clarification &amp; Outils de Communication
               </h4>
-              <span className="text-xs bg-amber-100 text-amber-950 font-bold px-3 py-1 rounded-full border border-amber-300">
+              <span className="text-xs bg-amber-50 text-amber-800 font-bold px-3 py-1 rounded-full border border-amber-200">
                 Niveau : Intermédiaire-Mid
               </span>
             </div>
@@ -248,9 +248,9 @@ function VocabularySection({ data, chapterId }) {
                 <div key={index} className="vocab-card">
                   <div>
                     <div className="vocab-term font-bold text-slate-900 text-sm leading-relaxed">{item.term}</div>
-                    <div className="vocab-def text-xs text-slate-500 mt-1">{item.definition}</div>
-                    <div className="english-sub-badge text-cyan-900 bg-white/90 py-1 px-2.5 rounded-full inline-block mt-2.5 text-[11px] font-bold border border-cyan-100 shadow-2xs">
-                      Anglais: {item.english}
+                    <div className="vocab-def text-xs text-slate-500 mt-1 leading-relaxed">{item.definition}</div>
+                    <div className="english-sub-badge text-indigo-700 bg-indigo-50 py-1 px-2.5 rounded-full inline-block mt-2.5 text-[11px] font-semibold border border-indigo-200">
+                      Anglais : {item.english}
                     </div>
                   </div>
                   <div style={{ marginTop: '1rem' }}>
@@ -276,21 +276,21 @@ function VocabularySection({ data, chapterId }) {
         <div className="orthographe-disney-container fade-in">
           
           {/* Activity Header Banner */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-amber-400/30">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-200">
             <div>
-              <h3 className="font-black text-xl text-white flex items-center gap-2">
-                <Sparkles className="text-amber-400" size={22} />
-                L'Atelier d'Orthographe & Dictée Enchantée
+              <h3 className="font-bold tracking-tight text-xl text-slate-900 flex items-center gap-2">
+                <Sparkles className="text-indigo-600" size={22} />
+                L'Atelier d'Orthographe &amp; Dictée Interactive
               </h3>
-              <p className="text-xs text-amber-200/80 font-medium mt-0.5">
+              <p className="text-xs text-slate-600 font-medium mt-0.5 leading-relaxed">
                 Écoutez l'audio authentique de chaque mot et rédigez son orthographe exacte en français.
               </p>
             </div>
 
             {/* Gamified Mastery Badge */}
-            <div className="flex items-center gap-2 bg-amber-400/20 px-3.5 py-1.5 rounded-full border border-amber-400/50 flex-shrink-0">
-              <Award size={16} className="text-amber-400" />
-              <span className="text-xs font-black text-amber-200">
+            <div className="flex items-center gap-2 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200 flex-shrink-0">
+              <Award size={16} className="text-emerald-600" />
+              <span className="text-xs font-bold text-emerald-800">
                 Mots maîtrisés : {correctCount} / {data.length}
               </span>
             </div>
@@ -306,7 +306,7 @@ function VocabularySection({ data, chapterId }) {
                   <div>
                     {/* Top Row: Word Number & Audio Trigger */}
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-md border border-amber-400/30">
+                      <span className="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-md border border-indigo-200">
                         Mot {index + 1}
                       </span>
 
@@ -314,35 +314,35 @@ function VocabularySection({ data, chapterId }) {
                       <button
                         type="button"
                         onClick={() => speakFrench(item.term, { audioUrl: item.audioUrl })}
-                        className="text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-200 px-3 py-1.5 rounded-lg border border-cyan-400/40 flex items-center gap-1.5 transition-all shadow-xs"
+                        className="audio-btn"
                       >
-                        <Volume2 size={16} className="text-cyan-400" /> 🔊 Écouter la dictée
+                        <Volume2 size={15} /> Écouter la dictée
                       </button>
                     </div>
 
                     {/* Definition & English Hint */}
-                    <p className="text-xs font-medium text-slate-200 leading-relaxed mb-1">
-                      <strong className="text-amber-200">Définition :</strong> {item.definition}
+                    <p className="text-xs font-medium text-slate-700 leading-relaxed mb-1.5">
+                      <strong className="text-slate-900 font-bold">Définition :</strong> {item.definition}
                     </p>
                     {item.english && (
-                      <p className="text-[11px] font-bold text-cyan-300/80 mb-2">
+                      <p className="text-[11px] font-semibold text-indigo-600 mb-2">
                         Indice Anglais : {item.english}
                       </p>
                     )}
                   </div>
 
                   {/* Input Field & Embedded French Accent Keyboard Right Above Input */}
-                  <div className="mt-2 pt-2 border-t border-slate-700/60">
+                  <div className="mt-2 pt-3 border-t border-slate-200">
                     
                     {/* ACCENTS BAR ACCESSIBLE FOR EVERY WORD */}
-                    <div className="flex items-center gap-1 flex-wrap mb-2 bg-slate-900/80 p-1.5 rounded-xl border border-amber-400/30">
-                      <span className="text-[10px] font-black text-amber-300 mr-1 uppercase tracking-wider">Accents :</span>
+                    <div className="flex items-center gap-1 flex-wrap mb-2.5 bg-slate-50 p-1.5 rounded-xl border border-slate-200">
+                      <span className="text-[10px] font-bold text-slate-500 mr-1 uppercase tracking-wider">Accents :</span>
                       {frenchAccents.map((acc, aIdx) => (
                         <button
                           key={aIdx}
                           type="button"
                           onClick={() => handleInsertAccentWord(index, acc)}
-                          className="accent-btn"
+                          className="accent-btn bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 active:scale-95 transition-transform"
                           title={`Insérer ${acc}`}
                         >
                           {acc}
@@ -366,24 +366,24 @@ function VocabularySection({ data, chapterId }) {
                       }`}
                     />
 
-                    {/* Feedback Banners */}
+                    {/* Seamless Animated Feedback Banners */}
                     {status === 'correct' && (
-                      <div className="mt-2.5 text-xs font-black text-emerald-400 flex items-center gap-1.5 bg-emerald-950/60 p-2 rounded-lg border border-emerald-500/40">
-                        <CheckCircle2 size={16} className="text-emerald-400 flex-shrink-0" />
+                      <div className="mt-2.5 text-xs font-bold text-emerald-800 flex items-center gap-1.5 bg-emerald-50 p-2.5 rounded-xl border border-emerald-200 fade-in">
+                        <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
                         <span>Parfait ! Orthographe impeccable : "{item.term}"</span>
                       </div>
                     )}
 
                     {status === 'accent-error' && (
-                      <div className="mt-2.5 text-xs font-bold text-amber-300 flex items-center gap-1.5 bg-amber-950/60 p-2 rounded-lg border border-amber-400/40">
-                        <AlertTriangle size={16} className="text-amber-400 flex-shrink-0" />
-                        <span>Attention aux accents ! Terme exact : <strong className="text-amber-100 underline">{item.term}</strong></span>
+                      <div className="mt-2.5 text-xs font-bold text-amber-800 flex items-center gap-1.5 bg-amber-50 p-2.5 rounded-xl border border-amber-200 fade-in">
+                        <AlertTriangle size={16} className="text-amber-600 flex-shrink-0" />
+                        <span>Attention aux accents ! Terme exact : <strong className="text-amber-950 underline">{item.term}</strong></span>
                       </div>
                     )}
 
                     {status === 'spelling-error' && (
-                      <div className="mt-2.5 text-xs font-semibold text-rose-300 flex items-center gap-1.5 bg-rose-950/60 p-2 rounded-lg border border-rose-500/40">
-                        <XCircle size={16} className="text-rose-400 flex-shrink-0" />
+                      <div className="mt-2.5 text-xs font-semibold text-rose-800 flex items-center gap-1.5 bg-rose-50 p-2.5 rounded-xl border border-rose-200 fade-in">
+                        <XCircle size={16} className="text-rose-600 flex-shrink-0" />
                         <span>Orthographe incorrecte. Réécoutez l'audio et vérifiez les lettres.</span>
                       </div>
                     )}

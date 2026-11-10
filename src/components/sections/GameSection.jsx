@@ -16,23 +16,25 @@ const STYLE_BLOCK = `
 }
 
 .back-btn {
-  background: transparent;
-  border: 1px solid #0891b2; /* cyan-600 */
-  color: #0891b2;
-  padding: 0.5rem 1.25rem;
-  border-radius: 0.5rem;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #4f46e5;
+  padding: 0.55rem 1.25rem;
+  border-radius: 0.75rem;
   align-self: flex-start;
   font-weight: 700;
   font-size: 0.875rem;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
 }
 
 .back-btn:hover {
-  background: rgba(8, 145, 178, 0.1);
+  background: #eef2ff;
+  border-color: #a5b4fc;
   transform: translateX(-2px);
 }
 
@@ -45,114 +47,121 @@ const STYLE_BLOCK = `
 }
 
 .game-card {
-  padding: 2.5rem 2rem;
+  padding: 2.25rem 1.85rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
-  gap: 1.25rem;
+  gap: 1.15rem;
   cursor: pointer;
-  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
-  background: rgba(255, 255, 255, 0.75);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(8, 145, 178, 0.15);
-  border-radius: 1.25rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: all 0.22s cubic-bezier(0.4, 0, 0.2, 1);
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px -2px rgba(15, 23, 42, 0.04);
 }
 
 .game-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 30px rgba(8, 145, 178, 0.15);
-  border-color: #0891b2; /* cyan-600 */
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px -4px rgba(79, 70, 229, 0.14);
+  border-color: #a5b4fc;
 }
 
 .game-icon-container {
-  width: 72px;
-  height: 72px;
-  border-radius: 50%;
+  width: 68px;
+  height: 68px;
+  border-radius: 1.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 0.25rem;
-  transition: transform 0.3s;
+  transition: transform 0.25s ease;
 }
 
 .game-card:hover .game-icon-container {
-  transform: scale(1.1) rotate(5deg);
+  transform: scale(1.06);
 }
 
 .game-card h4 {
-  font-size: 1.35rem;
+  font-size: 1.3rem;
   font-weight: 800;
-  color: #0f172a; /* slate-900 */
+  letter-spacing: -0.02em;
+  color: #0f172a;
   margin: 0;
 }
 
 .game-card p {
-  font-size: 0.95rem;
-  color: #475569; /* slate-600 */
+  font-size: 0.92rem;
+  color: #475569;
   line-height: 1.6;
   margin: 0;
   flex-grow: 1;
 }
 
 .play-btn {
-  margin-top: 1rem;
-  padding: 0.8rem 1.5rem;
-  border-radius: 0.6rem;
+  margin-top: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
   color: white;
   font-weight: 700;
   font-size: 0.9rem;
   border: none;
   width: 100%;
-  transition: background-color 0.2s, transform 0.1s;
+  background: #4f46e5;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+}
+
+.play-btn:hover {
+  background: #4338ca;
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
 }
 
 .play-btn:active {
-  transform: scale(0.97);
+  transform: scale(0.98);
 }
 
 .disney-option-btn {
   width: 100%;
-  background: rgba(15, 23, 42, 0.8) !important;
-  color: #ffffff !important;
-  border: 2px solid rgba(251, 191, 36, 0.4) !important;
-  border-radius: 0.75rem !important;
-  padding: 0.85rem 1.25rem !important;
+  background: #f8fafc !important;
+  color: #0f172a !important;
+  border: 1.5px solid #e2e8f0 !important;
+  border-radius: 0.85rem !important;
+  padding: 0.95rem 1.25rem !important;
   font-size: 0.925rem !important;
   font-weight: 600 !important;
   line-height: 1.5;
   text-align: left;
   cursor: pointer;
-  transition: all 0.2s ease !important;
+  transition: all 0.18s cubic-bezier(0.4, 0, 0.2, 1) !important;
 }
 
 .disney-option-btn:hover:not(:disabled) {
-  border-color: #fbbf24 !important;
-  background: rgba(15, 23, 42, 0.9) !important;
+  border-color: #818cf8 !important;
+  background: #eef2ff !important;
+  color: #312e81 !important;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(251, 191, 36, 0.15);
+  box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
 }
 
 .disney-option-btn:disabled {
   cursor: not-allowed;
-  opacity: 0.8;
+  opacity: 0.88;
 }
 
 .disney-option-btn.correct {
   border-color: #10b981 !important;
-  background: rgba(16, 185, 129, 0.25) !important;
-  color: #a7f3d0 !important;
-  box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+  background: #ecfdf5 !important;
+  color: #065f46 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
 }
 
 .disney-option-btn.wrong {
   border-color: #f43f5e !important;
-  background: rgba(244, 63, 94, 0.25) !important;
-  color: #fecdd3 !important;
-  box-shadow: 0 0 10px rgba(244, 63, 94, 0.2);
+  background: #fff1f2 !important;
+  color: #9f1239 !important;
+  box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.15);
 }
 `;
 
@@ -290,7 +299,7 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
               <span className="section-header-icon-badge game-badge">
                 <Gamepad2 size={24} />
               </span>
-              <span className="font-extrabold text-lg text-slate-900">Pratique Ludique</span>
+              <span className="font-bold tracking-tight text-lg text-slate-900">Pratique Ludique</span>
             </span>
           </div>
 
@@ -348,26 +357,26 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
         </button>
       )}
 
-      {/* MODE SELECTION MENU (Redesign matching Grade 11 style) */}
+      {/* MODE SELECTION MENU */}
       {mode === 'menu' && chapterId !== 'unite-reprise' && (
         <div className="practice-menu-container animate-in">
           <div className="game-cards-container">
             <div className="game-card" onClick={() => setMode('flashcards')}>
-              <div className="game-icon-container" style={{ background: 'rgba(6, 182, 212, 0.1)', color: '#06b6d4' }}>
+              <div className="game-icon-container bg-indigo-50 text-indigo-600">
                 <Sparkles size={32} />
               </div>
               <h4>Cartes Mémoires</h4>
               <p>Révisez le vocabulaire de l'unité avec des cartes mémoires interactives en trois dimensions.</p>
-              <button className="play-btn bg-cyan-600 hover:bg-cyan-700">Lancer les Cartes Mémoires</button>
+              <button className="play-btn">Lancer les Cartes Mémoires</button>
             </div>
 
             <div className="game-card" onClick={() => setMode('quiz')}>
-              <div className="game-icon-container" style={{ background: 'rgba(99, 102, 241, 0.1)', color: '#6366f1' }}>
+              <div className="game-icon-container bg-indigo-50 text-indigo-600">
                 <Award size={32} />
               </div>
               <h4>Quiz Défi : Vocabulaire</h4>
               <p>Testez vos connaissances et tentez d'obtenir un score parfait au questionnaire à choix multiples.</p>
-              <button className="play-btn bg-indigo-600 hover:bg-indigo-700">Lancer le Quiz Défi</button>
+              <button className="play-btn">Lancer le Quiz Défi</button>
             </div>
           </div>
         </div>
@@ -442,21 +451,22 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
                 {/* BACK FACE (Shown when flipped) */}
                 <div className={`flashcard-back ${!isFlipped ? 'hidden-face' : ''}`}>
                   <div className="flex justify-between w-full items-center">
-                    <span className="badge-aqua text-xs text-white">Traduction & Définition</span>
+                    <span className="badge-aqua text-xs" style={{ background: 'rgba(255,255,255,0.2)', color: '#fff', borderColor: 'rgba(255,255,255,0.35)' }}>Traduction &amp; Définition</span>
                     <button 
                       onClick={(e) => { 
                         e.stopPropagation(); 
                         speakFrench(currentWord.term, { audioUrl: currentWord.audioUrl }); 
                       }} 
-                      className="audio-btn bg-white/20 text-white border-white/40 hover:bg-white hover:text-cyan-800"
+                      className="audio-btn"
+                      style={{ background: 'rgba(255,255,255,0.2)', color: '#ffffff', borderColor: 'rgba(255,255,255,0.35)' }}
                     >
                       <Volume2 size={16} /> Réécouter
                     </button>
                   </div>
 
                   <div className="my-auto text-center px-4 flex flex-col gap-3">
-                    <div className="bg-white text-slate-900 font-extrabold text-xl py-2.5 px-6 rounded-2xl shadow-md border border-cyan-200 inline-block mx-auto">
-                      Anglais: <span className="text-cyan-700 font-black">{currentWord.english || currentWord.term}</span>
+                    <div className="bg-white text-slate-900 font-extrabold text-xl py-2.5 px-6 rounded-2xl shadow-md border border-indigo-200 inline-block mx-auto">
+                      Anglais : <span className="text-indigo-700 font-black">{currentWord.english || currentWord.term}</span>
                     </div>
 
                     <p className="text-white text-base font-semibold leading-relaxed max-w-md mx-auto mt-1">
@@ -464,7 +474,7 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
                     </p>
                   </div>
 
-                  <div className="hint text-cyan-100 flex items-center gap-2">
+                  <div className="hint flex items-center gap-2">
                     <RotateCw size={16} />
                     <span>Cliquez pour revenir au mot</span>
                   </div>
@@ -480,11 +490,11 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
               <ArrowLeft size={18} /> Précédent
             </button>
 
-            <button onClick={markForReview} className="btn-secondary border-amber-400 text-amber-800 hover:bg-amber-50">
+            <button onClick={markForReview} className="btn-secondary border-amber-300 text-amber-800 bg-amber-50">
               🤔 À revoir
             </button>
 
-            <button onClick={markAsKnown} className="btn-primary bg-emerald-600 hover:bg-emerald-700 border-none">
+            <button onClick={markAsKnown} className="btn-primary bg-emerald-600 border-none">
               ✅ Maîtrisé !
             </button>
 
@@ -495,26 +505,26 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
         </div>
       )}
 
-      {/* MODE 2: QUIZ MATCHING (Redesigned in the style of L'Atelier d'Orthographe & Dictée Enchantée) */}
+      {/* MODE 2: QUIZ MATCHING */}
       {mode === 'quiz' && (
-        <div className="orthographe-disney-container max-w-2xl mx-auto py-6 shadow-2xl animate-in">
+        <div className="orthographe-disney-container max-w-2xl mx-auto py-6 shadow-md animate-in">
           
           {/* Activity Header Banner */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-amber-400/30">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-slate-200">
             <div>
-              <h3 className="font-black text-xl text-white flex items-center gap-2">
-                <HelpCircle className="text-amber-400 animate-pulse" size={22} />
+              <h3 className="font-bold tracking-tight text-xl text-slate-900 flex items-center gap-2">
+                <HelpCircle className="text-indigo-600" size={22} />
                 Quiz Défi : Vocabulaire
               </h3>
-              <p className="text-xs text-amber-200/80 font-medium mt-0.5">
+              <p className="text-xs text-slate-600 font-medium mt-0.5">
                 Sélectionnez la définition correcte pour le terme affiché ci-dessous.
               </p>
             </div>
 
             {/* Gamified Mastery Badge */}
-            <div className="flex items-center gap-2 bg-amber-400/20 px-3.5 py-1.5 rounded-full border border-amber-400/50 flex-shrink-0">
-              <Award size={16} className="text-amber-400" />
-              <span className="text-xs font-black text-amber-200">
+            <div className="flex items-center gap-2 bg-emerald-50 px-3.5 py-1.5 rounded-full border border-emerald-200 flex-shrink-0">
+              <Award size={16} className="text-emerald-600" />
+              <span className="text-xs font-bold text-emerald-800">
                 Score : {score} / {currentList.length}
               </span>
             </div>
@@ -523,16 +533,16 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
           {quizIndex < currentList.length ? (
             <div className="ortho-card-disney flex flex-col gap-5 text-center">
               <div>
-                <span className="text-xs font-black uppercase tracking-wider text-amber-300 bg-amber-400/20 px-2.5 py-0.5 rounded-md border border-amber-400/30 inline-block mb-3">
+                <span className="text-xs font-bold uppercase tracking-wider text-indigo-700 bg-indigo-50 px-2.5 py-0.5 rounded-md border border-indigo-200 inline-block mb-3">
                   Question {quizIndex + 1} sur {currentList.length}
                 </span>
                 
-                <h2 className="text-3xl font-black text-white mt-1.5 mb-1 font-serif">
+                <h2 className="text-2xl font-bold tracking-tight text-slate-900 mt-1 mb-1">
                   {currentList[quizIndex]?.term}
                 </h2>
                 
                 {currentList[quizIndex]?.english && (
-                  <div className="text-xs font-bold text-cyan-300/85 mb-3">
+                  <div className="text-xs font-semibold text-indigo-600 mb-3">
                     Indice Anglais : {currentList[quizIndex]?.english}
                   </div>
                 )}
@@ -541,9 +551,9 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
                 <button
                   type="button"
                   onClick={() => speakFrench(currentList[quizIndex]?.term, { audioUrl: currentList[quizIndex]?.audioUrl })}
-                  className="text-xs font-bold bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-200 px-4 py-2 rounded-lg border border-cyan-400/40 flex items-center gap-1.5 transition-all shadow-xs mx-auto mb-2 cursor-pointer"
+                  className="audio-btn mx-auto mb-2"
                 >
-                  <Volume2 size={16} className="text-cyan-400" /> 🔊 Écouter le mot
+                  <Volume2 size={16} /> 🔊 Écouter le mot
                 </button>
               </div>
 
@@ -572,16 +582,16 @@ function GameSection({ chapterId, vocabulary, initialMode }) {
             </div>
           ) : (
             <div className="ortho-card-disney p-8 text-center flex flex-col items-center gap-4">
-              <h3 className="text-3xl font-black text-white flex items-center gap-2">
-                <Sparkles className="text-amber-400 animate-bounce" size={32} />
+              <h3 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
+                <Sparkles className="text-indigo-600" size={28} />
                 Quiz Terminé !
               </h3>
-              <p className="text-lg font-bold text-amber-200">
-                Votre score final : <span className="text-white font-black text-2xl underline">{score} / {currentList.length}</span>
+              <p className="text-base font-semibold text-slate-700">
+                Votre score final : <span className="text-indigo-600 font-black text-2xl underline">{score} / {currentList.length}</span>
               </p>
               <button 
                 onClick={() => { setQuizIndex(0); setScore(0); }} 
-                className="play-btn bg-cyan-600 hover:bg-cyan-700 mt-4 max-w-xs mx-auto"
+                className="play-btn mt-4 max-w-xs mx-auto"
               >
                 Recommencer le Quiz 🔄
               </button>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
-import { CheckCircle2, RefreshCw, ArrowLeft, Shield, Sparkles } from 'lucide-react';
+import { CheckCircle2, RefreshCw, ArrowLeft } from 'lucide-react';
 import './HeroCrossword.css';
 
 const ACCENTS = ['É', 'È', 'Ê', 'Ë', 'À', 'Â', 'Ù', 'Û', 'Ç', 'Ô', 'Î', 'Ï', 'Œ'];
@@ -196,19 +196,19 @@ export default function HeroCrossword({
     return set;
   }, [inputs, puzzleData]);
 
-  const cellSize = Math.max(20, Math.min(34, Math.floor(520 / Math.max(numCols, numRows * 0.9))));
-  const fontSize = Math.max(12, Math.floor(cellSize * 0.58));
+  const cellSize = Math.max(20, Math.min(34, Math.floor(500 / Math.max(numCols, numRows * 0.88))));
+  const fontSize = Math.max(11, Math.floor(cellSize * 0.55));
   const numFontSize = Math.max(7, Math.floor(cellSize * 0.32));
 
   return (
     <div className="hero-cw-wrapper">
-      {/* ── Top Bar with Back Button & Grille Quick-Tabs ── */}
+      {/* ── Top Bar with Back Button, Grille Quick-Tabs & Victory Badge ── */}
       <div className="hero-cw-topbar">
         <button onClick={onBack} className="hero-back-btn">
-          <ArrowLeft size={16} /> Retour au QG
+          <ArrowLeft size={16} /> Retour au menu
         </button>
 
-        {/* 5 Grille Quick-Switch Tabs */}
+        {/* Grille Quick-Switch Tabs */}
         {allPuzzles.length > 0 && onSelectPuzzle && (
           <div className="hero-tabs-bar">
             {allPuzzles.map((p, idx) => (
@@ -226,29 +226,24 @@ export default function HeroCrossword({
 
         {isWon && (
           <div className="hero-cw-victory">
-            <Sparkles size={20} />
-            <span>💥 MISSION ACCOMPLIE ! RANG HÉROÏQUE DÉBLOQUÉ ! 🛡️</span>
+            <CheckCircle2 size={20} />
+            <span>Bravo ! Grille complétée ! ✨</span>
           </div>
         )}
       </div>
 
-      {/* ── Comic Dossier Header ── */}
+      {/* ── Entry Header (Aligned with Reprise) ── */}
       <div className="hero-cw-header">
-        <h2>
-          <Shield size={22} color="#eab308" />
-          {title}
-        </h2>
+        <h2>{title}</h2>
         <p>{description}</p>
         <div className="hero-cw-rule-badge">
-          ⚡ <strong>Règle BD :</strong> Écrivez les formes composées en un seul mot sans espace (ex : <code>ASAUVÉ</code>, <code>ESTNÉ</code>, <code>SONTRESTÉS</code>).
+          ⚡ <strong>Règle spéciale :</strong> Écrivez les formes composées en un seul mot sans espace ni trait d'union (ex : <code>ASAUVÉ</code>, <code>EXPRIMETOI</code>).
         </div>
       </div>
 
-      {/* ── Comic Accent Toolbar ── */}
+      {/* ── Accent Character Toolbar (Aligned with Reprise) ── */}
       <div className="hero-cw-accent-bar">
-        <span className="hero-accent-label">
-          <span>⚡</span> Accents :
-        </span>
+        <span className="hero-accent-label">Accents :</span>
         {ACCENTS.map((char) => (
           <button
             key={char}
@@ -262,13 +257,13 @@ export default function HeroCrossword({
         ))}
       </div>
 
-      {/* ── Comic Board & Clues Layout ── */}
+      {/* ── Board & Clues Layout (Aligned with Reprise) ── */}
       <div className="hero-cw-layout">
         {/* Crossword Grid Panel */}
         <div className="hero-cw-grid-panel">
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f8fafc', padding: '4px', borderRadius: '8px' }}>
             {gridMeta.map((row, r) => (
-              <div key={r} style={{ display: 'flex' }}>
+              <div key={r} style={{ display: 'flex', gap: '1px' }}>
                 {row.map((cell, c) => {
                   if (!cell.isActive) {
                     return (
@@ -290,30 +285,30 @@ export default function HeroCrossword({
                   const isWrong = isChecked && !isCorrect;
 
                   let cellBg = '#ffffff';
-                  let borderColor = '#0f172a';
-                  let borderWidth = '2px';
+                  let borderColor = '#cbd5e1';
                   let textColor = '#0f172a';
-                  let numColor = '#475569';
+                  let numColor = '#64748b';
+                  let boxShadow = 'none';
                   let zIndex = 1;
 
                   if (isCorrect) {
-                    cellBg = '#86efac';
-                    borderColor = '#15803d';
-                    textColor = '#14532d';
+                    cellBg = '#dcfce7';
+                    borderColor = '#10b981';
+                    textColor = '#065f46';
                   } else if (isWrong) {
-                    cellBg = '#fca5a5';
-                    borderColor = '#b91c1c';
-                    textColor = '#7f1d1d';
+                    cellBg = '#ffe4e6';
+                    borderColor = '#f43f5e';
+                    textColor = '#9f1239';
                   } else if (isActiveCell) {
-                    cellBg = '#dc2626'; // Vigilante Crimson spotlight
-                    borderColor = '#eab308'; // Hero Gold border
-                    borderWidth = '2.5px';
+                    cellBg = '#4f46e5';
+                    borderColor = '#4338ca';
                     textColor = '#ffffff';
-                    numColor = '#fef08a';
+                    numColor = 'rgba(255, 255, 255, 0.85)';
+                    boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.25)';
                     zIndex = 3;
                   } else if (isWordCell) {
-                    cellBg = '#fef08a'; // Comic yellow strip
-                    borderColor = '#ca8a04';
+                    cellBg = '#eef2ff';
+                    borderColor = '#818cf8';
                     zIndex = 2;
                   }
 
@@ -325,15 +320,17 @@ export default function HeroCrossword({
                         width: `${cellSize}px`,
                         height: `${cellSize}px`,
                         position: 'relative',
-                        border: `${borderWidth} solid ${borderColor}`,
+                        border: `1.5px solid ${borderColor}`,
+                        borderRadius: '4px',
                         background: cellBg,
+                        boxShadow,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
                         boxSizing: 'border-box',
                         zIndex: zIndex,
-                        transition: 'background 0.12s ease, border-color 0.12s ease'
+                        transition: 'background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease'
                       }}
                     >
                       {cell.startNum && (
@@ -343,7 +340,7 @@ export default function HeroCrossword({
                             top: '1px',
                             left: '2px',
                             fontSize: `${numFontSize}px`,
-                            fontWeight: 900,
+                            fontWeight: 800,
                             color: numColor,
                             lineHeight: 1,
                             pointerEvents: 'none'
@@ -367,7 +364,7 @@ export default function HeroCrossword({
                           background: 'transparent',
                           textAlign: 'center',
                           fontSize: `${fontSize}px`,
-                          fontWeight: 900,
+                          fontWeight: 800,
                           color: textColor,
                           textTransform: 'uppercase',
                           outline: 'none',
@@ -382,18 +379,18 @@ export default function HeroCrossword({
           </div>
         </div>
 
-        {/* Classified Clues Panel */}
+        {/* Clues Panel (Aligned with Reprise) */}
         <div className="hero-cw-clues-panel">
           <div className="hero-clues-title">
-            <span>📜 Indices de Mission</span>
-            <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 700 }}>
+            <span>Indices (Clues)</span>
+            <span className="hero-clues-counter">
               {solvedWordIds.size} / {puzzleData.length} résolus
             </span>
           </div>
 
           <div style={{ marginBottom: '1.25rem' }}>
             <h4 className="hero-clue-section-header">
-              <span>⚔️</span> Horizontal (Across)
+              → Horizontal (Across)
             </h4>
             <div className="hero-clue-list">
               {puzzleData
@@ -420,7 +417,7 @@ export default function HeroCrossword({
 
           <div style={{ marginBottom: '1.25rem' }}>
             <h4 className="hero-clue-section-header">
-              <span>🛡️</span> Vertical (Down)
+              ↓ Vertical (Down)
             </h4>
             <div className="hero-clue-list">
               {puzzleData
@@ -447,7 +444,7 @@ export default function HeroCrossword({
 
           <div className="hero-actions">
             <button onClick={checkAnswers} className="hero-check-btn">
-              <CheckCircle2 size={18} /> Valider la Mission
+              <CheckCircle2 size={16} /> Vérifier
             </button>
             <button onClick={handleReset} className="hero-reset-btn">
               <RefreshCw size={16} /> Réinitialiser

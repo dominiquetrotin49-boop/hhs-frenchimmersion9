@@ -186,7 +186,7 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
     return set;
   }, [inputs, puzzleData]);
 
-  const cellSize = Math.max(18, Math.min(32, Math.floor(480 / Math.max(numCols, numRows * 0.85))));
+  const cellSize = Math.max(20, Math.min(34, Math.floor(500 / Math.max(numCols, numRows * 0.88))));
   const fontSize = Math.max(11, Math.floor(cellSize * 0.55));
   const numFontSize = Math.max(7, Math.floor(cellSize * 0.32));
 
@@ -201,7 +201,7 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
         {isWon && (
           <div className="cw-summer-victory">
             <CheckCircle2 size={20} />
-            <span>Bravo ! Grille complétée ! Tu peux aller à la plage ! 🏖️</span>
+            <span>Bravo ! Grille complétée ! 🏖️</span>
           </div>
         )}
       </div>
@@ -212,7 +212,7 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
         <p>{description}</p>
       </div>
 
-      {/* ── Summer Accent Character Toolbar ── */}
+      {/* ── Accent Character Toolbar ── */}
       <div className="cw-summer-accent-bar">
         <span className="cw-accent-label">Accents :</span>
         {ACCENTS.map((char) => (
@@ -232,9 +232,9 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
       <div className="cw-summer-layout">
         {/* Crossword Board */}
         <div className="cw-summer-grid-panel">
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1px', background: '#f8fafc', padding: '4px', borderRadius: '8px' }}>
             {gridMeta.map((row, r) => (
-              <div key={r} style={{ display: 'flex' }}>
+              <div key={r} style={{ display: 'flex', gap: '1px' }}>
                 {row.map((cell, c) => {
                   if (!cell.isActive) {
                     return (
@@ -256,26 +256,28 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
                   const isWrong = isChecked && !isCorrect;
 
                   let cellBg = '#ffffff';
-                  let borderColor = '#d4b896';
+                  let borderColor = '#cbd5e1';
                   let textColor = '#0f172a';
                   let numColor = '#64748b';
+                  let boxShadow = 'none';
 
                   if (isCorrect) {
-                    cellBg = '#bbf7d0';
-                    borderColor = '#16a34a';
-                    textColor = '#14532d';
+                    cellBg = '#dcfce7';
+                    borderColor = '#10b981';
+                    textColor = '#065f46';
                   } else if (isWrong) {
-                    cellBg = '#fecaca';
-                    borderColor = '#dc2626';
-                    textColor = '#7f1d1d';
+                    cellBg = '#ffe4e6';
+                    borderColor = '#f43f5e';
+                    textColor = '#9f1239';
                   } else if (isActiveCell) {
-                    cellBg = '#0ea5e9';
-                    borderColor = '#0284c7';
+                    cellBg = '#4f46e5';
+                    borderColor = '#4338ca';
                     textColor = '#ffffff';
                     numColor = 'rgba(255, 255, 255, 0.85)';
+                    boxShadow = '0 0 0 2px rgba(79, 70, 229, 0.25)';
                   } else if (isWordCell) {
-                    cellBg = '#fef3c7';
-                    borderColor = '#f59e0b';
+                    cellBg = '#eef2ff';
+                    borderColor = '#818cf8';
                   }
 
                   return (
@@ -287,13 +289,15 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
                         height: `${cellSize}px`,
                         position: 'relative',
                         border: `1.5px solid ${borderColor}`,
+                        borderRadius: '4px',
                         background: cellBg,
+                        boxShadow,
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
                         cursor: 'pointer',
                         boxSizing: 'border-box',
-                        transition: 'background 0.12s ease, border-color 0.12s ease'
+                        transition: 'background 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease'
                       }}
                     >
                       {cell.startNum && (
@@ -342,10 +346,15 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
 
         {/* Clues Panel */}
         <div className="cw-summer-clues-panel">
-          <h3 className="cw-clues-title">Indices (Clues)</h3>
+          <div className="cw-clues-title">
+            <span>Indices (Clues)</span>
+            <span className="cw-clues-counter">
+              {solvedWordIds.size} / {puzzleData.length} résolus
+            </span>
+          </div>
 
           <div style={{ marginBottom: '1.25rem' }}>
-            <h4 className="cw-clue-section-header">🌊 Horizontal (Across)</h4>
+            <h4 className="cw-clue-section-header">→ Horizontal (Across)</h4>
             <div className="cw-clue-list">
               {puzzleData.filter(w => w.dir === 'across').map(w => {
                 const isSelected = activeWord?.id === w.id;
@@ -368,7 +377,7 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
           </div>
 
           <div style={{ marginBottom: '1.25rem' }}>
-            <h4 className="cw-clue-section-header">🌴 Vertical (Down)</h4>
+            <h4 className="cw-clue-section-header">↓ Vertical (Down)</h4>
             <div className="cw-clue-list">
               {puzzleData.filter(w => w.dir === 'down').map(w => {
                 const isSelected = activeWord?.id === w.id;
@@ -403,4 +412,3 @@ export default function Crossword({ title, description, numRows, numCols, puzzle
     </div>
   );
 }
-

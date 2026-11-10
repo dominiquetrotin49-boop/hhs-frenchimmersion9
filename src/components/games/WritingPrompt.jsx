@@ -119,16 +119,16 @@ const MAX_CHARS = 2500;
 
 const STYLE_BLOCK = `
   .wp-container {
-    max-width: 950px;
+    max-width: 1020px;
     margin: 0 auto;
-    padding: 1.5rem;
-    background: rgba(30, 41, 59, 0.55);
+    padding: 1.75rem;
+    background: rgba(255, 255, 255, 0.9);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 24px;
-    color: #f8fafc;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(226, 232, 240, 0.85);
+    border-radius: 1.5rem;
+    color: #0f172a;
+    box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
@@ -138,92 +138,113 @@ const STYLE_BLOCK = `
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-bottom: 1.2rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid #e2e8f0;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .wp-title-group h2 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    margin: 0.3rem 0;
-    background: linear-gradient(135deg, #60a5fa, #3b82f6, #a78bfa);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    margin: 0.25rem 0;
+    color: #0f172a;
   }
 
   .wp-title-group p {
-    color: #cbd5e1;
+    color: #475569;
     font-size: 0.95rem;
+    font-weight: 500;
     margin: 0;
+    line-height: 1.55;
   }
 
   .wp-panel {
-    background: rgba(15, 23, 42, 0.3);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 18px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 1.25rem;
     padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(15, 23, 42, 0.03);
   }
 
   .accent-key-btn {
-    width: 28px;
-    height: 32px;
-    background: rgba(59, 130, 246, 0.12);
-    border: 1px solid rgba(59, 130, 246, 0.3);
-    border-radius: 6px;
-    color: #93c5fd;
-    font-size: 0.9rem;
-    font-weight: bold;
+    width: 30px;
+    height: 30px;
+    background: #f1f5f9;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    color: #334155;
+    font-size: 0.88rem;
+    font-weight: 700;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.15s ease;
+    transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .accent-key-btn:hover:not(:disabled) {
-    background: rgba(59, 130, 246, 0.25);
-    color: white;
+    background: #eef2ff;
+    border-color: #a5b4fc;
+    color: #4f46e5;
     transform: translateY(-1px);
+  }
+
+  .accent-key-btn:active:not(:disabled) {
+    transform: scale(0.95);
   }
 
   .wp-textarea {
     width: 100%;
     padding: 1rem;
-    background: rgba(15, 23, 42, 0.6);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: white;
-    font-size: 1rem;
-    line-height: 1.5;
+    background: #f8fafc;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 0.85rem;
+    color: #0f172a;
+    font-size: 0.96rem;
+    line-height: 1.65;
     outline: none;
     resize: none;
     transition: all 0.2s ease;
     box-sizing: border-box;
+    font-family: inherit;
+  }
+
+  .wp-textarea::placeholder {
+    color: #94a3b8;
   }
 
   .wp-textarea:focus {
-    border-color: #3b82f6;
-    background: rgba(15, 23, 42, 0.85);
-    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    border-color: #4f46e5;
+    background: #ffffff;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
   }
 
   .wp-primary-btn {
-    padding: 0.75rem 1.5rem;
-    background: #3b82f6;
+    padding: 0.65rem 1.35rem;
+    background: #4f46e5;
     color: white;
-    border: 1px solid #2563eb;
-    border-radius: 12px;
-    font-weight: bold;
+    border: 1px solid #4338ca;
+    border-radius: 0.75rem;
+    font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
+    font-size: 0.92rem;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.22);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .wp-primary-btn:hover:not(:disabled) {
-    background: #2563eb;
+    background: #4338ca;
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+  }
+
+  .wp-primary-btn:active:not(:disabled) {
+    transform: scale(0.98);
   }
 
   .wp-primary-btn:disabled {
@@ -232,47 +253,49 @@ const STYLE_BLOCK = `
   }
 
   .wp-secondary-btn {
-    padding: 0.75rem 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    font-weight: bold;
+    padding: 0.65rem 1.25rem;
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    font-weight: 600;
     cursor: pointer;
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    font-size: 0.95rem;
-    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .wp-secondary-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: #eef2ff;
+    border-color: #a5b4fc;
+    color: #4f46e5;
   }
 
   .wp-reset-btn {
-    padding: 0.5rem 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 12px;
-    color: #e2e8f0;
+    padding: 0.55rem 1rem;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    color: #475569;
     cursor: pointer;
-    font-size: 0.9rem;
-    font-weight: bold;
+    font-size: 0.88rem;
+    font-weight: 600;
     transition: all 0.2s ease;
   }
 
   .wp-reset-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
-    color: white;
+    background: #f1f5f9;
+    color: #0f172a;
   }
 
   .wp-loader {
     width: 36px;
     height: 36px;
-    border: 4px solid rgba(59, 130, 246, 0.2);
-    border-top-color: #3b82f6;
+    border: 4px solid #e0e7ff;
+    border-top-color: #4f46e5;
     border-radius: 50%;
     animation: wp-spin 1s infinite linear;
   }
@@ -612,26 +635,26 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
         <div className="lg:col-span-6 wp-panel flex flex-col justify-between">
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <span className="w-2.5 h-2.5 rounded-full bg-blue-500 animate-pulse" />
-              <h3 className="text-xs font-black uppercase tracking-widest text-blue-400">
+              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600" />
+              <h3 className="text-xs font-black uppercase tracking-widest text-indigo-600">
                 Sujet d'écriture
               </h3>
             </div>
 
             {/* Prompt Display */}
-            <div className="p-4 rounded-xl bg-slate-950/80 border border-slate-800/80 mb-6">
-              <h4 className="text-sm font-bold text-slate-200 mb-1">{activePrompt.title}</h4>
-              <p className="text-sm text-slate-350 leading-relaxed font-medium">
+            <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 mb-6">
+              <h4 className="text-sm font-bold text-slate-900 mb-1">{activePrompt.title}</h4>
+              <p className="text-sm text-slate-700 leading-relaxed font-medium">
                 {activePrompt.prompt}
               </p>
               {activePrompt.vocab && activePrompt.vocab.length > 0 && (
-                <div style={{ marginTop: '0.9rem', paddingTop: '0.75rem', borderTop: '1px solid rgba(148,163,184,0.3)' }}>
-                  <div style={{ fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.08em', textTransform: 'uppercase', color: '#fcd34d', marginBottom: '0.4rem' }}>
+                <div style={{ marginTop: '0.9rem', paddingTop: '0.75rem', borderTop: '1px solid #e2e8f0' }}>
+                  <div style={{ fontSize: '0.7rem', fontWeight: 800, letterSpacing: '0.06em', textTransform: 'uppercase', color: '#4f46e5', marginBottom: '0.45rem' }}>
                     🎯 À réutiliser : {activePrompt.focus} • min. {activePrompt.minWords} mots
                   </div>
                   <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
                     {activePrompt.vocab.map((w) => (
-                      <span key={w} style={{ background: '#e0f2fe', color: '#0c4a6e', border: '1px solid #7dd3fc', borderRadius: '999px', padding: '0.15rem 0.65rem', fontSize: '0.78rem', fontWeight: 700 }}>
+                      <span key={w} style={{ background: '#eef2ff', color: '#4338ca', border: '1px solid #c7d2fe', borderRadius: '0.5rem', padding: '0.2rem 0.65rem', fontSize: '0.76rem', fontWeight: 600 }}>
                         {w}
                       </span>
                     ))}
@@ -641,9 +664,9 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
             </div>
 
             {/* Accent Bar */}
-            <div className="mb-2 space-y-1.5">
+            <div className="mb-3 space-y-1.5 bg-slate-50 p-3 rounded-xl border border-slate-200">
               <div className="flex items-center justify-between">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                   Accents minuscules :
                 </span>
               </div>
@@ -654,7 +677,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                     type="button"
                     disabled={loading}
                     onClick={() => handleAccentClick(char)}
-                    className="accent-key-btn"
+                    className="accent-key-btn bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 active:scale-95 transition-transform"
                   >
                     {char}
                   </button>
@@ -662,7 +685,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
               </div>
 
               <div className="flex items-center justify-between pt-1">
-                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">
                   Accents majuscules :
                 </span>
               </div>
@@ -673,7 +696,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                     type="button"
                     disabled={loading}
                     onClick={() => handleAccentClick(char)}
-                    className="accent-key-btn font-bold"
+                    className="accent-key-btn font-bold bg-slate-100 hover:bg-indigo-50 hover:text-indigo-600 active:scale-95 transition-transform"
                   >
                     {char}
                   </button>
@@ -683,8 +706,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
             {/* Textarea Input */}
             <div className="relative">
-              
-            <textarea
+              <textarea
                 ref={textareaRef}
                 value={text}
                 onChange={handleTextChange}
@@ -697,13 +719,13 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                 autoCapitalize="none"
                 spellCheck="false"
               />
-              <div className="absolute right-3 bottom-3 text-xs text-slate-500 font-mono">
+              <div className="absolute right-3 bottom-3 text-xs text-slate-400 font-semibold">
                 {text.length} / {MAX_CHARS} caract.
               </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-between border-t border-slate-800 pt-4 mt-6">
+          <div className="flex items-center justify-between border-t border-slate-200 pt-4 mt-6">
             <button
               onClick={handleReset}
               disabled={loading || !text.trim()}
@@ -728,16 +750,16 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
             <div>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-2">
-                  <span className={`w-2.5 h-2.5 rounded-full ${feedback?.source === 'local' ? 'bg-amber-400' : 'bg-purple-400'} animate-pulse`} />
-                  <h3 className="text-xs font-black uppercase tracking-widest text-purple-400">
+                  <span className={`w-2.5 h-2.5 rounded-full ${feedback?.source === 'local' ? 'bg-amber-500' : 'bg-indigo-600'}`} />
+                  <h3 className="text-xs font-black uppercase tracking-widest text-indigo-600">
                     Rapport de Correction Pédagogique
                   </h3>
                 </div>
                 {feedback && (
-                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full border ${
+                  <span className={`text-[10px] font-bold px-2.5 py-0.5 rounded-full border ${
                     feedback.source === 'ai' 
-                      ? 'border-emerald-500/30 bg-emerald-950/40 text-emerald-300' 
-                      : 'border-amber-500/30 bg-amber-950/40 text-amber-300'
+                      ? 'border-emerald-200 bg-emerald-50 text-emerald-700' 
+                      : 'border-amber-200 bg-amber-50 text-amber-700'
                   }`}>
                     {feedback.source === 'ai' ? '✨ Analyse IA Immersion 9e' : '⚡ Vérification de base'}
                   </span>
@@ -746,8 +768,8 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
               {/* Error banner */}
               {error && (
-                <div className="p-4 rounded-xl border border-red-500/20 bg-red-950/20 text-red-200 flex items-center gap-2 mb-4">
-                  <AlertTriangle size={18} />
+                <div className="p-4 rounded-xl border border-rose-200 bg-rose-50 text-rose-800 flex items-center gap-2 mb-4">
+                  <AlertTriangle size={18} className="text-rose-600" />
                   <p className="text-sm font-medium">{error}</p>
                 </div>
               )}
@@ -756,16 +778,16 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
               {loading && (
                 <div className="flex flex-col items-center justify-center py-16 gap-3">
                   <div className="wp-loader" />
-                  <p className="text-sm text-slate-400 font-medium">Gemini analyse votre grammaire, accords et orthographe...</p>
+                  <p className="text-sm text-slate-600 font-medium">Gemini analyse votre grammaire, accords et orthographe...</p>
                 </div>
               )}
 
               {/* Empty state before submit */}
               {!feedback && !loading && !error && (
                 <div className="text-center py-16 text-slate-500">
-                  <HelpCircle size={40} className="mx-auto opacity-40 mb-3" />
-                  <p className="text-sm font-semibold">Aucun texte soumis pour le moment.</p>
-                  <p className="text-xs text-slate-400 mt-1">Rédigez votre réponse et cliquez sur Soumettre pour recevoir vos corrections.</p>
+                  <HelpCircle size={40} className="mx-auto text-slate-400 mb-3" />
+                  <p className="text-sm font-semibold text-slate-700">Aucun texte soumis pour le moment.</p>
+                  <p className="text-xs text-slate-500 mt-1">Rédigez votre réponse et cliquez sur Soumettre pour recevoir vos corrections.</p>
                 </div>
               )}
 
@@ -774,22 +796,22 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                 <div className="space-y-4 max-h-[380px] overflow-y-auto pr-1">
                   
                   {/* General feedback */}
-                  <div className="p-4 rounded-xl bg-slate-950/60 border border-slate-800/80">
-                    <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest block mb-1">Retour général</span>
-                    <p className="text-sm text-slate-200 leading-relaxed font-semibold italic">
+                  <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
+                    <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Retour général</span>
+                    <p className="text-sm text-slate-800 leading-relaxed font-semibold italic">
                       "{feedback.generalFeedback}"
                     </p>
                   </div>
 
                   {/* Perfect work check */}
                   {feedback.isValid && (
-                    <div className="p-4 rounded-xl border border-emerald-500/20 bg-emerald-950/10 text-emerald-100 flex items-center gap-2">
-                      <CheckCircle2 className="text-emerald-400 flex-shrink-0" size={20} />
+                    <div className="p-4 rounded-xl border border-emerald-200 bg-emerald-50 text-emerald-800 flex items-center gap-2.5">
+                      <CheckCircle2 className="text-emerald-600 flex-shrink-0" size={20} />
                       <div>
-                        <span className="text-xs font-black uppercase text-emerald-400 tracking-wider block mb-0.5">
+                        <span className="text-xs font-black uppercase text-emerald-700 tracking-wider block mb-0.5">
                           {feedback.source === 'ai' ? "Zéro faute !" : "Aucune erreur fréquente détectée"}
                         </span>
-                        <p className="text-xs font-medium text-slate-300">
+                        <p className="text-xs font-medium text-emerald-800">
                           {feedback.source === 'ai'
                             ? "Excellent travail ! Votre orthographe, vos accords et votre syntaxe sont soignés."
                             : "Aucune erreur élémentaire détectée par le vérificateur automatique. Faites relire votre paragraphe par votre enseignant(e) pour valider les tournures avancées."}
@@ -800,15 +822,15 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
                   {/* Strengths */}
                   {feedback.strengths && feedback.strengths.length > 0 && (
-                    <div className="p-3.5 rounded-xl border border-emerald-500/25 bg-emerald-950/20 space-y-2">
-                      <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1.5">
-                        <CheckCircle2 size={13} className="text-emerald-400" />
+                    <div className="p-3.5 rounded-xl border border-emerald-200 bg-emerald-50 space-y-2">
+                      <span className="text-[10px] font-black text-emerald-700 uppercase tracking-widest flex items-center gap-1.5">
+                        <CheckCircle2 size={13} className="text-emerald-600" />
                         Points forts observés
                       </span>
                       <ul className="space-y-1.5 pl-1">
                         {feedback.strengths.map((str, idx) => (
-                          <li key={idx} className="text-xs text-emerald-100 flex items-start gap-2">
-                            <span className="text-emerald-400 font-bold">•</span>
+                          <li key={idx} className="text-xs text-emerald-800 flex items-start gap-2">
+                            <span className="text-emerald-600 font-bold">•</span>
                             <span>{str}</span>
                           </li>
                         ))}
@@ -819,30 +841,30 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Detailed Corrections */}
                   {feedback.corrections && feedback.corrections.length > 0 && (
                     <div className="space-y-2.5">
-                      <span className="text-[10px] font-black text-red-400 uppercase tracking-widest block">
+                      <span className="text-[10px] font-black text-rose-700 uppercase tracking-widest block">
                         Corrections détaillées ({feedback.corrections.length})
                       </span>
                       {feedback.corrections.map((corr, idx) => {
                         const catColor = corr.category === 'Conjugaison'
-                          ? 'border-red-500/30 bg-red-950/30 text-red-300'
+                          ? 'border-rose-200 bg-rose-50 text-rose-700'
                           : corr.category === 'Accords & Genre'
-                          ? 'border-orange-500/30 bg-orange-950/30 text-orange-300'
+                          ? 'border-amber-200 bg-amber-50 text-amber-800'
                           : corr.category === 'Orthographe'
-                          ? 'border-blue-500/30 bg-blue-950/30 text-blue-300'
-                          : 'border-purple-500/30 bg-purple-950/30 text-purple-300';
+                          ? 'border-indigo-200 bg-indigo-50 text-indigo-700'
+                          : 'border-indigo-200 bg-indigo-50 text-violet-700';
 
                         return (
-                          <div key={idx} className="p-3 rounded-lg border border-slate-800 bg-slate-900/60 text-xs space-y-1.5">
+                          <div key={idx} className="p-3 rounded-xl border border-slate-200 bg-slate-50 text-xs space-y-1.5">
                             <div className="flex justify-between items-center flex-wrap gap-1">
-                              <span className={`px-2 py-0.5 rounded text-[10px] font-black uppercase tracking-wider border ${catColor}`}>
+                              <span className={`px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider border ${catColor}`}>
                                 {corr.category}
                               </span>
                               <div className="flex items-center gap-2">
-                                <span className="line-through text-slate-400 font-medium">« {corr.originalSegment} »</span>
-                                <span className="text-emerald-400 font-bold">➔ « {corr.suggestedCorrection} »</span>
+                                <span className="line-through text-rose-600 font-medium">« {corr.originalSegment} »</span>
+                                <span className="text-emerald-700 font-bold">➔ « {corr.suggestedCorrection} »</span>
                               </div>
                             </div>
-                            <p className="text-slate-300 leading-relaxed font-normal">{corr.ruleExplanation}</p>
+                            <p className="text-slate-700 leading-relaxed font-normal">{corr.ruleExplanation}</p>
                           </div>
                         );
                       })}
@@ -851,11 +873,11 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
                   {/* Pedagogical Advice */}
                   {feedback.pedagogicalAdvice && (
-                    <div className="p-3 rounded-xl border border-purple-500/25 bg-purple-950/20">
-                      <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest block mb-1">
+                    <div className="p-3.5 rounded-xl border border-indigo-200 bg-indigo-50">
+                      <span className="text-[10px] font-black text-indigo-700 uppercase tracking-widest block mb-1">
                         💡 Conseil pour progresser
                       </span>
-                      <p className="text-xs text-purple-100 leading-relaxed">
+                      <p className="text-xs text-slate-800 leading-relaxed">
                         {feedback.pedagogicalAdvice}
                       </p>
                     </div>
@@ -864,15 +886,15 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Verbs feedback */}
                   {(!feedback.corrections || feedback.corrections.length === 0) && feedback.verbAgreements && feedback.verbAgreements.length > 0 && (
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black text-red-400 uppercase tracking-widest block">Accords de verbes (présent)</span>
+                      <span className="text-[10px] font-black text-rose-700 uppercase tracking-widest block">Accords de verbes (présent)</span>
                       {feedback.verbAgreements.map((err, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-red-500/10 bg-red-950/5 text-xs">
+                        <div key={idx} className="p-3 rounded-xl border border-rose-200 bg-rose-50 text-xs">
                           <div className="flex justify-between items-center mb-1">
-                            <span className="font-semibold text-red-300">Sujet : « {err.subject} »</span>
+                            <span className="font-semibold text-rose-800">Sujet : « {err.subject} »</span>
                             <span className="line-through text-slate-500">{err.error}</span>
-                            <span className="text-emerald-400 font-bold">➔ {err.correction}</span>
+                            <span className="text-emerald-700 font-bold">➔ {err.correction}</span>
                           </div>
-                          <p className="text-slate-400 leading-relaxed mt-1">{err.explanation}</p>
+                          <p className="text-slate-700 leading-relaxed mt-1">{err.explanation}</p>
                         </div>
                       ))}
                     </div>
@@ -881,15 +903,15 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Adjectives feedback */}
                   {(!feedback.corrections || feedback.corrections.length === 0) && feedback.adjectiveAgreements && feedback.adjectiveAgreements.length > 0 && (
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black text-orange-400 uppercase tracking-widest block">Accord des adjectifs</span>
+                      <span className="text-[10px] font-black text-amber-700 uppercase tracking-widest block">Accord des adjectifs</span>
                       {feedback.adjectiveAgreements.map((err, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-orange-500/10 bg-orange-950/5 text-xs">
+                        <div key={idx} className="p-3 rounded-xl border border-amber-200 bg-amber-50 text-xs">
                           <div className="flex justify-between items-center mb-1">
-                            <span className="font-semibold text-orange-300">Nom qualifié : « {err.noun} »</span>
+                            <span className="font-semibold text-amber-800">Nom qualifié : « {err.noun} »</span>
                             <span className="line-through text-slate-500">{err.error}</span>
-                            <span className="text-emerald-400 font-bold">➔ {err.correction}</span>
+                            <span className="text-emerald-700 font-bold">➔ {err.correction}</span>
                           </div>
-                          <p className="text-slate-400 leading-relaxed mt-1">{err.explanation}</p>
+                          <p className="text-slate-700 leading-relaxed mt-1">{err.explanation}</p>
                         </div>
                       ))}
                     </div>
@@ -898,14 +920,14 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Noun Genders feedback */}
                   {(!feedback.corrections || feedback.corrections.length === 0) && feedback.nounGenders && feedback.nounGenders.length > 0 && (
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest block">Genre des noms & articles</span>
+                      <span className="text-[10px] font-black text-amber-700 uppercase tracking-widest block">Genre des noms &amp; articles</span>
                       {feedback.nounGenders.map((err, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-amber-500/10 bg-amber-950/5 text-xs">
+                        <div key={idx} className="p-3 rounded-xl border border-amber-200 bg-amber-50 text-xs">
                           <div className="flex justify-between items-center mb-1">
                             <span className="line-through text-slate-500">{err.error}</span>
-                            <span className="text-emerald-400 font-bold">➔ {err.correction}</span>
+                            <span className="text-emerald-700 font-bold">➔ {err.correction}</span>
                           </div>
-                          <p className="text-slate-400 leading-relaxed mt-1">{err.explanation}</p>
+                          <p className="text-slate-700 leading-relaxed mt-1">{err.explanation}</p>
                         </div>
                       ))}
                     </div>
@@ -914,14 +936,14 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Spelling feedback */}
                   {(!feedback.corrections || feedback.corrections.length === 0) && feedback.spellingErrors && feedback.spellingErrors.length > 0 && (
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black text-blue-400 uppercase tracking-widest block">Orthographe</span>
+                      <span className="text-[10px] font-black text-indigo-700 uppercase tracking-widest block">Orthographe</span>
                       {feedback.spellingErrors.map((err, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-blue-500/10 bg-blue-950/5 text-xs">
+                        <div key={idx} className="p-3 rounded-xl border border-indigo-200 bg-indigo-50 text-xs">
                           <div className="flex justify-between items-center mb-1">
                             <span className="line-through text-slate-500">{err.error}</span>
-                            <span className="text-emerald-400 font-bold">➔ {err.correction}</span>
+                            <span className="text-emerald-700 font-bold">➔ {err.correction}</span>
                           </div>
-                          <p className="text-slate-400 leading-relaxed mt-1">{err.explanation}</p>
+                          <p className="text-slate-700 leading-relaxed mt-1">{err.explanation}</p>
                         </div>
                       ))}
                     </div>
@@ -930,14 +952,14 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
                   {/* Word Choices & Prepositions feedback */}
                   {(!feedback.corrections || feedback.corrections.length === 0) && feedback.wordChoices && feedback.wordChoices.length > 0 && (
                     <div className="space-y-2">
-                      <span className="text-[10px] font-black text-purple-400 uppercase tracking-widest block">Vocabulaire & Prépositions</span>
+                      <span className="text-[10px] font-black text-violet-700 uppercase tracking-widest block">Vocabulaire &amp; Prépositions</span>
                       {feedback.wordChoices.map((err, idx) => (
-                        <div key={idx} className="p-3 rounded-lg border border-purple-500/10 bg-purple-950/5 text-xs">
+                        <div key={idx} className="p-3 rounded-xl border border-indigo-200 bg-indigo-50 text-xs">
                           <div className="flex justify-between items-center mb-1">
                             <span className="line-through text-slate-500">{err.error}</span>
-                            <span className="text-emerald-400 font-bold">➔ {err.correction}</span>
+                            <span className="text-emerald-700 font-bold">➔ {err.correction}</span>
                           </div>
-                          <p className="text-slate-400 leading-relaxed mt-1">{err.explanation}</p>
+                          <p className="text-slate-700 leading-relaxed mt-1">{err.explanation}</p>
                         </div>
                       ))}
                     </div>
@@ -947,7 +969,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
               )}
             </div>
 
-            <div className="text-[10px] text-slate-500 italic mt-4 text-center">
+            <div className="text-[11px] text-slate-500 italic mt-4 text-center">
               💡 Révisez la conjugaison du présent de l'indicatif et l'accord des adjectifs dans l'onglet "Grammaire" !
             </div>
           </div>
@@ -957,5 +979,3 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     </div>
   );
 }
-
-

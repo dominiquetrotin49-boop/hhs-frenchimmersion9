@@ -1,4 +1,4 @@
-/* ── HERO CROSSWORD HUB SECTION — BANDE DESSINÉE & COMIC HERO THEME ──────── */
+/* ── UNIT 1–4 CROSSWORD HUB — ALIGNED WITH REPRISE BLUEPRINT ──────────────── */
 
 .hero-hub {
   width: 100%;
@@ -16,12 +16,11 @@
 }
 
 .hero-hub-header h2 {
-  font-size: 1.7rem;
-  font-weight: 900;
-  color: #f8fafc;
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #0f172a;
   margin: 0 0 8px 0;
-  letter-spacing: -0.02em;
-  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.5);
+  letter-spacing: -0.025em;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,75 +29,91 @@
 }
 
 .hero-hub-header p {
-  color: #cbd5e1;
+  color: #64748b;
   font-size: 0.94rem;
-  margin: 0 0 10px 0;
-  line-height: 1.5;
+  margin: 0 0 12px 0;
+  line-height: 1.6;
 }
 
 .hero-hub-badge-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  background: rgba(234, 179, 8, 0.15);
-  border: 1.5px solid #eab308;
+  gap: 0.45rem;
+  background: #eef2ff;
+  border: 1px solid #c7d2fe;
   border-radius: 9999px;
-  padding: 0.35rem 0.9rem;
+  padding: 0.4rem 1rem;
   font-size: 0.8rem;
-  font-weight: 800;
-  color: #fef08a;
+  font-weight: 700;
+  color: #4f46e5;
 }
 
-/* ── 5-Card Comic Grid ─────────────────────────────────────────────────────── */
+.hero-hub-badge-pill code {
+  background: #ffffff;
+  color: #312e81;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.35rem;
+  border: 1px solid #e0e7ff;
+  font-weight: 800;
+}
+
+/* ── Puzzle Card Grid (Matches .summer-puzzle-grid) ───────────────────────── */
 .hero-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 18px;
 }
 
-/* ── Comic Strip Card ─────────────────────────────────────────────────────── */
+/* ── Modular Puzzle Card (Matches .summer-card) ───────────────────────────── */
 .hero-comic-card {
-  background: #0f172a;
-  border-radius: 14px;
-  border: 3px solid #1e293b;
-  box-shadow: 5px 5px 0px rgba(0, 0, 0, 0.45);
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 0;
+  box-shadow:
+    0 4px 16px -4px rgba(15, 23, 42, 0.06),
+    0 2px 6px -1px rgba(15, 23, 42, 0.04);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   display: flex;
   flex-direction: column;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
   overflow: hidden;
   position: relative;
 }
 
 .hero-comic-card:hover {
-  transform: translate(-3px, -3px);
-  box-shadow: 8px 8px 0px #0f172a;
-  border-color: #eab308;
+  transform: translateY(-4px);
+  border-color: #a5b4fc;
+  box-shadow:
+    0 14px 28px -6px rgba(79, 70, 229, 0.12),
+    0 4px 10px -2px rgba(15, 23, 42, 0.05);
 }
 
 .hero-card-top-stripe {
-  height: 6px;
+  height: 5px;
   width: 100%;
+  border-radius: 16px 16px 0 0;
+  flex-shrink: 0;
 }
 
 .hero-card-body {
-  padding: 16px 18px 14px;
+  padding: 16px 18px 12px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 14px;
   flex: 1;
 }
 
 .hero-card-badge-icon {
-  width: 52px;
-  height: 52px;
+  width: 48px;
+  height: 48px;
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(226, 232, 240, 0.7);
 }
 
 .hero-card-content {
@@ -109,26 +124,28 @@
 .hero-card-tag {
   display: inline-block;
   font-size: 0.68rem;
-  font-weight: 900;
-  letter-spacing: 0.08em;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   padding: 2px 8px;
-  border-radius: 4px;
-  margin-bottom: 6px;
+  border-radius: 9999px;
+  margin-bottom: 5px;
 }
 
 .hero-card-content h3 {
-  font-size: 1.05rem;
-  font-weight: 900;
-  color: #f8fafc;
+  font-size: 1rem;
+  font-weight: 800;
+  color: #0f172a;
   margin: 0 0 4px 0;
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .hero-card-content p {
   font-size: 0.8rem;
-  color: #94a3b8;
+  color: #64748b;
   margin: 0;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .hero-card-footer {
@@ -145,22 +162,22 @@
 }
 
 .hero-card-play-btn {
-  border: 2px solid #0f172a;
+  border: none;
   color: #ffffff;
-  font-size: 0.83rem;
-  font-weight: 900;
+  font-size: 0.82rem;
+  font-weight: 700;
   padding: 7px 18px;
-  border-radius: 8px;
+  border-radius: 9999px;
   cursor: pointer;
-  box-shadow: 2px 2px 0px #0f172a;
-  transition: all 0.12s ease;
-  letter-spacing: 0.02em;
+  box-shadow: 0 3px 10px rgba(15, 23, 42, 0.14);
+  transition: opacity 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  letter-spacing: 0.01em;
 }
 
 .hero-card-play-btn:hover {
-  transform: translate(-1px, -1px);
-  box-shadow: 3px 3px 0px #000000;
-  filter: brightness(1.1);
+  opacity: 0.94;
+  transform: scale(1.04);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.18);
 }
 
 /* ── Responsive ───────────────────────────────────────────────────────────── */

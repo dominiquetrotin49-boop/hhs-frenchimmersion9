@@ -25,7 +25,7 @@ export default function Unit2CrosswordSection() {
     <div className="hero-hub">
       <div className="hero-hub-header">
         <h2>
-          <span>🧩</span> Mots Croisés : L'impératif et le subjonctif ({UNIT2_CROSSWORDS.length} grilles)
+          <span>🧩</span> Mots Croisés — Unité 2 ({UNIT2_CROSSWORDS.length} grilles)
         </h2>
         <p>
           Révise les verbes du Dossier 2 : <strong>gérer, s'exprimer, prendre, se confier, faire, dormir, comprendre, demander</strong>.
@@ -42,7 +42,7 @@ export default function Unit2CrosswordSection() {
             <div className="hero-card-top-stripe" style={{ background: item.color }} />
             <div className="hero-card-body">
               <div className="hero-card-badge-icon" style={{ background: item.bg, color: item.color }}>
-                <span style={{ fontSize: '1.75rem', lineHeight: 1 }}>{item.emoji}</span>
+                <span style={{ fontSize: '1.5rem', lineHeight: 1 }}>{item.emoji}</span>
               </div>
               <div className="hero-card-content">
                 <span className="hero-card-tag" style={{ background: item.bg, color: item.color }}>
@@ -64,7 +64,7 @@ export default function Unit2CrosswordSection() {
                   setActiveGameId(item.id);
                 }}
               >
-                Relever le défi →
+                Jouer →
               </button>
             </div>
           </div>

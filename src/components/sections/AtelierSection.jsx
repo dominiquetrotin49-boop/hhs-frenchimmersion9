@@ -188,7 +188,7 @@ export default function AtelierSection({ chapterId, vocabulary }) {
         )}
 
         {activeTab === 'mots_croises' && (
-          isReprise ? <CrosswordSection /> : isUnit2 ? <Unit2CrosswordSection /> : <HeroCrosswordSection />
+          isReprise ? <CrosswordSection /> : isUnit2 ? <Unit2CrosswordSection /> : <HeroCrosswordSection chapterId={chapterId} />
         )}
 
         {activeTab === 'jeux' && (

@@ -191,8 +191,8 @@ function ChapterView() {
     // When no dossier is clicked yet, show only the 3 Dossiers at the top!
     if (!activeSection) {
       return (
-        <div className="hub-welcome-prompt text-center py-8 px-4 rounded-2xl bg-white/40 border border-white/60 backdrop-blur-md shadow-xs animate-fade-in">
-          <p className="text-base sm:text-lg font-extrabold text-slate-800 m-0">
+        <div className="hub-welcome-prompt text-center py-8 px-4 rounded-2xl bg-white/80 border border-slate-200/70 backdrop-blur-md shadow-sm animate-fade-in">
+          <p className="text-base sm:text-lg font-extrabold text-slate-900 m-0">
             👆 Sélectionnez un des 3 dossiers ci-dessus pour explorer le contenu de l'unité.
           </p>
           <p className="text-xs sm:text-sm text-slate-600 font-medium mt-1 mb-0">
@@ -235,8 +235,8 @@ function ChapterView() {
   return (
     <div className="chapter-view">
       <div className="chapter-header">
-        <h2>{chapter.title}</h2>
-        <p>{chapter.description}</p>
+        <h2 className="font-bold tracking-tight text-slate-900">{chapter.title}</h2>
+        <p className="leading-relaxed">{chapter.description}</p>
       </div>
 
       <UnitAvatarSpeaker 
@@ -256,8 +256,8 @@ function ChapterView() {
                 to={`/chapter/${chapter.id}/${ch.id}`} 
                 className={`section-card ${isActive ? 'active' : ''}`}
               >
-                <div className="tab-icon-badge story-badge bg-gradient-to-tr from-violet-600 to-indigo-700">
-                  <span className="font-black text-white text-lg">{idx + 1}</span>
+                <div className="tab-icon-badge story-badge bg-indigo-50 text-indigo-600 p-3 rounded-2xl">
+                  <span className="font-black text-lg">{idx + 1}</span>
                 </div>
                 <h3>{ch.title.split(' : ')[0]}</h3>
               </NavLink>
@@ -270,63 +270,72 @@ function ChapterView() {
           {/* Dossier 1: Vocabulaire & Écoute */}
           <NavLink 
             to={`/chapter/${chapter.id}/vocabulaire`} 
-            className={`section-card ${activeSection === 'vocabulaire' ? 'active' : ''}`}
+            className={`section-card hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeSection === 'vocabulaire' ? 'active' : ''}`}
           >
-            <div className="tab-icon-badge vocab-badge">
-              <Languages size={28} />
+            <div className="tab-icon-badge vocab-badge bg-indigo-50 text-indigo-600 p-3 rounded-2xl">
+              <Languages size={26} />
             </div>
-            <div>
-              <span className="text-[10px] font-black uppercase tracking-wider text-cyan-600 block mb-0.5">
+            <div className="w-full">
+              <span className="text-[10px] font-black uppercase tracking-wider text-indigo-600 block mb-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.tag || 'Dossier 01'}
               </span>
-              <h3 className="text-base sm:text-lg">
+              <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.title || 'Le Lexique'}
               </h3>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-medium mt-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier1.subtitle || 'Écoute • Dictée • Cartes 3D'}
               </p>
+              <div className="unit-tile-progress-bar h-2 rounded-full bg-slate-100 overflow-hidden mt-3">
+                <div className="unit-tile-progress-fill" style={{ width: activeSection === 'vocabulaire' ? '100%' : '35%' }} />
+              </div>
             </div>
           </NavLink>
 
           {/* Dossier 2: Grammaire & Règles */}
           <NavLink 
             to={`/chapter/${chapter.id}/grammaire`} 
-            className={`section-card ${activeSection === 'grammaire' || activeSection === 'studio' ? 'active' : ''}`}
+            className={`section-card hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeSection === 'grammaire' || activeSection === 'studio' ? 'active' : ''}`}
           >
-            <div className="tab-icon-badge grammar-badge">
-              <BookOpenCheck size={28} />
+            <div className="tab-icon-badge grammar-badge bg-amber-50 text-amber-600 p-3 rounded-2xl">
+              <BookOpenCheck size={26} />
             </div>
-            <div>
+            <div className="w-full">
               <span className="text-[10px] font-black uppercase tracking-wider text-amber-600 block mb-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.tag || 'Dossier 02'}
               </span>
-              <h3 className="text-base sm:text-lg">
+              <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.title || 'Le Studio & Règles'}
               </h3>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-medium mt-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier2.subtitle || 'Règles • Conjugaison • Exercices'}
               </p>
+              <div className="unit-tile-progress-bar h-2 rounded-full bg-slate-100 overflow-hidden mt-3">
+                <div className="unit-tile-progress-fill" style={{ width: (activeSection === 'grammaire' || activeSection === 'studio') ? '100%' : '35%' }} />
+              </div>
             </div>
           </NavLink>
 
           {/* Dossier 3: L'Atelier Créatif & Jeux */}
           <NavLink 
             to={`/chapter/${chapter.id}/atelier`} 
-            className={`section-card ${activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux' ? 'active' : ''}`}
+            className={`section-card hover:-translate-y-1 hover:border-indigo-300 hover:shadow-lg transition-all ${activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux' ? 'active' : ''}`}
           >
-            <div className="tab-icon-badge practice-badge" style={{ background: 'rgba(124,58,237,0.15)', color: '#7c3aed' }}>
-              <PenTool size={28} />
+            <div className="tab-icon-badge practice-badge bg-indigo-50 text-violet-600 p-3 rounded-2xl">
+              <PenTool size={26} />
             </div>
-            <div>
+            <div className="w-full">
               <span className="text-[10px] font-black uppercase tracking-wider text-violet-600 block mb-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.tag || 'Dossier 03'}
               </span>
-              <h3 className="text-base sm:text-lg">
+              <h3 className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.title || 'L\'Atelier Créatif & Jeux'}
               </h3>
-              <p className="text-xs text-slate-500 font-medium">
+              <p className="text-xs text-slate-500 font-medium mt-0.5">
                 {UNIT_DOSSIER_CONFIG[chapter.id]?.dossier3.subtitle || 'Écriture • Mots Croisés • Jeux'}
               </p>
+              <div className="unit-tile-progress-bar h-2 rounded-full bg-slate-100 overflow-hidden mt-3">
+                <div className="unit-tile-progress-fill" style={{ width: (activeSection === 'atelier' || activeSection === 'exercices' || activeSection === 'jeux') ? '100%' : '35%' }} />
+              </div>
             </div>
           </NavLink>
         </div>

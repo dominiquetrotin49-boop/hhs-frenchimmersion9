@@ -331,7 +331,7 @@ export default function PracticeSection() {
 
       {activeActivityId === 'mots_croises' ? (
         <div style={{ width: '100%' }}>
-          {isReprise ? <CrosswordSection /> : <HeroCrosswordSection />}
+          {isReprise ? <CrosswordSection /> : <HeroCrosswordSection chapterId={chapterId} />}
         </div>
 
       ) : activeActivityId === 'writing_prompt' ? (
