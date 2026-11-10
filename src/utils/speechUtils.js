@@ -19,7 +19,12 @@ export const speakFrench = (text, options = {}) => {
   // If a custom recorded audio file path is provided, play it
   if (options.audioUrl) {
     try {
-      const audio = new Audio(options.audioUrl);
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      const resolvedUrl =
+        options.audioUrl.startsWith('/') && !options.audioUrl.startsWith(baseUrl)
+          ? `${baseUrl}${options.audioUrl.slice(1)}`
+          : options.audioUrl;
+      const audio = new Audio(resolvedUrl);
       currentAudio = audio;
       audio.play().catch(() => {
         // Fallback to SpeechSynthesis if audio playback is blocked or file fails

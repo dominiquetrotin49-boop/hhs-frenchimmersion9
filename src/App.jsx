@@ -8,7 +8,7 @@ import './App.css';
 
 function App() {
   return (
-    <Router>
+    <Router basename={import.meta.env.BASE_URL}>
       <div className="app-shell">
         {/* Global Sticky Translucent Glass Navigation Bar */}
         <header className="app-top-navbar sticky top-0 z-50 backdrop-blur-lg bg-white/80 border-b border-slate-200/70">

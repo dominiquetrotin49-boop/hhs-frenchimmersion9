@@ -68,7 +68,7 @@ function ChapterView() {
 
   const toggleStoryAudio = () => {
     if (!storyAudioRef.current) {
-      storyAudioRef.current = new Audio('/audio/horloge-boreale/chapitre_1_complet.mp3');
+      storyAudioRef.current = new Audio(`${import.meta.env.BASE_URL}audio/horloge-boreale/chapitre_1_complet.mp3`);
       storyAudioRef.current.onended = () => {
         setIsStoryAudioPlaying(false);
       };
@@ -98,7 +98,7 @@ function ChapterView() {
       avatar: 'jasmine',
       name: 'Jasmine',
       text: 'Dans cette unité sur les héros et anti-héros, n\'hésite pas à réviser le passé composé et l\'imparfait pour raconter des récits captivants !',
-      audioUrl: '/audio/unite-1/jasmine_intro_unite1.wav'
+      audioUrl: `${import.meta.env.BASE_URL}audio/unite-1/jasmine_intro_unite1.wav`
     },
     'unite-2': {
       avatar: 'kader',
@@ -138,7 +138,7 @@ function ChapterView() {
                   style={{ width: '100%', maxWidth: '75%' }}
                 >
                   <img 
-                    src="/images/horloge-boreale/chapitre_1_illustration.jpg" 
+                    src={`${import.meta.env.BASE_URL}images/horloge-boreale/chapitre_1_illustration.jpg`} 
                     alt="Illustration Ligne Claire du Chapitre 1" 
                     style={{ width: '100%', height: 'auto', display: 'block' }}
                   />

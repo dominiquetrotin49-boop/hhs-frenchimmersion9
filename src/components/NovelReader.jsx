@@ -125,7 +125,12 @@ export default function NovelReader({ onBack }) {
     }
 
     if (currentPage.audioSrc) {
-      const audio = new Audio(currentPage.audioSrc);
+      const baseUrl = import.meta.env.BASE_URL || '/';
+      const resolvedAudio =
+        currentPage.audioSrc.startsWith('/') && !currentPage.audioSrc.startsWith(baseUrl)
+          ? `${baseUrl}${currentPage.audioSrc.slice(1)}`
+          : currentPage.audioSrc;
+      const audio = new Audio(resolvedAudio);
       setActiveAudioObj(audio);
       setIsPlayingAudio(true);
 
@@ -298,7 +303,7 @@ export default function NovelReader({ onBack }) {
             {activePageIdx === 0 && chapter.image && (
               <div className="chapter-scene-image-box" style={{ margin: '1.5rem 0', borderRadius: '16px', overflow: 'hidden', border: '1px solid rgba(255, 255, 255, 0.15)' }}>
                 <img
-                  src={chapter.image}
+                  src={chapter.image.startsWith('/') ? `${import.meta.env.BASE_URL}${chapter.image.slice(1)}` : chapter.image}
                   alt={`Scène clé du ${chapter.number}`}
                   style={{ width: '100%', maxHeight: '420px', objectFit: 'cover', display: 'block' }}
                 />

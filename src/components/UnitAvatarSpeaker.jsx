@@ -3,7 +3,19 @@ import { Sparkles } from 'lucide-react';
 import './UnitAvatarSpeaker.css';
 
 export default function UnitAvatarSpeaker({ avatar = 'jasmine', name = 'Jasmine', text = '', image = null }) {
-  const imgSrc = image || (avatar === 'kader' ? '/avatars/kader.jpg' : avatar === 'maya' ? '/images/avatars/avatar_maya.jpg' : '/avatars/jasmine.jpg');
+  const baseUrl = import.meta.env.BASE_URL || '/';
+  const rawImg =
+    image ||
+    (avatar === 'kader'
+      ? `${baseUrl}avatars/kader.jpg`
+      : avatar === 'maya'
+      ? `${baseUrl}images/avatars/avatar_maya.jpg`
+      : `${baseUrl}avatars/jasmine.jpg`);
+
+  const imgSrc =
+    rawImg.startsWith('/') && !rawImg.startsWith(baseUrl)
+      ? `${baseUrl}${rawImg.slice(1)}`
+      : rawImg;
 
   return (
     <div className="unit-avatar-speaker-card">

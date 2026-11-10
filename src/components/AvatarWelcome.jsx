@@ -37,7 +37,7 @@ export default function AvatarWelcome() {
 
     // Play clean 44.1kHz standard welcome audio track
     // (Jasmine: Option 6 [+15% pitch], Kader: Option 8 [+21% pitch])
-    speakFrench('', { audioUrl: '/audio/welcome/final_welcome_conversation.wav' });
+    speakFrench('', { audioUrl: `${import.meta.env.BASE_URL}audio/welcome/final_welcome_conversation.wav` });
 
     // Precise millisecond delays matching exact sentence audio lengths at 44.1kHz
     setTimeout(() => { setCurrentSpeaker('kader'); setCurrentDialogueIndex(1); }, 2800);   // Kader Line 1 starts at 2.80s
@@ -67,7 +67,7 @@ export default function AvatarWelcome() {
         {/* Jasmine (14-year-old Black French immersion high school girl) */}
         <div className={`avatar-card ${currentSpeaker === 'jasmine' ? 'speaking' : ''}`}>
           <div className="avatar-img-wrapper">
-            <img src="/avatars/jasmine.jpg" alt="Jasmine" className="avatar-img" />
+            <img src={`${import.meta.env.BASE_URL}avatars/jasmine.jpg`} alt="Jasmine" className="avatar-img" />
           </div>
           <div className="avatar-badge jasmine-badge">
             <span>Jasmine</span>
@@ -78,7 +78,7 @@ export default function AvatarWelcome() {
         {/* Kader (14-year-old Moroccan French immersion high school boy) */}
         <div className={`avatar-card ${currentSpeaker === 'kader' ? 'speaking' : ''}`}>
           <div className="avatar-img-wrapper">
-            <img src="/avatars/kader.jpg" alt="Kader" className="avatar-img" />
+            <img src={`${import.meta.env.BASE_URL}avatars/kader.jpg`} alt="Kader" className="avatar-img" />
           </div>
           <div className="avatar-badge kader-badge">
             <span>Kader</span>

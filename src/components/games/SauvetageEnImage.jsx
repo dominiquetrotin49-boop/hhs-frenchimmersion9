@@ -270,7 +270,7 @@ export default function SauvetageEnImage() {
           }}
         >
           <img
-            src="/images/superman_spiderman_rescue.jpg"
+            src={`${import.meta.env.BASE_URL}images/superman_spiderman_rescue.jpg`}
             alt="Sauvetage héroïque au crépuscule par Superman et Spider-Man"
             style={{
               width: '100%',
@@ -331,7 +331,7 @@ export default function SauvetageEnImage() {
             onClick={(e) => e.stopPropagation()}
           >
             <img
-              src="/images/superman_spiderman_rescue.jpg"
+              src={`${import.meta.env.BASE_URL}images/superman_spiderman_rescue.jpg`}
               alt="Plein écran — Sauvetage héroïque"
               style={{
                 width: '100%',

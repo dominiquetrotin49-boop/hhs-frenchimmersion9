@@ -531,22 +531,15 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
       const textRes = await res.text();
 
-      if (textRes.trim().startsWith("<!DOCTYPE") || textRes.trim().startsWith("<html")) {
-        const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
-        setFeedback(localFeedback);
-        return;
-      }
-
       if (!res.ok) {
-        throw new Error("Une erreur s'est produite lors de l'analyse.");
+        throw new Error("Une erreur s'est produite lors de l'analyse avec le serveur IA.");
       }
 
       const normalized = normalizeProxyFeedback(textRes);
       setFeedback(normalized);
     } catch (err) {
       console.error("API error:", err);
-      const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
-      setFeedback(localFeedback);
+      setError(err.message || "Erreur lors de la communication avec le serveur d'analyse IA.");
     } finally {
       setLoading(false);
     }
