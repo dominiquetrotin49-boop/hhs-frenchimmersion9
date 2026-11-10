@@ -52,6 +52,7 @@ export default function Amnesique() {
         },
         body: JSON.stringify({
           prompt: promptText,
+          model: 'gemini-3.8-flash',
           history: messages,
           message: userMessage,
           turnCount: turnCount + 1,

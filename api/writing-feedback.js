@@ -59,7 +59,7 @@ Texte de l'élève à analyser :
 ${studentText}
 """`;
 
-  const models = ['gemini-3.6-flash', 'gemini-3.5-flash-lite'];
+  const models = ['gemini-3.8-flash', 'gemini-3.6-flash', 'gemini-3.5-flash-lite'];
   let lastError = null;
 
   for (const model of models) {
