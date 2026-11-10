@@ -370,7 +370,7 @@ const localAnalyzeText = (inputText, promptText = "", unitId = "1") => {
 };
 
 async function analyzeWithClientGemini(studentText, promptSubject, promptInstructions, targetVocab = []) {
-  const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+  const apiKey = "";
   if (!apiKey) throw new Error("Clé API non disponible côté client.");
 
   const systemInstruction = `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
@@ -488,9 +488,10 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     const promptTitle = activePrompt?.title || "Sujet de rédaction";
     const promptInstructions = activePrompt?.prompt || "";
     const targetVocab = activePrompt?.vocab || [];
+    const apiProxyUrl = import.meta.env.VITE_API_PROXY_URL || "/api/writing-feedback";
 
     try {
-      const res = await fetch("/api/writing-feedback", {
+      const res = await fetch(apiProxyUrl, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -506,17 +507,8 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
       const textRes = await res.text();
 
-      // If we receive an HTML page (such as Vite SPA fallback in local dev), try client Gemini then local
+      // If we receive an HTML page (such as Vite SPA fallback in local dev or static hosting), use local analysis
       if (textRes.trim().startsWith("<!DOCTYPE") || textRes.trim().startsWith("<html")) {
-        try {
-          if (import.meta.env.VITE_GEMINI_API_KEY) {
-            const clientFeedback = await analyzeWithClientGemini(text.trim(), promptTitle, promptInstructions, targetVocab);
-            setFeedback(clientFeedback);
-            return;
-          }
-        } catch (cErr) {
-          console.warn("Client Gemini direct call error:", cErr);
-        }
         const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
         setFeedback(localFeedback);
         return;
@@ -538,15 +530,6 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
       setFeedback(data);
     } catch (err) {
       console.error("API error:", err);
-      try {
-        if (import.meta.env.VITE_GEMINI_API_KEY) {
-          const clientFeedback = await analyzeWithClientGemini(text.trim(), promptTitle, promptInstructions, targetVocab);
-          setFeedback(clientFeedback);
-          return;
-        }
-      } catch (cErr) {
-        console.warn("Client Gemini fallback error:", cErr);
-      }
       const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
       setFeedback(localFeedback);
     } finally {
