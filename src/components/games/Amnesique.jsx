@@ -41,14 +41,18 @@ export default function Amnesique() {
     setIsLoading(true);
 
     try {
-      // The API endpoint is a Vercel Serverless Function
-      const response = await fetch('/api/amnesique', {
+      const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxI4aY57cD5wMLNKGQYbZWXppMWo07Hy-Zz_Fi0XRYdk41YFIiAw4titVYL5Pwg-n_0/exec';
+      const conversationContext = messages.map(m => `${m.role === 'user' ? 'Élève' : 'Personnage'}: ${m.content}`).join('\n');
+      const promptText = `Tu joues le rôle d'un personnage amnésique sympathique pour des élèves de 9e année en immersion française (tour ${turnCount + 1}/10).\nHistorique:\n${conversationContext}\nÉlève: ${userMessage}\nRéponds brièvement en français :`;
+
+      const response = await fetch(appsScriptUrl, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'text/plain;charset=utf-8',
         },
         body: JSON.stringify({
-          history: messages, // Send past context
+          prompt: promptText,
+          history: messages,
           message: userMessage,
           turnCount: turnCount + 1,
         }),
@@ -60,7 +64,15 @@ export default function Amnesique() {
         throw new Error(data.error || "Une erreur s'est produite");
       }
 
-      setMessages([...newMessages, { role: 'model', content: data.text }]);
+      const replyText =
+        data?.text ||
+        data?.reply ||
+        data?.response ||
+        data?.result ||
+        data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+        "Je commence à me souvenir d'un détail...";
+
+      setMessages([...newMessages, { role: 'model', content: replyText }]);
     } catch (err) {
       console.error(err);
       setError(err.message);

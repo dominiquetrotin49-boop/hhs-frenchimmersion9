@@ -369,11 +369,11 @@ const localAnalyzeText = (inputText, promptText = "", unitId = "1") => {
   };
 };
 
-async function analyzeWithClientGemini(studentText, promptSubject, promptInstructions, targetVocab = []) {
-  const apiKey = "";
-  if (!apiKey) throw new Error("Clé API non disponible côté client.");
+const APPS_SCRIPT_URL =
+  "https://script.google.com/macros/s/AKfycbxI4aY57cD5wMLNKGQYbZWXppMWo07Hy-Zz_Fi0XRYdk41YFIiAw4titVYL5Pwg-n_0/exec";
 
-  const systemInstruction = `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
+function buildGeminiWritingPrompt(studentText, promptSubject, promptInstructions, targetVocab = []) {
+  return `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
 Ton rôle est d'analyser le travail de rédaction d'un élève avec clarté et précision, SANS JAMAIS ATTRIBUER DE NOTE CHIFFRÉE.
 
 Critères d'évaluation Grade 9 Immersion :
@@ -403,9 +403,9 @@ Réponds STRICTEMENT sous forme d'un objet JSON valide respectant ce format :
     }
   ],
   "pedagogicalAdvice": "string"
-}`;
+}
 
-  const userPrompt = `Sujet : "${promptSubject}"
+Sujet : "${promptSubject}"
 Consignes : "${promptInstructions}"
 Vocabulaire cible suggéré : ${targetVocab.length > 0 ? targetVocab.join(', ') : 'Aucun'}
 
@@ -413,46 +413,66 @@ Texte de l'élève à analyser :
 """
 ${studentText}
 """`;
+}
 
-  const models = ['gemini-3.6-flash', 'gemini-3.5-flash-lite'];
-  for (const model of models) {
+function stripJsonFences(str) {
+  if (typeof str !== "string") return "";
+  return str
+    .trim()
+    .replace(/^```(?:json)?\s*/i, "")
+    .replace(/\s*```$/i, "")
+    .trim();
+}
+
+function normalizeProxyFeedback(rawResponseText) {
+  const cleanedRaw = stripJsonFences(rawResponseText);
+  let parsed = JSON.parse(cleanedRaw);
+
+  if (parsed && parsed.error) {
+    throw new Error(typeof parsed.error === "string" ? parsed.error : parsed.error.message || "Erreur proxy Gemini");
+  }
+
+  // Handle raw Gemini generateContent structure or Apps Script wrapper keys ({ text }, { reply }, { response }, { result }, { output })
+  const innerText =
+    parsed?.candidates?.[0]?.content?.parts?.[0]?.text ??
+    parsed?.text ??
+    parsed?.reply ??
+    parsed?.response ??
+    parsed?.result ??
+    parsed?.output ??
+    parsed?.answer;
+
+  if (typeof innerText === "string" && !Array.isArray(parsed?.corrections)) {
     try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: userPrompt }] }],
-          systemInstruction: { parts: [{ text: systemInstruction }] },
-          generationConfig: {
-            temperature: 0.1,
-            responseMimeType: 'application/json'
-          }
-        })
-      });
-
-      const data = await response.json();
-      if (!response.ok || !data.candidates || !data.candidates[0].content) {
-        throw new Error(data.error?.message || `Erreur Gemini ${model}`);
-      }
-
-      const parsed = JSON.parse(data.candidates[0].content.parts[0].text);
-      const corrections = Array.isArray(parsed.corrections) ? parsed.corrections : [];
-      const isValid = (typeof parsed.isValid === 'boolean') ? parsed.isValid : (corrections.length === 0);
-
+      parsed = JSON.parse(stripJsonFences(innerText));
+    } catch {
       return {
-        isValid,
-        generalFeedback: parsed.generalFeedback || (isValid ? "Excellent travail ! Votre texte est bien rédigé." : "Plusieurs erreurs ont été détectées."),
-        strengths: parsed.strengths || [],
-        corrections,
-        pedagogicalAdvice: parsed.pedagogicalAdvice || "Relisez vos phrases en vérifiant les accords.",
-        source: 'ai'
+        isValid: true,
+        generalFeedback: innerText,
+        strengths: [],
+        corrections: [],
+        pedagogicalAdvice: "Relisez attentivement vos phrases en vérifiant les accords.",
+        source: "ai"
       };
-    } catch (e) {
-      console.warn(`Fallback client Gemini (${model}):`, e.message);
     }
   }
-  throw new Error("Tous les modèles Gemini ont échoué.");
+
+  const corrections = Array.isArray(parsed?.corrections) ? parsed.corrections : [];
+  const isValid = typeof parsed?.isValid === "boolean" ? parsed.isValid : corrections.length === 0;
+
+  return {
+    isValid,
+    generalFeedback:
+      parsed?.generalFeedback ||
+      (isValid
+        ? "Excellent travail ! Votre texte est bien rédigé."
+        : "Plusieurs erreurs ont été relevées ci-dessous."),
+    strengths: Array.isArray(parsed?.strengths) ? parsed.strengths : [],
+    corrections,
+    pedagogicalAdvice:
+      parsed?.pedagogicalAdvice || "Relisez attentivement vos phrases en vérifiant les accords.",
+    source: "ai"
+  };
 }
 
 export default function WritingPrompt({ onBack, unitId, chapterId }) {
@@ -478,7 +498,6 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     setError(null);
   };
 
-  
   const handleSubmit = async () => {
     if (!text.trim() || loading) return;
     setLoading(true);
@@ -488,46 +507,42 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     const promptTitle = activePrompt?.title || "Sujet de rédaction";
     const promptInstructions = activePrompt?.prompt || "";
     const targetVocab = activePrompt?.vocab || [];
-    const apiProxyUrl = import.meta.env.VITE_API_PROXY_URL || "/api/writing-feedback";
+    const fullPrompt = buildGeminiWritingPrompt(
+      text.trim(),
+      promptTitle,
+      promptInstructions,
+      targetVocab
+    );
 
     try {
-      const res = await fetch(apiProxyUrl, {
+      const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
+          prompt: fullPrompt,
           studentText: text.trim(),
           text: text.trim(),
           promptSubject: promptTitle,
           promptInstructions: promptInstructions,
-          prompt: promptInstructions,
           targetVocab: targetVocab,
-          unitTheme: `French Immersion 9 - ${activePrompt?.focus || 'Rédaction'}`
+          unitTheme: `French Immersion 9 - ${activePrompt?.focus || "Rédaction"}`
         })
       });
 
       const textRes = await res.text();
 
-      // If we receive an HTML page (such as Vite SPA fallback in local dev or static hosting), use local analysis
       if (textRes.trim().startsWith("<!DOCTYPE") || textRes.trim().startsWith("<html")) {
         const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
         setFeedback(localFeedback);
         return;
       }
 
-      let data;
-      try {
-        data = JSON.parse(textRes);
-      } catch (parseErr) {
-        const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
-        setFeedback(localFeedback);
-        return;
-      }
-
       if (!res.ok) {
-        throw new Error(data.error || "Une erreur s'est produite lors de l'analyse.");
+        throw new Error("Une erreur s'est produite lors de l'analyse.");
       }
 
-      setFeedback(data);
+      const normalized = normalizeProxyFeedback(textRes);
+      setFeedback(normalized);
     } catch (err) {
       console.error("API error:", err);
       const localFeedback = localAnalyzeText(text.trim(), promptInstructions, unitId);
