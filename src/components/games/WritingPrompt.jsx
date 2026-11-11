@@ -370,7 +370,7 @@ const localAnalyzeText = (inputText, promptText = "", unitId = "1") => {
 };
 
 const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxI4aY57cD5wMLNKGQYbZWXppMWo07Hy-Zz_Fi0XRYdk41YFIiAw4titVYL5Pwg-n_0/exec";
+  "https://script.google.com/macros/s/AKfycbxSKXy7BT9DF4YAsJgmflNvI6jD9jPP_Qxq-XvvP09ObjPeUM2RqvtRtExumoFVLG6p/exec";
 
 function buildGeminiWritingPrompt(studentText, promptSubject, promptInstructions, targetVocab = []) {
   return `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
@@ -426,16 +426,33 @@ function stripJsonFences(str) {
 
 function normalizeProxyFeedback(rawResponseText) {
   const cleanedRaw = stripJsonFences(rawResponseText);
-  let parsed = JSON.parse(cleanedRaw);
+  let parsed;
+  try {
+    parsed = JSON.parse(cleanedRaw);
+  } catch {
+    return {
+      isValid: true,
+      generalFeedback: cleanedRaw || "Analyse reçue.",
+      strengths: [],
+      corrections: [],
+      pedagogicalAdvice: "Relisez attentivement vos phrases en vérifiant les accords.",
+      source: "ai"
+    };
+  }
 
   if (parsed && parsed.error) {
     throw new Error(typeof parsed.error === "string" ? parsed.error : parsed.error.message || "Erreur proxy Gemini");
   }
 
-  // Handle raw Gemini generateContent structure or Apps Script wrapper keys ({ text }, { reply }, { response }, { result }, { output })
+  // Safely unwrap data.feedback || data.text || data
+  if (parsed && typeof parsed.feedback === "object" && parsed.feedback !== null) {
+    parsed = parsed.feedback;
+  }
+
   const innerText =
-    parsed?.candidates?.[0]?.content?.parts?.[0]?.text ??
+    (typeof parsed?.feedback === "string" ? parsed.feedback : null) ??
     parsed?.text ??
+    parsed?.candidates?.[0]?.content?.parts?.[0]?.text ??
     parsed?.reply ??
     parsed?.response ??
     parsed?.result ??
@@ -517,10 +534,8 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     try {
       const res = await fetch(APPS_SCRIPT_URL, {
         method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
         body: JSON.stringify({
           prompt: fullPrompt,
-          model: "gemini-3.8-flash",
           studentText: text.trim(),
           text: text.trim(),
           promptSubject: promptTitle,

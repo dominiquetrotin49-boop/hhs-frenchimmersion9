@@ -41,37 +41,40 @@ export default function Amnesique() {
     setIsLoading(true);
 
     try {
-      const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxI4aY57cD5wMLNKGQYbZWXppMWo07Hy-Zz_Fi0XRYdk41YFIiAw4titVYL5Pwg-n_0/exec';
+      const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxSKXy7BT9DF4YAsJgmflNvI6jD9jPP_Qxq-XvvP09ObjPeUM2RqvtRtExumoFVLG6p/exec';
       const conversationContext = messages.map(m => `${m.role === 'user' ? 'Élève' : 'Personnage'}: ${m.content}`).join('\n');
       const promptText = `Tu joues le rôle d'un personnage amnésique sympathique pour des élèves de 9e année en immersion française (tour ${turnCount + 1}/10).\nHistorique:\n${conversationContext}\nÉlève: ${userMessage}\nRéponds brièvement en français :`;
 
       const response = await fetch(appsScriptUrl, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
         body: JSON.stringify({
           prompt: promptText,
-          model: 'gemini-3.8-flash',
           history: messages,
           message: userMessage,
           turnCount: turnCount + 1,
         }),
       });
 
-      const data = await response.json();
+      const rawText = await response.text();
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch {
+        data = { text: rawText };
+      }
 
-      if (!response.ok) {
-        throw new Error(data.error || "Une erreur s'est produite");
+      if (!response.ok || data?.error) {
+        throw new Error(data?.error || "Une erreur s'est produite");
       }
 
       const replyText =
+        data?.feedback ||
         data?.text ||
         data?.reply ||
         data?.response ||
         data?.result ||
         data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        "Je commence à me souvenir d'un détail...";
+        (typeof data === 'string' ? data : "Je commence à me souvenir d'un détail...");
 
       setMessages([...newMessages, { role: 'model', content: replyText }]);
     } catch (err) {
