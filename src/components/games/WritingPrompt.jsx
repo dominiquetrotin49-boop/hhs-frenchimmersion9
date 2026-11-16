@@ -1,6 +1,13 @@
 import React, { useState, useRef } from 'react';
 import { analyzeFrenchText } from '../../utils/frenchTextAnalyzer';
 import { BookOpen, RefreshCw, Send, CheckCircle2, AlertTriangle, HelpCircle } from 'lucide-react';
+import {
+  callGeminiProxy,
+  cleanFeedbackText,
+  pickResponseText,
+  resolveJsonPayload,
+  stripLeadingBullet
+} from '../../utils/geminiProxy';
 
 const RENTREE_PROMPTS = [
   {
@@ -369,11 +376,10 @@ const localAnalyzeText = (inputText, promptText = "", unitId = "1") => {
   };
 };
 
-const APPS_SCRIPT_URL =
-  "https://script.google.com/macros/s/AKfycbxSKXy7BT9DF4YAsJgmflNvI6jD9jPP_Qxq-XvvP09ObjPeUM2RqvtRtExumoFVLG6p/exec";
+const AI_TIMEOUT_MS = 60000;
 
-function buildGeminiWritingPrompt(studentText, promptSubject, promptInstructions, targetVocab = []) {
-  return `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
+// ── Pedagogical rubric (identical to the original Vercel /api/writing-feedback handler) ──
+const WRITING_SYSTEM_INSTRUCTION = `Tu es un professeur de français bienveillant et rigoureux pour des élèves en immersion française au lycée (Grade 9 / 9e année).
 Ton rôle est d'analyser le travail de rédaction d'un élève avec clarté et précision, SANS JAMAIS ATTRIBUER DE NOTE CHIFFRÉE.
 
 Critères d'évaluation Grade 9 Immersion :
@@ -392,8 +398,8 @@ Consignes impératives pour les corrections :
 Réponds STRICTEMENT sous forme d'un objet JSON valide respectant ce format :
 {
   "isValid": boolean,
-  "generalFeedback": "string",
-  "strengths": ["string"],
+  "generalFeedback": "string (appréciation générale globale bienveillante mais honnête)",
+  "strengths": ["string (point fort 1)", "string (point fort 2)"],
   "corrections": [
     {
       "category": "Conjugaison" | "Orthographe" | "Syntaxe & Anglicismes" | "Accords & Genre" | "Vocabulaire",
@@ -402,10 +408,16 @@ Réponds STRICTEMENT sous forme d'un objet JSON valide respectant ce format :
       "ruleExplanation": "explication claire et pédagogique de la règle"
     }
   ],
-  "pedagogicalAdvice": "string"
-}
+  "pedagogicalAdvice": "string (conseil concret pour continuer à progresser)"
+}`;
 
-Sujet : "${promptSubject}"
+const WRITING_GENERATION_CONFIG = {
+  temperature: 0.1,
+  responseMimeType: "application/json"
+};
+
+function buildWritingUserPrompt(studentText, promptSubject, promptInstructions, targetVocab = []) {
+  return `Sujet : "${promptSubject}"
 Consignes : "${promptInstructions}"
 Vocabulaire cible suggéré : ${targetVocab.length > 0 ? targetVocab.join(', ') : 'Aucun'}
 
@@ -415,79 +427,52 @@ ${studentText}
 """`;
 }
 
-function stripJsonFences(str) {
-  if (typeof str !== "string") return "";
-  return str
-    .trim()
-    .replace(/^```(?:json)?\s*/i, "")
-    .replace(/\s*```$/i, "")
-    .trim();
-}
-
-function normalizeProxyFeedback(rawResponseText) {
-  const cleanedRaw = stripJsonFences(rawResponseText);
-  let parsed;
-  try {
-    parsed = JSON.parse(cleanedRaw);
-  } catch {
-    return {
-      isValid: true,
-      generalFeedback: cleanedRaw || "Analyse reçue.",
-      strengths: [],
-      corrections: [],
-      pedagogicalAdvice: "Relisez attentivement vos phrases en vérifiant les accords.",
-      source: "ai"
-    };
+// Normalizes the proxy response using resolveJsonPayload (filtering `part.thought === true`,
+// stripping fences, and guarding against unparsed payloads so "Zéro faute !" is never shown falsely).
+function normalizeProxyFeedback(data) {
+  if (data && data.error) {
+    throw new Error(typeof data.error === "string" ? data.error : data.error.message || "Erreur proxy Gemini");
   }
 
-  if (parsed && parsed.error) {
-    throw new Error(typeof parsed.error === "string" ? parsed.error : parsed.error.message || "Erreur proxy Gemini");
-  }
+  const src = resolveJsonPayload(data, ["corrections", "generalFeedback"]);
+  const hasStructured =
+    src.__parsed && (Array.isArray(src.corrections) || typeof src.generalFeedback === "string");
 
-  // Safely unwrap data.feedback || data.text || data
-  if (parsed && typeof parsed.feedback === "object" && parsed.feedback !== null) {
-    parsed = parsed.feedback;
-  }
-
-  const innerText =
-    (typeof parsed?.feedback === "string" ? parsed.feedback : null) ??
-    parsed?.text ??
-    parsed?.candidates?.[0]?.content?.parts?.[0]?.text ??
-    parsed?.reply ??
-    parsed?.response ??
-    parsed?.result ??
-    parsed?.output ??
-    parsed?.answer;
-
-  if (typeof innerText === "string" && !Array.isArray(parsed?.corrections)) {
-    try {
-      parsed = JSON.parse(stripJsonFences(innerText));
-    } catch {
+  if (!hasStructured) {
+    const fallbackText = cleanFeedbackText(pickResponseText(data));
+    if (fallbackText) {
       return {
-        isValid: true,
-        generalFeedback: innerText,
+        isValid: false,
+        isPlainText: true,
+        generalFeedback: fallbackText,
         strengths: [],
         corrections: [],
-        pedagogicalAdvice: "Relisez attentivement vos phrases en vérifiant les accords.",
+        pedagogicalAdvice: "",
         source: "ai"
       };
     }
+    throw new Error("La réponse de l'IA n'était pas au format attendu. Veuillez réessayer.");
   }
 
-  const corrections = Array.isArray(parsed?.corrections) ? parsed.corrections : [];
-  const isValid = typeof parsed?.isValid === "boolean" ? parsed.isValid : corrections.length === 0;
+  const corrections = Array.isArray(src.corrections) ? src.corrections : [];
+  const isValid = typeof src.isValid === "boolean" ? src.isValid : corrections.length === 0;
 
   return {
     isValid,
-    generalFeedback:
-      parsed?.generalFeedback ||
-      (isValid
-        ? "Excellent travail ! Votre texte est bien rédigé."
-        : "Plusieurs erreurs ont été relevées ci-dessous."),
-    strengths: Array.isArray(parsed?.strengths) ? parsed.strengths : [],
-    corrections,
-    pedagogicalAdvice:
-      parsed?.pedagogicalAdvice || "Relisez attentivement vos phrases en vérifiant les accords.",
+    generalFeedback: cleanFeedbackText(
+      src.generalFeedback ||
+        (isValid
+          ? "Excellent travail ! Votre texte est bien rédigé."
+          : "Plusieurs erreurs ont été relevées ci-dessous.")
+    ),
+    strengths: (Array.isArray(src.strengths) ? src.strengths : [])
+      .map((s) => stripLeadingBullet(String(s || "")))
+      .filter(Boolean),
+    corrections: corrections.map((c) => ({
+      ...c,
+      ruleExplanation: cleanFeedbackText(c?.ruleExplanation || "")
+    })),
+    pedagogicalAdvice: cleanFeedbackText(src.pedagogicalAdvice || ""),
     source: "ai"
   };
 }
@@ -524,7 +509,7 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     const promptTitle = activePrompt?.title || "Sujet de rédaction";
     const promptInstructions = activePrompt?.prompt || "";
     const targetVocab = activePrompt?.vocab || [];
-    const fullPrompt = buildGeminiWritingPrompt(
+    const userPrompt = buildWritingUserPrompt(
       text.trim(),
       promptTitle,
       promptInstructions,
@@ -532,27 +517,16 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
     );
 
     try {
-      const res = await fetch(APPS_SCRIPT_URL, {
-        method: "POST",
-        body: JSON.stringify({
-          prompt: fullPrompt,
-          studentText: text.trim(),
-          text: text.trim(),
-          promptSubject: promptTitle,
-          promptInstructions: promptInstructions,
-          targetVocab: targetVocab,
-          unitTheme: `French Immersion 9 - ${activePrompt?.focus || "Rédaction"}`
-        })
-      });
-
-      const textRes = await res.text();
-
-      if (!res.ok) {
-        throw new Error("Une erreur s'est produite lors de l'analyse avec le serveur IA.");
-      }
-
-      const normalized = normalizeProxyFeedback(textRes);
-      setFeedback(normalized);
+      const data = await callGeminiProxy(
+        {
+          prompt: userPrompt,
+          systemInstruction: WRITING_SYSTEM_INSTRUCTION,
+          generationConfig: WRITING_GENERATION_CONFIG,
+          safetySettings: []
+        },
+        AI_TIMEOUT_MS
+      );
+      setFeedback(normalizeProxyFeedback(data));
     } catch (err) {
       console.error("API error:", err);
       setError(err.message || "Erreur lors de la communication avec le serveur d'analyse IA.");
@@ -800,13 +774,13 @@ export default function WritingPrompt({ onBack, unitId, chapterId }) {
 
               {/* Feedback Content */}
               {feedback && !loading && (
-                <div className="space-y-4 max-h-[380px] overflow-y-auto pr-1">
+                <div className="space-y-4 max-h-[560px] overflow-y-auto pr-1">
                   
                   {/* General feedback */}
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200">
                     <span className="text-[10px] font-bold text-slate-500 uppercase tracking-widest block mb-1">Retour général</span>
-                    <p className="text-sm text-slate-800 leading-relaxed font-semibold italic">
-                      "{feedback.generalFeedback}"
+                    <p className="text-sm text-slate-800 leading-relaxed font-semibold whitespace-pre-wrap">
+                      {feedback.isPlainText ? feedback.generalFeedback : `"${feedback.generalFeedback}"`}
                     </p>
                   </div>
 

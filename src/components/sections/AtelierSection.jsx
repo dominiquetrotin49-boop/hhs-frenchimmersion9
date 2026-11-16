@@ -3,6 +3,7 @@ import MystereAuPasse from '../games/MystereAuPasse';
 import SauvetageEnImage from '../games/SauvetageEnImage';
 import AtelierEcritureReprise from '../games/AtelierEcritureReprise';
 import WritingPrompt from '../games/WritingPrompt';
+import ExpressionOrale from '../games/ExpressionOrale';
 import CrosswordSection from './CrosswordSection';
 import HeroCrosswordSection from './HeroCrosswordSection';
 import Unit2CrosswordSection from './Unit2CrosswordSection';
@@ -74,6 +75,14 @@ export default function AtelierSection({ chapterId, vocabulary }) {
           icon: '📝',
           color: '#0891b2',
           badgeBg: 'rgba(8, 145, 178, 0.12)'
+        },
+        {
+          id: 'expression_orale',
+          title: 'Expression Orale',
+          subtitle: 'Message vocal (45–60s) & Rétroaction IA',
+          icon: '🎙️',
+          color: '#4f46e5',
+          badgeBg: 'rgba(79, 70, 229, 0.12)'
         },
         {
           id: 'mots_croises',
@@ -185,6 +194,10 @@ export default function AtelierSection({ chapterId, vocabulary }) {
 
         {activeTab === 'recits' && (
           <WritingPrompt chapterId={chapterId} unitId={isReprise ? 'unite-reprise' : chapterId || '1'} />
+        )}
+
+        {activeTab === 'expression_orale' && (
+          <ExpressionOrale />
         )}
 
         {activeTab === 'mots_croises' && (

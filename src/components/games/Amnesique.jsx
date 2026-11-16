@@ -2,6 +2,41 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Send, RefreshCw, AlertCircle } from 'lucide-react';
 import './Amnesique.css';
 
+const PROXY_URL =
+  'https://script.google.com/macros/s/AKfycbxSKXy7BT9DF4YAsJgmflNvI6jD9jPP_Qxq-XvvP09ObjPeUM2RqvtRtExumoFVLG6p/exec';
+
+// Secret the student must uncover by asking questions (edit here to change the game).
+const AMNESIQUE_SECRET = {
+  objet: "un carnet de voyage rouge contenant des photos",
+  evenement: "un feu d'artifice sur la plage le soir du 14 juillet"
+};
+
+const AMNESIQUE_SYSTEM_INSTRUCTION = `Tu joues le rôle d'un personnage sympathique et un peu étourdi qui souffre d'amnésie partielle, dans un jeu de classe pour des élèves de 9e année en immersion française.
+Tu as passé de superbes vacances cet été, mais tu as oublié un objet très important et un événement. Tu connais la vérité, mais tu ne peux la révéler que par petits indices.
+
+Vérité secrète (ne la révèle JAMAIS directement) :
+- Objet oublié : ${AMNESIQUE_SECRET.objet}
+- Événement oublié : ${AMNESIQUE_SECRET.evenement}
+
+Règles :
+- Réponds toujours en français simple (niveau 9e année), en 1 à 3 phrases courtes, avec un ton chaleureux et encourageant.
+- Donne un indice progressif seulement si la question de l'élève est précise et bien formulée (où, quand, avec qui, comment, de quelle couleur...). Si la question est vague, réponds que tu ne te souviens pas bien et invite l'élève à poser une question plus précise.
+- Si l'élève devine correctement l'objet ou l'événement, félicite-le avec enthousiasme et confirme.
+- Si l'élève fait une erreur de français, reformule naturellement ta réponse avec la forme correcte (sans le corriger lourdement).
+- N'utilise jamais l'anglais. Pas de listes à puces ; mets en gras (**mot**) uniquement un mot-clé important.`;
+
+const AMNESIQUE_GENERATION_CONFIG = {
+  temperature: 0.7,
+  maxOutputTokens: 300
+};
+
+// Removes duplicated leading bullet markers such as "- •" so only one bullet remains.
+function cleanBullets(text) {
+  return text
+    .replace(/^[ \t]*(?:[-*•·–—][ \t]*){2,}/gm, '• ')
+    .trim();
+}
+
 export default function Amnesique() {
   const [messages, setMessages] = useState([
     { role: 'model', content: "Bonjour ! Je me souviens d'avoir passé de superbes vacances cet été, mais... j'ai oublié un objet très important et un événement ! Posez-moi des questions pour m'aider à retrouver la mémoire." }
@@ -40,19 +75,25 @@ export default function Amnesique() {
     setMessages(newMessages);
     setIsLoading(true);
 
-    try {
-      const appsScriptUrl = 'https://script.google.com/macros/s/AKfycbxSKXy7BT9DF4YAsJgmflNvI6jD9jPP_Qxq-XvvP09ObjPeUM2RqvtRtExumoFVLG6p/exec';
-      const conversationContext = messages.map(m => `${m.role === 'user' ? 'Élève' : 'Personnage'}: ${m.content}`).join('\n');
-      const promptText = `Tu joues le rôle d'un personnage amnésique sympathique pour des élèves de 9e année en immersion française (tour ${turnCount + 1}/10).\nHistorique:\n${conversationContext}\nÉlève: ${userMessage}\nRéponds brièvement en français :`;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 30000);
 
-      const response = await fetch(appsScriptUrl, {
+    try {
+      const conversationContext = messages.map(m => `${m.role === 'user' ? 'Élève' : 'Personnage'}: ${m.content}`).join('\n');
+      const userPrompt = `Historique de la conversation :\n${conversationContext}\nÉlève: ${userMessage}\n\nQuestion ${turnCount + 1} sur ${maxTurns}. Réponds en tant que le personnage amnésique :`;
+
+      const response = await fetch(PROXY_URL, {
         method: 'POST',
+        redirect: 'follow',
+        signal: controller.signal,
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
         body: JSON.stringify({
-          prompt: promptText,
-          history: messages,
-          message: userMessage,
-          turnCount: turnCount + 1,
-        }),
+          prompt: userPrompt,
+          systemInstruction: AMNESIQUE_SYSTEM_INSTRUCTION,
+          generationConfig: AMNESIQUE_GENERATION_CONFIG
+        })
       });
 
       const rawText = await response.text();
@@ -63,27 +104,37 @@ export default function Amnesique() {
         data = { text: rawText };
       }
 
-      if (!response.ok || data?.error) {
-        throw new Error(data?.error || "Une erreur s'est produite");
+      if (data && data.error) {
+        const errMsg = typeof data.error === 'string' ? data.error : data.error.message || JSON.stringify(data.error);
+        setError(errMsg);
+        setMessages(messages);
+        setInput(userMessage);
+        return;
       }
 
-      const replyText =
-        data?.feedback ||
-        data?.text ||
-        data?.reply ||
-        data?.response ||
-        data?.result ||
+      const feedbackText =
+        data.feedback ||
+        data.text ||
+        data.response ||
+        data.result ||
+        data.error ||
         data?.candidates?.[0]?.content?.parts?.[0]?.text ||
-        (typeof data === 'string' ? data : "Je commence à me souvenir d'un détail...");
+        data.reply ||
+        (typeof data === 'string' ? data : JSON.stringify(data));
 
-      setMessages([...newMessages, { role: 'model', content: replyText }]);
+      setMessages([...newMessages, { role: 'model', content: cleanBullets(String(feedbackText)) }]);
     } catch (err) {
       console.error(err);
-      setError(err.message);
+      const message =
+        err.name === 'AbortError'
+          ? "Le serveur IA met trop de temps à répondre (délai dépassé). Veuillez réessayer."
+          : err.message || "Une erreur s'est produite.";
+      setError(message);
       // Remove the user message if API failed, so they can try again
       setMessages(messages);
       setInput(userMessage);
     } finally {
+      clearTimeout(timeoutId);
       setIsLoading(false);
     }
   };

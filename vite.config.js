@@ -6,7 +6,7 @@ export default defineConfig({
   base: '/hhs-frenchimmersion9/',
   plugins: [react()],
   server: {
-    port: 5174,
+    port: 5175,
     host: true
   }
 })
